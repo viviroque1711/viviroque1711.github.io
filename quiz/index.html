@@ -104,7 +104,8 @@ const CAPS = [
  {k:"b9",m:"b",n:9,t:"Morfologia e anatomia do fruto e da semente"},
  {k:"b10",m:"b",n:10,t:"Fisiologia da absorção: condução de seiva"},
  {k:"b11",m:"b",n:11,t:"Fisiologia da absorção: transpiração vegetal"},
- {k:"b12",m:"b",n:12,t:"Hormônios vegetais"}
+ {k:"b12",m:"b",n:12,t:"Hormônios vegetais"},
+ {k:"bi",m:"b",n:"Sist.",t:"Integração dos sistemas (caps. 5 a 12)"}
 ];
 
 const Q = [
@@ -623,7 +624,108 @@ const Q = [
  ["etileno.","O etileno acelera o amadurecimento e o envelhecimento, o contrário."],
  ["ácido abscísico.","O ácido abscísico é hormônio do estresse e da dormência."]]},
 {k:"b12",s:"A raiz é menos sensível à auxina que o caule.",v:false,e:"A raiz é MUITO MAIS sensível. A dose que estimula o caule inibe a raiz."},
-{k:"b12",s:"O caule tem gravitropismo negativo e a raiz, gravitropismo positivo.",v:true,e:"O caule cresce para cima, contra a gravidade. A raiz cresce para baixo, a favor dela."}
+{k:"b12",s:"O caule tem gravitropismo negativo e a raiz, gravitropismo positivo.",v:true,e:"O caule cresce para cima, contra a gravidade. A raiz cresce para baixo, a favor dela."},
+/* ================= BIOLOGIA · INTEGRAÇÃO DOS SISTEMAS ================= */
+{k:"bi",s:"Qual sequência mostra corretamente o caminho da água, do solo até a atmosfera?",c:2,o:[
+ ["Coifa → floema da raiz → floema do caule → estômato.","A coifa protege a ponta, não absorve. E a água sobe pelo xilema, não pelo floema."],
+ ["Pelo absorvente → xilema → floema → cutícula.","A água não passa do xilema para o floema para sair. E a cutícula é justamente o que impede a saída."],
+ ["Pelo absorvente → córtex → endoderme → xilema (raiz, caule, nervuras) → mesofilo → estômato.","Isso. Ela atravessa o sistema de revestimento, o fundamental e o vascular, e sai como vapor pelo estômato."],
+ ["Pelo absorvente → endoderme → córtex → floema → hidatódio.","A ordem está trocada (o córtex vem antes da endoderme), e a água sobe pelo xilema. O hidatódio é a saída da gutação, não da transpiração."],
+ ["Estômato → mesofilo → xilema → raiz → solo.","Esse é o caminho ao contrário. A água entra pela raiz e sai pela folha."]]},
+{k:"bi",s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos. Na chegada da água até a folha, qual é o papel de cada um?",c:0,o:[
+ ["Revestimento absorve (epiderme com pelos), fundamental deixa passar (córtex) e vascular conduz (xilema).","Isso. Os três sistemas trabalham em sequência, como uma linha de montagem."],
+ ["Só o sistema vascular participa; os outros dois não têm relação com a água.","Antes de chegar ao xilema, a água entra pela epiderme e atravessa o córtex."],
+ ["O revestimento conduz, o fundamental absorve e o vascular protege.","Os papéis estão trocados."],
+ ["O sistema fundamental absorve a água pelo floema.","Floema é vascular, não fundamental. E ele leva açúcar, não água do solo."],
+ ["O sistema de revestimento faz fotossíntese e manda a água para baixo.","A fotossíntese acontece no mesofilo (fundamental), e a água sobe."]]},
+{k:"bi",s:"Um ramo de salsão é colocado em água com corante. Horas depois, as nervuras das folhas ficam coloridas. Esse experimento mostra que",c:3,o:[
+ ["o floema leva o corante da folha até a base.","O corante subiu da água até a folha. Quem sobe a seiva bruta é o xilema."],
+ ["a folha absorve o corante pelos estômatos.","O corante estava na água da base do ramo, não em contato com a folha."],
+ ["o corante se espalha por todas as células igualmente.","Ficaram coloridas as nervuras, que são os vasos, e não tudo igual."],
+ ["o xilema é contínuo da base do caule até as nervuras, e a água é puxada para cima pela transpiração.","Isso. Caule e folha formam um único sistema de tubulação, e a transpiração é o motor."],
+ ["a pressão de raiz empurra o corante.","O ramo foi cortado: não tem raiz. Quem puxou foi a transpiração das folhas."]]},
+{k:"bi",s:"As folhas de uma planta são cobertas com vaselina, que tapa os estômatos. O que acontece com a subida de água no xilema?",c:1,o:[
+ ["Aumenta, porque a água fica presa na folha.","A água presa não puxa nada. Sem perder água, a folha deixa de criar a tensão que puxa a coluna."],
+ ["Diminui muito, porque a transpiração, que é o motor da subida, quase para.","Isso. Coesão-tensão: sem transpiração, quase não há puxão. Ligação direta entre folha (cap. 11) e condução (cap. 10)."],
+ ["Não muda, porque quem sobe a água é a pressão de raiz.","A pressão de raiz é um empurrão fraco. O principal é o puxão da transpiração."],
+ ["A água passa a subir pelo floema.","O floema não substitui o xilema."],
+ ["A raiz para de absorver sais, mas a água continua igual.","A subida de água cai junto com a transpiração."]]},
+{k:"bi",s:"Num dia quente e seco, a planta fecha os estômatos. Qual cadeia de consequências está correta?",c:4,o:[
+ ["Mais transpiração → mais CO₂ → mais fotossíntese.","Fechar o estômato diminui a transpiração e a entrada de CO₂."],
+ ["Menos transpiração → mais subida de água → folhas mais túrgidas.","Com menos transpiração, a subida de água diminui."],
+ ["Menos CO₂ → mais açúcar no floema → frutos maiores.","Menos CO₂ quer dizer menos fotossíntese e menos açúcar."],
+ ["Nada muda, porque o estômato só controla a saída de água.","O estômato também é a porta de entrada do CO₂."],
+ ["Menos perda de água, mas menos CO₂ → menos fotossíntese → menos açúcar enviado pelo floema às raízes e frutos.","Isso. Um ajuste na folha afeta a planta inteira: transpiração, condução e distribuição de açúcar."]]},
+{k:"bi",s:"Na seca, o ácido abscísico fecha os estômatos. Do ponto de vista da planta inteira, esse hormônio",c:2,o:[
+ ["só age na raiz, aumentando a absorção.","Ele age nas células-guarda das folhas."],
+ ["acelera o crescimento, porque aumenta a fotossíntese.","Com estômato fechado, a fotossíntese cai, e o crescimento desacelera."],
+ ["troca crescimento por sobrevivência: economiza água, mas reduz a entrada de CO₂ e a produção de açúcar.","Isso. O hormônio (cap. 12) conecta o estado da água (cap. 11) com a produção de alimento (fotossíntese)."],
+ ["amadurece os frutos para a planta se reproduzir antes de morrer.","Quem amadurece frutos é o etileno."],
+ ["abre os estômatos para resfriar a folha.","O ácido abscísico fecha, não abre."]]},
+{k:"bi",s:"Depois do anel de Malpighi, as folhas continuam verdes por semanas e a árvore só morre meses depois. Por quê?",c:0,o:[
+ ["O xilema, mais interno, continua levando água às folhas, que seguem fazendo fotossíntese; mas o açúcar não chega à raiz, que morre de fome e, aí sim, para de absorver água.","Isso. Os dois sistemas de transporte são independentes: um corte que tira só o floema demora a matar."],
+ ["O floema continua funcionando por dentro do tronco.","O floema fica na casca, e foi justamente ele que saiu com o anel."],
+ ["A raiz faz fotossíntese e se sustenta sozinha.","A raiz fica no escuro e depende do açúcar que vem das folhas."],
+ ["As folhas param de transpirar logo depois do corte.","Elas continuam transpirando, porque o xilema está intacto."],
+ ["O anel tira o xilema, mas a água sobe pela casca.","É o contrário: o anel tira o floema (casca), e o xilema fica."]]},
+{k:"bi",s:"Um produtor arranca muitas folhas de um pé de tomate carregado de frutos. Os frutos tendem a ficar menores porque",c:3,o:[
+ ["as folhas protegiam os frutos do sol.","O efeito principal não é sombra: é falta de alimento."],
+ ["sem folhas, a raiz para de absorver água imediatamente.","A raiz continua absorvendo; o problema é o açúcar."],
+ ["o etileno das folhas deixa de chegar aos frutos.","Não é o etileno que faz o fruto crescer."],
+ ["a fonte de açúcar (folhas) diminuiu, e o floema leva menos açúcar ao dreno (frutos).","Isso. Fonte (folha) e dreno (fruto) estão ligados pelo floema: menos fonte, menos crescimento do dreno."],
+ ["o xilema passa a levar açúcar para as folhas novas.","O xilema leva água e sais, não açúcar."]]},
+{k:"bi",s:"A planta tem um sistema radicular e um sistema caulinar. O que cada um entrega ao outro?",c:1,o:[
+ ["A raiz manda açúcar para as folhas, e as folhas mandam água para a raiz.","Está invertido."],
+ ["A raiz manda água e sais pelo xilema; as folhas mandam açúcar pelo floema. O caule liga os dois.","Isso. Um depende do outro: sem raiz a folha seca; sem folha a raiz passa fome."],
+ ["Os dois são independentes; cada um produz o que precisa.","A raiz não faz fotossíntese, e a folha não absorve água do solo."],
+ ["A raiz manda hormônios e as folhas mandam sais minerais.","Sais vêm do solo, pela raiz."],
+ ["O caule produz todo o açúcar e a água da planta.","O caule conduz. Água vem da raiz e açúcar vem principalmente das folhas."]]},
+{k:"bi",s:"No cacto, as folhas viraram espinhos. Como a planta continua fazendo fotossíntese e sobrevivendo à seca?",c:4,o:[
+ ["Os espinhos fazem a fotossíntese.","Espinhos são folhas reduzidas, sem mesofilo suficiente para isso."],
+ ["A raiz faz a fotossíntese no subsolo.","Raiz não recebe luz."],
+ ["O cacto não faz fotossíntese; vive só da água armazenada.","Toda planta verde precisa fazer fotossíntese para produzir açúcar."],
+ ["O cacto abre os estômatos o dia todo para captar mais CO₂.","Isso faria perder muita água na seca."],
+ ["O caule verde faz a fotossíntese e guarda água em parênquima de reserva, enquanto os espinhos reduzem a perda de água.","Isso. A adaptação é do conjunto: caule, folha e tecidos de reserva mudaram juntos."]]},
+{k:"bi",s:"Uma planta perto da janela se curva para a luz. Pensando na planta inteira, essa curvatura",c:2,o:[
+ ["acontece porque a auxina vai para o lado iluminado.","A auxina vai para o lado da sombra, que cresce mais."],
+ ["serve para a raiz receber mais luz.","Quem se curva para a luz é o caule. A raiz tem gravitropismo positivo."],
+ ["coloca as folhas na luz, aumentando a fotossíntese e o açúcar que o floema distribui para a planta.","Isso. Um hormônio (cap. 12) muda o crescimento do caule (cap. 6) para beneficiar a folha (cap. 7)."],
+ ["aumenta a absorção de água pela raiz.","A curvatura é do caule, ligada à luz, não à absorção."],
+ ["é causada pelo etileno liberado pela luz.","Fototropismo é comandado pela auxina."]]},
+{k:"bi",s:"Qual sequência descreve o ciclo da reprodução de uma angiosperma, da flor até a nova planta?",c:1,o:[
+ ["Fecundação → polinização → fruto → flor → germinação.","A polinização vem antes da fecundação, e a flor vem primeiro."],
+ ["Polinização → fecundação → ovário vira fruto e óvulo vira semente → dispersão → germinação.","Isso. Liga a flor (cap. 8) ao fruto e à semente (cap. 9)."],
+ ["Polinização → germinação → fecundação → dispersão → fruto.","A germinação é a última etapa, quando a semente já foi dispersa."],
+ ["Germinação → polinização → semente → flor → fruto.","A semente se forma depois da fecundação, não antes da flor."],
+ ["Dispersão → polinização → fruto → fecundação → semente.","A dispersão acontece com o fruto e a semente prontos."]]},
+{k:"bi",s:"A banana comercial não tem semente. Como a bananeira é multiplicada?",c:0,o:[
+ ["Por propagação vegetativa: o rizoma, um caule subterrâneo, tem gemas que originam novas plantas.","Isso. Junta partenocarpia (cap. 9) com gemas e tipos de caule (cap. 6)."],
+ ["Pelas sementes escondidas na casca.","A banana comercial é partenocárpica: não forma sementes."],
+ ["Pela raiz, que tem gemas.","Gemas são marca do caule. O rizoma da bananeira é caule."],
+ ["Pela polinização do vento.","Polinização forma semente; aqui não há semente."],
+ ["Pelas folhas, que caem e enraízam.","A bananeira é multiplicada pelo rizoma."]]},
+{k:"bi",s:"Uma semente de feijão foi enterrada fundo demais e a plântula morreu antes de sair do solo. A explicação mais provável é que",c:3,o:[
+ ["faltou polinização.","A polinização já aconteceu lá na flor, antes de a semente existir."],
+ ["a semente estava dormente.","Ela germinou: a plântula chegou a crescer."],
+ ["a radícula não saiu.","Se a plântula cresceu, a radícula saiu."],
+ ["ela gastou as reservas dos cotilédones antes de chegar à luz e começar a fotossíntese.","Isso. A plântula vive da reserva da semente até ter folhas fazendo fotossíntese."],
+ ["o endosperma é triploide.","Ser triploide não mata a plântula."]]},
+{k:"bi",s:"Qual associação entre estrutura e função está ERRADA?",c:4,o:[
+ ["Pelos absorventes → aumentam a superfície de absorção.","Essa está certa."],
+ ["Mesofilo lacunoso → facilita a troca de gases.","Essa está certa."],
+ ["Colênquima → sustentação flexível.","Essa está certa."],
+ ["Súber → impermeabiliza e isola.","Essa está certa."],
+ ["Elementos de vaso → conduzem seiva elaborada.","Isso, essa é a errada. Elementos de vaso são do xilema e conduzem seiva bruta; a elaborada vai pelo floema (tubo crivado)."]]},
+{k:"bi",s:"De madrugada, com solo úmido e ar saturado, aparecem gotas na borda das folhas. Comparando com o meio-dia ensolarado, é correto dizer que",c:2,o:[
+ ["nos dois horários a água sobe pelo mesmo motor, a transpiração.","De madrugada a transpiração quase para."],
+ ["de madrugada a planta transpira mais que ao meio-dia.","Com ar saturado e sem sol, transpira menos."],
+ ["de madrugada a pressão de raiz empurra a água (gutação); ao meio-dia, a transpiração puxa a água.","Isso. São dois mecanismos que se alternam conforme o ambiente."],
+ ["as gotas são vapor da transpiração que condensou.","Gutação é água líquida saindo pelos hidatódios, empurrada pela raiz."],
+ ["ao meio-dia a planta faz gutação.","Ao meio-dia domina a transpiração."]]},
+{k:"bi",s:"Se o xilema for bloqueado no caule, as folhas murcham mesmo que a raiz esteja absorvendo água normalmente.",v:true,e:"A água absorvida não tem como chegar às folhas. Raiz, caule e folha só funcionam ligados pelo xilema."},
+{k:"bi",s:"A fotossíntese da folha não depende da raiz.",v:false,e:"Depende: a água usada na fotossíntese e que mantém as células-guarda túrgidas (estômato aberto) vem da raiz, pelo xilema."},
+{k:"bi",s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos: revestimento, fundamental e vascular.",v:true,e:"O que muda de um órgão para outro é como cada sistema é organizado e o que ele faz ali."},
+{k:"bi",s:"O floema só transporta açúcar de cima para baixo.",v:false,e:"O floema vai da fonte ao dreno. Se o dreno for um fruto ou um broto no alto, o açúcar sobe."}
 ];
 
 
@@ -694,7 +796,13 @@ b11:[
 b12:[
  [/cerca viva|fototropismo|auxina|gravitropismo/i,"Auxina","A auxina da ponta inibe as gemas laterais (dominância apical): podou, ramifica. No fototropismo ela vai para a sombra, que cresce mais. A raiz é muito mais sensível que o caule.","Cap. 12 · Dominância apical, tropismos e A dose importa"],
  [/Bananas/i,"Etileno","O etileno é um gás: preso num saco, concentra e acelera o amadurecimento. Uma fruta madura apressa as vizinhas.","Cap. 12 · Etileno no dia a dia"],
- [/./,"Os cinco hormônios","Auxina: crescer e curvar (dominância apical, tropismos). Giberelina: alonga o caule e quebra a dormência. Citocinina: divide células e retarda o envelhecimento. Etileno: gás que amadurece frutos. Ácido abscísico: fecha estômatos na seca.","Cap. 12 · Hormônios vegetais"]]
+ [/./,"Os cinco hormônios","Auxina: crescer e curvar (dominância apical, tropismos). Giberelina: alonga o caule e quebra a dormência. Citocinina: divide células e retarda o envelhecimento. Etileno: gás que amadurece frutos. Ácido abscísico: fecha estômatos na seca.","Cap. 12 · Hormônios vegetais"]],
+ bi:[
+ [/estômato|seca|abscísico|quente|vaselina/i,"O dilema que liga folha, água e açúcar","Estômato fechado → menos transpiração → menos subida de água e menos CO₂ → menos fotossíntese → menos açúcar no floema. Um ajuste na folha mexe na planta inteira.","Biologia · Caps. 7, 10, 11 e 12"],
+ [/madrugada|depende da raiz|água|corante|xilema|três sistemas/i,"O caminho da água","Solo → pelo absorvente → córtex → endoderme → xilema (raiz → caule → nervura) → mesofilo → estômato → ar. O motor é a transpiração.","Biologia · Caps. 5, 6, 10 e 11"],
+ [/açúcar|floema|anel|folhas de um pé|radicular|cacto|luz/i,"O caminho do açúcar","Folha (fonte) faz açúcar → floema → dreno (raiz, fruto, broto). Menos folha = menos açúcar; sem floema, a raiz passa fome.","Biologia · Caps. 6, 7 e 10"],
+ [/semente|banana|reprodução|feijão/i,"O ciclo da reprodução","Flor → polinização → fecundação → ovário vira fruto e óvulo vira semente → dispersão → germinação → plântula vive da reserva até fazer fotossíntese.","Biologia · Caps. 6, 8 e 9"],
+ [/./,"Estrutura e função","Cada órgão tem os três sistemas: revestimento (proteger e trocar), fundamental (fotossíntese, reserva, sustentação) e vascular (xilema sobe água, floema distribui açúcar).","Biologia · Caps. 5, 6 e 7"]],
 };
 const topicOf=q=>(DICAS[q.k]||[]).find(r=>r[0].test(q.s.replace(/<[^>]+>/g,"")));
 </script>
@@ -705,7 +813,7 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const label=c=>(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
+const label=c=>c.k==="bi"?"Biologia · Integração dos sistemas":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const L="ABCDE";
@@ -837,7 +945,7 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.m==="q"?`Química · Cap. ${c.n} · ${r}`:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?`Química · Cap. ${c.n} · ${r}`:r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
@@ -851,7 +959,7 @@ function finish(){
   <div class="tips">${topics.slice(0,4).map(g=>`<div class="tip"><div class="tiph"><b>${g.t[1]}</b><span class="small">${g.n} ${g.n>1?"erros":"erro"}</span></div><p><span class="lbl2">Macete</span> ${g.t[2]}</p><p class="small"><span class="lbl2">Releia no resumo</span> ${where(g.k,g.t[3])}</p></div>`).join("")}</div>
   ${topics.length>4?`<p class="small" style="margin:0">Mais ${topics.length-4} ${topics.length-4>1?"temas":"tema"} com erro aparecem na revisão abaixo.</p>`:""}</section>`:""}
  <section class="panel"><h2>Próximo passo</h2><p style="margin:0">${next}</p>
-  <div class="row">${run.miss.length?`<button class="btn" id="redo">Refazer as ${run.miss.length} que errei</button>`:""}${worst?`<button class="btn ghost" id="train">Treinar só o ${label(worst.c).replace(" · "," ")}</button>`:""}<button class="btn ghost" id="new">Novo quiz</button></div></section>
+  <div class="row">${run.miss.length?`<button class="btn" id="redo">Refazer as ${run.miss.length} que errei</button>`:""}${worst?`<button class="btn ghost" id="train">Treinar: ${label(worst.c)}</button>`:""}<button class="btn ghost" id="new">Novo quiz</button></div></section>
  ${run.miss.length?`<section class="panel"><h2>Revisão dos erros</h2><div class="review">${run.miss.map(({q,mine})=>{const c=capOf(q.k);return `<div class="rv"><div class="eyebrow">${label(c)}</div><p><b>${q.s}</b></p><p class="small">Sua resposta: ${mine}</p><p>Certa: <b>${q.o?q.o[q.c][0]:(q.v?"Verdadeiro":"Falso")}</b> ${q.o?why(q.o[q.c][1]):q.e}</p></div>`}).join("")}</div></section>`:""}`;
  const r=document.getElementById("redo");
  if(r)r.onclick=()=>start(shuffle(run.miss.map(m=>Q.find(x=>x.s===m.q.s&&x.k===m.q.k))),true);
