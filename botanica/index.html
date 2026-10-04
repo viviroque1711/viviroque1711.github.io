@@ -1,0 +1,660 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Resumos de Botânica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: plataforma de estudo — trilha de capítulos à esquerda (como no SAS), uma estação por vez à direita; no celular a trilha vira faixa rolável no topo. */
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --sunk:#E7EDE6; --line:#CFDACD;
+  --ink:#16241C; --muted:#56685C;
+  --leaf:#1E6A48; --leaf-soft:#D7EBDF; --pollen:#B98510; --pollen-soft:#F7EBCB;
+  --ok:#1E7A45; --ok-soft:#D8F0E1; --bad:#B23A2E; --bad-soft:#F8DEDA;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1612; --surface:#15201A; --sunk:#1B2922; --line:#2C3D33;
+  --ink:#E3ECE6; --muted:#9DB0A4;
+  --leaf:#5FC795; --leaf-soft:#1C3A2B; --pollen:#E8B949; --pollen-soft:#3A3018;
+  --ok:#6BD69A; --ok-soft:#173826; --bad:#F08C7E; --bad-soft:#3D1F1B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1612; --surface:#15201A; --sunk:#1B2922; --line:#2C3D33;
+  --ink:#E3ECE6; --muted:#9DB0A4;
+  --leaf:#5FC795; --leaf-soft:#1C3A2B; --pollen:#E8B949; --pollen-soft:#3A3018;
+  --ok:#6BD69A; --ok-soft:#173826; --bad:#F08C7E; --bad-soft:#3D1F1B; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;padding-inline:16px;padding-block:0 48px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--pollen);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto}
+header.top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;padding-block:28px 20px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+header.top h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:800;letter-spacing:-.01em}
+header.top h1 span{color:var(--leaf)}
+.meter{min-width:0;flex:0 1 300px}
+.meter .bar{height:10px;border-radius:99px;background:var(--sunk);overflow:hidden;margin-top:6px}
+.meter .fill{height:100%;background:var(--leaf);width:0;transition:width .4s}
+.meter small{color:var(--muted);font-variant-numeric:tabular-nums}
+
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:32px;padding-top:24px;align-items:start}
+nav.trail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:flex;flex-direction:column;gap:4px}
+nav.trail .grp{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 12px 4px}
+.tbtn{display:flex;gap:12px;align-items:flex-start;text-align:left;background:none;border:0;border-radius:10px;padding:10px 12px;font-size:.95rem;line-height:1.3;font-weight:700}
+.tbtn:hover{background:var(--sunk)}
+.tbtn[aria-current="true"]{background:var(--leaf-soft)}
+.dot{flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--muted);margin-top:3px}
+.tbtn[aria-current="true"] .dot{border-color:var(--leaf)}
+.tbtn.done .dot{background:var(--leaf);border-color:var(--leaf)}
+
+main{min-width:0}
+.panel{display:flex;flex-direction:column;gap:20px}
+.chap-head .num{font-family:var(--display);color:var(--leaf);font-weight:800;font-size:1rem}
+.chap-head h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;margin-top:2px}
+.chap-head p{color:var(--muted);margin:8px 0 0;max-width:62ch}
+.big-idea{background:var(--leaf);color:var(--bg);border-radius:var(--r);padding:20px 22px}
+.big-idea .eyebrow{color:inherit;opacity:.8}
+.big-idea p{margin:6px 0 0;font-size:1.15rem;font-weight:700;line-height:1.45}
+.analogy{font-style:italic;color:var(--muted);margin:0;max-width:62ch}
+.flag{background:var(--pollen-soft);border:1px solid var(--pollen);border-radius:10px;padding:10px 14px;font-size:.92rem}
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;min-width:0}
+.block h3{font-size:1.08rem;margin-bottom:8px}
+.block ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.block b{color:var(--leaf)}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700}
+.explain{background:var(--sunk);border-radius:var(--r);padding:14px 18px;margin-top:-8px}
+.explain h4{font-family:var(--display);font-size:.95rem;margin:0 0 8px;color:var(--leaf)}
+.explain dl{margin:0;display:flex;flex-direction:column;gap:8px}
+.explain dt{font-weight:700;display:inline}
+.explain dd{margin:0;display:inline}
+.trap{display:flex;gap:14px;align-items:flex-start;border:2px dashed var(--pollen);border-radius:var(--r);padding:14px 18px}
+.trap .tag{flex:none;font-family:var(--display);font-weight:800;color:var(--pollen);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+.trap p{margin:0}
+.quick h3{font-size:1.1rem;margin-bottom:10px}
+.qcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:8px;min-height:110px}
+.flip .q{font-weight:700}
+.flip .a{color:var(--leaf);font-weight:700}
+.flip .hint{font-size:.82rem;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{border:0;border-radius:99px;padding:10px 20px;font-weight:700;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:none;border:2px solid var(--line);color:var(--ink)}
+.btn:hover{filter:brightness(1.08)}
+
+.factory{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.station{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:4px}
+.station:hover{border-color:var(--leaf)}
+.station .role{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--leaf)}
+.station .org{font-weight:700}
+.station .what{color:var(--muted);font-size:.92rem}
+.links{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.links ul{margin:8px 0 0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;counter-reset:s}
+.howto div{background:var(--sunk);border-radius:var(--r);padding:12px 14px;font-size:.95rem}
+.howto div b{display:block;font-family:var(--display);color:var(--leaf)}
+
+/* exercícios */
+.score{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.9rem;font-variant-numeric:tabular-nums}
+.chip b{color:var(--leaf)}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.ex > h3{font-size:1.2rem}
+.ex > p.lead{margin:-6px 0 0;color:var(--muted)}
+.item{display:flex;flex-direction:column;gap:8px;padding-top:14px;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.stem{font-weight:700}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.opt:hover:not(:disabled){border-color:var(--leaf)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:10px 14px;font-size:.95rem}
+.fb.right{background:var(--ok-soft)} .fb.wrong{background:var(--bad-soft)}
+.fb b{display:block}
+.vf{display:flex;gap:8px}
+.vf .opt{min-width:56px;text-align:center;font-weight:700}
+.match{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;align-items:center}
+select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px;max-width:100%}
+select.right,input.right{border-color:var(--ok);background:var(--ok-soft)}
+select.wrong,input.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.bank{display:flex;flex-wrap:wrap;gap:8px}
+.bank span{background:var(--pollen-soft);border-radius:6px;padding:3px 10px;font-weight:700;font-size:.92rem}
+.gap input{width:11em}
+textarea{width:100%;min-height:110px;resize:vertical}
+.check{display:flex;flex-direction:column;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start}
+.check input{margin-top:5px;accent-color:var(--leaf)}
+.legend{font-size:.85rem;color:var(--muted)}
+footer.note{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+
+@media (max-width:820px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  nav.trail{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px;gap:6px;margin-inline:-16px;padding-inline:16px}
+  nav.trail .grp{display:none}
+  .tbtn{flex:none;max-width:220px;border:1px solid var(--line);background:var(--surface)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow"><a href="../" style="font-size:13px;font-weight:700;color:inherit;opacity:.75;text-decoration:none;margin-right:8px">← Início</a>Recuperação de Biologia · 2ª série</div>
+      <h1>Botânica: a planta é uma <span>fábrica</span></h1>
+    </div>
+    <div class="meter" aria-live="polite">
+      <small id="meterTxt">0 de 8 capítulos estudados</small>
+      <div class="bar"><div class="fill" id="meterFill"></div></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="trail" id="trail" aria-label="Capítulos"></nav>
+    <main id="main"></main>
+  </div>
+
+  <footer class="note">Os capítulos 10, 11 e 12 seguem o conteúdo padrão do ensino médio e ainda não foram conferidos com o livro do SAS. Se algum termo for diferente do que o professor usa, vale o livro.</footer>
+</div>
+
+<script>
+const CH = [
+ {n:5,title:"Morfologia e anatomia da raiz",station:"Captação",
+  sobre:"Os tecidos que fazem a planta crescer, as funções da raiz, suas regiões por fora, suas camadas por dentro e os tipos de raízes.",
+  ideia:"A raiz fixa, absorve e armazena.",
+  analogia:"Pensa na raiz como a bomba de captação da fábrica: fica escondida, mas sem ela nada funciona lá em cima.",
+  blocks:[
+   {h:"Meristemas (os tecidos que crescem)",items:["Células que vivem se dividindo.","<b>Apical</b>: alonga a planta (crescimento primário).","<b>Lateral</b>: engrossa (crescimento secundário). São o <b>câmbio vascular</b> e o <b>felogênio</b>."]},
+   {h:"Três sistemas de tecidos",items:["<b>Revestimento</b>: epiderme.","<b>Vascular</b>: xilema e floema.","<b>Fundamental</b>: parênquima e tecidos de sustentação."]},
+   {h:"Zonas, da ponta para cima",items:["<b>Coifa</b>: capacete que protege a ponta.","<b>Zona lisa</b>: onde a raiz alonga.","<b>Zona pilífera</b>: pelos absorventes, é aqui que a água entra.","<b>Zona suberosa</b>: onde saem as ramificações."]},
+   {h:"Por dentro, de fora para o centro",items:["Epiderme → córtex → <b>endoderme</b> (filtra o que entra) → <b>periciclo</b> (origina raízes laterais) → xilema e floema.","Eudicotiledônea: raiz <b>pivotante</b>, xilema em forma de cruz.","Monocotiledônea: raiz <b>fasciculada</b> (cabeleira), vasos em círculo com medula."]}
+  ],
+  table:{head:["Tipo de raiz","Função","Exemplo"],rows:[
+   ["Tuberosa","guarda reserva","cenoura, mandioca"],["Escora","sustenta","milho"],["Pneumatóforo","respira","plantas do mangue"],
+   ["Sugadora (haustório)","suga outra planta","plantas parasitas"],["Estranguladora","abraça e sufoca a hospedeira","figueira"],
+   ["Grampiforme","prende a trepadeira","hera"],["Aquática","flutua e absorve na água","aguapé"]]},
+  trap:"A coifa NÃO absorve. Quem absorve é a zona pilífera.",
+  check:[{q:"Qual zona da raiz absorve água?",a:"A zona pilífera, pelos pelos absorventes."},{q:"Que camada origina as raízes laterais?",a:"O periciclo."},{q:"Raiz pivotante é de mono ou eudicotiledônea?",a:"Eudicotiledônea."}]},
+
+ {n:6,title:"Morfologia e anatomia do caule",station:"Coluna e estrada",
+  sobre:"As funções do caule, suas partes por fora, os três sistemas de tecidos que o formam e os tipos de caule conforme o ambiente. Conferido com o livro do SAS (págs. 64 a 77).",
+  ideia:"O caule sustenta a planta e liga raiz e folhas pelos vasos condutores. E tem uma marca registrada: gemas.",
+  analogia:"O livro abre com a banana: a cultivada não tem semente. O produtor corta um pedaço do caule subterrâneo (o rizoma) e planta em outro lugar. Nasce uma bananeira geneticamente igual. Isso é propagação vegetativa, um tipo de reprodução assexuada.",
+  blocks:[
+   {h:"Funções do caule",items:["<b>Sustenta</b> ramos, folhas, flores, frutos e sementes.","<b>Conduz</b>: liga raiz e folhas pelos vasos condutores.","Caule novo é verde e faz <b>fotossíntese</b>, mas essa não é a função principal: ao envelhecer ele fica pardo.","<b>Propagação vegetativa</b>: gemas em contato com o solo enraízam e formam nova planta (morangueiro).","<b>Armazena</b> substâncias no parênquima (cana-de-açúcar).","Caule + folhas = <b>sistema caulinar</b>."]},
+   {h:"Morfologia externa",items:["O que identifica um caule são as <b>gemas</b>, que fazem a planta crescer.","<b>Gema apical</b> (terminal): meristema primário, faz o caule crescer em comprimento. Dela saem os <b>primórdios foliares</b>, que viram folhas.","<b>Gemas laterais</b> (axilares): ficam na axila das folhas, no nó, e originam os ramos laterais.","<b>Nó</b>: onde a folha se prende ao caule. <b>Entrenó</b> (internó): trecho entre dois nós."]},
+   {h:"Sistema de revestimento",items:["<b>Epiderme</b>: reveste a planta jovem.","<b>Periderme</b>: substitui a epiderme quando há crescimento secundário (gimnospermas e maioria das eudicotiledôneas).","Periderme = <b>felogênio</b> (meristema secundário) + <b>feloderme</b> (para dentro) + <b>súber</b> (para fora).","<b>Súber</b> = cortiça: células mortas com lipídios na parede, impermeável e isolante térmico por causa do ar.","A periderme velha descama, como no tronco da goiabeira."]},
+   {h:"Sistema fundamental",items:["<b>Parênquima</b>, o principal, em três tipos:","de <b>preenchimento</b>: ocupa espaços e regenera lesões;","<b>fotossintético</b> (clorofiliano): cheio de cloroplastos;","de <b>armazenamento</b>: guarda amido, água ou ar.","<b>Colênquima</b> e <b>esclerênquima</b> dão sustentação. A diferença está na tabela abaixo."]},
+   {h:"Sistema vascular: xilema",items:["Vasos primários vêm do <b>procâmbio</b>; secundários vêm do <b>câmbio vascular</b>.","Monocotiledônea: feixes espalhados. Eudicotiledônea: feixes em anel.","<b>Xilema</b> (lenho): leva a seiva bruta (mineral) da raiz às folhas; também sustenta e armazena.","<b>Traqueídes</b>: longas e estreitas, menos especializadas (pteridófitas e gimnospermas).","<b>Elementos de vaso</b>: mais largos, com placas perfuradas; principais condutores das angiospermas.","As duas têm parede reforçada por <b>lignina</b>."]},
+   {h:"Sistema vascular: floema",items:["<b>Floema</b> (líber): leva a seiva elaborada (orgânica), produzida nas folhas.","<b>Elementos de tubo crivado</b>: células vivas, sem núcleo, ligadas por placas com crivos.","Sem núcleo, eles dependem das <b>células companheiras</b> (com núcleo), que mandam proteínas e ATP."]}
+  ],
+  tables:[
+   {head:["","Colênquima","Esclerênquima"],rows:[
+    ["Células","vivas","mortas"],["Parede","espessa, reforçada por celulose","espessa, reforçada por lignina"],["Consistência","flexível","rígido"],
+    ["Onde fica","estruturas jovens, periferia do caule e folhas; raro em raízes","todos os órgãos, partes velhas, vasos, frutos secos e sementes"],["Formato","células alongadas em feixes","fibras (longas) e esclereídes"]]},
+   {head:["Grupo","Tipo","Como é","Exemplos"],rows:[
+    ["Aéreo","Ereto","cresce na vertical sem apoio","tronco (robusto), haste (fina e flexível)"],
+    ["Aéreo","Rastejante","cresce paralelo ao solo; gemas enraízam e formam novas plantas","morangueiro, grama de jardim"],
+    ["Aéreo","Trepador","cresce sobre suportes; prende-se por gavinhas, raízes adventícias ou enrolando-se","videira (gavinhas), hera (raízes adventícias)"],
+    ["Subterrâneo","Rizoma","cresce na horizontal sob o solo e emite folhas e ramos","bananeira, samambaia, íris, espada-de-são-jorge"],
+    ["Subterrâneo","Tubérculo","dilatado na ponta das ramificações, guarda reserva; as gemas brotam","batata-inglesa, cará, inhame"],
+    ["Subterrâneo","Bulbo","porção central de onde saem folhas modificadas com reserva; raízes embaixo","cebola, açafrão"],
+    ["Aquático","Aquático","verde, delicado, com parênquima aerífero para flutuar e respirar","vitória-régia, aguapé"],
+    ["Clima seco","Cladódio","verde (faz fotossíntese), com parênquima aquífero que guarda água","cactos, palma"]]}
+  ],
+  trap:["Batata-inglesa é caule (tubérculo) porque tem gemas, os \"olhinhos\". Batata-doce é raiz. Para diferenciar sem cortar: procure gemas e nós. Raiz não tem.","Colênquima: C de Celulose e de Células vivas. Esclerênquima: \"esclero\" = duro, com lignina e células mortas.","A periderme NÃO vem da epiderme. Ela vem do felogênio, um meristema secundário."],
+  check:[{q:"Onde ficam as gemas laterais?",a:"Nas axilas das folhas, na região do nó."},{q:"Qual tecido tem células vivas, parede de celulose e é flexível?",a:"O colênquima."},{q:"Quem mantém vivo o elemento de tubo crivado, que não tem núcleo?",a:"As células companheiras."},{q:"Em que tecido o cacto guarda água?",a:"No parênquima aquífero do cladódio."}]},
+
+ {n:7,title:"Morfologia e anatomia da folha",station:"Cozinha",
+  sobre:"A organização interna da folha, os estômatos, as funções da folha, os tipos de folha e as folhas modificadas.",
+  ideia:"A folha é a cozinha da planta: faz fotossíntese, troca gases e perde água por transpiração.",
+  analogia:"Ingredientes: água (vem da raiz), CO₂ (entra pelo estômato) e luz. Prato pronto: açúcar.",
+  blocks:[
+   {h:"Por dentro, em sanduíche",items:["<b>Cutícula</b>: cera que impermeabiliza.","Epiderme de cima → <b>mesofilo</b> → epiderme de baixo.","Mesofilo <b>paliçádico</b>: células compactas, captam luz.","Mesofilo <b>lacunoso</b>: cheio de espaços, facilita a troca de gases.","Os vasos formam as <b>nervuras</b>."]},
+   {h:"Estômatos (as portas)",items:["Ficam na epiderme, em geral na face de baixo.","Duas <b>células-guarda</b> com cloroplastos controlam a abertura.","Túrgidas (cheias de água): <b>abre</b>. Flácidas: <b>fecha</b> e economiza água."]},
+   {h:"Partes e formas",items:["<b>Limbo</b> (lâmina), <b>pecíolo</b> (cabinho), <b>estípula</b>.","Monocotiledônea em geral não tem pecíolo e tem <b>bainha</b>.","<b>Simples</b> (limbo inteiro) ou <b>composta</b> (dividida em folíolos).","Filotaxia: <b>alternadas</b> (1 por nó), <b>opostas</b> (2), <b>verticiladas</b> (3 ou mais)."]},
+   {h:"Anexos da epiderme",items:["<b>Acúleos</b>: os \"espinhos\" da roseira, que saem fácil.","<b>Tricomas</b>: pelos."]}
+  ],
+  table:{head:["Folha modificada","Para quê","Exemplo"],rows:[
+   ["Catafilos","protegem e armazenam","cebola, alho"],["Brácteas","coloridas, atraem polinizador","buganvília, bico-de-papagaio"],["Espinhos","poupam água e defendem","cacto"],
+   ["Cotilédones","nutrem o embrião na germinação","feijão"],["Gavinhas","enrolam e fixam","chuchu, ervilha"],["Propagação vegetativa","geram mudas na borda","planta-da-fortuna"]]},
+  trap:"Acúleo da roseira é anexo da epiderme. Espinho do cacto é folha modificada.",
+  check:[{q:"Qual parênquima capta mais luz?",a:"O paliçádico."},{q:"Células-guarda túrgidas: o estômato abre ou fecha?",a:"Abre."},{q:"A parte colorida da buganvília é pétala?",a:"Não. São brácteas, folhas modificadas."}]},
+
+ {n:8,title:"Morfologia e anatomia da flor",station:"Reprodução",
+  sobre:"As peças da flor, os tipos de flor, as inflorescências e a polinização.",
+  ideia:"A flor é o órgão de reprodução das angiospermas. É um ramo com folhas modificadas.",
+  analogia:"A flor é a vitrine com propaganda: cor, cheiro e néctar existem para chamar o \"entregador\" de pólen.",
+  blocks:[
+   {h:"Quatro verticilos, de fora para dentro",items:["<b>Sépalas</b> (cálice): protegem.","<b>Pétalas</b> (corola): atraem.","<b>Estames</b> (androceu): parte masculina.","<b>Carpelos</b> (gineceu): parte feminina.","Cálice + corola = <b>perianto</b> (peças inférteis)."]},
+   {h:"As peças férteis",items:["<b>Estame</b> = filete + antera (produz o pólen).","<b>Carpelo</b> = estigma (recebe o pólen) + estilete (tubo) + ovário (guarda os óvulos).","Suporte: <b>pedúnculo</b> (cabo) e <b>receptáculo</b> (base)."]},
+   {h:"Tipos de flor",items:["<b>Completa</b>: tem as quatro peças. <b>Incompleta</b>: falta alguma.","<b>Monoclina</b>: masculino e feminino na mesma flor (roseira).","<b>Diclina</b>: só um dos dois (abobrinha).","Planta <b>dioica</b>: indivíduos só machos ou só fêmeas (mamoeiro).","Simetria <b>radial</b> (rosa) ou <b>bilateral</b> (orquídea).","<b>Inflorescência</b>: várias flores num pedúnculo (cacho, espiga, umbela)."]},
+   {h:"Polinização",items:["Transporte do pólen da antera ao estigma.","<b>Autopolinização</b>: diminui a variabilidade genética.","<b>Cruzada</b>: aumenta a variabilidade.","<b>Dicogamia</b> (amadurecem em épocas diferentes) e <b>autoincompatibilidade</b> evitam a autofecundação."]}
+  ],
+  table:{head:["Polinizador","Nome","Como é a flor"],rows:[
+   ["Insetos","entomofilia","pétalas chamativas, cores vivas"],["Aves","ornitofilia","muito néctar, vermelha ou amarela"],
+   ["Morcegos","quiropterofilia","muito néctar, pouco colorida, abre à noite"],["Vento","anemofilia","pequena, sem cor, sem néctar nem aroma"]]},
+  trap:"Polinização não é fecundação. Polinizar é entregar o pólen. Fecundar é o encontro dos gametas, que vem depois.",
+  check:[{q:"Qual parte do carpelo recebe o pólen?",a:"O estigma."},{q:"Flor vermelha, com muito néctar: qual polinizador?",a:"Aves (ornitofilia)."},{q:"Mamoeiro é monoico ou dioico?",a:"Dioico: há pés machos e pés fêmeas."}]},
+
+ {n:9,title:"Morfologia e anatomia do fruto e da semente",station:"Embalagem e envio",
+  sobre:"As partes da semente, a germinação, a formação e a classificação dos frutos, os pseudofrutos e a dispersão de sementes.",
+  ideia:"Depois da fecundação, o óvulo vira semente e o ovário vira fruto.",
+  analogia:"A semente é o bebê com a marmita. O fruto é a embalagem que ajuda a espalhar o bebê por aí.",
+  blocks:[
+   {h:"Semente",items:["Três partes: <b>tegumento</b> (casca), <b>reserva</b> (endosperma ou cotilédones) e <b>embrião</b>.","<b>Endosperma</b> é triploide (3n): 1 núcleo espermático + 2 núcleos polares.","Embrião: <b>radícula</b> (vira raiz, sai primeiro), caulículo (hipocótilo e epicótilo) e cotilédones.","Mono tem 1 cotilédone; eudicotiledônea tem 2."]},
+   {h:"Germinação",items:["Precisa de água, temperatura adequada, O₂ e, em algumas espécies, luz.","<b>Epígea</b>: cotilédones sobem (feijão).","<b>Hipógea</b>: cotilédones ficam embaixo (milho, ervilha).","<b>Dormência</b>: bloqueio interno, não germina mesmo com ambiente bom.","<b>Quiescência</b>: falta algo do ambiente; chegou, germina."]},
+   {h:"Fruto",items:["Fruto = ovário maduro.","<b>Pericarpo</b> = epicarpo (casca) + mesocarpo (polpa) + endocarpo (junto da semente).","<b>Partenocarpia</b>: fruto sem fecundação, sem semente (banana).","Carnosos: <b>baga</b> (várias sementes: tomate, uva) e <b>drupa</b> (um caroço: pêssego, azeitona).","Secos: <b>deiscentes</b> abrem (vagem, cápsula); <b>indeiscentes</b> não abrem (grão, aquênio).","Origem: <b>simples</b> (1 ovário), <b>agregado</b> (vários ovários de 1 flor), <b>múltiplo</b> (uma inflorescência)."]},
+   {h:"Dispersão",items:["<b>Anemocoria</b>: vento (sementes com asas).","<b>Hidrocoria</b>: água (coco).","<b>Zoocoria</b>: animais (carrapicho ou fruto comido)."]}
+  ],
+  table:{head:["Pseudofruto","A parte carnosa vem de","Onde está o fruto verdadeiro"],rows:[
+   ["Caju","pedúnculo","a castanha"],["Maçã","receptáculo","o miolo com as sementes"],["Morango","receptáculo","os pontinhos (aquênios)"],["Abacaxi","inflorescência inteira","cada \"gomo\" da casca"]]},
+  trap:"Fruta é termo de cozinha, fruto é termo de Botânica. Tomate é fruto. A parte gostosa do caju não é.",
+  check:[{q:"O ovário vira o quê? E o óvulo?",a:"Ovário vira fruto; óvulo vira semente."},{q:"Endosperma é n, 2n ou 3n?",a:"3n (triploide)."},{q:"Banana sem semente: como se chama isso?",a:"Partenocarpia."}]},
+
+ {n:10,title:"Fisiologia da absorção: condução de seiva",station:"Elevador e delivery",flag:true,
+  sobre:"Como a planta absorve água e sais e como a seiva circula pelo xilema e pelo floema.",
+  ideia:"A planta tem duas tubulações. O xilema sobe água; o floema distribui açúcar.",
+  analogia:"Xilema é o elevador de água. Floema é o delivery de açúcar, que entrega para quem estiver com fome, em cima ou embaixo.",
+  blocks:[
+   {h:"Absorção",items:["A água entra pelos pelos absorventes por <b>osmose</b>.","Os sais entram por <b>transporte ativo</b> (gasta energia)."]},
+   {h:"Coesão-tensão (Dixon)",items:["A folha perde água por transpiração e isso puxa a coluna de água de baixo para cima.","Moléculas de água grudam umas nas outras (<b>coesão</b>) e nas paredes do vaso (<b>adesão</b>).","É como suco de canudinho: quem puxa é a ponta de cima."]},
+   {h:"Pressão de raiz",items:["Empurrão fraco, de baixo para cima.","Explica a <b>gutação</b>: gotinhas na borda das folhas de manhã."]},
+   {h:"Fluxo em massa (Münch)",items:["O açúcar entra no floema na folha (<b>fonte</b>).","A água vem atrás por osmose, a pressão sobe e empurra a seiva até o <b>dreno</b>."]},
+   {h:"Anel de Malpighi",items:["Tira-se um anel de casca do tronco, e o floema vai junto.","O açúcar não chega à raiz, que morre de fome; depois a planta toda morre.","Acima do corte, o tronco incha (açúcar acumulado)."]}
+  ],
+  table:{head:["","Xilema","Floema"],rows:[
+   ["Leva","seiva bruta (água e sais)","seiva elaborada (açúcares)"],["Sentido","da raiz para as folhas","da fonte (folha) para o dreno (consumo ou reserva)"],
+   ["Células","mortas, parede com lignina","vivas"],["Teoria","coesão-tensão (Dixon)","fluxo em massa (Münch)"]]},
+  trap:"O floema não é \"só para baixo\". Ele vai da fonte para o dreno, e isso pode ser para cima, até um fruto ou broto.",
+  check:[{q:"Qual vaso tem células mortas?",a:"O xilema."},{q:"Quem é o \"motor\" da subida da seiva bruta?",a:"A transpiração nas folhas (coesão-tensão)."},{q:"Por que a árvore morre no anel de Malpighi?",a:"O floema é removido e a raiz fica sem açúcar."}]},
+
+ {n:11,title:"Fisiologia da absorção: transpiração vegetal",station:"Motor do elevador",flag:true,
+  sobre:"A perda de água pelas folhas, o abre e fecha dos estômatos e os fatores que controlam esse processo.",
+  ideia:"Transpirar é perder água como vapor. A planta precisa disso para puxar a seiva e se resfriar, mas não pode secar. Quem regula é o estômato.",
+  analogia:"O dilema do estômato é o da janela num dia de calor: aberta, entra ar fresco (CO₂) mas sai o ar-condicionado (água).",
+  blocks:[
+   {h:"Duas vias",items:["<b>Estomática</b>: a maior parte, e controlável.","<b>Cuticular</b>: pouca, sem controle."]},
+   {h:"O dilema",items:["Aberto: entra CO₂ para a fotossíntese, mas sai água.","Fechado: economiza água, mas a fotossíntese para."]},
+   {h:"Como o estômato abre",items:["Entram íons <b>potássio (K⁺)</b> nas células-guarda.","A água entra atrás por osmose, elas ficam túrgidas e o <b>ostíolo</b> abre.","Sai o K⁺, sai a água, elas murcham e o poro fecha."]},
+   {h:"Mais e menos transpiração",items:["Aumenta: calor, vento, ar seco, luz.","Diminui: ar úmido, frio, falta de água.","Plantas de clima seco: cutícula grossa, folhas pequenas ou em espinhos, estômatos em cavidades, tricomas.","<b>Gutação</b> não é transpiração: é água líquida saindo por hidatódios."]}
+  ],
+  table:{head:["Fator","Estômato"],rows:[
+   ["Luz","abre"],["Escuro","fecha"],["Muita água no solo","abre"],["Falta de água","fecha (ordem do ácido abscísico)"],["Pouco CO₂ dentro da folha","abre"],["Muito CO₂ dentro da folha","fecha"]]},
+  trap:"A regra do CO₂ é o contrário do que parece. Pouco CO₂ ABRE, porque a planta \"quer\" mais.",
+  check:[{q:"Qual íon faz o estômato abrir?",a:"Potássio (K⁺)."},{q:"Vento aumenta ou diminui a transpiração?",a:"Aumenta."},{q:"Gutação é transpiração?",a:"Não. É água líquida saindo pelos hidatódios."}]},
+
+ {n:12,title:"Hormônios vegetais",station:"Gerência",flag:true,
+  sobre:"As substâncias que regulam o crescimento e o desenvolvimento da planta, e os movimentos que elas provocam.",
+  ideia:"Planta não tem sistema nervoso. Quem dá as ordens são cinco hormônios (fitormônios).",
+  analogia:"São os gerentes da fábrica: cada um manda num setor, e às vezes um manda o outro parar.",
+  blocks:[
+   {h:"Dominância apical",items:["A auxina da ponta do caule inibe as gemas laterais.","Podou a ponta, a planta ramifica. Por isso se poda cerca viva."]},
+   {h:"Movimentos (tropismos)",items:["<b>Fototropismo</b>: a auxina vai para o lado da sombra, que cresce mais, e o caule curva para a luz.","<b>Gravitropismo</b>: caule cresce para cima (negativo), raiz para baixo (positivo)."]},
+   {h:"A dose importa",items:["A concentração de auxina que estimula o caule <b>inibe</b> a raiz, que é muito mais sensível."]},
+   {h:"Etileno no dia a dia",items:["Banana embrulhada em jornal amadurece mais rápido: o gás fica preso.","Uma fruta madura faz as vizinhas amadurecerem."]}
+  ],
+  table:{head:["Hormônio","Apelido","O que faz"],rows:[
+   ["Auxina (AIA)","o do crescimento","alonga células; curva para a luz; dominância apical; enraíza estacas; forma frutos sem semente"],
+   ["Giberelina","o do esticão","alonga o caule; quebra a dormência e estimula a germinação"],
+   ["Citocinina","o da juventude","estimula a divisão celular; faz gemas laterais brotarem; retarda o envelhecimento das folhas"],
+   ["Etileno","o gás do amadurecimento","amadurece frutos; faz cair folhas e frutos (abscisão)"],
+   ["Ácido abscísico (ABA)","o do freio","fecha estômatos na seca; mantém sementes e gemas dormentes"]]},
+  trap:"Ácido abscísico tem nome de abscisão, mas quem derruba folha e fruto é principalmente o etileno.",
+  check:[{q:"Qual hormônio é um gás?",a:"O etileno."},{q:"Qual fecha os estômatos na seca?",a:"O ácido abscísico."},{q:"Por que podar a ponta deixa a cerca mais cheia?",a:"Tira a fonte de auxina que inibia as gemas laterais."}]}
+];
+
+const FACTORY = [
+ ["Captação","Raiz","Puxa água e sais do solo.",5],["Elevador","Xilema","Sobe a água pelo caule até as folhas.",10],
+ ["Coluna","Caule","Sustenta a planta e abriga os vasos.",6],["Cozinha","Folha","Com água, CO₂ e luz, fabrica açúcar.",7],
+ ["Motor do elevador","Transpiração","A água que evapora puxa a coluna lá de baixo.",11],["Delivery","Floema","Leva o açúcar para raiz, flores e frutos.",10],
+ ["Reprodução","Flor","Recebe o pólen e forma o embrião.",8],["Embalagem","Fruto e semente","Protegem e espalham a próxima geração.",9],
+ ["Gerência","Hormônios","Mandam crescer, fechar estômato, amadurecer, dormir.",12]
+];
+
+/* ---------- exercícios ---------- */
+const MC = [
+ {s:"Um agricultor retirou um anel completo de casca do tronco de uma árvore. Semanas depois, a região acima do corte inchou e, meses depois, a árvore morreu. A morte ocorreu porque",
+  o:["o xilema foi removido e a água deixou de subir.","a transpiração foi interrompida nas folhas.","o floema foi removido e as raízes deixaram de receber açúcares.","a planta perdeu os meristemas apicais.","os estômatos do tronco foram destruídos."],c:2,
+  e:"O floema fica na casca, então o anel o remove. O açúcar para acima do corte (por isso incha) e a raiz morre de fome. O xilema fica mais para dentro e continua levando água, por isso a morte demora."},
+ {s:"Em um dia quente e seco, uma planta fecha os estômatos. A consequência imediata é",
+  o:["menor perda de água e menor entrada de CO₂, com queda da fotossíntese.","maior absorção de água pelas folhas.","aumento da subida de seiva bruta.","maior entrada de CO₂ e aumento da fotossíntese.","eliminação de água líquida por gutação."],c:0,
+  e:"Estômato fechado segura a água, mas também barra o CO₂. Sem CO₂, a fotossíntese cai."},
+ {s:"Bananas verdes guardadas em um saco fechado junto com uma maçã madura amadurecem mais depressa. O responsável é",
+  o:["a auxina liberada pela casca.","a giberelina produzida pelas sementes.","a citocinina acumulada no saco.","o etileno, gás liberado pelo fruto maduro.","o ácido abscísico, que acelera o metabolismo."],c:3,
+  e:"O etileno é um gás. Preso no saco, ele se concentra e acelera o amadurecimento."},
+ {s:"Uma flor é pequena, sem pétalas vistosas, sem néctar e sem perfume, e produz grande quantidade de pólen leve. O agente polinizador mais provável é",
+  o:["abelha.","vento.","beija-flor.","morcego.","borboleta."],c:1,
+  e:"Flor sem atrativos e com muito pólen leve aposta no vento (anemofilia). Animais precisam de cor, cheiro ou néctar."},
+ {s:"Sobre o caju, é correto afirmar que",
+  o:["a parte carnosa é o fruto e a castanha é a semente.","a parte carnosa vem do ovário e a castanha, do receptáculo.","é um fruto múltiplo, formado por uma inflorescência.","é um fruto partenocárpico, sem semente.","a parte carnosa vem do pedúnculo, e o fruto verdadeiro é a castanha."],c:4,
+  e:"O caju é pseudofruto: a parte carnosa vem do pedúnculo. O fruto verdadeiro é a castanha, um aquênio."},
+ {s:"Um jardineiro corta as pontas dos ramos de uma cerca viva, e ela fica mais cheia. Isso ocorre porque a poda",
+  o:["aumenta a produção de etileno nas folhas.","remove a fonte de auxina que inibia as gemas laterais.","estimula a produção de ácido abscísico nas gemas.","interrompe o floema e acumula açúcar nos ramos.","elimina a citocinina que impedia a brotação."],c:1,
+  e:"A ponta do ramo produz auxina, que inibe as gemas laterais (dominância apical). Sem a ponta, elas brotam."}
+];
+const VF = [
+ {s:"O parênquima paliçádico tem muitos espaços entre as células para a circulação de gases.",v:false,e:"Quem tem espaços é o lacunoso. O paliçádico é compacto e especializado em captar luz."},
+ {s:"Uma flor diclina tem só androceu ou só gineceu.",v:true,e:"Diclina = unissexuada."},
+ {s:"O endosperma das angiospermas é triploide.",v:true,e:"Um núcleo espermático (n) mais dois núcleos polares (n + n) dá 3n."},
+ {s:"O xilema é formado por células vivas e transporta açúcares.",v:false,e:"O xilema tem células mortas e leva água e sais. Açúcar vai pelo floema, que é vivo."},
+ {s:"Na germinação epígea, os cotilédones permanecem sob o solo.",v:false,e:"Na epígea os cotilédones sobem (feijão). Ficam sob o solo na hipógea (milho)."},
+ {s:"O espinho do cacto é uma folha modificada.",v:true,e:"Reduz a perda de água e defende contra herbívoros."},
+ {s:"Polinização e fecundação são a mesma coisa.",v:false,e:"Polinização é a chegada do pólen ao estigma. Fecundação é a união dos gametas, que acontece depois, dentro do óvulo."}
+];
+const HORM = ["Auxina","Giberelina","Citocinina","Etileno","Ácido abscísico"];
+const MATCH = [["Fecha os estômatos na seca",5],["Amadurece frutos",4],["Curva o caule em direção à luz",1],["Quebra a dormência da semente e alonga o caule",2],["Estimula a divisão celular e retarda o envelhecimento",3]];
+const GAPS = [
+ ["Cálice e corola formam o","perianto","."],["As folhas coloridas que atraem polinizadores na buganvília são","brácteas","."],
+ ["O parênquima","lacunoso","facilita as trocas gasosas na folha."],["Epicarpo, mesocarpo e endocarpo formam o","pericarpo","."],
+ ["O pêssego, com um caroço, é um fruto carnoso do tipo","drupa","."],["No milho, os cotilédones ficam sob o solo: germinação","hipógea","."],
+ ["A subida da seiva bruta é explicada pela teoria da","coesão-tensão","."],["O estômato abre quando entram íons","potássio","nas células-guarda."]
+];
+const DISC = [
+ {s:"Uma árvore de 30 metros leva água até o topo sem nenhuma bomba. Explique como, usando as palavras transpiração, coesão e xilema.",
+  k:["As folhas perdem água por transpiração.","Essa perda cria uma tensão que puxa a água dos vasos do xilema.","As moléculas de água ficam unidas (coesão), então a coluna sobe inteira, sem se romper.","A energia vem do Sol, que evapora a água, e não de uma bomba da planta."]},
+ {s:"No morango, a parte vermelha e suculenta não é o fruto. Explique o que ela é, onde estão os frutos verdadeiros e por que o morango é chamado de pseudofruto.",
+  k:["A parte vermelha é o receptáculo floral, que cresceu e ficou suculento.","Os frutos verdadeiros são os pontinhos na superfície (aquênios), cada um com uma semente.","É pseudofruto porque a parte carnosa não vem do ovário."]}
+];
+
+const MC6 = [
+ {s:"Um tecido vegetal tem células vivas, alongadas, com parede espessa reforçada por celulose. Fica na periferia de caules jovens e deixa que eles se dobrem com o vento sem quebrar. Esse tecido é o",
+  o:["esclerênquima.","colênquima.","súber.","xilema.","parênquima aquífero."],c:1,
+  e:"Vivo + celulose + flexível = colênquima. O esclerênquima é o oposto: células mortas, lignina e rigidez."},
+ {s:"A cortiça das rolhas vem do súber. Ela veda e isola bem porque",
+  o:["tem células vivas cheias de água.","é rica em cloroplastos.","tem células mortas com lipídios na parede e ar acumulado.","é formada por elementos de vaso.","vem diretamente da epiderme."],c:2,
+  e:"O súber é tecido morto, com lipídios na parede (impermeável) e ar acumulado (isolante térmico)."},
+ {s:"Os elementos de tubo crivado do floema não têm núcleo, mas continuam funcionando porque",
+  o:["recebem lignina do esclerênquima.","são substituídos por traqueídes.","fazem fotossíntese.","dependem das células companheiras, que têm núcleo.","recebem seiva bruta do xilema."],c:3,
+  e:"As células companheiras têm núcleo e mandam proteínas e ATP para o tubo crivado por conexões citoplasmáticas."},
+ {s:"Alguém encontra no solo uma estrutura grossa e cheia de reserva e quer saber, sem cortar, se é caule ou raiz. O melhor critério é procurar",
+  o:["gemas e nós, que só o caule tem.","pelos absorventes.","cor marrom.","amido.","o tamanho da estrutura."],c:0,
+  e:"Gemas e nós são a marca do caule. É por isso que a batata-inglesa é caule (tubérculo) e a batata-doce é raiz."},
+ {s:"A videira se prende a fios e a hera sobe pelos muros. As duas têm caule do tipo trepador e se fixam, respectivamente, por",
+  o:["raízes adventícias e espinhos.","espinhos e gavinhas.","rizomas e bulbos.","raízes adventícias e gavinhas.","gavinhas e raízes adventícias."],c:4,
+  e:"Videira: gavinhas. Hera: raízes adventícias. Os dois exemplos estão na página 70 do livro."},
+ {s:"Em um caule de eudicotiledônea com crescimento secundário, o câmbio vascular produz",
+  o:["súber para fora e feloderme para dentro.","apenas xilema.","xilema secundário e floema secundário.","epiderme e periderme.","primórdios foliares."],c:2,
+  e:"O câmbio vascular é o meristema secundário dos vasos. Súber e feloderme vêm de outro meristema, o felogênio."}
+];
+const TIPOS = ["Aquático","Bulbo","Cladódio","Rastejante","Rizoma","Trepador","Tubérculo"];
+const MATCH6 = [["Cebola","Bulbo"],["Batata-inglesa","Tubérculo"],["Bananeira","Rizoma"],["Morangueiro","Rastejante"],["Videira","Trepador"],["Aguapé","Aquático"],["Palma","Cladódio"]];
+const LIVRO = [
+ ["Pág. 68 · Agora é com @você 1","a) A: parênquima. B: colênquima (parede espessa de celulose). C: esclerênquima (parede com lignina, como as células duras da pera). b) Colênquima e esclerênquima. O colênquima é vivo e flexível; o esclerênquima é morto, rígido e tem lignina."],
+ ["Pág. 68 · Agora é com @você 2","a) Seiva bruta: xilema. Seiva elaborada: floema. Desenvolvido da protoderme: epiderme. Meristema secundário que forma xilema e floema: câmbio vascular. Sistema fundamental: parênquima. Ligue cada um à letra da figura. b) Eudicotiledônea, porque os feixes estão organizados em anel."],
+ ["Pág. 69 · Agora é com @você 3","a) A é o floema (secundário) e B é o xilema (secundário, o lenho). Os dois são produzidos pelo câmbio: floema para fora, xilema para dentro. b) Errada: a periderme vem do felogênio, um meristema secundário, e não da epiderme. c) Sim: há periderme, câmbio e lenho, sinais de crescimento em espessura."],
+ ["Pág. 73 · Agora é com @você 1","a) A: nó. B: entrenó. b) As gemas laterais ficam nos nós, na axila das folhas. Elas originam os ramos laterais."],
+ ["Pág. 73 · Agora é com @você 2","Ereto: B (mamoeiro). Trepador: A (chuchu). Rastejante: C (abóbora)."],
+ ["Pág. 73 · Agora é com @você 3","a) A: bulbo (cebola), folhas modificadas com reserva. B: tubérculo (batata), reserva de nutrientes e gemas que brotam. C: rizoma (gengibre), cresce na horizontal e emite folhas. b) Pela presença de gemas e nós. A raiz não tem."],
+ ["Atividade 1 (FCM-MG)","c. A lignina está no esclerênquima e no xilema."],
+ ["Atividade 2 (FAMERP)","b. Colênquima: células vivas, alongadas, paredes de celulose, flexível."],
+ ["Atividade 3 (UECE)","b (II, I, I, III). Batata-inglesa é tubérculo; samambaia e bananeira são rizoma; cebola é bulbo."],
+ ["Atividade 4 (FUVEST)","c. O xiquexique guarda água no parênquima aquífero do caule (cladódio)."],
+ ["Atividade 5 (UEL)","e. O tubérculo tem gemas laterais que formam ramos e folhas. Raiz não tem gemas."],
+ ["Atividade 6 (COTUCA)","b. No enxerto se unem xilema (seiva bruta) e floema (seiva elaborada)."],
+ ["Atividade 7 (MACKENZIE)","a. Em A a seiva sobe da raiz pelos vasos lenhosos, que formam o xilema. B é o floema, que leva seiva elaborada."],
+ ["Atividade 8 (UNESP)","e. No feijoeiro adulto o açúcar está no floema. Nas plântulas, a reserva está nos cotilédones (folhas modificadas)."],
+ ["Atividade 9 (UNICAMP)","c (subtipo IIa). Tem pouca lignina, o que exige menos H₂S e polui menos, e paredes mais grossas, com mais celulose por área plantada."],
+ ["Atividade 10 (UFJF)","b (I, III e V). II erra: o esclerênquima tem lignina, não suberina. IV erra: o floema não tem parede lignificada."]
+];
+
+const TABLE_EX = {
+ "Setor|Órgão|O que faz|Capítulo":[
+  ["Captação","A raiz é a entrada de matéria-prima: sem água e sais, nenhum outro setor funciona."],
+  ["Elevador","O xilema é um cano que só sobe: leva a água da raiz até o alto da planta."],
+  ["Coluna","O caule segura tudo de pé e é por dentro dele que passam os canos (xilema e floema)."],
+  ["Cozinha","Na folha acontece a fotossíntese: água + CO₂ + luz viram açúcar, a comida da planta."],
+  ["Motor do elevador","Quem faz o elevador subir é a água que evapora na folha. É ela que puxa a coluna de água de baixo."],
+  ["Delivery","O floema entrega o açúcar pronto para quem precisa: raiz, flor, fruto, broto."],
+  ["Reprodução","A flor existe para receber o pólen e formar a próxima geração."],
+  ["Embalagem","O fruto protege a semente e ajuda a espalhá-la; a semente leva o embrião com a sua marmita."],
+  ["Gerência","Os hormônios não fabricam nada: dão as ordens de crescer, fechar, amadurecer ou esperar."]],
+ "Tipo de raiz|Função|Exemplo":[
+  ["Tuberosa","A cenoura e a mandioca que você come são raízes que engordaram: a planta guarda ali o amido que produziu, como uma despensa embaixo da terra."],
+  ["Escora","No milho, saem raízes do caule acima do solo e descem até a terra. Funcionam como as cordas de uma barraca, impedindo a planta alta de tombar."],
+  ["Pneumatóforo","No mangue a lama é encharcada e quase não tem oxigênio. Essas raízes crescem para cima, saem da lama como canudinhos e captam ar para a raiz respirar."],
+  ["Sugadora (haustório)","Plantas parasitas, como o cipó-chumbo, enfiam essas raízes na planta hospedeira e sugam a seiva dela."],
+  ["Estranguladora","A figueira-mata-pau nasce em cima de uma árvore e desce raízes que abraçam o tronco. Com os anos, aperta tanto que a hospedeira morre."],
+  ["Grampiforme","Na hera, raizinhas saem do caule e grudam no muro como grampos, deixando a planta subir."],
+  ["Aquática","No aguapé, as raízes ficam soltas na água e absorvem os nutrientes direto dela, sem precisar de solo."]],
+ "|Colênquima|Esclerênquima":[
+  ["Células","O colênquima é vivo, então acompanha o crescimento da planta jovem. O esclerênquima morre quando fica pronto: sobra só a parede, como um esqueleto."],
+  ["Parede","A celulose é resistente mas maleável. A lignina é a substância dura da madeira: deixa a parede rígida e impermeável."],
+  ["Consistência","Colênquima é como o talo do aipo (salsão): dobra sem quebrar. Esclerênquima é como a casca da noz: não dobra."],
+  ["Onde fica","O colênquima aparece onde a planta ainda cresce e precisa de flexibilidade. O esclerênquima aparece onde precisa de resistência definitiva: madeira, vasos, cascas de sementes."],
+  ["Formato","Fibras são células compridas (como as do linho e da juta). Esclereídes são curtas: são as \"pedrinhas\" que você sente ao morder uma pera."]],
+ "Grupo|Tipo|Como é|Exemplos":[
+  ["Ereto","O tronco da árvore e a haste de uma erva sobem sozinhos, sem apoio. A diferença é a força: o tronco é grosso e lenhoso, a haste é fina e verde."],
+  ["Rastejante","O morangueiro solta ramos que correm pelo chão. Onde uma gema encosta na terra, nasce raiz e uma muda nova. É por isso que grama se planta em placas."],
+  ["Trepador","O caule é fraco demais para ficar de pé sozinho e usa um apoio. A videira se agarra com gavinhas (fios que se enrolam), a hera gruda com raízes adventícias e outras plantas enrolam o próprio caule."],
+  ["Rizoma","É um caule deitado embaixo da terra. Na bananeira, o \"tronco\" que você vê é feito das bainhas das folhas; o caule de verdade é o rizoma enterrado, de onde sai o cacho."],
+  ["Tubérculo","A batata-inglesa é a ponta de um ramo subterrâneo que engordou de amido. Os \"olhinhos\" são gemas: esqueça uma batata no armário e veja brotar."],
+  ["Bulbo","Corte uma cebola ao meio: a base dura no fundo é o caule (o \"prato\"), e as camadas que você come são folhas modificadas cheias de reserva."],
+  ["Aquático","O parênquima aerífero tem espaços cheios de ar que funcionam como boias: fazem a vitória-régia e o aguapé flutuarem e levam ar às partes submersas."],
+  ["Cladódio","No cacto as folhas viraram espinhos, então é o caule verde que faz a fotossíntese. O parênquima aquífero é a caixa-d'água para os meses de seca."]],
+ "Folha modificada|Para quê|Exemplo":[
+  ["Catafilos","As camadas da cebola e os dentes do alho. Guardam reserva e protegem a gema que vai brotar."],
+  ["Brácteas","Na buganvília, a \"flor\" colorida são brácteas; a flor de verdade é a pequenininha no meio. As brácteas são o letreiro que chama o polinizador."],
+  ["Espinhos","No cacto a folha virou espinho: com quase nenhuma superfície, perde pouquíssima água por transpiração e ainda afasta quem quer comer a planta."],
+  ["Cotilédones","As duas metades do grão de feijão. São folhas do embrião cheias de reserva que alimentam a plantinha até ela conseguir fazer fotossíntese."],
+  ["Gavinhas","Na ervilha, a ponta da folha virou um fio que se enrola no apoio e segura a planta. Atenção: na videira a gavinha vem do caule (cap. 6). Gavinha pode ser folha ou caule modificado, e a questão costuma dizer qual."],
+  ["Propagação vegetativa","A folha da planta-da-fortuna forma mudinhas na borda. Cada uma cai, enraíza e vira uma planta igual à mãe."]],
+ "Polinizador|Nome|Como é a flor":[
+  ["Insetos","Abelhas e borboletas são atraídas por cores vivas e perfume. Em troca do néctar, saem com pólen grudado no corpo e levam para a próxima flor."],
+  ["Aves","O beija-flor enxerga muito bem o vermelho e gasta muita energia voando. Flores vermelhas, em tubo e cheias de néctar combinam com o bico longo dele."],
+  ["Morcegos","O morcego sai à noite, então a flor abre à noite. No escuro a cor não ajuda, mas cheiro forte e muito néctar sim."],
+  ["Vento","O vento não vê cor nem sente cheiro, então a planta não gasta energia com isso: faz montanhas de pólen leve (milho, gramíneas). É esse pólen que dá alergia."]],
+ "Pseudofruto|A parte carnosa vem de|Onde está o fruto verdadeiro":[
+  ["Caju","A parte suculenta é o pedúnculo (o cabinho da flor) que inchou. O fruto verdadeiro é a castanha, que vem do ovário."],
+  ["Maçã","A polpa que você come vem do receptáculo. O ovário é só o miolo com as sementes, que vai para o lixo."],
+  ["Morango","A parte vermelha é o receptáculo. Cada pontinho por fora é um aquênio: um fruto seco com uma semente dentro."],
+  ["Abacaxi","É uma inflorescência inteira que se fundiu numa peça só. Cada \"gomo\" da casca veio de uma flor."]],
+ "|Xilema|Floema":[
+  ["Leva","Xilema leva água e sais minerais (seiva bruta, sem açúcar). Floema leva o açúcar feito na fotossíntese (seiva elaborada, a comida pronta)."],
+  ["Sentido","O xilema é mão única: da raiz para cima. O floema vai de onde se faz açúcar (fonte, a folha) para onde se gasta ou guarda (dreno: raiz, fruto, broto), em qualquer direção."],
+  ["Células","O xilema é feito de células mortas que viraram canos ocos reforçados com lignina. O floema é vivo, porque carregar açúcar exige energia."],
+  ["Teoria","Dixon (coesão-tensão) é um puxão de cima: a transpiração puxa a água. Münch (fluxo em massa) é um empurrão: o açúcar atrai água por osmose e a pressão empurra a seiva."]],
+ "Fator|Estômato":[
+  ["Luz","Com luz dá para fazer fotossíntese, então vale a pena abrir para o CO₂ entrar."],
+  ["Escuro","Sem luz não há fotossíntese. Abrir só faria perder água, então fecha."],
+  ["Muita água no solo","Com água sobrando, as células-guarda ficam túrgidas e o estômato abre sem risco."],
+  ["Falta de água","A planta sente a seca e produz ácido abscísico, que dá a ordem de fechar para não murchar."],
+  ["Pouco CO₂ dentro da folha","A fotossíntese gastou o CO₂ que estava dentro da folha. Abre para entrar mais."],
+  ["Muito CO₂ dentro da folha","Já tem estoque de CO₂. Fecha e economiza água."]],
+ "Hormônio|Apelido|O que faz":[
+  ["Auxina (AIA)","É feita na ponta do caule. Estica as células, foge da luz para o lado da sombra (por isso o caule curva para a luz), segura as gemas de baixo e, em pó, ajuda estacas a enraizar."],
+  ["Giberelina","É o esticão: faz o caule crescer muito e acorda a semente para germinar. Agricultores usam para deixar uvas sem semente maiores."],
+  ["Citocinina","Manda as células se dividirem, faz as gemas laterais brotarem (o contrário da auxina) e mantém a folha verde por mais tempo."],
+  ["Etileno","É um gás. Uma fruta madura solta etileno e faz as vizinhas amadurecerem. Também faz folhas e frutos caírem."],
+  ["Ácido abscísico (ABA)","É o freio: na seca fecha os estômatos e mantém sementes e gemas dormindo até a hora certa."]]
+};
+
+/* ---------- estado ---------- */
+const KEY="botanica-qb-v1";
+let st={done:{},view:"mapa"};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(st,s)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const score={mc:{ok:0,n:0},vf:{ok:0,n:0},mt:null,gp:null,g:{ok:0,n:0},gm:null};
+
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+
+function meter(){
+  const n=CH.filter(c=>st.done[c.n]).length;
+  $("#meterTxt").textContent=`${n} de ${CH.length} capítulos estudados`;
+  $("#meterFill").style.width=(n/CH.length*100)+"%";
+}
+
+function trail(){
+  const t=$("#trail");t.innerHTML="";
+  const add=(id,label,done)=>{const b=el("button","tbtn"+(done?" done":""));b.innerHTML=`<span class="dot"></span><span>${label}</span>`;
+    b.setAttribute("aria-current",st.view===id?"true":"false");b.onclick=()=>go(id);t.appendChild(b)};
+  t.appendChild(el("div","grp","Comece aqui"));
+  add("mapa","Mapa da fábrica");
+  t.appendChild(el("div","grp","Capítulos"));
+  CH.forEach(c=>add("c"+c.n,`Capítulo ${c.n} – ${c.title}`,st.done[c.n]));
+  t.appendChild(el("div","grp","Treino"));
+  add("ex","Exercícios de fixação");
+}
+
+function go(id){st.view=id;save();trail();render();
+  const m=$("#main");if(m.getBoundingClientRect().top<0)m.scrollIntoView({behavior:"smooth"})}
+
+function render(){
+  const m=$("#main");m.innerHTML="";
+  if(st.view==="mapa")return mapa(m);
+  if(st.view==="ex")return exercicios(m);
+  const c=CH.find(x=>"c"+x.n===st.view)||CH[0];chapter(m,c);
+}
+
+function explain(p,head){const ex=TABLE_EX[head.join("|")];if(!ex)return;
+  p.appendChild(el("div","explain",`<h4>Entendendo o quadro, linha por linha</h4><dl>${ex.map(([k,v])=>`<div><dt>${k}:</dt> <dd>${v}</dd></div>`).join("")}</dl>`))}
+
+function mapa(m){
+  const p=el("div","panel");
+  p.appendChild(el("div","chap-head",`<div class="num">Antes de tudo</div><h2>Os 8 capítulos contam uma história só</h2><p>Como a planta se alimenta, se reproduz e se controla. Pense numa fábrica: cada órgão é um setor. Toque num setor para abrir o capítulo.</p>`));
+  const f=el("div","factory");
+  FACTORY.forEach(([role,org,what,n])=>{const b=el("button","station",`<span class="role">${role}</span><span class="org">${org} · cap. ${n}</span><span class="what">${what}</span>`);b.onclick=()=>go("c"+n);f.appendChild(b)});
+  p.appendChild(f);
+  explain(p,["Setor","Órgão","O que faz","Capítulo"]);
+  p.appendChild(el("div","links",`<h3>Três ligações entre capítulos que as provas adoram</h3><ul>
+   <li>Estômato fechado na seca (cap. 7 e 11) é ordem do <b>ácido abscísico</b> (cap. 12).</li>
+   <li>Sem transpiração (cap. 11), a seiva bruta quase não sobe (cap. 10).</li>
+   <li>O <b>ovário</b> da flor (cap. 8) vira o fruto, e o <b>óvulo</b> vira a semente (cap. 9).</li></ul>`));
+  p.appendChild(el("h3",null,"Como estudar com esta página"));
+  p.appendChild(el("div","howto",`<div><b>1. Um por vez</b>Abra um capítulo e leia só ele.</div><div><b>2. Em voz alta</b>Feche a tela e diga a ideia central e a pegadinha.</div><div><b>3. Teste rápido</b>Responda os cartões no fim do capítulo antes de virar.</div><div><b>4. Marque</b>Toque em "Estudei este capítulo" para encher a barra.</div><div><b>5. Treino final</b>Faça os exercícios. A correção aparece na hora.</div>`));
+  const a=el("div","actions");const b=el("button","btn","Começar pelo capítulo 5");b.onclick=()=>go("c5");a.appendChild(b);p.appendChild(a);
+  m.appendChild(p);
+}
+
+function chapter(m,c){
+  const p=el("div","panel");
+  p.appendChild(el("div","chap-head",`<div class="num">Capítulo ${c.n} · setor ${c.station}</div><h2>${c.title}</h2><p>${c.sobre}</p>`));
+  p.appendChild(el("div","big-idea",`<div class="eyebrow">Ideia central</div><p>${c.ideia}</p>`));
+  p.appendChild(el("p","analogy",c.analogia));
+  if(c.flag)p.appendChild(el("div","flag","Este capítulo ainda não foi conferido com o livro do SAS. Ele segue o conteúdo padrão do ensino médio. Compare os termos com o caderno."));
+  const bl=el("div","blocks");
+  c.blocks.forEach(b=>bl.appendChild(el("div","block",`<h3>${b.h}</h3><ul>${b.items.map(i=>`<li>${i}</li>`).join("")}</ul>`)));
+  p.appendChild(bl);
+  (c.tables||(c.table?[c.table]:[])).forEach(t=>{const tb=el("div","tablebox");tb.innerHTML=`<table><thead><tr>${t.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table>`;p.appendChild(tb);explain(p,t.head)});
+  [].concat(c.trap).forEach(t=>p.appendChild(el("div","trap",`<span class="tag">Pegadinha</span><p>${t}</p>`)));
+  const q=el("div","quick");q.appendChild(el("h3",null,"Prove que entendeu: pense na resposta e toque no cartão"));
+  const qc=el("div","qcards");
+  c.check.forEach(k=>{const b=el("button","flip",`<span class="q">${k.q}</span><span class="hint">Toque para ver a resposta</span>`);
+    b.onclick=()=>{if(b.dataset.open)return;b.dataset.open=1;b.querySelector(".hint").remove();b.appendChild(el("span","a",k.a))};qc.appendChild(b)});
+  q.appendChild(qc);p.appendChild(q);
+  const a=el("div","actions");
+  const d=el("button","btn"+(st.done[c.n]?" ghost":""),st.done[c.n]?"Estudado ✓ (desmarcar)":"Estudei este capítulo");
+  d.onclick=()=>{st.done[c.n]=!st.done[c.n];save();meter();trail();render()};a.appendChild(d);
+  const i=CH.indexOf(c);const nx=CH[i+1];
+  const n=el("button","btn ghost",nx?`Próximo: capítulo ${nx.n} →`:"Ir para os exercícios →");n.onclick=()=>go(nx?"c"+nx.n:"ex");a.appendChild(n);
+  p.appendChild(a);m.appendChild(p);
+}
+
+function scoreBar(){
+  const s=$("#scoreBar");if(!s)return;
+  const f=(x,t)=>`<span class="chip">${t}: <b>${x.ok}</b> de ${x.n}</span>`;
+  s.innerHTML=f({ok:score.mc.ok,n:MC.length},"Múltipla escolha")+f({ok:score.vf.ok,n:VF.length},"Verdadeiro ou falso")+
+   `<span class="chip">Associação: <b>${score.mt==null?"–":score.mt}</b> de 5</span><span class="chip">Lacunas: <b>${score.gp==null?"–":score.gp}</b> de 8</span>`+f({ok:score.g.ok,n:MC6.length},"Caule (G)")+`<span class="chip">Tipos de caule: <b>${score.gm==null?"–":score.gm}</b> de 7</span>`;
+}
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[\s-]+/g," ").trim();
+
+function exercicios(m){
+  score.mc={ok:0,n:0};score.vf={ok:0,n:0};score.mt=null;score.gp=null;score.g={ok:0,n:0};score.gm=null;
+  const p=el("div","panel");
+  p.appendChild(el("div","chap-head",`<div class="num">Treino final</div><h2>Exercícios de fixação</h2><p>Faça sem olhar os capítulos. Cada parte corrige na hora e explica o porquê. As partes G e H são do capítulo 6, conferidas com o livro. Errou? Ótimo: é ali que a prova ia te pegar.</p>`));
+  p.appendChild(el("div","score",null)).id="scoreBar";
+
+  // A
+  const A=el("section","ex");A.appendChild(el("h3",null,"A. Checagem rápida"));A.appendChild(el("p","lead","Responda de cabeça, em uma linha, e depois vire o cartão."));
+  const qa=[["Raiz: qual zona absorve água e qual estrutura protege a ponta?","A zona pilífera absorve; a coifa protege."],["Folha: o que acontece com o estômato quando as células-guarda ficam túrgidas?","O estômato abre."],["Flor: quais são os quatro verticilos, de fora para dentro?","Sépalas (cálice), pétalas (corola), estames (androceu), carpelos (gineceu)."],["Fruto e semente: de onde vem cada um?","O fruto vem do ovário; a semente vem do óvulo fecundado."],["Condução: o que cada vaso transporta?","Xilema: água e sais (seiva bruta). Floema: açúcares (seiva elaborada)."],["Transpiração: por que a planta fecha os estômatos na seca, e o que perde com isso?","Fecha para não perder água. Perde a entrada de CO₂, e a fotossíntese cai."],["Hormônios: qual amadurece frutos e qual fecha estômatos?","Etileno amadurece; ácido abscísico fecha os estômatos."]];
+  const g=el("div","qcards");qa.forEach(([q,a])=>{const b=el("button","flip",`<span class="q">${q}</span><span class="hint">Toque para ver a resposta</span>`);b.onclick=()=>{if(b.dataset.open)return;b.dataset.open=1;b.querySelector(".hint").remove();b.appendChild(el("span","a",a))};g.appendChild(b)});
+  A.appendChild(g);p.appendChild(A);
+
+  // B
+  const B=el("section","ex");B.appendChild(el("h3",null,"B. Múltipla escolha, estilo ENEM"));B.appendChild(el("p","lead","Toque na alternativa. Você só tem uma chance por questão."));
+  MC.forEach((q,qi)=>{const it=el("div","item");it.appendChild(el("div","stem",`${qi+1}. ${q.s}`));const os=el("div","opts");
+    q.o.forEach((o,i)=>{const b=el("button","opt",`${"abcde"[i]}) ${o}`);b.onclick=()=>{
+      os.querySelectorAll("button").forEach((x,j)=>{x.disabled=true;if(j===q.c)x.classList.add("right")});
+      const ok=i===q.c;if(!ok)b.classList.add("wrong");score.mc.n++;if(ok)score.mc.ok++;scoreBar();
+      it.appendChild(el("div","fb "+(ok?"right":"wrong"),`<b>${ok?"Acertou!":"Resposta certa: "+"abcde"[q.c]+")"}</b>${q.e}`))};os.appendChild(b)});
+    it.appendChild(os);B.appendChild(it)});
+  p.appendChild(B);
+
+  // C
+  const C=el("section","ex");C.appendChild(el("h3",null,"C. Verdadeiro ou falso"));C.appendChild(el("p","lead","Antes de tocar, pense: se for falsa, o que está errado nela?"));
+  VF.forEach((q,qi)=>{const it=el("div","item");it.appendChild(el("div","stem",`${qi+1}. ${q.s}`));const r=el("div","vf");
+    [["V",true],["F",false]].forEach(([l,v])=>{const b=el("button","opt",l);b.onclick=()=>{r.querySelectorAll("button").forEach(x=>x.disabled=true);
+      const ok=v===q.v;b.classList.add(ok?"right":"wrong");score.vf.n++;if(ok)score.vf.ok++;scoreBar();
+      it.appendChild(el("div","fb "+(ok?"right":"wrong"),`<b>${ok?"Acertou!":"Errou."} É ${q.v?"verdadeira":"falsa"}.</b>${q.e}`))};r.appendChild(b)});
+    it.appendChild(r);C.appendChild(it)});
+  p.appendChild(C);
+
+  // D
+  const D=el("section","ex");D.appendChild(el("h3",null,"D. Associe o hormônio ao efeito"));D.appendChild(el("p","lead","Escolha o hormônio de cada efeito e toque em Corrigir."));
+  const mg=el("div","match");MATCH.forEach(([t],i)=>{mg.appendChild(el("label",null,t)).setAttribute("for","mt"+i);
+    const s=el("select");s.id="mt"+i;s.innerHTML=`<option value="">escolha…</option>`+HORM.map((h,j)=>`<option value="${j+1}">${h}</option>`).join("");mg.appendChild(s)});
+  D.appendChild(mg);const dfb=el("div");const db=el("button","btn","Corrigir");
+  db.onclick=()=>{let ok=0;MATCH.forEach(([t,c],i)=>{const s=$("#mt"+i);const r=+s.value===c;s.className=r?"right":"wrong";if(r)ok++});score.mt=ok;scoreBar();
+    dfb.className="fb "+(ok===5?"right":"wrong");dfb.innerHTML=ok===5?"<b>Perfeito!</b>Sequência: 5, 4, 1, 2, 3.":`<b>${ok} de 5.</b>Os vermelhos estão errados. Dica: o \"freio\" fecha estômatos, o gás amadurece, o \"do crescimento\" curva para a luz.`};
+  const da=el("div","actions");da.appendChild(db);D.appendChild(da);D.appendChild(dfb);p.appendChild(D);
+
+  // E
+  const E=el("section","ex");E.appendChild(el("h3",null,"E. Complete as lacunas"));E.appendChild(el("p","lead","Digite a palavra. Acento não conta."));
+  E.appendChild(el("div","bank",["pericarpo","lacunoso","perianto","coesão-tensão","brácteas","potássio","drupa","hipógea"].map(w=>`<span>${w}</span>`).join("")));
+  GAPS.forEach(([a,w,b],i)=>{const it=el("div","item gap");it.innerHTML=`<label for="gp${i}">${i+1}. ${a} <input type="text" id="gp${i}" autocomplete="off" aria-label="lacuna ${i+1}"> ${b}</label>`;E.appendChild(it)});
+  const efb=el("div");const eb=el("button","btn","Corrigir");
+  eb.onclick=()=>{let ok=0;GAPS.forEach(([a,w],i)=>{const x=$("#gp"+i);const r=norm(x.value)===norm(w);x.className=r?"right":"wrong";if(r)ok++;else if(x.value.trim())x.title="Resposta: "+w});score.gp=ok;scoreBar();
+    efb.className="fb "+(ok===8?"right":"wrong");efb.innerHTML=ok===8?"<b>Todas certas!</b>":`<b>${ok} de 8.</b>Gabarito: 1 perianto, 2 brácteas, 3 lacunoso, 4 pericarpo, 5 drupa, 6 hipógea, 7 coesão-tensão, 8 potássio.`};
+  const ea=el("div","actions");ea.appendChild(eb);E.appendChild(ea);E.appendChild(efb);p.appendChild(E);
+
+  // F
+  const F=el("section","ex");F.appendChild(el("h3",null,"F. Discursivas"));F.appendChild(el("p","lead","Escreva com suas palavras. Depois abra a lista do que a resposta precisa ter e marque o que você incluiu."));
+  DISC.forEach((q,i)=>{const it=el("div","item");it.appendChild(el("label","stem",`${i+1}. ${q.s}`)).setAttribute("for","ds"+i);
+    const t=el("textarea");t.id="ds"+i;t.placeholder="Sua resposta…";it.appendChild(t);
+    const b=el("button","btn ghost","Ver o que a resposta precisa ter");const ck=el("div","check");ck.hidden=true;
+    q.k.forEach((k,j)=>ck.appendChild(el("label",null,`<input type="checkbox" id="ds${i}k${j}"> <span>${k}</span>`)));
+    ck.appendChild(el("span","legend","Marcou tudo? Resposta completa. Faltou algum item? Reescreva incluindo ele."));
+    b.onclick=()=>{ck.hidden=false;b.remove()};it.appendChild(b);it.appendChild(ck);F.appendChild(it)});
+  p.appendChild(F);
+
+  // G
+  const G=el("section","ex");G.appendChild(el("h3",null,"G. Especial capítulo 6: caule (conferido com o livro)"));G.appendChild(el("p","lead","O capítulo que o livro mais cobra em tecidos. Toque na alternativa."));
+  MC6.forEach((q,qi)=>{const it=el("div","item");it.appendChild(el("div","stem",`${qi+1}. ${q.s}`));const os=el("div","opts");
+    q.o.forEach((o,i)=>{const b=el("button","opt",`${"abcde"[i]}) ${o}`);b.onclick=()=>{
+      os.querySelectorAll("button").forEach((x,j)=>{x.disabled=true;if(j===q.c)x.classList.add("right")});
+      const ok=i===q.c;if(!ok)b.classList.add("wrong");score.g.n++;if(ok)score.g.ok++;scoreBar();
+      it.appendChild(el("div","fb "+(ok?"right":"wrong"),`<b>${ok?"Acertou!":"Resposta certa: "+"abcde"[q.c]+")"}</b>${q.e}`))};os.appendChild(b)});
+    it.appendChild(os);G.appendChild(it)});
+  const it7=el("div","item");it7.appendChild(el("div","stem","7. Qual é o tipo de caule de cada planta?"));
+  const mg6=el("div","match");MATCH6.forEach(([pl],i)=>{mg6.appendChild(el("label",null,pl)).setAttribute("for","tc"+i);
+    const s=el("select");s.id="tc"+i;s.innerHTML=`<option value="">escolha…</option>`+TIPOS.map(t=>`<option>${t}</option>`).join("");mg6.appendChild(s)});
+  it7.appendChild(mg6);const gfb=el("div");const gb=el("button","btn","Corrigir");
+  gb.onclick=()=>{let ok=0;MATCH6.forEach(([pl,t],i)=>{const s=$("#tc"+i);const r=s.value===t;s.className=r?"right":"wrong";if(r)ok++});score.gm=ok;scoreBar();
+    gfb.className="fb "+(ok===7?"right":"wrong");gfb.innerHTML=ok===7?"<b>Perfeito!</b>":`<b>${ok} de 7.</b>Gabarito: cebola bulbo, batata-inglesa tubérculo, bananeira rizoma, morangueiro rastejante, videira trepador, aguapé aquático, palma cladódio.`};
+  const ga=el("div","actions");ga.appendChild(gb);it7.appendChild(ga);it7.appendChild(gfb);G.appendChild(it7);
+  p.appendChild(G);
+
+  // H
+  const Hs=el("section","ex");Hs.appendChild(el("h3",null,"H. Gabarito das atividades do livro (capítulo 6)"));
+  Hs.appendChild(el("p","lead","Faça as questões no livro (págs. 68 a 77) e só depois confira aqui, uma por uma."));
+  LIVRO.forEach(([t,a],i)=>{const it=el("div","item");it.appendChild(el("div","stem",t));const b=el("button","btn ghost","Ver resposta");
+    b.onclick=()=>{b.replaceWith(el("div","fb right",a))};it.appendChild(b);Hs.appendChild(it)});
+  p.appendChild(Hs);
+
+  m.appendChild(p);scoreBar();
+}
+
+meter();trail();render();
+</script>
+
+</body></html>
