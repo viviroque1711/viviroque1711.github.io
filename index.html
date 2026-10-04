@@ -7,15 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
-<style>
+<meta name="color-scheme" content="light"><style>
 /* Layout: coluna única de 720px; três cartões de destino (resumo de Química, resumo de Botânica, quiz). */
 :root{
- --bg:#f3f5f7; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
+ --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
  --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --quiz:#8a4fbf; --quiz-soft:#f1e8fa;
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
+@media not all{:root{
  --bg:#11161c; --card:#1a2129; --ink:#e7ecf1; --muted:#9aa7b4; --line:#2c3640;
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326; --quiz:#c9a0f0; --quiz-soft:#2c1f3a; color-scheme:dark}}
 *,*::before,*::after{box-sizing:border-box}

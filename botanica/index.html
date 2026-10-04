@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Resumos de Botânica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6,7 +6,7 @@
 <style>
 /* Layout: plataforma de estudo — trilha de capítulos à esquerda (como no SAS), uma estação por vez à direita; no celular a trilha vira faixa rolável no topo. */
 :root{
-  --bg:#F3F6F2; --surface:#FFFFFF; --sunk:#E7EDE6; --line:#CFDACD;
+  --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#E7EDE6; --line:#CFDACD;
   --ink:#16241C; --muted:#56685C;
   --leaf:#1E6A48; --leaf-soft:#D7EBDF; --pollen:#B98510; --pollen-soft:#F7EBCB;
   --ok:#1E7A45; --ok-soft:#D8F0E1; --bad:#B23A2E; --bad-soft:#F8DEDA;
@@ -14,12 +14,12 @@
   --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --r:12px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+@media not all{:root:not([data-theme="light"]){
   --bg:#0E1612; --surface:#15201A; --sunk:#1B2922; --line:#2C3D33;
   --ink:#E3ECE6; --muted:#9DB0A4;
   --leaf:#5FC795; --leaf-soft:#1C3A2B; --pollen:#E8B949; --pollen-soft:#3A3018;
   --ok:#6BD69A; --ok-soft:#173826; --bad:#F08C7E; --bad-soft:#3D1F1B; color-scheme:dark}}
-:root[data-theme="dark"]{
+:root[data-theme="__off__"]{
   --bg:#0E1612; --surface:#15201A; --sunk:#1B2922; --line:#2C3D33;
   --ink:#E3ECE6; --muted:#9DB0A4;
   --leaf:#5FC795; --leaf-soft:#1C3A2B; --pollen:#E8B949; --pollen-soft:#3A3018;

@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Quiz de Química e Biologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6,18 +6,18 @@
 <style>
 /* Layout: uma coluna de estudo (máx. 720px); configuração → pergunta → feedback → resultado. Cor da matéria no topo. */
 :root{
- --bg:#f3f5f7; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
+ --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
  --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9;
  --ok:#1d7a45; --ok-soft:#e2f4e9; --mid:#9a6400; --mid-soft:#fbf0d9; --bad:#b4372f; --bad-soft:#fbe7e5;
  --acc:var(--qui); --acc-soft:var(--qui-soft);
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+@media not all{:root:not([data-theme="light"]){
  --bg:#11161c; --card:#1a2129; --ink:#e7ecf1; --muted:#9aa7b4; --line:#2c3640;
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
  --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}}
-:root[data-theme="dark"]{
+:root[data-theme="__off__"]{
  --bg:#11161c; --card:#1a2129; --ink:#e7ecf1; --muted:#9aa7b4; --line:#2c3640;
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
  --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}

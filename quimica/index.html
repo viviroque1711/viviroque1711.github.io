@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Resumos de Química</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -6,7 +6,7 @@
 <style>
 /* Layout: trilha das seções do capítulo à esquerda (como no SAS), uma seção por vez à direita; no celular a trilha vira faixa rolável no topo. */
 :root{
-  --bg:#F3F5F9; --surface:#FFFFFF; --sunk:#E5EAF3; --line:#CBD4E3;
+  --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#E5EAF3; --line:#CBD4E3;
   --ink:#141C2B; --muted:#55607A;
   --leaf:#1F4F9A; --leaf-soft:#DCE6F7; --pollen:#C0452F; --pollen-soft:#FBE3DD;
   --ok:#1E7A45; --ok-soft:#D8F0E1; --bad:#B23A2E; --bad-soft:#F8DEDA;
@@ -14,12 +14,12 @@
   --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --r:12px;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+@media not all{:root:not([data-theme="light"]){
   --bg:#0E121B; --surface:#151B27; --sunk:#1B2232; --line:#2B3548;
   --ink:#E3E8F2; --muted:#9AA6BE;
   --leaf:#7FA8F0; --leaf-soft:#1C2B48; --pollen:#F08A74; --pollen-soft:#3D221D;
   --ok:#6BD69A; --ok-soft:#173826; --bad:#F08C7E; --bad-soft:#3D1F1B; color-scheme:dark}}
-:root[data-theme="dark"]{
+:root[data-theme="__off__"]{
   --bg:#0E121B; --surface:#151B27; --sunk:#1B2232; --line:#2B3548;
   --ink:#E3E8F2; --muted:#9AA6BE;
   --leaf:#7FA8F0; --leaf-soft:#1C2B48; --pollen:#F08A74; --pollen-soft:#3D221D;
