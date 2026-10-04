@@ -1,0 +1,877 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Quiz de Química e Biologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: uma coluna de estudo (máx. 720px); configuração → pergunta → feedback → resultado. Cor da matéria no topo. */
+:root{
+ --bg:#f3f5f7; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
+ --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9;
+ --ok:#1d7a45; --ok-soft:#e2f4e9; --mid:#9a6400; --mid-soft:#fbf0d9; --bad:#b4372f; --bad-soft:#fbe7e5;
+ --acc:var(--qui); --acc-soft:var(--qui-soft);
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+ --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#11161c; --card:#1a2129; --ink:#e7ecf1; --muted:#9aa7b4; --line:#2c3640;
+ --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
+ --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#11161c; --card:#1a2129; --ink:#e7ecf1; --muted:#9aa7b4; --line:#2c3640;
+ --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
+ --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:22px;font-weight:800}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+.lead{color:var(--muted);margin:6px 0 0;max-width:60ch}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button,.chip{font:inherit;font-size:15px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft);color:var(--acc);font-weight:700}
+.chips{display:flex;flex-direction:column;gap:6px}
+.chip{display:flex;align-items:center;gap:10px;border-radius:10px;text-align:left;padding:9px 12px}
+.chip input{accent-color:var(--acc);width:18px;height:18px;flex:none}
+.chip .n{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex:none}
+.chip .tag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;flex:none}
+.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:10px;padding:12px 20px;background:var(--acc);color:var(--card);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,.chip:focus-within{outline:3px solid var(--acc);outline-offset:2px}
+.small{font-size:14px;color:var(--muted)}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.score{font-variant-numeric:tabular-nums;font-weight:700;display:flex;gap:12px;font-size:15px}
+.score .o{color:var(--ok)}.score .x{color:var(--bad)}
+.stem{font-size:19px;font-weight:700;line-height:1.45;margin:0}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{font:inherit;text-align:left;display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:12px 14px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--acc-soft);color:var(--acc);font-size:14px}
+.opt span{min-width:0}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}.opt.right b{background:var(--ok);color:var(--card)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}.opt.wrong b{background:var(--bad);color:var(--card)}
+.opt.dim{opacity:.55}
+.vf{flex-direction:row}.vf .opt{flex:1;justify-content:center;font-weight:700}
+.fb{border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;border:1.5px solid}
+.fb.ok{background:var(--ok-soft);border-color:var(--ok)}.fb.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fb h3{font-size:19px}.fb.ok h3{color:var(--ok)}.fb.bad h3{color:var(--bad)}
+.fb p{margin:0}
+.fb .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted);margin-top:4px}
+.big{font-family:var(--display);font-size:56px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--acc)}
+.review{display:flex;flex-direction:column;gap:10px}
+.rv{border-left:4px solid var(--bad);padding:4px 0 4px 12px}
+.rv p{margin:2px 0}
+.caps{display:flex;flex-direction:column;gap:12px}
+.cap{display:flex;flex-direction:column;gap:4px}
+.capt{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.capn{font-weight:700;min-width:0;flex:1}
+.st{font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;flex:none}
+.st.ok{background:var(--ok-soft);color:var(--ok)}.st.mid{background:var(--mid-soft);color:var(--mid)}.st.bad{background:var(--bad-soft);color:var(--bad)}
+.capbar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.capbar i{display:block;height:100%;border-radius:99px}
+.capbar i.ok{background:var(--ok)}.capbar i.mid{background:var(--mid)}.capbar i.bad{background:var(--bad)}
+.tips{display:flex;flex-direction:column;gap:10px}
+.tip{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.tip p{margin:0}
+.tiph{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.lbl2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--acc);margin-right:4px}
+.kbd{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media (max-width:480px){.stem{font-size:18px}.vf{flex-direction:column}}
+</style>
+
+</head><body><div class="wrap" id="app"></div>
+
+<script>
+/* Banco de questões. MC: o = [[texto, explicação se escolhida], ...], c = índice da certa. VF: v = verdadeiro/falso, e = explicação. */
+const CAPS = [
+ {k:"q2",m:"q",n:2,t:"Isomeria configuracional geométrica"},
+ {k:"q3",m:"q",n:3,t:"Isomeria configuracional óptica"},
+ {k:"q5",m:"q",n:5,t:"Reações de adição"},
+ {k:"b5",m:"b",n:5,t:"Morfologia e anatomia da raiz"},
+ {k:"b6",m:"b",n:6,t:"Morfologia e anatomia do caule"},
+ {k:"b7",m:"b",n:7,t:"Morfologia e anatomia da folha"},
+ {k:"b8",m:"b",n:8,t:"Morfologia e anatomia da flor"},
+ {k:"b9",m:"b",n:9,t:"Morfologia e anatomia do fruto e da semente"},
+ {k:"b10",m:"b",n:10,t:"Fisiologia da absorção: condução de seiva"},
+ {k:"b11",m:"b",n:11,t:"Fisiologia da absorção: transpiração vegetal"},
+ {k:"b12",m:"b",n:12,t:"Hormônios vegetais"}
+];
+
+const Q = [
+/* ================= QUÍMICA · CAP. 2 ================= */
+{k:"q2",s:"Estereoisômeros são compostos que têm a mesma fórmula molecular e a mesma sequência de ligações, mas diferem",c:2,o:[
+ ["na fórmula molecular.","Não: a fórmula molecular é a mesma. Isso vale para todo tipo de isômero."],
+ ["na ordem em que os átomos estão ligados.","Diferença na ordem das ligações é isomeria plana (constitucional). No estereoisômero a sequência é igual."],
+ ["na configuração espacial dos átomos.","Isso. Mesmos átomos, ligados na mesma ordem, mas arrumados de outro jeito no espaço."],
+ ["na função orgânica.","Mudar a função é isomeria plana de função. Estereoisômeros têm a mesma função."],
+ ["no número de carbonos.","Isômeros sempre têm o mesmo número de cada átomo."]]},
+{k:"q2",s:"O que impede a rotação entre os dois carbonos de uma ligação dupla?",c:1,o:[
+ ["A ligação sigma (σ).","A sigma é frontal e permite girar. É ela que existe nas ligações simples."],
+ ["A ligação pi (π).","Isso. A ligação π fica acima e abaixo do eixo; girar a romperia. Por isso a dupla trava a molécula."],
+ ["A ponte de hidrogênio.","Ponte de hidrogênio é interação entre moléculas, não tem relação com girar a dupla."],
+ ["O carbono assimétrico.","Carbono assimétrico é assunto de isomeria óptica (cap. 3) e não tem ligação dupla."],
+ ["A massa dos ligantes.","O peso dos grupos não impede a rotação. Quem trava é a ligação π."]]},
+{k:"q2",s:"Para um alceno apresentar isomeria geométrica, é necessário que",c:1,o:[
+ ["tenha pelo menos quatro carbonos.","Contar carbonos não basta: o but-1-eno tem quatro e não tem isomeria geométrica."],
+ ["cada carbono da dupla tenha dois ligantes diferentes entre si.","Isso. É a condição do livro: em cada carbono da dupla, os dois ligantes precisam ser diferentes."],
+ ["os dois carbonos da dupla tenham ligantes iguais.","É o contrário: se um carbono da dupla tem dois ligantes iguais, não há isomeria."],
+ ["a cadeia seja ramificada.","Ramificação não é exigida. O but-2-eno é normal e tem cis e trans."],
+ ["haja um halogênio na molécula.","Não precisa de halogênio. O but-2-eno só tem C e H."]]},
+{k:"q2",s:"Qual composto apresenta isomeria geométrica?",c:3,o:[
+ ["But-1-eno.","No C1 da dupla há dois H iguais (CH₂=). Um carbono com ligantes iguais já elimina a isomeria."],
+ ["2-metilpropeno.","No C2 há dois CH₃ iguais. Sem isomeria."],
+ ["Eteno.","Os dois carbonos têm dois H cada. Sem isomeria."],
+ ["But-2-eno.","Isso. Cada carbono da dupla tem um H e um CH₃: dá para formar cis e trans."],
+ ["1,1-dicloroeteno.","Os dois Cl estão no mesmo carbono, e o outro carbono tem dois H. Sem isomeria."]]},
+{k:"q2",s:"Qual dos compostos cíclicos apresenta isomeria geométrica (bayeriana)?",c:3,o:[
+ ["Ciclopropano.","Não tem substituinte nenhum para ficar do mesmo lado ou em lados opostos."],
+ ["Metilciclopropano.","Só tem um substituinte. É preciso ter substituintes em pelo menos dois carbonos do ciclo."],
+ ["1,1-dimetilciclopropano.","Os dois metilas estão no mesmo carbono. Precisam estar em carbonos diferentes."],
+ ["1,2-dimetilciclopropano.","Isso. Os metilas estão em carbonos diferentes do anel: podem ficar do mesmo lado (cis) ou em lados opostos (trans)."],
+ ["Ciclobutano.","Sem substituintes não há isomeria geométrica."]]},
+{k:"q2",s:"Pela Regra 1 de Cahn-Ingold-Prelog, qual ligante tem a maior prioridade?",c:0,o:[
+ ["–Br","Isso. Regra 1: maior número atômico vence. Br tem Z = 35, o maior da lista."],
+ ["–Cl","O Cl tem Z = 17, menor que o do Br (35)."],
+ ["–OH","Compara-se o átomo ligado direto: O, com Z = 8. Perde para Br e Cl."],
+ ["–CH₃","O átomo ligado é C (Z = 6). Perde para os halogênios e para o O."],
+ ["–H","O H (Z = 1) é sempre o de menor prioridade entre os átomos."]]},
+{k:"q2",s:"Pelas regras de Cahn-Ingold-Prelog, o substituinte de maior prioridade é",c:2,o:[
+ ["–CH(CH₃)₂","Empata no primeiro átomo (C). No desempate tem (C, C, H), mas perde para quem tem um O."],
+ ["–CH₂CH₃","Primeiro átomo C, depois (C, H, H). Perde no desempate."],
+ ["–CH₂OH","Isso. Todos começam com C, mas no desempate o –CH₂OH tem um O (Z = 8), que vence qualquer C."],
+ ["–CH₃","Primeiro átomo C, depois (H, H, H). É o menor entre os grupos com carbono."],
+ ["–H","O H tem Z = 1 e é sempre o último."]]},
+{k:"q2",s:"Pela Regra 3, o grupo vinila (–CH=CH₂) é tratado como um carbono ligado a",c:2,o:[
+ ["três hidrogênios.","Isso seria o metila (–CH₃). A vinila tem uma dupla que precisa ser replicada."],
+ ["um carbono e dois hidrogênios.","Esqueceu de replicar a dupla. O carbono vizinho conta duas vezes."],
+ ["dois carbonos e um hidrogênio.","Isso. A dupla é replicada: o carbono conta o vizinho duas vezes. Fica (C, C, H)."],
+ ["três carbonos.","Ele tem um H de verdade. Três carbonos seria o caso de uma tripla (–C≡CH)."],
+ ["um oxigênio.","Não há oxigênio no grupo vinila."]]},
+{k:"q2",s:"No sistema (E)-(Z), a letra Z indica que",c:2,o:[
+ ["os ligantes de menor prioridade estão do mesmo lado.","O sistema compara os de MAIOR prioridade de cada carbono."],
+ ["a molécula é cíclica.","Z não tem relação com ser cíclico."],
+ ["os ligantes de maior prioridade de cada carbono estão do mesmo lado.","Isso. Z vem de zusammen (junto)."],
+ ["os ligantes iguais estão em lados opostos.","O sistema E/Z compara prioridades, não ligantes iguais. E lados opostos seria E."],
+ ["o composto é polar.","Z indica posição no espaço, não polaridade."]]},
+{k:"q2",s:"Sobre os isômeros do 1,2-dicloroeteno, é correto afirmar que",c:1,o:[
+ ["o trans é polar e ferve a uma temperatura maior.","No trans os dipolos se anulam: ele é apolar e ferve a uma temperatura menor."],
+ ["o cis é polar e tem ponto de ebulição maior.","Isso. No cis os dipolos se somam. Moléculas polares se atraem mais e fervem a uma temperatura maior."],
+ ["os dois têm o mesmo momento dipolar.","Não: no cis os dipolos se somam e no trans se anulam."],
+ ["os dois são apolares.","O cis é polar."],
+ ["são tautômeros.","Tautomeria é isomeria plana dinâmica. Cis e trans são estereoisômeros geométricos."]]},
+{k:"q2",s:"Todo isômero cis é (Z).",v:false,e:"O livro avisa: não há relação entre cis e Z. Cis olha ligantes iguais; Z olha prioridades. Sempre faça o ranking."},
+{k:"q2",s:"Pela Regra 5, o par de elétrons livre tem a maior prioridade.",v:false,e:"É o contrário: o par de elétrons livre tem a menor prioridade de todas."},
+{k:"q2",s:"O deutério (²H) tem prioridade maior que o hidrogênio comum (¹H).",v:true,e:"Regra 4: entre isótopos, vence o de maior número de massa. ²H vence ¹H."},
+{k:"q2",s:"O trans-1,2-dicloroeteno é apolar.",v:true,e:"Os dois dipolos C–Cl apontam em sentidos opostos e se anulam: soma vetorial zero."},
+{k:"q2",s:"O 1,1-diclorociclopropano apresenta isomeria geométrica.",v:false,e:"Os dois Cl estão no mesmo carbono. A isomeria em ciclos exige substituintes em dois carbonos diferentes."},
+{k:"q2",s:"A ligação sigma permite rotação entre os carbonos.",v:true,e:"A sigma é uma interação frontal: girar não a rompe. Quem trava é a π."},
+
+/* ================= QUÍMICA · CAP. 3 ================= */
+{k:"q3",s:"Um carbono é chamado de assimétrico (quiral) quando",c:1,o:[
+ ["faz ligação dupla.","Não existe carbono assimétrico com dupla: ele precisa de quatro ligantes, um em cada ligação simples."],
+ ["está ligado a quatro substituintes diferentes.","Isso. É a definição do livro. Ele é marcado com asterisco (C*)."],
+ ["está no meio da cadeia.","Estar no meio não basta: o C2 do propan-2-ol está no meio e tem dois CH₃ iguais."],
+ ["está ligado a um halogênio.","Halogênio não é exigido. O que importa são quatro ligantes diferentes."],
+ ["faz parte de um anel.","Estar num anel não é a condição."]]},
+{k:"q3",s:"Qual destes compostos tem carbono assimétrico?",c:1,o:[
+ ["Propan-2-ol.","O C2 tem H, OH e dois CH₃ iguais. Com dois ligantes iguais, não é C*."],
+ ["Butan-2-ol.","Isso. O C2 tem H, OH, CH₃ e CH₂CH₃: quatro ligantes diferentes."],
+ ["Etanol.","O C1 tem dois H. O C2 tem três H. Nenhum é C*."],
+ ["Butan-1-ol.","O C1 tem dois H e os outros carbonos têm pelo menos dois H. Sem C*."],
+ ["Metano.","Quatro H iguais."]]},
+{k:"q3",s:"O aparelho que mede o desvio do plano da luz polarizada é o",c:3,o:[
+ ["prisma de Nicol.","O prisma de Nicol polariza a luz, mas quem mede o desvio é o polarímetro."],
+ ["espectrômetro de massa.","Mede massa de íons, não desvio de luz."],
+ ["termômetro.","Mede temperatura."],
+ ["polarímetro.","Isso. Ele mostra quanto e para que lado a substância desvia a luz polarizada."],
+ ["pHmetro.","Mede acidez."]]},
+{k:"q3",s:"Uma substância dextrogira desvia o plano da luz polarizada",c:0,o:[
+ ["para a direita, e recebe o sinal (+).","Isso. Dextro = direita, sinal (+)."],
+ ["para a esquerda, e recebe o sinal (–).","Essa é a levogira."],
+ ["para a direita, e recebe o sinal (–).","O lado está certo, mas o sinal da direita é (+)."],
+ ["em zero grau.","Desvio zero é de substância opticamente inativa."],
+ ["para cima, e recebe a letra R.","R/S é outro sistema e não indica o desvio da luz."]]},
+{k:"q3",s:"Uma mistura racêmica é opticamente inativa porque",c:2,o:[
+ ["não tem carbono assimétrico.","Tem sim: ela é feita de enantiômeros, que têm C*."],
+ ["tem plano de simetria interno.","Plano de simetria explica o composto meso (compensação interna)."],
+ ["contém quantidades iguais de enantiômeros, que desviam a luz em sentidos opostos.","Isso. Os desvios se anulam: compensação externa."],
+ ["é formada por diastereoisômeros.","É formada por enantiômeros, não por diastereoisômeros."],
+ ["absorve toda a luz.","Ela não absorve a luz. Os desvios é que se cancelam."]]},
+{k:"q3",s:"O composto meso é opticamente inativo por",c:1,o:[
+ ["compensação externa.","Compensação externa é a da mistura racêmica (duas substâncias)."],
+ ["compensação interna.","Isso. O plano de simetria faz uma metade da molécula anular a outra."],
+ ["não ter carbono assimétrico.","O meso tem C*, só que iguais e espelhados dentro da mesma molécula."],
+ ["ser uma mistura.","O meso é uma substância só."],
+ ["ter ligação dupla.","Não tem relação com dupla."]]},
+{k:"q3",s:"Uma substância tem 3 carbonos assimétricos diferentes. O número de isômeros ópticos ativos e de pares racêmicos é, respectivamente,",c:2,o:[
+ ["3 e 6","Não é n, é 2ⁿ. Com n = 3: 2³ = 8."],
+ ["6 e 3","6 seria 2 × 3. A fórmula é 2ⁿ = 2³ = 8."],
+ ["8 e 4","Isso. 2³ = 8 ativos e 8 ÷ 2 = 4 pares racêmicos."],
+ ["8 e 16","Os pares são a metade dos ativos: 8 ÷ 2 = 4, não o dobro."],
+ ["9 e 3","9 seria 3². A fórmula é 2ⁿ (2 elevado a 3)."]]},
+{k:"q3",s:"O ácido láctico, CH₃–CH(OH)–COOH, tem quantos isômeros ópticos ativos?",c:1,o:[
+ ["1","Tem 1 carbono assimétrico, mas o número de isômeros é 2¹ = 2."],
+ ["2","Isso. 1 C* → 2¹ = 2: o ácido (+)-láctico e o (–)-láctico."],
+ ["3","Não segue a fórmula 2ⁿ."],
+ ["4","Seria 2², para dois C* diferentes."],
+ ["0","O C2 tem H, OH, CH₃ e COOH: é assimétrico, então há isômeros ativos."]]},
+{k:"q3",s:"Sobre a nomenclatura (R)-(S), é correto afirmar que",c:3,o:[
+ ["todo composto (R) é dextrogiro.","R/S não tem relação com o desvio da luz. O sinal só vem do polarímetro."],
+ ["todo composto (S) é levogiro.","Mesmo erro: S não quer dizer levogiro."],
+ ["depende de comparar a molécula com o gliceraldeído.","Quem compara com o gliceraldeído é o sistema D-L (relativo). O R/S é absoluto."],
+ ["(R) indica que a sequência 1 → 2 → 3 é horária, com a prioridade 4 afastada do observador.","Isso. Horário = R (rectus); anti-horário = S (sinister)."],
+ ["é igual ao sistema D-L.","São sistemas diferentes: R/S é absoluto e D-L é relativo."]]},
+{k:"q3",s:"Numa projeção de Fischer, trocar de lugar dois pares de substituintes do mesmo C* (duas permutas)",c:2,o:[
+ ["forma o enantiômero.","Uma permuta forma o enantiômero. Duas permutas desfazem a inversão."],
+ ["forma um diastereoisômero.","Num único C*, a troca só pode dar o mesmo composto ou o enantiômero."],
+ ["mantém a mesma configuração.","Isso. Número par de permutas não altera o C*. É o truque usado para levar a prioridade 4 para a vertical."],
+ ["forma um composto meso.","Meso depende de a molécula ter dois C* com plano de simetria, não de permutas."],
+ ["transforma R em D.","R/S e D-L são sistemas diferentes; uma troca não converte um no outro."]]},
+{k:"q3",s:"Numa projeção de Fischer, fazer UMA permuta (trocar um único par de ligantes) no C*",c:0,o:[
+ ["forma o enantiômero.","Isso. Número ímpar de permutas inverte a configuração: R vira S."],
+ ["mantém a mesma configuração.","Isso vale para número par de permutas."],
+ ["torna o composto meso.","Uma permuta não cria plano de simetria."],
+ ["apaga o carbono assimétrico.","Os quatro ligantes continuam diferentes; o C* continua lá."],
+ ["não muda nada, pois é só um desenho.","Na Fischer a posição importa: horizontal vem para a frente, vertical vai para trás."]]},
+{k:"q3",s:"Enantiômeros têm propriedades físicas semelhantes, exceto o sentido do desvio da luz polarizada.",v:true,e:"Mesmo ponto de fusão, mesma densidade e mesmo ângulo de desvio, só que em sentidos opostos."},
+{k:"q3",s:"Todo composto (R) é dextrogiro.",v:false,e:"R/S vem da configuração; (+)/(–) vem do polarímetro. Não há relação entre eles."},
+{k:"q3",s:"Um carbono com ligação dupla pode ser assimétrico.",v:false,e:"Não existe carbono assimétrico insaturado: ele precisa de quatro ligantes diferentes."},
+{k:"q3",s:"Diastereoisômeros formam par objeto-imagem.",v:false,e:"É o contrário: diastereoisômeros são estereoisômeros que NÃO são imagem um do outro no espelho."},
+{k:"q3",s:"Na projeção de Fischer, as linhas horizontais representam ligações que se aproximam do leitor.",v:true,e:"Horizontal vem para a frente (na sua direção); vertical vai para trás."},
+{k:"q3",s:"As fórmulas de van't Hoff valem também para compostos meso.",v:false,e:"O livro avisa: as fórmulas não se aplicam a compostos meso, porque o meso reduz o número de isômeros."},
+
+/* ================= QUÍMICA · CAP. 5 ================= */
+{k:"q5",s:"A reação de adição acontece em compostos",c:2,o:[
+ ["saturados, como os alcanos.","Alcanos só têm ligações simples: não há dupla ou tripla para abrir."],
+ ["que só têm ligações sigma.","Sem ligação π não há o que abrir. A adição consome justamente a ligação π."],
+ ["insaturados, com ligação dupla ou tripla.","Isso. A ligação π se abre e o reagente entra na molécula."],
+ ["iônicos, como o NaCl.","Adição orgânica acontece em compostos com dupla ou tripla, não em sais."],
+ ["sem carbono.","Estamos falando de compostos orgânicos insaturados."]]},
+{k:"q5",s:"Na hidrogenação catalítica, os catalisadores citados pelo livro são",c:1,o:[
+ ["Hg²⁺ e H₂SO₄.","Esses são da hidratação de alcinos."],
+ ["Ni, Pd ou Pt.","Isso. Níquel, paládio ou platina. Por isso a reação se chama catalítica."],
+ ["peróxidos (R–O–O–R).","Peróxido é o que muda o HBr para a regra de Kharasch."],
+ ["luz ultravioleta.","Não é o caso da hidrogenação."],
+ ["água.","Água é reagente da hidratação, não catalisador da hidrogenação."]]},
+{k:"q5",s:"A hidrogenação catalítica de 1 mol de but-2-ino com 1 mol de H₂, usando níquel, forma principalmente",c:2,o:[
+ ["butano.","Para chegar ao butano seriam necessários 2 mol de H₂. Com 1 mol a tripla vira dupla."],
+ ["trans-but-2-eno.","Na hidrogenação os dois H entram do mesmo lado (adição cis), então não dá trans."],
+ ["cis-but-2-eno.","Isso. Adição cis: os dois H entram pelo mesmo lado, na superfície do catalisador."],
+ ["but-1-eno.","A dupla fica onde estava a tripla, entre C2 e C3. Ela não muda de lugar."],
+ ["but-1-ino.","Isso seria só mudar a tripla de lugar. Não houve adição."]]},
+{k:"q5",s:"Eteno reage com Br₂. O produto é",c:3,o:[
+ ["bromoetano.","Bromoetano vem de eteno + HBr. Com Br₂ entram dois Br."],
+ ["etanol.","Etanol vem da hidratação (eteno + água)."],
+ ["1,1-dibromoetano.","Os dois Br entram um em cada carbono da dupla, não no mesmo carbono."],
+ ["1,2-dibromoetano.","Isso. A dupla abre e cada carbono recebe um Br, em adição trans pelo íon bromônio."],
+ ["etano.","Etano viria da hidrogenação (H₂)."]]},
+{k:"q5",s:"Propeno reage com HBr sem peróxido. O produto principal é",c:1,o:[
+ ["1-bromopropano.","Esse seria o produto com peróxido (Kharasch). Sem peróxido, vale Markovnikov."],
+ ["2-bromopropano.","Isso. Markovnikov: o H vai para o carbono mais hidrogenado (C1) e o Br fica no C2."],
+ ["1,2-dibromopropano.","Esse vem do Br₂. Com HBr entra só um Br."],
+ ["propano.","Propano viria da hidrogenação."],
+ ["bromoeteno.","Não faz sentido perder um carbono."]]},
+{k:"q5",s:"A mesma reação (propeno + HBr), agora com peróxido (R–O–O–R), forma principalmente",c:1,o:[
+ ["2-bromopropano, por mecanismo iônico.","Esse é o caso sem peróxido (Markovnikov)."],
+ ["1-bromopropano, por mecanismo de radicais livres.","Isso. Kharasch: com peróxido, o mecanismo é radicalar e o Br vai para o C1."],
+ ["2-bromopropano, por radicais livres.","O mecanismo radicalar está certo, mas ele leva o Br para o C1, não para o C2."],
+ ["1,2-dibromopropano.","Com HBr entra só um Br."],
+ ["propan-2-ol.","Não há água nem OH nessa reação."]]},
+{k:"q5",s:"A hidratação catalítica do propino (Hg²⁺/H₂SO₄) produz",c:2,o:[
+ ["propanal.","Só o etino gera aldeído. Os outros alcinos geram cetona."],
+ ["propan-1-ol.","Na hidratação de alcino forma-se um enol, que vira aldeído ou cetona, não álcool comum."],
+ ["propanona.","Isso. Forma-se um enol que, por tautomerização, vira a cetona propanona."],
+ ["ácido propanoico.","Ácido carboxílico não é produto dessa reação."],
+ ["propano.","Propano viria da hidrogenação total."]]},
+{k:"q5",s:"Dois isômeros de um alceno têm calores de hidrogenação de –119,7 kJ e –115,6 kJ. É correto afirmar que",c:1,o:[
+ ["o de –119,7 kJ é o trans e é mais estável.","Quem libera mais energia era o menos estável. O de maior |ΔH| é o cis."],
+ ["o de –115,6 kJ é o trans e é mais estável.","Isso. Menor valor absoluto de ΔH = mais estável. O trans é o mais estável."],
+ ["os dois têm a mesma estabilidade.","Os valores são diferentes, então a estabilidade também é."],
+ ["a hidrogenação é endotérmica.","ΔH negativo quer dizer exotérmica: libera calor."],
+ ["o cis é mais estável por ter maior |ΔH|.","Maior |ΔH| quer dizer que a molécula tinha mais energia guardada, ou seja, era menos estável."]]},
+{k:"q5",s:"Na adição de Br₂ ao buta-1,3-dieno, o produto formado em maior quantidade é",c:1,o:[
+ ["3,4-dibromobut-1-eno, por adição 1,2.","A adição 1,2 acontece, mas é a minoria (20% no exemplo do livro). O livro escreve o nome desse produto de outro jeito; veja o aviso no resumo."],
+ ["1,4-dibromobut-2-eno, por adição 1,4.","Isso. Em alcadienos a adição 1,4 é a de maior ocorrência (80%)."],
+ ["1,1-dibromobutano.","Os Br não entram no mesmo carbono."],
+ ["1,2,3,4-tetrabromobutano.","Isso exigiria 2 mol de Br₂. A pergunta é sobre a adição de uma molécula."],
+ ["2,3-dibromobut-1-eno.","Não é um produto descrito para essa reação."]]},
+{k:"q5",s:"A reação do etanal com H₂ (com catalisador) produz",c:0,o:[
+ ["etanol.","Isso. O H₂ entra na dupla C=O e o aldeído vira álcool primário. É uma redução."],
+ ["ácido acético.","Ácido vem da oxidação do etanal. Aqui é o contrário, uma redução."],
+ ["etano.","O oxigênio não sai da molécula."],
+ ["propanona.","Propanona tem 3 carbonos. O etanal tem 2."],
+ ["etino.","Não há formação de tripla."]]},
+{k:"q5",s:"Na hidrogenação catalítica, os dois hidrogênios entram em lados opostos da molécula.",v:false,e:"Entram do mesmo lado: é uma adição cis, na superfície do catalisador."},
+{k:"q5",s:"A adição de Br₂ a um alceno ocorre em trans e passa pelo íon bromônio.",v:true,e:"O Br⁻ ataca pelo lado oposto ao íon bromônio, por isso a adição é trans."},
+{k:"q5",s:"O efeito do peróxido (regra de Kharasch) também vale para o HCl.",v:false,e:"O livro diz que o efeito do peróxido só é observado com o HBr."},
+{k:"q5",s:"Os alcenos adicionam o cianeto de hidrogênio (HCN).",v:false,e:"O livro diz que os alcenos não adicionam HCN. Só os alcinos."},
+{k:"q5",s:"A hidratação catalítica do etino produz etanal.",v:true,e:"Etino + água forma um enol que, por tautomerização, vira etanal (aldeído)."},
+{k:"q5",s:"Na reação etanal + H₂, o Nox do carbono diminui.",v:true,e:"Passa de +1 para –1. O Nox diminuiu, então é redução."},
+{k:"q5",s:"Nos alcadienos, a adição 1,2 é a de maior ocorrência.",v:false,e:"A de maior ocorrência é a 1,4 (80% contra 20%)."},
+
+/* ================= BIOLOGIA · CAP. 5 RAIZ ================= */
+{k:"b5",s:"Em que região da raiz acontece a maior parte da absorção de água?",c:2,o:[
+ ["Coifa.","A coifa é o capacete da ponta: protege, não absorve."],
+ ["Zona lisa.","É a zona onde a raiz alonga. Ainda não tem pelos absorventes."],
+ ["Zona pilífera.","Isso. Os pelos absorventes aumentam muito a superfície de contato com o solo."],
+ ["Zona suberosa.","É a região de onde saem as ramificações, não a de absorção."],
+ ["Periciclo.","O periciclo é uma camada interna que origina raízes laterais."]]},
+{k:"b5",s:"A função da coifa é",c:0,o:[
+ ["proteger a ponta da raiz enquanto ela avança no solo.","Isso. Funciona como um capacete sobre o meristema da ponta."],
+ ["absorver água e sais.","Quem absorve são os pelos da zona pilífera."],
+ ["originar as raízes laterais.","Essa é a função do periciclo."],
+ ["conduzir a seiva elaborada.","Isso é trabalho do floema."],
+ ["fazer fotossíntese.","A raiz fica no escuro e não faz fotossíntese."]]},
+{k:"b5",s:"Qual camada interna da raiz funciona como filtro do que entra nos vasos?",c:1,o:[
+ ["Epiderme.","A epiderme reveste e tem os pelos absorventes, mas não é o filtro."],
+ ["Endoderme.","Isso. Ela controla o que passa do córtex para os vasos."],
+ ["Córtex.","O córtex é a região de passagem e reserva, antes da endoderme."],
+ ["Coifa.","A coifa fica na ponta, por fora, e protege."],
+ ["Floema.","O floema é vaso condutor, não filtro."]]},
+{k:"b5",s:"Uma raiz com uma raiz principal bem desenvolvida e várias secundárias, e com xilema em forma de cruz, é típica de",c:1,o:[
+ ["monocotiledônea.","Monocotiledônea tem raiz fasciculada (cabeleira) e vasos em círculo com medula."],
+ ["eudicotiledônea.","Isso. Raiz pivotante e xilema em cruz (estrela) são marcas das eudicotiledôneas."],
+ ["qualquer planta, sem diferença.","Há diferença clara entre mono e eudicotiledôneas."],
+ ["planta sem vasos.","Essa raiz tem xilema, então a planta tem vasos."],
+ ["caule subterrâneo.","Caule tem gemas e nós. Aqui a descrição é de raiz."]]},
+{k:"b5",s:"O câmbio vascular e o felogênio são",c:0,o:[
+ ["meristemas laterais, responsáveis pelo crescimento em espessura.","Isso. Eles fazem o crescimento secundário (engrossar)."],
+ ["meristemas apicais, responsáveis pelo crescimento em comprimento.","Os apicais ficam nas pontas e alongam. Câmbio e felogênio são laterais."],
+ ["tecidos de revestimento.","Revestimento é a epiderme (ou a periderme)."],
+ ["tipos de parênquima.","Parênquima é tecido fundamental, não meristema."],
+ ["células mortas de sustentação.","Meristemas são células vivas que se dividem sem parar."]]},
+{k:"b5",s:"O periciclo dá origem às raízes laterais.",v:true,e:"As raízes laterais nascem do periciclo, lá de dentro, e atravessam as camadas até sair."},
+{k:"b5",s:"O meristema apical faz a planta engrossar.",v:false,e:"O apical faz a planta alongar (crescimento primário). Engrossar é tarefa dos meristemas laterais."},
+{k:"b5",s:"A raiz fasciculada, em cabeleira, é típica das monocotiledôneas.",v:true,e:"É a raiz do milho e da grama: várias raízes do mesmo tamanho, sem uma principal."},
+
+/* ================= BIOLOGIA · CAP. 6 CAULE ================= */
+{k:"b6",s:"O que identifica com segurança que uma estrutura é um caule?",c:3,o:[
+ ["Ser verde.","Caule velho é pardo, e folhas também são verdes. Cor não define."],
+ ["Estar acima do solo.","Há caules subterrâneos: rizoma, tubérculo, bulbo."],
+ ["Ter pelos absorventes.","Pelos absorventes são da raiz."],
+ ["Ter gemas e nós.","Isso. Gemas e nós são a marca registrada do caule."],
+ ["Armazenar amido.","Raízes também armazenam amido (batata-doce, mandioca)."]]},
+{k:"b6",s:"Sobre a batata-inglesa e a batata-doce, é correto afirmar que",c:0,o:[
+ ["a batata-inglesa é caule (tubérculo) e a batata-doce é raiz.","Isso. Os \"olhos\" da batata-inglesa são gemas, marca de caule."],
+ ["as duas são raízes.","A batata-inglesa tem gemas: é caule."],
+ ["as duas são caules.","A batata-doce não tem gemas nem nós: é raiz tuberosa."],
+ ["a batata-inglesa é raiz e a batata-doce é caule.","É o contrário."],
+ ["as duas são frutos.","Fruto vem do ovário da flor. Nenhuma das duas é fruto."]]},
+{k:"b6",s:"Um tecido tem células vivas, alongadas, com parede espessa reforçada por celulose. Fica na periferia de caules jovens e deixa que eles se dobrem sem quebrar. Esse tecido é o",c:1,o:[
+ ["esclerênquima.","O esclerênquima tem células mortas e lignina, e é rígido. É o oposto."],
+ ["colênquima.","Isso. Vivo + celulose + flexível = colênquima."],
+ ["súber.","Súber é cortiça: tecido morto de revestimento."],
+ ["xilema.","Xilema conduz seiva bruta e tem lignina."],
+ ["parênquima aquífero.","Parênquima aquífero armazena água, não sustenta."]]},
+{k:"b6",s:"A cortiça das rolhas vem do súber. Ela veda e isola bem porque",c:2,o:[
+ ["tem células vivas cheias de água.","O súber é formado por células mortas."],
+ ["é rica em cloroplastos.","Cloroplasto não veda nem isola. O súber nem tem cloroplastos."],
+ ["tem células mortas com lipídios na parede e ar acumulado.","Isso. Lipídio impermeabiliza, e o ar isola o calor."],
+ ["é formada por elementos de vaso.","Elementos de vaso são do xilema."],
+ ["vem diretamente da epiderme.","O súber vem do felogênio, que forma a periderme."]]},
+{k:"b6",s:"Os elementos de tubo crivado do floema não têm núcleo, mas continuam funcionando porque",c:3,o:[
+ ["recebem lignina do esclerênquima.","Lignina reforça paredes, não mantém a célula viva."],
+ ["são substituídos por traqueídes.","Traqueídes são do xilema."],
+ ["fazem fotossíntese.","Não é isso que os mantém funcionando."],
+ ["dependem das células companheiras, que têm núcleo.","Isso. As companheiras mandam proteínas e ATP para o tubo crivado."],
+ ["recebem seiva bruta do xilema.","A seiva bruta não substitui o núcleo."]]},
+{k:"b6",s:"Em um caule de eudicotiledônea com crescimento secundário, o câmbio vascular produz",c:2,o:[
+ ["súber para fora e feloderme para dentro.","Isso quem faz é o felogênio, outro meristema."],
+ ["apenas xilema.","Ele produz os dois vasos."],
+ ["xilema secundário e floema secundário.","Isso. O câmbio vascular é o meristema secundário dos vasos."],
+ ["epiderme e periderme.","A periderme vem do felogênio."],
+ ["primórdios foliares.","Primórdios foliares saem da gema apical."]]},
+{k:"b6",s:"Num corte de caule, os feixes vasculares aparecem espalhados. A planta provavelmente é",c:1,o:[
+ ["eudicotiledônea.","Na eudicotiledônea os feixes ficam organizados em anel."],
+ ["monocotiledônea.","Isso. Feixes espalhados é a marca do caule de monocotiledônea."],
+ ["uma raiz de eudicotiledônea.","Raiz de eudicotiledônea tem xilema em cruz no centro."],
+ ["uma planta sem vasos.","Se há feixes vasculares, há vasos."],
+ ["uma folha.","A pergunta é sobre um caule."]]},
+{k:"b6",s:"O xilema leva a seiva elaborada, rica em açúcares.",v:false,e:"O xilema leva a seiva bruta (água e sais). A elaborada vai pelo floema."},
+{k:"b6",s:"A cebola é um caule do tipo bulbo.",v:true,e:"O bulbo é um caule pequeno cercado de folhas que guardam reserva."},
+{k:"b6",s:"A videira se prende por gavinhas e a hera, por raízes adventícias.",v:true,e:"Os dois são caules trepadores, mas cada um usa uma estrutura de fixação."},
+
+/* ================= BIOLOGIA · CAP. 7 FOLHA ================= */
+{k:"b7",s:"A camada da folha formada por células compactas, logo abaixo da epiderme de cima, especializada em captar luz, é o",c:0,o:[
+ ["parênquima paliçádico.","Isso. É compacto e cheio de cloroplastos."],
+ ["parênquima lacunoso.","O lacunoso tem muitos espaços e serve para a troca de gases."],
+ ["cutícula.","Cutícula é a camada de cera por fora da epiderme."],
+ ["estômato.","O estômato é uma abertura da epiderme."],
+ ["floema.","O floema conduz açúcar pelas nervuras."]]},
+{k:"b7",s:"O estômato abre quando as células-guarda estão",c:1,o:[
+ ["flácidas.","Flácidas, elas murcham e o poro fecha."],
+ ["túrgidas, cheias de água.","Isso. Elas incham, se curvam e o ostíolo abre."],
+ ["mortas.","As células-guarda são vivas e têm cloroplastos."],
+ ["sem cloroplastos.","Elas têm cloroplastos. Isso não abre o estômato."],
+ ["cobertas de cutícula.","A cutícula não controla a abertura."]]},
+{k:"b7",s:"Os \"espinhos\" da roseira, que se soltam com facilidade, são",c:2,o:[
+ ["folhas modificadas.","Folha modificada em espinho é o caso do cacto. O da roseira sai fácil porque é só da epiderme."],
+ ["gavinhas.","Gavinhas enrolam e prendem a planta."],
+ ["acúleos.","Isso. São anexos da epiderme, por isso saem fácil."],
+ ["tricomas.","Tricomas são pelos."],
+ ["estípulas.","Estípulas ficam na base da folha."]]},
+{k:"b7",s:"Uma planta tem duas folhas em cada nó. A filotaxia é",c:1,o:[
+ ["alternada.","Alternada é uma folha por nó."],
+ ["oposta.","Isso. Duas folhas por nó, uma em frente da outra."],
+ ["verticilada.","Verticilada é três ou mais folhas por nó."],
+ ["composta.","Composta fala do limbo dividido em folíolos, não de quantas folhas há no nó."],
+ ["simples.","Simples fala do limbo inteiro, não da filotaxia."]]},
+{k:"b7",s:"A folha típica de monocotiledônea",c:0,o:[
+ ["em geral não tem pecíolo e tem bainha.","Isso. A folha se prende ao caule pela bainha, como no milho."],
+ ["é sempre composta.","Não é regra. Em geral ela é simples."],
+ ["tem pecíolo longo e estípulas.","Isso é mais comum em eudicotiledôneas."],
+ ["não tem nervuras.","Tem sim: são as nervuras paralelas."],
+ ["não tem estômatos.","Toda folha precisa de estômatos para trocar gases."]]},
+{k:"b7",s:"A cutícula é uma camada de cera que impermeabiliza a folha.",v:true,e:"Ela reduz a perda de água pela superfície."},
+{k:"b7",s:"Uma folha composta tem o limbo dividido em folíolos.",v:true,e:"Se o limbo é inteiro, a folha é simples."},
+{k:"b7",s:"O parênquima paliçádico tem muitos espaços entre as células para a circulação de gases.",v:false,e:"Quem tem espaços é o lacunoso. O paliçádico é compacto e capta luz."},
+
+/* ================= BIOLOGIA · CAP. 8 FLOR ================= */
+{k:"b8",s:"O conjunto de estames, a parte masculina da flor, chama-se",c:0,o:[
+ ["androceu.","Isso. Andro = masculino."],
+ ["gineceu.","Gineceu é a parte feminina (carpelos)."],
+ ["cálice.","Cálice é o conjunto das sépalas, que protegem."],
+ ["corola.","Corola é o conjunto das pétalas, que atraem."],
+ ["perianto.","Perianto é cálice + corola, as peças inférteis."]]},
+{k:"b8",s:"A parte do carpelo que recebe o pólen é o",c:2,o:[
+ ["ovário.","O ovário guarda os óvulos, lá embaixo."],
+ ["estilete.","O estilete é o tubo que liga o estigma ao ovário."],
+ ["estigma.","Isso. Fica no topo e costuma ser pegajoso."],
+ ["antera.","A antera produz o pólen; não recebe."],
+ ["filete.","O filete sustenta a antera, no estame."]]},
+{k:"b8",s:"No mamoeiro, há pés que só dão flores masculinas e pés que só dão flores femininas. Essa planta é",c:3,o:[
+ ["monoclina.","Monoclina é a flor com as duas partes, como a da roseira."],
+ ["de flor completa.","Flor completa tem os quatro verticilos. Aqui falta androceu ou gineceu."],
+ ["de autopolinização.","Com sexos em indivíduos separados, a autopolinização é impossível."],
+ ["dioica.","Isso. Indivíduos só machos ou só fêmeas."],
+ ["de simetria bilateral.","Simetria fala do formato da flor, não dos sexos."]]},
+{k:"b8",s:"Uma flor é pequena, sem pétalas vistosas, sem néctar e sem perfume, e produz grande quantidade de pólen leve. O polinizador mais provável é",c:1,o:[
+ ["abelha.","Abelhas são atraídas por cor, cheiro e néctar."],
+ ["o vento.","Isso. Sem atrativos e com muito pólen leve, a aposta é o vento (anemofilia)."],
+ ["beija-flor.","Beija-flor busca flores coloridas com néctar."],
+ ["morcego.","Morcegos buscam flores com cheiro e néctar."],
+ ["borboleta.","Borboletas também buscam néctar e cor."]]},
+{k:"b8",s:"Sobre a autopolinização, é correto afirmar que ela",c:0,o:[
+ ["diminui a variabilidade genética.","Isso. O pólen e o óvulo vêm da mesma planta, então os genes se repetem."],
+ ["aumenta a variabilidade genética.","Quem aumenta é a polinização cruzada."],
+ ["é favorecida pela dicogamia.","A dicogamia evita a autopolinização: as partes amadurecem em épocas diferentes."],
+ ["é a regra em plantas dioicas.","Na dioica os sexos estão em pés diferentes, então não há autopolinização."],
+ ["é o mesmo que fecundação.","Polinização é a chegada do pólen. A fecundação vem depois."]]},
+{k:"b8",s:"Polinização e fecundação são a mesma coisa.",v:false,e:"Polinização é a chegada do pólen ao estigma. Fecundação é a união dos gametas, dentro do óvulo."},
+{k:"b8",s:"Uma flor diclina tem só androceu ou só gineceu.",v:true,e:"Diclina = unissexuada, como a da abobrinha."},
+{k:"b8",s:"Cálice e corola formam o perianto.",v:true,e:"São as peças inférteis da flor: protegem e atraem."},
+
+/* ================= BIOLOGIA · CAP. 9 FRUTO E SEMENTE ================= */
+{k:"b9",s:"O endosperma das angiospermas é",c:2,o:[
+ ["diploide (2n).","2n é o embrião, que vem do zigoto."],
+ ["haploide (n).","n são os gametas."],
+ ["triploide (3n).","Isso. Um núcleo espermático (n) mais dois núcleos polares (n + n) dá 3n."],
+ ["tetraploide (4n).","Não há quatro conjuntos nessa fusão."],
+ ["igual ao grão de pólen.","O pólen é outra estrutura e não forma reserva."]]},
+{k:"b9",s:"Sobre o caju, é correto afirmar que",c:4,o:[
+ ["a parte carnosa é o fruto e a castanha é a semente.","A parte carnosa não vem do ovário."],
+ ["a parte carnosa vem do ovário e a castanha, do receptáculo.","A parte carnosa vem do pedúnculo, não do ovário. E a castanha é o fruto verdadeiro."],
+ ["é um fruto múltiplo, formado por uma inflorescência.","Fruto múltiplo é o do abacaxi. O caju vem de uma flor só."],
+ ["é um fruto partenocárpico, sem semente.","O caju tem semente dentro da castanha."],
+ ["a parte carnosa vem do pedúnculo, e o fruto verdadeiro é a castanha.","Isso. O caju é pseudofruto; a castanha é o fruto verdadeiro (aquênio)."]]},
+{k:"b9",s:"Na germinação, a primeira estrutura do embrião a sair da semente, e que vira a raiz, é a",c:0,o:[
+ ["radícula.","Isso. Ela sai primeiro e fixa a plântula."],
+ ["epicótilo.","O epicótilo forma a parte de cima do caule."],
+ ["cotilédone.","O cotilédone é folha de reserva do embrião."],
+ ["tegumento.","Tegumento é a casca da semente, que se rompe."],
+ ["endosperma.","Endosperma é a reserva, não uma parte do embrião."]]},
+{k:"b9",s:"O pêssego e a azeitona, frutos carnosos com um caroço só, são do tipo",c:1,o:[
+ ["baga.","Baga é o carnoso com várias sementes (tomate, uva)."],
+ ["drupa.","Isso. Um caroço só = drupa."],
+ ["aquênio.","O aquênio é um fruto seco."],
+ ["vagem.","A vagem é seca e abre (deiscente)."],
+ ["múltiplo.","Múltiplo vem de uma inflorescência inteira, como o abacaxi."]]},
+{k:"b9",s:"A banana comercial forma fruto sem fecundação e sem semente. Isso se chama",c:3,o:[
+ ["dormência.","Dormência é a semente que não germina mesmo com ambiente bom."],
+ ["quiescência.","Quiescência é a semente esperando algo do ambiente."],
+ ["hidrocoria.","Hidrocoria é dispersão pela água."],
+ ["partenocarpia.","Isso. Fruto formado sem fecundação, sem semente."],
+ ["fruto agregado.","Agregado vem de vários ovários de uma flor."]]},
+{k:"b9",s:"O coco flutua e viaja pelo mar até outra praia. Esse tipo de dispersão é a",c:2,o:[
+ ["anemocoria.","Anemocoria é pelo vento."],
+ ["zoocoria.","Zoocoria é por animais."],
+ ["hidrocoria.","Isso. Hidro = água."],
+ ["partenocarpia.","Partenocarpia é fruto sem fecundação, não dispersão."],
+ ["germinação hipógea.","Isso é um tipo de germinação, não de dispersão."]]},
+{k:"b9",s:"Uma semente recebe água, temperatura e oxigênio ideais e mesmo assim não germina, por um bloqueio interno. Isso é",c:0,o:[
+ ["dormência.","Isso. O bloqueio é da própria semente."],
+ ["quiescência.","Na quiescência falta algo do ambiente. Quando chega, germina."],
+ ["partenocarpia.","Partenocarpia é fruto sem semente."],
+ ["germinação epígea.","Aqui nem houve germinação."],
+ ["polinização.","Polinização acontece na flor, antes de existir semente."]]},
+{k:"b9",s:"Na germinação epígea, os cotilédones permanecem sob o solo.",v:false,e:"Na epígea os cotilédones sobem (feijão). Ficam sob o solo na hipógea (milho, ervilha)."},
+{k:"b9",s:"Depois da fecundação, o ovário vira fruto e o óvulo vira semente.",v:true,e:"É a regra geral: fruto = ovário maduro; semente = óvulo maduro."},
+
+/* ================= BIOLOGIA · CAP. 10 CONDUÇÃO ================= */
+{k:"b10",s:"Um agricultor retirou um anel completo de casca do tronco de uma árvore. A região acima do corte inchou e, meses depois, a árvore morreu. A morte ocorreu porque",c:2,o:[
+ ["o xilema foi removido e a água deixou de subir.","O xilema fica mais para dentro e continua levando água. Por isso a morte demora."],
+ ["a transpiração foi interrompida nas folhas.","As folhas continuam transpirando."],
+ ["o floema foi removido e as raízes deixaram de receber açúcares.","Isso. O floema fica na casca. O açúcar para acima do corte (incha) e a raiz morre de fome."],
+ ["a planta perdeu os meristemas apicais.","Os meristemas apicais ficam nas pontas, não no tronco."],
+ ["os estômatos do tronco foram destruídos.","Estômatos ficam principalmente nas folhas."]]},
+{k:"b10",s:"Pela teoria da coesão-tensão (Dixon), o que puxa a água da raiz até o topo da árvore é",c:0,o:[
+ ["a transpiração nas folhas.","Isso. A folha perde água e cria uma tensão que puxa a coluna inteira, como um canudinho."],
+ ["a pressão de raiz.","A pressão de raiz existe, mas é um empurrão fraco. Explica a gutação, não a subida em árvores altas."],
+ ["o fluxo em massa de Münch.","Münch explica o floema, o transporte de açúcar."],
+ ["o transporte ativo da água.","A água entra por osmose, sem gasto de energia. Transporte ativo é dos sais."],
+ ["a fotossíntese, que empurra a seiva para cima.","A fotossíntese produz açúcar; quem puxa a água é a transpiração."]]},
+{k:"b10",s:"Os sais minerais entram na raiz principalmente por",c:1,o:[
+ ["osmose.","Osmose é como entra a água."],
+ ["transporte ativo, com gasto de energia.","Isso. A raiz gasta energia para trazer os sais para dentro."],
+ ["transpiração.","Transpiração é perda de água nas folhas."],
+ ["gutação.","Gutação é saída de água líquida pelas folhas."],
+ ["fluxo de Münch.","Münch explica o floema."]]},
+{k:"b10",s:"De manhã cedo aparecem gotinhas de água na borda das folhas (gutação). Isso é explicado pela",c:3,o:[
+ ["transpiração.","Transpiração é perda de vapor, não de gotas."],
+ ["coesão-tensão.","A coesão-tensão depende da transpiração, que à noite quase para."],
+ ["fotossíntese.","A fotossíntese não empurra água para fora."],
+ ["pressão de raiz.","Isso. A raiz empurra água de baixo para cima e o excesso sai pela borda da folha."],
+ ["ação do etileno.","O etileno amadurece frutos."]]},
+{k:"b10",s:"Pela hipótese de Münch (fluxo em massa), a seiva elaborada se move porque",c:2,o:[
+ ["a transpiração puxa o açúcar para cima.","Transpiração puxa a água no xilema, não o açúcar no floema."],
+ ["o xilema empurra o açúcar.","O açúcar viaja pelo floema."],
+ ["o açúcar entra no floema na folha, a água vem atrás por osmose e a pressão empurra a seiva até o dreno.","Isso. Da fonte (folha) para o dreno (raiz, fruto)."],
+ ["a raiz suga o açúcar com gasto de energia.","O motor está na fonte, onde o açúcar entra e a pressão sobe."],
+ ["a gravidade puxa o açúcar para baixo.","A seiva elaborada também sobe para frutos e brotos, contra a gravidade."]]},
+{k:"b10",s:"O floema distribui o açúcar da fonte (folha) até o dreno (raiz, fruto).",v:true,e:"É o caminho da seiva elaborada."},
+{k:"b10",s:"Coesão é a união das moléculas de água umas com as outras.",v:true,e:"A união da água com a parede do vaso se chama adesão."},
+
+/* ================= BIOLOGIA · CAP. 11 TRANSPIRAÇÃO ================= */
+{k:"b11",s:"Em um dia quente e seco, uma planta fecha os estômatos. A consequência imediata é",c:0,o:[
+ ["menor perda de água e menor entrada de CO₂, com queda da fotossíntese.","Isso. É o dilema: fechar economiza água, mas barra o CO₂."],
+ ["maior absorção de água pelas folhas.","As folhas não passam a absorver mais água."],
+ ["aumento da subida de seiva bruta.","Com menos transpiração, a subida diminui."],
+ ["maior entrada de CO₂ e aumento da fotossíntese.","O CO₂ entra pelos estômatos. Fechados, ele entra menos."],
+ ["eliminação de água líquida por gutação.","Gutação é outro fenômeno, ligado à pressão de raiz."]]},
+{k:"b11",s:"O que faz o estômato abrir?",c:0,o:[
+ ["A entrada de íons potássio (K⁺) nas células-guarda, seguida da entrada de água.","Isso. A água vem atrás por osmose, elas ficam túrgidas e o ostíolo abre."],
+ ["A saída de K⁺ das células-guarda.","A saída de K⁺ faz a água sair e o estômato fechar."],
+ ["A falta de água no solo.","Falta de água faz o estômato fechar."],
+ ["O ácido abscísico.","O ácido abscísico fecha os estômatos."],
+ ["A cutícula grossa.","A cutícula não abre o estômato; ela só reduz a perda de água."]]},
+{k:"b11",s:"Qual condição AUMENTA a transpiração?",c:2,o:[
+ ["Ar úmido.","Ar úmido diminui a transpiração: o vapor tem menos para onde ir."],
+ ["Frio.","O frio diminui a evaporação."],
+ ["Calor, vento e ar seco.","Isso. Todos aceleram a saída de vapor."],
+ ["Falta de água no solo.","A planta fecha os estômatos e transpira menos."],
+ ["Noite escura.","Sem luz, os estômatos tendem a fechar."]]},
+{k:"b11",s:"Uma adaptação de plantas de clima seco para reduzir a transpiração é",c:3,o:[
+ ["folhas grandes e cutícula fina.","Isso aumentaria a perda de água."],
+ ["muitos estômatos expostos na face de cima.","Estômatos expostos ao sol perdem mais água."],
+ ["ausência de tricomas.","Os tricomas ajudam a segurar a umidade perto da folha."],
+ ["cutícula grossa e folhas pequenas ou transformadas em espinhos.","Isso. Menos superfície e mais cera = menos água perdida."],
+ ["gutação constante.","Gutação é perda de água. Não é adaptação à seca."]]},
+{k:"b11",s:"A maior parte da transpiração da planta acontece pela via",c:1,o:[
+ ["cuticular.","A cuticular existe, mas é pequena e não tem controle."],
+ ["estomática.","Isso. É a maior parte, e a planta consegue controlar."],
+ ["radicular.","A raiz absorve água, não transpira."],
+ ["do floema.","O floema conduz seiva, não transpira."],
+ ["da gutação.","Gutação é água líquida e não é transpiração."]]},
+{k:"b11",s:"A gutação é um tipo de transpiração.",v:false,e:"Gutação é água LÍQUIDA saindo pelos hidatódios. Transpiração é perda de VAPOR."},
+{k:"b11",s:"A transpiração cuticular pode ser controlada pela planta.",v:false,e:"A cuticular não tem controle. Quem é controlada é a estomática."},
+
+/* ================= BIOLOGIA · CAP. 12 HORMÔNIOS ================= */
+{k:"b12",s:"Bananas verdes guardadas em um saco fechado junto com uma maçã madura amadurecem mais depressa. O responsável é",c:3,o:[
+ ["a auxina.","Auxina comanda crescimento e tropismos."],
+ ["a giberelina.","Giberelina alonga o caule e quebra a dormência."],
+ ["a citocinina.","Citocinina estimula a divisão celular e retarda o envelhecimento."],
+ ["o etileno, gás liberado pelo fruto maduro.","Isso. Preso no saco, o gás se concentra e acelera o amadurecimento."],
+ ["o ácido abscísico.","O ácido abscísico fecha estômatos e mantém dormência."]]},
+{k:"b12",s:"Um jardineiro corta as pontas dos ramos de uma cerca viva, e ela fica mais cheia. Isso acontece porque a poda",c:1,o:[
+ ["aumenta a produção de etileno.","O etileno não é o protagonista aqui."],
+ ["remove a fonte de auxina que inibia as gemas laterais.","Isso. Sem a ponta, acaba a dominância apical e as gemas laterais brotam."],
+ ["estimula a produção de ácido abscísico.","O ácido abscísico inibe, não estimula a brotação."],
+ ["interrompe o floema.","A poda das pontas não corta o floema do tronco."],
+ ["elimina a citocinina.","A citocinina, na verdade, favorece a brotação."]]},
+{k:"b12",s:"Na seca, o hormônio que faz os estômatos fecharem é",c:4,o:[
+ ["a auxina.","A auxina comanda o crescimento."],
+ ["a giberelina.","A giberelina alonga o caule."],
+ ["a citocinina.","A citocinina estimula a divisão celular."],
+ ["o etileno.","O etileno amadurece frutos."],
+ ["o ácido abscísico.","Isso. É o hormônio do estresse: fecha estômatos na seca."]]},
+{k:"b12",s:"No fototropismo, o caule se curva em direção à luz porque",c:0,o:[
+ ["a auxina vai para o lado da sombra, que cresce mais.","Isso. O lado escuro alonga mais e empurra a ponta para a luz."],
+ ["a auxina vai para o lado iluminado, que cresce mais.","Se o lado iluminado crescesse mais, o caule se afastaria da luz."],
+ ["o etileno puxa o caule.","O etileno não comanda o fototropismo."],
+ ["a luz destrói o caule do lado escuro.","Não há destruição de células."],
+ ["a gravidade puxa o caule para a luz.","Gravidade é assunto do gravitropismo."]]},
+{k:"b12",s:"O hormônio que quebra a dormência da semente e alonga o caule é a",c:1,o:[
+ ["auxina.","A auxina age no crescimento e nos tropismos, mas a quebra da dormência é com a giberelina."],
+ ["giberelina.","Isso."],
+ ["citocinina.","A citocinina estimula a divisão celular."],
+ ["etileno.","O etileno amadurece frutos."],
+ ["ácido abscísico.","O ácido abscísico faz o contrário: mantém a dormência."]]},
+{k:"b12",s:"Estimular a divisão celular e retardar o envelhecimento das folhas é papel da",c:2,o:[
+ ["auxina.","A auxina alonga as células."],
+ ["giberelina.","A giberelina alonga o caule e quebra a dormência."],
+ ["citocinina.","Isso. Cito = célula: ela estimula a divisão."],
+ ["etileno.","O etileno acelera o amadurecimento e o envelhecimento, o contrário."],
+ ["ácido abscísico.","O ácido abscísico é hormônio do estresse e da dormência."]]},
+{k:"b12",s:"A raiz é menos sensível à auxina que o caule.",v:false,e:"A raiz é MUITO MAIS sensível. A dose que estimula o caule inibe a raiz."},
+{k:"b12",s:"O caule tem gravitropismo negativo e a raiz, gravitropismo positivo.",v:true,e:"O caule cresce para cima, contra a gravidade. A raiz cresce para baixo, a favor dela."}
+];
+
+
+/* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
+const DICAS = {
+q2:[
+ [/polar|ebuli|isômeros do 1,2-dicloroeteno/i,"Polaridade de cis e trans","Cis: os dipolos se somam, a molécula é polar e ferve a uma temperatura maior. Trans: os dipolos se anulam e a molécula é apolar.","Isômeros geométricos com ligação dupla"],
+ [/cíclic|ciclo/i,"Isomeria em ciclos (bayeriana)","No anel, os substituintes precisam estar em dois carbonos DIFERENTES. Dois no mesmo carbono não contam.","Isômeros geométricos em compostos cíclicos (isomeria bayeriana)"],
+ [/\(E\)|cis é \(Z\)/,"Sistema (E)-(Z)","Z = zusammen = juntos: os campeões de prioridade ficam do mesmo lado. E = entgegen = opostos. Cis não é sinônimo de Z: sempre faça o ranking.","Sistema (E)-(Z) para nomear estereoisômeros geométricos"],
+ [/Regra|prioridade|deutério|vinila|Cahn/i,"Prioridades de Cahn-Ingold-Prelog","Compare o primeiro átomo pelo número atômico. Empatou? Olhe os vizinhos. Dupla conta em dobro. Isótopo mais pesado vence. Par de elétrons livre é sempre o último.","Prioridades dos substituintes: Regras 1 a 5"],
+ [/rotação|sigma/i,"Por que a dupla trava","Ligação simples (σ) gira. Ligação dupla tem a π, que trava a rotação.","Isômeros geométricos com ligação dupla"],
+ [/Estereoisômeros são/i,"O que é estereoisomeria","Mesmos átomos, ligados na mesma ordem. Só muda a arrumação no espaço.","Estereoisomeria"],
+ [/./,"Condição para isomeria geométrica","Teste rápido: em CADA carbono da dupla, os dois ligantes são diferentes? Se um carbono tiver dois iguais (dois H, dois CH₃), não há isomeria.","Isômeros geométricos com ligação dupla"]],
+q3:[
+ [/van't Hoff|isômeros ópticos ativos|carbonos assimétricos diferentes/i,"Fórmulas de van't Hoff","2ⁿ isômeros ativos e 2ⁿ ÷ 2 pares racêmicos (n = número de C* diferentes). Não vale para composto meso.","Fórmulas de van't Hoff"],
+ [/meso/i,"Composto meso","Meso é a borboleta: duas metades iguais e espelhadas que se anulam por dentro (compensação interna).","Composto meso"],
+ [/racêmica/i,"Mistura racêmica","Racêmica é o cabo de guerra empatado: 50% (+) e 50% (–) se anulam (compensação externa).","Alguns termos importantes: diastereoisômeros, mistura racêmica e centro estereogênico"],
+ [/\(R\)/,"Sistema (R)-(S)","Ordene 1 → 2 → 3 com o 4 para trás. Horário = R; anti-horário = S. R/S não diz nada sobre (+) ou (–).","Nomenclatura (R)-(S) em perspectiva e em projeções de Fischer"],
+ [/permuta|Fischer/i,"Projeção de Fischer","Horizontal vem para a frente; vertical vai para trás. Troca ímpar inverte (enantiômero); troca par mantém.","Fórmulas estruturais (perspectiva e Fischer)"],
+ [/Diastereo|Enantiômeros/i,"Enantiômeros e diastereoisômeros","Enantiômeros são imagem no espelho, como as mãos. Diastereoisômeros são estereoisômeros que NÃO são imagem um do outro.","Alguns termos importantes: isômeros ópticos, enantiômeros e quiralidade"],
+ [/polarímetro|dextrogira|desvi/i,"Luz polarizada e polarímetro","Dextrogira: direita (+). Levogira: esquerda (–). Quem mede o desvio é o polarímetro.","Polarímetro e substâncias opticamente ativas e inativas"],
+ [/./,"Carbono assimétrico (C*)","C* = carbono com quatro ligantes diferentes. Com dupla, nunca. Dois ligantes iguais (dois CH₃, dois H) já eliminam.","Estereoisomeria configuracional óptica (abertura)"]],
+q5:[
+ [/dieno/i,"Adição em alcadienos","Em alcadienos predomina a adição 1,4 (80%).","Adição em alcadienos"],
+ [/sem peróxido/i,"Regra de Markovnikov","O H vai para o carbono da dupla que já tem mais H (\"quem tem mais, ganha mais\"). O Br fica no outro.","Adição de haletos de hidrogênio"],
+ [/peróxido/i,"Regra de Kharasch","Só HBr com peróxido inverte a regra: mecanismo de radicais, e o Br vai para o carbono da ponta (C1).","Adição de haletos de hidrogênio"],
+ [/HCN/,"HCN","Alcenos não adicionam HCN. Só os alcinos.","Adição em alcinos"],
+ [/HBr/,"Regra de Markovnikov","O H vai para o carbono da dupla que já tem mais H (\"quem tem mais, ganha mais\"). O Br fica no outro.","Adição de haletos de hidrogênio"],
+ [/hidratação/i,"Hidratação de alcinos","Forma um enol, que vira carbonila por tautomeria. Etino dá aldeído (etanal); os outros alcinos dão cetona.","Adição em alcinos"],
+ [/etanal|Nox/i,"Adição em aldeídos e cetonas","Aldeído + H₂ dá álcool. É uma redução: o Nox do carbono diminui.","Adição em aldeídos e cetonas"],
+ [/hidrogenação/i,"Hidrogenação catalítica","H₂ com Ni, Pd ou Pt. Os dois H entram do mesmo lado (adição cis). Menor |ΔH| = isômero mais estável.","Hidrogenação catalítica"],
+ [/Br₂|bromônio/,"Adição de halogênios","Um halogênio em cada carbono da dupla, em adição trans pelo íon bromônio.","Adição de halogênios"],
+ [/./,"O que é reação de adição","Só acontece em compostos com dupla ou tripla: a ligação π se abre e o reagente entra.","Reações de adição (abertura)"]],
+b5:[
+ [/coifa|absorção|região/i,"Zonas da raiz","Da ponta para cima: coifa (protege) → zona lisa (alonga) → zona pilífera (absorve) → zona suberosa (ramifica).","Cap. 5 · Zonas, da ponta para cima"],
+ [/endoderme|periciclo|camada/i,"Camadas internas da raiz","De fora para dentro: epiderme → córtex → endoderme (filtro) → periciclo (raízes laterais) → vasos.","Cap. 5 · Por dentro, de fora para o centro"],
+ [/meristema|câmbio|felogênio/i,"Meristemas","Apical alonga (crescimento primário). Lateral (câmbio vascular e felogênio) engrossa (secundário).","Cap. 5 · Meristemas"],
+ [/./,"Mono × eudicotiledônea","Eudicotiledônea: raiz pivotante e xilema em cruz. Monocotiledônea: raiz fasciculada (cabeleira) e vasos em círculo com medula.","Cap. 5 · Por dentro, de fora para o centro"]],
+b6:[
+ [/identifica|gemas|batata|cebola|videira/i,"Como reconhecer um caule","Caule tem gemas e nós. A batata-inglesa é caule (os \"olhos\" são gemas); a batata-doce é raiz.","Cap. 6 · Morfologia externa e tipos de caule"],
+ [/colênquima|cortiça|súber|tecido/i,"Tecidos de sustentação e revestimento","Colênquima: vivo, celulose, flexível. Esclerênquima: morto, lignina, rígido. Súber: morto, impermeável e isolante.","Cap. 6 · Sistema fundamental e de revestimento"],
+ [/./,"Xilema, floema e câmbio","Xilema sobe a seiva bruta; floema leva a elaborada. O câmbio faz os vasos; o felogênio faz o súber. Feixes espalhados = mono; em anel = eudicot.","Cap. 6 · Sistema vascular"]],
+b7:[
+ [/paliçádico|cutícula|camada/i,"Anatomia da folha","Em sanduíche: cutícula → epiderme → paliçádico (compacto, capta luz) → lacunoso (espaços, troca gases) → epiderme.","Cap. 7 · Por dentro, em sanduíche"],
+ [/estômato/i,"Estômatos","Célula-guarda túrgida abre; flácida fecha.","Cap. 7 · Estômatos"],
+ [/roseira/i,"Anexos da epiderme","Roseira tem acúleo (da epiderme, sai fácil). Espinho de cacto é folha modificada.","Cap. 7 · Anexos da epiderme"],
+ [/./,"Partes e formas da folha","Filotaxia: 1 por nó = alternada; 2 = oposta; 3 ou mais = verticilada. Folha de mono: sem pecíolo, com bainha.","Cap. 7 · Partes e formas"]],
+b8:[
+ [/mamoeiro|diclina/i,"Sexo das flores e plantas","Monoclina: os dois sexos na mesma flor. Diclina: só um. Dioica: há pés machos e pés fêmeas.","Cap. 8 · Tipos de flor"],
+ [/estames|pólen é|perianto/i,"Partes da flor","De fora para dentro: cálice (sépalas) → corola (pétalas) → androceu (estames ♂) → gineceu (carpelos ♀: estigma, estilete, ovário).","Cap. 8 · Quatro verticilos e peças férteis"],
+ [/./,"Polinização","Polinização não é fecundação. Autopolinização reduz a variabilidade; a cruzada aumenta. Flor sem atrativos e com muito pólen = vento.","Cap. 8 · Polinização"]],
+b9:[
+ [/endosperma/i,"Endosperma","Endosperma é 3n: 1 núcleo espermático + 2 núcleos polares.","Cap. 9 · Semente"],
+ [/germina/i,"Germinação","A radícula sai primeiro. Epígea: cotilédones sobem (feijão). Dormência = bloqueio interno; quiescência = falta algo do ambiente.","Cap. 9 · Germinação"],
+ [/coco/i,"Dispersão","Vento = anemocoria; água = hidrocoria; animais = zoocoria.","Cap. 9 · Dispersão"],
+ [/./,"Tipos de fruto","Fruto = ovário; semente = óvulo. Drupa tem um caroço; baga, várias sementes. Caju é pseudofruto (pedúnculo). Banana: partenocarpia.","Cap. 9 · Fruto"]],
+b10:[
+ [/anel/i,"Anel de Malpighi","Tirar a casca tira o floema: a raiz morre de fome, e acima do corte o tronco incha.","Cap. 10 · Anel de Malpighi"],
+ [/gotinhas|gutação/i,"Pressão de raiz","A pressão de raiz é um empurrão fraco de baixo, que explica a gutação.","Cap. 10 · Pressão de raiz"],
+ [/sais/i,"Absorção","Água entra por osmose. Sais entram por transporte ativo (gastam energia).","Cap. 10 · Absorção"],
+ [/Münch|floema distribui/i,"Fluxo em massa (Münch)","O açúcar entra no floema na folha (fonte), a água vem atrás e a pressão empurra até o dreno.","Cap. 10 · Fluxo em massa (Münch)"],
+ [/./,"Coesão-tensão","A transpiração puxa a coluna de água, como um canudinho. Coesão: água com água. Adesão: água com a parede.","Cap. 10 · Coesão-tensão (Dixon)"]],
+b11:[
+ [/abrir/i,"Como o estômato abre","Entra K⁺ → entra água → célula-guarda túrgida → ostíolo abre.","Cap. 11 · Como o estômato abre"],
+ [/gutação/i,"Gutação × transpiração","Gutação é água líquida. Transpiração é vapor.","Cap. 11 · Mais e menos transpiração"],
+ [/AUMENTA|clima seco/,"O que muda a transpiração","Calor, vento, ar seco e luz aumentam. Plantas de seca: cutícula grossa, folhas pequenas ou em espinhos.","Cap. 11 · Mais e menos transpiração"],
+ [/./,"O dilema do estômato","A via estomática é a maior e controlável; a cuticular é pequena e sem controle. Fechar o estômato economiza água, mas corta o CO₂.","Cap. 11 · Duas vias e O dilema"]],
+b12:[
+ [/cerca viva|fototropismo|auxina|gravitropismo/i,"Auxina","A auxina da ponta inibe as gemas laterais (dominância apical): podou, ramifica. No fototropismo ela vai para a sombra, que cresce mais. A raiz é muito mais sensível que o caule.","Cap. 12 · Dominância apical, tropismos e A dose importa"],
+ [/Bananas/i,"Etileno","O etileno é um gás: preso num saco, concentra e acelera o amadurecimento. Uma fruta madura apressa as vizinhas.","Cap. 12 · Etileno no dia a dia"],
+ [/./,"Os cinco hormônios","Auxina: crescer e curvar (dominância apical, tropismos). Giberelina: alonga o caule e quebra a dormência. Citocinina: divide células e retarda o envelhecimento. Etileno: gás que amadurece frutos. Ácido abscísico: fecha estômatos na seca.","Cap. 12 · Hormônios vegetais"]]
+};
+const topicOf=q=>(DICAS[q.k]||[]).find(r=>r[0].test(q.s.replace(/<[^>]+>/g,"")));
+</script>
+<script>
+const KEY="quiz-qb-v1";
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
+const store=load();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
+const app=document.getElementById("app");
+const capOf=k=>CAPS.find(c=>c.k===k);
+const label=c=>(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const L="ABCDE";
+const why=t=>t.replace(/^Isso\.\s*/,"");
+
+let cfg={m:store.m||"q",sel:null,n:store.n||10};
+let run=null;
+
+function setTheme(){document.body.classList.toggle("bio",cfg.m==="b")}
+
+function setup(){
+ setTheme();
+ const caps=CAPS.filter(c=>cfg.m==="t"||c.m===cfg.m);
+ if(!cfg.sel||!cfg.sel.some(k=>caps.find(c=>c.k===k)))cfg.sel=caps.map(c=>c.k);
+ const best=store.best||{};
+ app.innerHTML=`
+ <header>
+  <div class="eyebrow">Treino para a recuperação · 2ª série do ensino médio</div>
+  <h1>Quiz de Química e Biologia</h1>
+  <p class="lead">Responda e veja na hora se acertou. Quando errar, a explicação mostra por que aquela alternativa está errada e qual é a certa.</p>
+ </header>
+ <section class="panel">
+  <div class="eyebrow">1. Matéria</div>
+  <div class="seg" id="mat">
+   <button data-m="q" aria-pressed="${cfg.m==="q"}">Química</button>
+   <button data-m="b" aria-pressed="${cfg.m==="b"}">Biologia</button>
+   <button data-m="t" aria-pressed="${cfg.m==="t"}">Tudo misturado</button>
+  </div>
+  <div class="eyebrow">2. Capítulos</div>
+  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
+  <div class="row small"><button class="chip" style="display:inline-flex;padding:6px 12px" id="all">Marcar todos</button><button class="chip" style="display:inline-flex;padding:6px 12px" id="none">Desmarcar todos</button></div>
+  <div class="eyebrow">3. Quantas perguntas?</div>
+  <div class="seg" id="qtd">${[10,20,0].map(n=>`<button data-n="${n}" aria-pressed="${cfg.n===n}">${n||"Todas"}</button>`).join("")}</div>
+  <div class="row"><button class="btn" id="go">Começar</button><span class="small" id="info"></span></div>
+ </section>
+ ${Object.keys(best).length?`<section class="panel"><div class="eyebrow">Seus melhores resultados</div>${Object.entries(best).map(([k,v])=>`<div class="row small"><b style="color:var(--ink)">${k}</b><span>${v}</span></div>`).join("")}</section>`:""}`;
+ const pool=()=>Q.filter(q=>cfg.sel.includes(q.k));
+ const info=()=>{const p=pool().length;const n=cfg.n?Math.min(cfg.n,p):p;document.getElementById("info").textContent=p?`${n} perguntas sorteadas de ${p}`:"Escolha pelo menos um capítulo";document.getElementById("go").disabled=!p};
+ info();
+ app.querySelectorAll("#mat button").forEach(b=>b.onclick=()=>{cfg.m=b.dataset.m;cfg.sel=null;store.m=cfg.m;save();setup()});
+ app.querySelectorAll("#qtd button").forEach(b=>b.onclick=()=>{cfg.n=+b.dataset.n;store.n=cfg.n;save();app.querySelectorAll("#qtd button").forEach(x=>x.setAttribute("aria-pressed",x===b));info()});
+ app.querySelectorAll("#caps input").forEach(i=>i.onchange=()=>{cfg.sel=[...app.querySelectorAll("#caps input:checked")].map(x=>x.value);info()});
+ document.getElementById("all").onclick=()=>{cfg.sel=caps.map(c=>c.k);setup()};
+ document.getElementById("none").onclick=()=>{cfg.sel=[];app.querySelectorAll("#caps input").forEach(i=>i.checked=false);info()};
+ document.getElementById("go").onclick=()=>{let p=shuffle(pool());if(cfg.n)p=p.slice(0,cfg.n);start(p,false)};
+}
+
+function start(list,retry){
+ run={list:list.map(prep),i:0,ok:0,bad:0,miss:[],res:[],retry};
+ ask();
+}
+function prep(q){
+ if(q.o){const idx=shuffle(q.o.map((_,i)=>i));return {...q,ord:idx}}
+ return {...q};
+}
+
+function ask(){
+ const q=run.list[run.i],c=capOf(q.k);
+ document.body.classList.toggle("bio",c.m==="b");
+ const tot=run.list.length;
+ app.innerHTML=`
+ <div class="top"><span class="eyebrow">${label(c)} · ${esc(c.t)}</span>
+  <span class="score"><span>${run.i+1}/${tot}</span><span class="o">✓ ${run.ok}</span><span class="x">✗ ${run.bad}</span></span></div>
+ <div class="bar"><i style="width:${run.i/tot*100}%"></i></div>
+ <section class="panel" aria-live="polite">
+  ${q.o?"":`<div class="eyebrow">Verdadeiro ou falso?</div>`}
+  <p class="stem">${q.s}</p>
+  ${q.o?`<div class="opts">${q.ord.map((oi,p)=>`<button class="opt" data-i="${oi}"><b>${L[p]}</b><span>${q.o[oi][0]}</span></button>`).join("")}</div>`
+       :`<div class="opts vf"><button class="opt" data-v="1"><b>V</b><span>Verdadeiro</span></button><button class="opt" data-v="0"><b>F</b><span>Falso</span></button></div>`}
+  <div id="fb"></div>
+ </section>
+ <div class="row"><button class="btn ghost" id="quit">Encerrar e ver resultado</button><span class="kbd">Atalhos: teclas A–E ou V/F, e Enter para seguir.</span></div>`;
+ app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(b));
+ document.getElementById("quit").onclick=finish;
+ window.scrollTo({top:0});
+}
+
+function answer(btn){
+ const q=run.list[run.i];
+ const all=[...app.querySelectorAll(".opt")];
+ all.forEach(b=>b.disabled=true);
+ let ok,html;
+ if(q.o){
+  const i=+btn.dataset.i;ok=i===q.c;
+  const pos=q.ord.indexOf(q.c),mine=q.ord.indexOf(i);
+  all.forEach(b=>{const bi=+b.dataset.i;if(bi===q.c)b.classList.add("right");else if(bi===i)b.classList.add("wrong");else b.classList.add("dim")});
+  html=ok?`<div class="fb ok"><h3>✓ Acertou!</h3><p>${q.o[q.c][1]}</p></div>`
+   :`<div class="fb bad"><h3>✗ Não foi dessa vez</h3>
+     <div class="lbl">Por que a ${L[mine]} está errada</div><p>${q.o[i][1]}</p>
+     <div class="lbl">A certa é a ${L[pos]}</div><p><b>${q.o[q.c][0]}</b> ${why(q.o[q.c][1])}</p></div>`;
+  if(!ok)run.miss.push({q,mine:q.o[i][0]});
+ }else{
+  const v=btn.dataset.v==="1";ok=v===q.v;
+  all.forEach(b=>{const bv=b.dataset.v==="1";b.classList.add(bv===q.v?"right":b===btn?"wrong":"dim")});
+  const word=q.v?"verdadeira":"falsa";
+  html=ok?`<div class="fb ok"><h3>✓ Acertou! A frase é ${word}.</h3><p>${q.e}</p></div>`
+   :`<div class="fb bad"><h3>✗ Não foi dessa vez</h3><div class="lbl">A frase é ${word}, e não ${q.v?"falsa":"verdadeira"}</div><p>${q.e}</p></div>`;
+  if(!ok)run.miss.push({q,mine:v?"Verdadeiro":"Falso"});
+ }
+ ok?run.ok++:run.bad++;
+ run.res.push({q,ok});
+ const last=run.i===run.list.length-1;
+ document.getElementById("fb").innerHTML=html+`<div class="row" style="margin-top:12px"><button class="btn" id="next">${last?"Ver resultado":"Próxima pergunta"}</button></div>`;
+ app.querySelector(".score").innerHTML=`<span>${run.i+1}/${run.list.length}</span><span class="o">✓ ${run.ok}</span><span class="x">✗ ${run.bad}</span>`;
+ const nx=document.getElementById("next");
+ nx.onclick=()=>{if(last)finish();else{run.i++;ask()}};
+ nx.focus({preventScroll:true});
+ document.getElementById("fb").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"});
+}
+
+function finish(){
+ const done=run.ok+run.bad;
+ if(!done){setup();return}
+ const pct=Math.round(run.ok/done*100);
+ const msg=pct===100?"Gabaritou! Esse conteúdo está dominado.":pct>=70?"Mandou bem! Veja abaixo onde ainda dá para melhorar.":pct>=50?"Está no caminho. Siga a orientação abaixo e refaça os erros.":"Sem problema: errar aqui é treino. Comece pelos macetes abaixo e refaça as que errou.";
+ if(!run.retry){
+  const k=cfg.m==="q"?"Química":cfg.m==="b"?"Biologia":"Tudo misturado";
+  store.best=store.best||{};
+  const prev=store.best[k],prevPct=prev?parseInt(prev):-1;
+  if(pct>=prevPct)store.best[k]=`${pct}% (${run.ok} de ${done})`;
+  save();
+ }
+ // desempenho por capítulo
+ const byCap={};
+ run.res.forEach(({q,ok})=>{const b=byCap[q.k]=byCap[q.k]||{k:q.k,ok:0,n:0};b.n++;if(ok)b.ok++});
+ const caps=Object.values(byCap).map(b=>({...b,p:b.ok/b.n,c:capOf(b.k)})).sort((a,b)=>a.p-b.p||b.n-a.n);
+ const status=p=>p===1?["Dominado","ok"]:p>=.7?["Bom","mid"]:["Revisar","bad"];
+ // temas com erro
+ const byTopic={};
+ run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
+ const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?`Química · Cap. ${c.n} · ${r}`:`Biologia · ${r}`};
+ const worst=caps.find(c=>c.p<1);
+ const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
+  :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
+ document.body.classList.toggle("bio",cfg.m==="b");
+ app.innerHTML=`
+ <header><div class="eyebrow">Resultado</div><h1>${run.ok} de ${done} certas</h1></header>
+ <section class="panel"><div class="row" style="gap:18px"><span class="big">${pct}%</span><p style="margin:0;max-width:40ch">${msg}</p></div></section>
+ <section class="panel"><h2>Desempenho por capítulo</h2>
+  <div class="caps">${caps.map(b=>{const [st,cl]=status(b.p);return `<div class="cap"><div class="capt"><span class="tag ${b.c.m}">${b.c.m==="q"?"Quí":"Bio"} ${b.c.n}</span><span class="capn">${esc(b.c.t)}</span><span class="st ${cl}">${st}</span></div><div class="capbar"><i class="${cl}" style="width:${Math.round(b.p*100)}%"></i></div><div class="small">${b.ok} de ${b.n} certas · ${Math.round(b.p*100)}%</div></div>`}).join("")}</div></section>
+ ${topics.length?`<section class="panel"><h2>Onde focar agora</h2><p class="small" style="margin:0">Os temas em que você mais errou, com o macete para fixar e o lugar do resumo para reler.</p>
+  <div class="tips">${topics.slice(0,4).map(g=>`<div class="tip"><div class="tiph"><b>${g.t[1]}</b><span class="small">${g.n} ${g.n>1?"erros":"erro"}</span></div><p><span class="lbl2">Macete</span> ${g.t[2]}</p><p class="small"><span class="lbl2">Releia no resumo</span> ${where(g.k,g.t[3])}</p></div>`).join("")}</div>
+  ${topics.length>4?`<p class="small" style="margin:0">Mais ${topics.length-4} ${topics.length-4>1?"temas":"tema"} com erro aparecem na revisão abaixo.</p>`:""}</section>`:""}
+ <section class="panel"><h2>Próximo passo</h2><p style="margin:0">${next}</p>
+  <div class="row">${run.miss.length?`<button class="btn" id="redo">Refazer as ${run.miss.length} que errei</button>`:""}${worst?`<button class="btn ghost" id="train">Treinar só o ${label(worst.c).replace(" · "," ")}</button>`:""}<button class="btn ghost" id="new">Novo quiz</button></div></section>
+ ${run.miss.length?`<section class="panel"><h2>Revisão dos erros</h2><div class="review">${run.miss.map(({q,mine})=>{const c=capOf(q.k);return `<div class="rv"><div class="eyebrow">${label(c)}</div><p><b>${q.s}</b></p><p class="small">Sua resposta: ${mine}</p><p>Certa: <b>${q.o?q.o[q.c][0]:(q.v?"Verdadeiro":"Falso")}</b> ${q.o?why(q.o[q.c][1]):q.e}</p></div>`}).join("")}</div></section>`:""}`;
+ const r=document.getElementById("redo");
+ if(r)r.onclick=()=>start(shuffle(run.miss.map(m=>Q.find(x=>x.s===m.q.s&&x.k===m.q.k))),true);
+ const tr=document.getElementById("train");
+ if(tr)tr.onclick=()=>start(shuffle(Q.filter(q=>q.k===worst.k)),true);
+ document.getElementById("new").onclick=setup;
+ window.scrollTo({top:0});
+}
+
+document.addEventListener("keydown",e=>{
+ if(!run||e.metaKey||e.ctrlKey||e.altKey)return;
+ const nx=document.getElementById("next");
+ if(e.key==="Enter"&&nx){e.preventDefault();nx.click();return}
+ const k=e.key.toUpperCase();
+ const opts=[...app.querySelectorAll(".opt:not(:disabled)")];
+ if(!opts.length)return;
+ if(opts[0].dataset.v!=null){if(k==="V")opts[0].click();if(k==="F")opts[1].click();return}
+ const i=L.indexOf(k);if(i>=0&&opts[i])opts[i].click();
+});
+
+setup();
+</script>
+</body></html>
