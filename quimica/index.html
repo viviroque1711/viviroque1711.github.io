@@ -181,7 +181,7 @@ footer.note{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);co
     <nav class="trail" id="trail" aria-label="Capítulos e seções"></nav>
     <main id="main"></main>
   </div>
-  <footer class="note">Conferido com o livro do SAS (cap. 2, págs. 10 a 21; cap. 3, págs. 22 a 41; cap. 5, págs. 52 a 62). Títulos e nomes seguem o livro. Onde o livro parece ter erro, há um aviso "Confira com o professor".</footer>
+  <footer class="note">Conferido com o livro do SAS (cap. 2, págs. 10 a 21; cap. 3, págs. 22 a 41; cap. 5, págs. 52 a 62). A seção Base (nomenclatura) reúne as regras usadas nesses capítulos. Títulos e nomes seguem o livro. Onde o livro parece ter erro, há um aviso "Confira com o professor".</footer>
 </div>
 
 <script>
@@ -1075,8 +1075,271 @@ const AVISOS=[
 return {id:"c5",num:5,title:"Reações de adição",pages:"págs. 52 a 62",intro:"Reação de adição: a ligação dupla ou tripla se abre e o reagente entra na molécula. O capítulo mostra como isso acontece em alcenos, alcinos, alcadienos e também em aldeídos e cetonas.",big3:["<b>Cis × trans</b>: hidrogenação catalítica é cis; adição de halogênios é trans.","<b>Markovnikov × Kharasch</b>: sem peróxido, o H vai para o carbono mais hidrogenado; com peróxido e HBr, para o menos hidrogenado.","<b>Alcino + água</b>: forma enol, que vira aldeído (só o etino) ou cetona (os outros)."],livroLead:"Faça no livro os dois blocos \"Agora é com você\" (págs. 57 e 60) e as 10 Atividades Propostas (págs. 60 a 62). Depois confira aqui, uma por uma.",S,TABLE_EX,MC,VF,MATCH,GAPS,BANK,DISC,LIVRO,QUICK,AVISOS};
 })();
 
-const CAPS=[CAP2,CAP3,CAP5];
-const TABLE_EX=Object.assign({},CAP2.TABLE_EX,CAP3.TABLE_EX,CAP5.TABLE_EX);
+const CAPN=(()=>{
+const S = [
+ {id:"s1",label:"Como se monta um nome: prefixo, infixo e sufixo",kicker:"Nomenclatura · base para os caps. 2, 3 e 5",title:"Como se monta um nome",
+  sobre:"O nome oficial (IUPAC) de um composto orgânico é montado em três peças: quantos carbonos a cadeia principal tem, que tipo de ligação há entre eles e qual é a função.",
+  hook:"Quase toda questão dos capítulos 2, 3 e 5 começa com um nome: but-2-eno, 3-bromobutan-2-ol, 2-metilpropeno. Se o nome não vira desenho na sua cabeça, a questão trava antes de começar.",
+  ideia:"Nome = <b>prefixo</b> (nº de carbonos) + <b>infixo</b> (tipo de ligação) + <b>sufixo</b> (função). Pent + en + ol = pent-en-ol.",
+  analogia:"É como um endereço: o prefixo diz a rua (tamanho da cadeia), o infixo diz o tipo de calçada (simples, dupla, tripla) e o sufixo diz o tipo de imóvel (álcool, cetona, ácido). Os números são o número da casa.",
+  blocks:[
+   {h:"As três peças",items:["<b>Prefixo</b>: quantos carbonos tem a cadeia principal (met, et, prop, but...).","<b>Infixo</b>: o tipo de ligação entre carbonos (an, en, in).","<b>Sufixo</b>: a função orgânica (o, ol, al, ona, oico...)."]},
+   {h:"Exemplos montados",items:["<b>prop + an + o</b> = propano (3 C, só simples, hidrocarboneto).","<b>but + en + o</b> = buteno (4 C, uma dupla, hidrocarboneto).","<b>et + an + ol</b> = etanol (2 C, só simples, álcool).","<b>prop + an + ona</b> = propanona (3 C, só simples, cetona)."]},
+   {h:"Onde entram os números",items:["O número indica <b>em que carbono</b> está a dupla, a tripla ou a função.","Pela regra atual, o número vem <b>logo antes</b> da peça que ele localiza: <b>but-2-eno</b>, <b>propan-2-ol</b>.","É assim que o livro escreve: but-2-eno, pent-2-eno, but-1-ino."]}
+  ],
+  tables:[
+   {head:["Nº de carbonos","Prefixo","Exemplo"],rows:[["1","met","metano"],["2","et","etano"],["3","prop","propano"],["4","but","butano"],["5","pent","pentano"],["6","hex","hexano"],["7","hept","heptano"],["8","oct","octano"],["9","non","nonano"],["10","dec","decano"]]},
+   {head:["Infixo","Ligações entre carbonos","Exemplo"],rows:[["an","só simples","propano"],["en","uma dupla","propeno"],["in","uma tripla","propino"],["dien","duas duplas","buta-1,3-dieno"],["enin","uma dupla e uma tripla","but-1-en-3-ino"]]}
+  ],
+  trap:["Os 4 primeiros prefixos (met, et, prop, but) não seguem o número grego. Eles têm de ser decorados.","O número sempre vem colado à peça que ele localiza: but-2-eno (dupla no 2), não 2-buteno, na regra atual."],
+  check:[{q:"Quantos carbonos tem um composto com prefixo \"hex\"?",a:"Seis."},{q:"O que o infixo \"in\" indica?",a:"Uma ligação tripla entre carbonos."},{q:"Monte o nome: 3 carbonos, uma dupla, hidrocarboneto.",a:"Propeno (prop + en + o)."}]},
+
+ {id:"s2",label:"Funções orgânicas e sufixos",kicker:"Nomenclatura · funções",title:"Funções orgânicas e sufixos",
+  sobre:"Cada função orgânica tem um grupo característico e um jeito próprio de terminar o nome. Quando há duas funções, só a mais importante vira sufixo.",
+  hook:"No capítulo 5, o alcino vira aldeído ou cetona, e o aldeído vira álcool. Se você não reconhece a função pelo nome, não percebe que a reação mudou a molécula.",
+  ideia:"O sufixo diz a função: <b>-o</b> hidrocarboneto, <b>-ol</b> álcool, <b>-al</b> aldeído, <b>-ona</b> cetona, <b>ácido …oico</b> ácido carboxílico, <b>…oato de …ila</b> éster.",
+  analogia:"O sufixo é o sobrenome da família. Todo mundo com sobrenome \"-ol\" tem um OH em carbono saturado; todo mundo com \"-al\" tem o C=O na ponta da cadeia.",
+  blocks:[
+   {h:"Como reconhecer pelo desenho",items:["<b>Álcool</b>: OH ligado a carbono saturado.","<b>Aldeído</b>: C=O na <b>ponta</b> da cadeia (–CHO).","<b>Cetona</b>: C=O no <b>meio</b> da cadeia (entre dois carbonos).","<b>Ácido carboxílico</b>: –COOH (C=O e OH no mesmo carbono).","<b>Éster</b>: –COO– ligando duas partes carbônicas."]},
+   {h:"Ordem de prioridade (quem vira sufixo)",items:["ácido carboxílico > éster > aldeído > cetona > álcool > amina > hidrocarboneto.","A função de maior prioridade vira o <b>sufixo</b>; as outras viram <b>prefixo</b>.","Exemplo: OH numa cetona vira o prefixo <b>hidroxi</b>: 4-hidroxibutan-2-ona."]},
+   {h:"Como se lê um éster",items:["CH<sub>3</sub>–COO–CH<sub>2</sub>CH<sub>3</sub>: a parte do ácido (CH<sub>3</sub>–COO, 2 C) vira <b>etanoato</b>.","A parte ligada ao O (CH<sub>2</sub>CH<sub>3</sub>) vira <b>de etila</b>.","Nome: <b>etanoato de etila</b>."]}
+  ],
+  tables:[{head:["Função","Grupo","Terminação","Exemplo"],rows:[
+   ["Hidrocarboneto","só C e H","-o","but-2-eno"],
+   ["Álcool","–OH em C saturado","-ol","propan-2-ol"],
+   ["Aldeído","–CHO (na ponta)","-al","etanal"],
+   ["Cetona","C=O no meio","-ona","propanona"],
+   ["Ácido carboxílico","–COOH","ácido …oico","ácido etanoico"],
+   ["Éster","–COO–","…oato de …ila","etanoato de etila"],
+   ["Amina","–NH<sub>2</sub>","-amina","metanamina"]]}],
+  trap:["Aldeído e cetona têm o mesmo C=O. A diferença é a posição: na ponta é aldeído (-al); no meio é cetona (-ona).","Com duas funções, não se juntam dois sufixos (\"butan-ol-ona\"). Só a de maior prioridade é sufixo."],
+  check:[{q:"Qual a função de um composto terminado em \"-al\"?",a:"Aldeído (C=O na ponta da cadeia)."},{q:"Entre cetona e álcool, qual vira sufixo?",a:"A cetona. O OH vira o prefixo hidroxi."},{q:"Dê o nome de CH<sub>3</sub>–CO–CH<sub>3</sub>.",a:"Propanona."}]},
+
+ {id:"s3",label:"Grupos substituintes (ramificações)",kicker:"Nomenclatura · grupos",title:"Grupos substituintes",
+  sobre:"Ramificação é um pedaço de cadeia (ou um átomo) pendurado na cadeia principal. O nome dela termina em -il (ou -ila) e diz por qual carbono ela está presa.",
+  hook:"Nas regras de Cahn-Ingold-Prelog (cap. 2) e no sistema (R)-(S) (cap. 3), você compara grupos como etil, isopropil e vinil o tempo todo. Sem reconhecê-los, não dá para ordenar prioridades.",
+  ideia:"O nome do grupo vem do prefixo + <b>il</b>: metil, etil, propil. Quando o grupo é ramificado, <b>iso</b>, <b>sec</b> e <b>terc</b> dizem por qual carbono ele está preso.",
+  analogia:"Pense numa mão segurando o grupo. Propil é segurado pela ponta; isopropil é segurado pelo meio. A mão muda, o grupo muda de nome, mesmo com os mesmos 3 carbonos.",
+  blocks:[
+   {h:"Grupos de 3 carbonos",items:["<b>propil</b>: –CH<sub>2</sub>–CH<sub>2</sub>–CH<sub>3</sub>, preso pela ponta.","<b>isopropil</b>: –CH(CH<sub>3</sub>)<sub>2</sub>, preso pelo carbono do meio."]},
+   {h:"Grupos de 4 carbonos",items:["<b>butil</b>: cadeia reta, presa pela ponta.","<b>sec-butil</b>: presa por um carbono <b>secundário</b> (ligado a 2 carbonos).","<b>isobutil</b>: presa por um CH<sub>2</sub>, com a ramificação na outra ponta.","<b>terc-butil</b>: presa por um carbono <b>terciário</b> (ligado a 3 carbonos)."]},
+   {h:"Outros que aparecem no livro",items:["<b>vinil</b> (etenil): –CH=CH<sub>2</sub>. Aparece na Regra 3 de Cahn-Ingold-Prelog.","<b>fenil</b>: –C<sub>6</sub>H<sub>5</sub> (anel benzênico menos um H).","<b>benzil</b>: –CH<sub>2</sub>–C<sub>6</sub>H<sub>5</sub>.","Halogênios entram como prefixo: <b>flúor</b> (o livro escreve fluor), <b>cloro</b>, <b>bromo</b>, <b>iodo</b>."]}
+  ],
+  tables:[{head:["Grupo","Fórmula","Preso por"],rows:[
+   ["metil","–CH<sub>3</sub>","o único carbono"],
+   ["etil","–CH<sub>2</sub>CH<sub>3</sub>","a ponta"],
+   ["propil","–CH<sub>2</sub>CH<sub>2</sub>CH<sub>3</sub>","a ponta"],
+   ["isopropil","–CH(CH<sub>3</sub>)<sub>2</sub>","o carbono do meio"],
+   ["butil","–CH<sub>2</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>3</sub>","a ponta"],
+   ["sec-butil","–CH(CH<sub>3</sub>)CH<sub>2</sub>CH<sub>3</sub>","carbono secundário"],
+   ["isobutil","–CH<sub>2</sub>CH(CH<sub>3</sub>)<sub>2</sub>","um CH<sub>2</sub> da ponta"],
+   ["terc-butil","–C(CH<sub>3</sub>)<sub>3</sub>","carbono terciário"],
+   ["vinil (etenil)","–CH=CH<sub>2</sub>","o carbono da dupla"],
+   ["fenil","–C<sub>6</sub>H<sub>5</sub>","um carbono do anel"],
+   ["benzil","–CH<sub>2</sub>–C<sub>6</sub>H<sub>5</sub>","o CH<sub>2</sub>"]]}],
+  trap:["Isobutil e sec-butil têm 4 carbonos e são ramificados, mas presos de jeitos diferentes. Olhe sempre o carbono que faz a ligação.","Fenil não é benzil: o benzil tem um CH<sub>2</sub> antes do anel."],
+  check:[{q:"Qual a diferença entre propil e isopropil?",a:"Propil é preso pela ponta; isopropil, pelo carbono do meio."},{q:"Que grupo é –C(CH<sub>3</sub>)<sub>3</sub>?",a:"terc-butil."},{q:"Que grupo é –CH=CH<sub>2</sub>?",a:"vinil (etenil)."}]},
+
+ {id:"s4",label:"Cadeia principal e numeração",kicker:"Nomenclatura · regras 1 e 2",title:"Cadeia principal e numeração",
+  sobre:"Antes de escrever qualquer coisa, escolha a cadeia principal e decida por qual ponta começar a contar. Quase todos os erros de nome nascem aqui.",
+  hook:"As questões de \"dê o nome\" e as de Markovnikov (\"o Br vai para o carbono 2\") dependem de numerar certo. Errou a numeração, errou a questão inteira.",
+  ideia:"Cadeia principal: a <b>maior</b> sequência de carbonos que contém a <b>função</b> e as <b>duplas ou triplas</b>. Numeração: menor número primeiro para a <b>função</b>, depois para a <b>insaturação</b>, depois para as <b>ramificações</b>.",
+  analogia:"É uma fila de prioridade no hospital: primeiro é atendida a função, depois a dupla ou tripla, e só por último as ramificações. Quem tem mais prioridade ganha o menor número.",
+  blocks:[
+   {h:"Escolhendo a cadeia principal",items:["Tem de conter o carbono da <b>função</b>.","Tem de conter as <b>duplas e triplas</b>.","Entre as que sobram, a <b>mais longa</b>.","Empatou no tamanho? A <b>mais ramificada</b>."]},
+   {h:"Numerando",items:["Comece pela ponta que dá o <b>menor número à função</b>.","Se não há função (ou empatou), menor número para a <b>dupla ou tripla</b>.","Se ainda empatou, menor conjunto de números para as <b>ramificações</b>.","Ramificação nunca fica na ponta: um metil no carbono 1 aumentaria a cadeia."]},
+   {h:"Exemplos",items:["CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH=CH–CH<sub>3</sub>: a dupla manda, então ela fica no 2 e o metil no 4: <b>4-metilpent-2-eno</b>.","CH<sub>3</sub>–CH(OH)–CH<sub>2</sub>–CH(CH<sub>3</sub>)–CH<sub>3</sub>: o OH manda: <b>4-metilpentan-2-ol</b>.","CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH<sub>2</sub>–CH(CH<sub>3</sub>)–CH<sub>2</sub>–CH<sub>3</sub>: maior cadeia tem 6 C: <b>2,4-dimetil-hexano</b>."]}
+  ],
+  tables:[{head:["Prioridade na numeração","Quem recebe o menor número","Exemplo"],rows:[
+   ["1º","o grupo funcional","pentan-2-ol, não pentan-4-ol"],
+   ["2º","a dupla ou a tripla","but-1-eno, não but-3-eno"],
+   ["3º","as ramificações","2,4-dimetil-hexano, não 3,5"]]}],
+  trap:["A cadeia principal nem sempre é a que está desenhada em linha reta. Siga também pelos galhos e conte.","Não numere para favorecer a ramificação quando há dupla: 4-metilpent-2-eno está certo; 2-metilpent-3-eno está errado."],
+  check:[{q:"Quem tem prioridade na numeração: a dupla ou a ramificação?",a:"A dupla."},{q:"Por que não existe \"1-metilpropano\"?",a:"Porque um metil no carbono 1 aumenta a cadeia: o composto é butano."},{q:"Dê o nome de CH<sub>2</sub>=CH–CH<sub>2</sub>–CH<sub>3</sub>.",a:"But-1-eno."}]},
+
+ {id:"s5",label:"Escrevendo o nome: ordem alfabética, hífens e vírgulas",kicker:"Nomenclatura · regras 3 a 5",title:"Escrevendo o nome",
+  sobre:"Com a cadeia e os números decididos, falta escrever: ramificações em ordem alfabética, di/tri para grupos iguais e a pontuação certa.",
+  hook:"Em questão de múltipla escolha, as alternativas costumam ter a mesma estrutura com a escrita trocada: \"2-metil-3-etil\" contra \"3-etil-2-metil\". A ordem alfabética decide.",
+  ideia:"Ramificações em <b>ordem alfabética</b> (di, tri, sec e terc <b>não contam</b>; iso <b>conta</b>). Grupos iguais: <b>di, tri, tetra</b>, com um número para cada. Número com letra: <b>hífen</b>. Número com número: <b>vírgula</b>.",
+  analogia:"É como a lista de chamada da turma: em ordem alfabética, pelo nome, não pelo apelido. \"Di\" e \"tri\" são só o tamanho do grupo, não fazem parte do nome.",
+  blocks:[
+   {h:"Ordem alfabética",items:["<b>3-etil-2-metilpentano</b>: etil (e) antes de metil (m).","<b>3-etil-2,2-dimetilpentano</b>: o \"di\" não conta; vale o \"m\" de metil.","<b>isopropil</b> é ordenado pelo \"i\". <b>terc-butil</b>, pelo \"b\"."]},
+   {h:"Pontuação",items:["Entre números: vírgula (<b>2,3</b>-dibromobutano).","Entre número e letra: hífen (2,3<b>-</b>dibromobutano).","Antes de dieno, triino etc. entra um \"a\" para facilitar a pronúncia: <b>buta</b>-1,3-dieno."]},
+   {h:"Quando o número não é escrito",items:["Quando não há dúvida possível: <b>propanona</b>, <b>metilpropano</b>, <b>etanol</b>.","Em aldeídos e ácidos, o carbono da função é sempre o 1: <b>propanal</b>, <b>ácido etanoico</b>."]}
+  ],
+  tables:[{head:["Regra","Certo","Errado"],rows:[
+   ["Ordem alfabética","3-etil-2-metilpentano","2-metil-3-etilpentano"],
+   ["Di não conta na ordem","3-etil-2,2-dimetilpentano","2,2-dimetil-3-etilpentano"],
+   ["Grupos iguais juntos","2,4-dimetil-hexano","2-metil-4-metil-hexano"],
+   ["Vírgula e hífen","2,3-dibromobutano","2-3-dibromobutano"],
+   ["\"a\" antes de dieno","buta-1,3-dieno","but-1,3-dieno"]]}],
+  trap:["\"Dimetil\" é ordenado pelo \"m\", não pelo \"d\".","Iso conta na ordem alfabética; sec e terc não."],
+  check:[{q:"Qual vem primeiro no nome: metil ou etil?",a:"Etil (ordem alfabética)."},{q:"No nome 3-etil-2,2-dimetilpentano, por que etil vem antes de dimetil?",a:"Porque o \"di\" não conta: compara-se etil (e) com metil (m)."},{q:"Escreva corretamente: but-1,3-dieno.",a:"Buta-1,3-dieno."}]},
+
+ {id:"s6",label:"Casos especiais: ciclos, benzeno, duas funções e (E)/(Z)",kicker:"Nomenclatura · casos especiais",title:"Casos especiais",
+  sobre:"Cadeias fechadas, anéis aromáticos, moléculas com duas funções e as letras de configuração que entram no começo do nome.",
+  hook:"Os capítulos 2 e 3 colocam letras na frente do nome, como (E), (Z), (R), (S), cis e trans. Elas não mudam a parte de trás do nome; só dizem o arranjo no espaço.",
+  ideia:"Ciclo: a palavra <b>ciclo</b> antes do nome, e a dupla do anel fica entre C1 e C2. Benzeno: <b>orto</b> (1,2), <b>meta</b> (1,3), <b>para</b> (1,4). Configuração: <b>(E)/(Z)</b>, <b>(R)/(S)</b> ou cis/trans no início.",
+  analogia:"As letras (E), (Z), (R) e (S) são como a indicação \"lado direito\" ou \"lado esquerdo\" num endereço: o prédio é o mesmo, muda só de que lado ele fica.",
+  blocks:[
+   {h:"Cadeias fechadas",items:["Coloca-se <b>ciclo</b> antes do nome: ciclopropano, ciclo-hexeno.","Com dupla no anel, ela fica entre <b>C1 e C2</b>, e as ramificações recebem os menores números.","Exemplo do livro: <b>1-metilciclo-hexeno</b> (metil no carbono da dupla)."]},
+   {h:"Benzeno com dois grupos",items:["<b>orto</b> = posições 1,2 (vizinhos).","<b>meta</b> = posições 1,3.","<b>para</b> = posições 1,4 (opostos)."]},
+   {h:"Letras de configuração (caps. 2 e 3)",items:["<b>cis/trans</b>: para alcenos dissubstituídos e ciclos (cap. 2).","<b>(E)/(Z)</b>: pelas prioridades de Cahn-Ingold-Prelog; vale sempre (cap. 2).","<b>(R)/(S)</b>: configuração do carbono assimétrico (cap. 3).","<b>(+)/(–)</b>: sentido do desvio da luz, medido no polarímetro (cap. 3)."]}
+  ],
+  tables:[{head:["Nome com letras","O que cada parte diz"],rows:[
+   ["(Z)-3-fluorpent-2-eno","(Z): maiores prioridades do mesmo lado. 3-fluor: flúor no C3. pent-2-eno: 5 C com dupla no 2."],
+   ["cis-1,2-diclorociclopropano","cis: os dois Cl do mesmo lado do anel. 1,2-dicloro: Cl nos carbonos 1 e 2. ciclopropano: anel de 3 C."],
+   ["(S)-(+)-ácido láctico","(S): configuração do C*. (+): desvia a luz para a direita. Ácido láctico: nome usual do ácido 2-hidroxipropanoico."],
+   ["1,3-diclorobenzeno (meta)","Dois Cl no anel benzênico, nas posições 1 e 3."]]}],
+  trap:["(R) não quer dizer dextrogiro, e (S) não quer dizer levogiro. São coisas diferentes.","Orto, meta e para são só para anel benzênico. Em dupla ou ciclo saturado, use cis/trans ou (E)/(Z)."],
+  check:[{q:"No benzeno, o que significa \"para\"?",a:"Posições 1,4 (grupos opostos)."},{q:"Num ciclo com dupla, onde fica a dupla na numeração?",a:"Entre os carbonos 1 e 2."},{q:"A letra (Z) muda a fórmula do composto?",a:"Não. Indica só o arranjo no espaço (mesmo lado)."}]},
+
+ {id:"s7",label:"Nomes do livro, decifrados",kicker:"Nomenclatura · treino com os nomes dos caps. 2, 3 e 5",title:"Nomes do livro, decifrados",
+  sobre:"Os nomes que mais aparecem nos três capítulos, peça por peça. Tente desenhar a estrutura antes de ler a explicação.",
+  hook:"Esses nomes estão nos exemplos e nos exercícios do livro. Se você consegue ler todos, consegue ler qualquer enunciado da prova.",
+  ideia:"Leia o nome <b>de trás para frente</b>: primeiro a função (sufixo), depois a cadeia e as duplas, por último as ramificações e as letras.",
+  analogia:"É como ler um endereço completo: cidade e rua primeiro (cadeia e função), depois número e complemento (posições e ramificações).",
+  blocks:[
+   {h:"Método em 4 passos",items:["1. Sufixo: qual é a função?","2. Prefixo e infixo: quantos carbonos e onde estão as duplas ou triplas?","3. Ramificações: o que está pendurado e em que carbono?","4. Letras na frente: cis/trans, (E)/(Z), (R)/(S)."]}
+  ],
+  tables:[{head:["Nome do livro","Estrutura"],rows:[
+   ["but-2-eno","CH<sub>3</sub>–CH=CH–CH<sub>3</sub>"],
+   ["2-metilpropeno","CH<sub>2</sub>=C(CH<sub>3</sub>)–CH<sub>3</sub>"],
+   ["buta-1,3-dieno","CH<sub>2</sub>=CH–CH=CH<sub>2</sub>"],
+   ["1,4-dibromobut-2-eno","BrCH<sub>2</sub>–CH=CH–CH<sub>2</sub>Br"],
+   ["2-metilbutan-2-ol","CH<sub>3</sub>–C(OH)(CH<sub>3</sub>)–CH<sub>2</sub>–CH<sub>3</sub>"],
+   ["3-bromobutan-2-ol","CH<sub>3</sub>–CH(OH)–CHBr–CH<sub>3</sub>"],
+   ["ácido 2-metilpent-2-enoico","CH<sub>3</sub>CH<sub>2</sub>–CH=C(CH<sub>3</sub>)–COOH"],
+   ["4-cloropent-3-en-2-ona","CH<sub>3</sub>–CCl=CH–CO–CH<sub>3</sub>"]]}],
+  trap:["Em 2-metilbutan-2-ol, o OH e o metil estão no mesmo carbono (C2). Os dois \"2\" não são repetição.","Em 1,4-dibromobut-2-eno, os Br estão nas pontas e a dupla está no meio: é o produto da adição 1,4 (cap. 5)."],
+  check:[{q:"Desenhe o propan-2-ol.",a:"CH<sub>3</sub>–CH(OH)–CH<sub>3</sub>."},{q:"Quantas duplas tem o buta-1,3-dieno, e onde?",a:"Duas: entre C1 e C2, e entre C3 e C4."},{q:"No 4-cloropent-3-en-2-ona, onde está a função?",a:"No carbono 2 (cetona, C=O)."}]}
+];
+
+const TABLE_EX = {
+ "Nº de carbonos|Prefixo|Exemplo":[
+  ["1","Met vem de metanol (álcool da madeira). É o menor: um carbono só."],
+  ["2","Et vem de etanol. Dois carbonos."],
+  ["3","Prop vem de ácido propiônico. Três carbonos."],
+  ["4","But vem de ácido butírico (manteiga rançosa). Quatro carbonos."],
+  ["5","A partir daqui é o número grego: penta = 5."],
+  ["6","Hexa = 6, como hexágono."],
+  ["7","Hepta = 7, como heptacampeão."],
+  ["8","Octa = 8, como octógono."],
+  ["9","Nona = 9."],
+  ["10","Deca = 10, como década."]],
+ "Infixo|Ligações entre carbonos|Exemplo":[
+  ["an","Só ligações simples: cadeia saturada (alcano)."],
+  ["en","Uma ligação dupla: alceno, como o propeno."],
+  ["in","Uma ligação tripla: alcino, como o propino."],
+  ["dien","Duas duplas: alcadieno. Ganha um \"a\" antes: buta-1,3-dieno."],
+  ["enin","Uma dupla e uma tripla na mesma cadeia."]],
+ "Função|Grupo|Terminação|Exemplo":[
+  ["Hidrocarboneto","Só carbono e hidrogênio. Termina em -o: propano, propeno, propino."],
+  ["Álcool","OH preso a carbono saturado. Termina em -ol."],
+  ["Aldeído","C=O na ponta da cadeia, com um H. Termina em -al."],
+  ["Cetona","C=O no meio, entre dois carbonos. Termina em -ona."],
+  ["Ácido carboxílico","COOH. O nome começa com a palavra \"ácido\" e termina em -oico."],
+  ["Éster","Ácido que trocou o H do OH por uma cadeia: …oato de …ila."],
+  ["Amina","Nitrogênio ligado a carbono. Termina em -amina."]],
+ "Grupo|Fórmula|Preso por":[
+  ["metil","O menor grupo: só um carbono."],
+  ["etil","Dois carbonos, preso por um deles."],
+  ["propil","Três carbonos em fila, preso pela ponta."],
+  ["isopropil","Os mesmos três carbonos, mas preso pelo do meio: parece um V."],
+  ["butil","Quatro carbonos em fila, preso pela ponta."],
+  ["sec-butil","Preso por um carbono que tem dois vizinhos de carbono (secundário)."],
+  ["isobutil","Preso pela ponta (um CH<sub>2</sub>), mas a outra ponta é um V (como o isopropil)."],
+  ["terc-butil","Preso por um carbono que tem três vizinhos de carbono (terciário): parece uma estrela."],
+  ["vinil (etenil)","É o eteno sem um H. Tem dupla, por isso vale (C, C, H) na Regra 3."],
+  ["fenil","É o benzeno sem um H, preso direto pelo anel."],
+  ["benzil","Um CH<sub>2</sub> faz a ponte entre a cadeia e o anel."]],
+ "Prioridade na numeração|Quem recebe o menor número|Exemplo":[
+  ["1º","Se há função, ela manda: o OH, o C=O ou o COOH ganham o menor número."],
+  ["2º","Sem função (ou empatou), a dupla ou a tripla ganha o menor número."],
+  ["3º","Só no fim, as ramificações: compare os números de cada lado e fique com o menor conjunto."]],
+ "Regra|Certo|Errado":[
+  ["Ordem alfabética","Etil começa com \"e\", metil com \"m\": etil vem primeiro."],
+  ["Di não conta na ordem","Dimetil é ordenado pelo \"m\". Etil continua vindo antes."],
+  ["Grupos iguais juntos","Dois metis viram \"dimetil\", com os dois números: 2,4."],
+  ["Vírgula e hífen","Número com número leva vírgula; número com letra leva hífen."],
+  ["\"a\" antes de dieno","O \"a\" facilita a pronúncia: buta-1,3-dieno, penta-1,3-dieno."]],
+ "Nome com letras|O que cada parte diz":[
+  ["(Z)-3-fluorpent-2-eno","Exemplo do livro (pág. 16). A letra vem primeiro; o resto é o nome normal."],
+  ["cis-1,2-diclorociclopropano","Exemplo do livro (pág. 12): isomeria geométrica em ciclo (bayeriana)."],
+  ["(S)-(+)-ácido láctico","Exemplo do livro (pág. 35). Duas informações diferentes: configuração (S) e desvio da luz (+)."],
+  ["1,3-diclorobenzeno (meta)","No benzeno, 1,3 também pode ser escrito \"meta\"."]],
+ "Nome do livro|Estrutura":[
+  ["but-2-eno","4 carbonos, dupla entre C2 e C3. O exemplo clássico de cis e trans (cap. 2)."],
+  ["2-metilpropeno","Cadeia de 3 C com dupla e um metil no C2. Não tem cis/trans: o C2 tem dois CH<sub>3</sub>."],
+  ["buta-1,3-dieno","Duas duplas, em C1 e C3. É o alcadieno da adição 1,4 (cap. 5)."],
+  ["1,4-dibromobut-2-eno","Produto principal da adição 1,4 de Br<sub>2</sub> ao buta-1,3-dieno (cap. 5)."],
+  ["2-metilbutan-2-ol","Produto da hidratação do 2-metilbut-2-eno (MACKENZIE, cap. 5). OH e metil no C2."],
+  ["3-bromobutan-2-ol","Dois carbonos assimétricos diferentes: 4 isômeros ativos (cap. 3)."],
+  ["ácido 2-metilpent-2-enoico","C1 é o COOH. Exercício (E)/(Z) do livro (cap. 2)."],
+  ["4-cloropent-3-en-2-ona","Cetona no C2, dupla no C3, cloro no C4. Exercício (E)/(Z) do livro (cap. 2)."]]
+};
+
+const MC = [
+ {s:"O nome do composto CH<sub>3</sub>–CH(OH)–CH<sub>2</sub>–CH(CH<sub>3</sub>)–CH<sub>3</sub> é",o:["2-metilpentan-4-ol.","4-metilpentan-2-ol.","4-metilpentan-1-ol.","2-metilpentan-2-ol.","hexan-2-ol."],c:1,e:"A função (OH) manda na numeração e recebe o menor número: OH no 2, metil no 4."},
+ {s:"O grupo –CH(CH<sub>3</sub>)<sub>2</sub> chama-se",o:["propil.","isopropil.","sec-butil.","terc-butil.","isobutil."],c:1,e:"Três carbonos presos pelo carbono do meio: isopropil."},
+ {s:"O nome correto de CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH=CH–CH<sub>3</sub> é",o:["2-metilpent-3-eno.","4-metilpent-2-eno.","2-metilpent-2-eno.","4-metilpent-3-eno.","isopropilpropeno."],c:1,e:"A dupla tem prioridade sobre a ramificação: dupla no 2, metil no 4."},
+ {s:"Qual nome segue a ordem alfabética correta?",o:["2-metil-3-etilpentano.","3-metil-2-etilpentano.","3-etil-2-metilpentano.","2-etil-3-metilpentano.","etilmetilpentano."],c:2,e:"Etil (e) vem antes de metil (m). Os números (3 e 2) acompanham cada grupo."},
+ {s:"Na molécula CH<sub>3</sub>–CO–CH<sub>2</sub>–CH<sub>2</sub>–OH, a função que dá o sufixo é",o:["álcool, porque o OH está na ponta.","cetona, porque tem prioridade maior que álcool.","as duas juntas: butan-ol-ona.","aldeído, porque tem C=O.","éster, porque tem dois oxigênios."],c:1,e:"Cetona > álcool. O nome é 4-hidroxibutan-2-ona."},
+ {s:"No 1,4-diclorobenzeno, a posição dos cloros é chamada de",o:["orto.","meta.","para.","cis.","trans."],c:2,e:"1,4 = para (grupos opostos no anel)."}
+];
+const VF = [
+ {s:"O prefixo \"but\" indica uma cadeia principal de 4 carbonos.",v:true,e:"Met 1, et 2, prop 3, but 4."},
+ {s:"Na numeração, a ramificação tem prioridade sobre a ligação dupla.",v:false,e:"É o contrário: função > dupla ou tripla > ramificações."},
+ {s:"Em \"3-etil-2,2-dimetilpentano\", o etil vem antes porque o \"di\" não conta na ordem alfabética.",v:true,e:"Compara-se etil (e) com metil (m)."},
+ {s:"Aldeído e cetona são diferenciados pela posição do C=O.",v:true,e:"Na ponta: aldeído (-al). No meio: cetona (-ona)."},
+ {s:"O grupo benzil é o mesmo que o fenil.",v:false,e:"Benzil = –CH<sub>2</sub>–C<sub>6</sub>H<sub>5</sub>; fenil = –C<sub>6</sub>H<sub>5</sub>."},
+ {s:"No nome (R)-butan-2-ol, a letra (R) indica que o composto é dextrogiro.",v:false,e:"(R) indica a configuração. O sentido do desvio da luz só o polarímetro mede."},
+ {s:"O nome correto é buta-1,3-dieno, com \"a\" depois de \"but\".",v:true,e:"Com dieno, acrescenta-se o \"a\" para facilitar a pronúncia."}
+];
+const MATCH = {cols:["-ol","-al","-ona","ácido …oico","…oato de …ila"],
+ rows:[["Cetona",3],["Éster",5],["Álcool",1],["Ácido carboxílico",4],["Aldeído",2]]};
+const GAPS = [
+ ["Um composto com 6 carbonos na cadeia principal tem o prefixo","hex","."],
+ ["O infixo que indica uma ligação tripla é","in","."],
+ ["O grupo –C(CH<sub>3</sub>)<sub>3</sub> chama-se terc-","butil","."],
+ ["O grupo –CH=CH<sub>2</sub> chama-se","vinil","."],
+ ["Na numeração, quem recebe primeiro o menor número é o grupo","funcional","."],
+ ["Ramificações são escritas em ordem","alfabética","."],
+ ["No benzeno, as posições 1,3 são chamadas de","meta","."],
+ ["CH<sub>3</sub>–CO–CH<sub>3</sub> chama-se","propanona","."]
+];
+const BANK = ["vinil","alfabética","hex","meta","propanona","in","butil","funcional"];
+const DISC = [
+ {s:"Explique, passo a passo, como chegar ao nome 4-metilpent-2-eno a partir de CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH=CH–CH<sub>3</sub>.",
+  k:["Cadeia principal: a maior que contém a dupla, com 5 carbonos (pent).","Tem uma dupla: infixo en; hidrocarboneto: sufixo o.","Numeração pela ponta mais perto da dupla: dupla no C2.","Assim o metil fica no C4: 4-metilpent-2-eno."]},
+ {s:"Por que o nome correto é 3-etil-2-metilpentano, e não 2-metil-3-etilpentano?",
+  k:["Os números estão certos nos dois casos: metil no 2 e etil no 3.","Mas as ramificações devem vir em ordem alfabética.","Etil (e) vem antes de metil (m)."]}
+];
+const LIVRO = [
+ ["Exemplo da pág. 16 (cap. 2): (E)-1-bromo-1-cloro-2-iodobut-1-eno","CBrCl=C(I)–CH<sub>2</sub>CH<sub>3</sub>. Cadeia de 4 C, dupla entre C1 e C2. No C1: Br e Cl; no C2: I e etil. (E): Br (maior no C1) e I (maior no C2) em lados opostos."],
+ ["Exercício da pág. 17 (cap. 2): 2-cloro-3-fluorpent-2-eno","CH<sub>3</sub>–CCl=CF–CH<sub>2</sub>CH<sub>3</sub>. 5 C, dupla no C2, Cl no C2, F no C3."],
+ ["Exercício da pág. 19 (cap. 2): (Z)-1-fluor-2,3-dimetilbut-1-eno","CHF=C(CH<sub>3</sub>)–CH(CH<sub>3</sub>)–CH<sub>3</sub>. 4 C, dupla no C1, F no C1 e metis nos C2 e C3."],
+ ["Pág. 29 (cap. 3): 3-bromobutan-2-ol","CH<sub>3</sub>–CH(OH)–CHBr–CH<sub>3</sub>. OH no C2 (função manda na numeração), Br no C3."],
+ ["Atividade 5 (cap. 5): 2-metilbut-2-eno + HCl → 2-cloro-2-metilbutano","Reagente: CH<sub>3</sub>–C(CH<sub>3</sub>)=CH–CH<sub>3</sub>. Produto: CH<sub>3</sub>–CCl(CH<sub>3</sub>)–CH<sub>2</sub>–CH<sub>3</sub>. Cloro e metil no C2, em ordem alfabética: cloro antes de metil."],
+ ["Atividade 3 (cap. 5): 1-cloro-1-metilciclo-hexano","Anel de 6 carbonos com Cl e CH<sub>3</sub> no mesmo carbono (C1)."]
+];
+const QUICK = [
+ ["Quais as três peças de um nome?","Prefixo (nº de C), infixo (ligação) e sufixo (função)."],
+ ["Prefixos de 1 a 4 carbonos?","Met, et, prop, but."],
+ ["Infixos an, en, in?","Simples, dupla, tripla."],
+ ["Quem manda na numeração?","1º a função, 2º a dupla ou tripla, 3º as ramificações."],
+ ["Isopropil x propil?","Isopropil: preso pelo meio. Propil: pela ponta."],
+ ["O \"di\" conta na ordem alfabética?","Não. Iso conta; di, tri, sec e terc não."],
+ ["Orto, meta, para?","1,2; 1,3; 1,4."]
+];
+return {id:"c0",num:0,lab:"Base",title:"Nomenclatura: regras e grupos",pages:"base para os capítulos 2, 3 e 5",intro:"Antes dos capítulos, a ferramenta que todos usam: como ler e escrever o nome de um composto orgânico. Prefixo, infixo e sufixo, os grupos substituintes e as regras de numeração.",
+ big3:["<b>Numeração</b>: menor número primeiro para a função, depois para a dupla ou tripla, por último para as ramificações.","<b>Grupos</b>: isopropil e terc-butil (presos pelo meio) contra propil e butil (presos pela ponta).","<b>Escrita</b>: ramificações em ordem alfabética (di/tri não contam), vírgula entre números, hífen entre número e letra."],
+ livroLead:"Nomes que aparecem nos capítulos 2, 3 e 5, decifrados. Tente desenhar a estrutura antes de abrir a resposta.",
+ S,TABLE_EX,MC,VF,MATCH,GAPS,BANK,DISC,LIVRO,QUICK,AVISOS:[]};
+})();
+
+const CAPS=[CAPN,CAP2,CAP3,CAP5];
+const TABLE_EX=Object.assign({},CAPN.TABLE_EX,CAP2.TABLE_EX,CAP3.TABLE_EX,CAP5.TABLE_EX);
 const KEY="quimica-qb-v2";
 let st={done:{},view:"c2:mapa"};
 try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)st=Object.assign(st,s)}catch(e){}
@@ -1102,7 +1365,7 @@ const cap=id=>CAPS.find(c=>c.id===id);
 function meter(){let n=0,t=0;CAPS.forEach(c=>c.S.forEach(s=>{t++;if(st.done[c.id+":"+s.id])n++}));$("#meterTxt").textContent=`${n} de ${t} seções estudadas`;$("#meterFill").style.width=(n/t*100)+"%"}
 function trail(){const t=$("#trail");t.innerHTML="";
   const add=(id,label,done)=>{const b=el("button","tbtn"+(done?" done":""));b.innerHTML=`<span class="dot"></span><span>${label}</span>`;b.setAttribute("aria-current",st.view===id?"true":"false");b.onclick=()=>go(id);t.appendChild(b)};
-  CAPS.forEach(c=>{t.appendChild(el("div","grp",`Capítulo ${c.num} – ${c.title}`));add(c.id+":mapa","Mapa do capítulo");
+  CAPS.forEach(c=>{t.appendChild(el("div","grp",`${c.lab||"Capítulo "+c.num} – ${c.title}`));add(c.id+":mapa","Mapa do capítulo");
     c.S.forEach(s=>add(c.id+":"+s.id,s.label,st.done[c.id+":"+s.id]));
     (c.TRAINERS||[]).forEach(t=>add(c.id+":t-"+t.id,"Treino: "+t.label));add(c.id+":ex","Exercícios de fixação")})}
 function go(id){st.view=id;save();trail();render();const m=$("#main");if(m.getBoundingClientRect().top<0)m.scrollIntoView({behavior:"smooth"})}
@@ -1115,7 +1378,7 @@ function avisos(p,c){if(!c.AVISOS||!c.AVISOS.length)return;const box=el("div","f
   box.innerHTML=`<b>Confira com o professor (${c.AVISOS.length} avisos)</b><ol>${c.AVISOS.map(([pg,diz,certo,dica])=>`<li><b>Pág. ${pg}.</b> ${diz} ${certo} <i>${dica}</i></li>`).join("")}</ol>`;p.appendChild(box)}
 
 function mapa(m,c){const p=el("div","panel");
-  p.appendChild(el("div","chap-head",`<div class="num">Capítulo ${c.num} · ${c.pages}</div><h2>${c.title}</h2><p>${c.intro} Toque numa seção para estudar.</p>`));
+  p.appendChild(el("div","chap-head",`<div class="num">${c.lab||"Capítulo "+c.num} · ${c.pages}</div><h2>${c.title}</h2><p>${c.intro} Toque numa seção para estudar.</p>`));
   const f=el("div","factory");c.S.forEach(s=>{const b=el("button","station",`<span class="role">${s.title}</span><span class="org">${s.kicker}</span><span class="what">${s.ideia}</span>`);b.onclick=()=>go(c.id+":"+s.id);f.appendChild(b)});p.appendChild(f);
   p.appendChild(el("div","links",`<h3>Três ideias que as provas mais cobram</h3><ul>${c.big3.map(x=>`<li>${x}</li>`).join("")}</ul>`));
   avisos(p,c);
@@ -1141,7 +1404,7 @@ function section(m,c,s){const p=el("div","panel");const key=c.id+":"+s.id;
   n.onclick=()=>go(c.id+":"+(nx?nx.id:(t0?"t-"+t0.id:"ex")));a.appendChild(n);p.appendChild(a);m.appendChild(p)}
 
 function treino(m,c,tr){if(tr.kind==="cstar")return tCstar(m,c,tr);if(tr.kind==="rs")return tRS(m,c,tr);if(tr.kind==="vh")return tVH(m,c,tr);c={...c,TRAINER:tr.items};const p=el("div","panel");let i=0,ok=0;
-  p.appendChild(el("div","chap-head",`<div class="num">Capítulo ${c.num} · prática guiada</div><h2>Treinador E/Z</h2><p>Em cada molécula, escolha o ligante de maior prioridade de cada carbono e depois decida: (E) ou (Z)? A linha tracejada é o plano que divide a molécula ao meio.</p>`));
+  p.appendChild(el("div","chap-head",`<div class="num">${c.lab||"Capítulo "+c.num} · prática guiada</div><h2>Treinador E/Z</h2><p>Em cada molécula, escolha o ligante de maior prioridade de cada carbono e depois decida: (E) ou (Z)? A linha tracejada é o plano que divide a molécula ao meio.</p>`));
   const box=el("div","ex");p.appendChild(box);m.appendChild(p);
   function step(){box.innerHTML="";if(i>=c.TRAINER.length){box.appendChild(el("h3",null,`Fim do treino: ${ok} de ${c.TRAINER.length} certas de primeira`));const b=el("button","btn","Treinar de novo");b.onclick=()=>{i=0;ok=0;step()};box.appendChild(b);return}
     const t=c.TRAINER[i];let pl=null,pr=null,first=true;
@@ -1159,7 +1422,7 @@ function treino(m,c,tr){if(tr.kind==="cstar")return tCstar(m,c,tr);if(tr.kind===
   step()}
 
 function exercicios(m,c){const sc={mc:{ok:0,n:0},vf:{ok:0,n:0},mt:null,gp:null};const p=el("div","panel");
-  p.appendChild(el("div","chap-head",`<div class="num">Capítulo ${c.num} · treino final</div><h2>Exercícios de fixação</h2><p>Faça sem olhar as seções. Cada parte corrige na hora e explica o porquê. A parte G traz o gabarito comentado das atividades do livro.</p>`));
+  p.appendChild(el("div","chap-head",`<div class="num">${c.lab||"Capítulo "+c.num} · treino final</div><h2>Exercícios de fixação</h2><p>Faça sem olhar as seções. Cada parte corrige na hora e explica o porquê. A parte G traz o gabarito comentado das atividades do livro.</p>`));
   const sb=el("div","score");p.appendChild(sb);
   const bar=()=>{const f=(x,n,t)=>`<span class="chip">${t}: <b>${x.ok}</b> de ${n}</span>`;sb.innerHTML=f(sc.mc,c.MC.length,"Múltipla escolha")+f(sc.vf,c.VF.length,"Verdadeiro ou falso")+`<span class="chip">Associação: <b>${sc.mt==null?"–":sc.mt}</b> de ${c.MATCH.rows.length}</span><span class="chip">Lacunas: <b>${sc.gp==null?"–":sc.gp}</b> de ${c.GAPS.length}</span>`};
   const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[\s-]+/g," ").trim();
@@ -1212,7 +1475,7 @@ function solveFischer(p0){const p={...p0};const steps=[];const pos=k=>Object.key
   const cyc=["t","r","l"];const i1=cyc.indexOf(pos(1));const cw=cyc[(i1+1)%3]===pos(2);
   steps.push(`Leitura: 1 (${nm[pos(1)]}) → 2 (${nm[pos(2)]}) → 3 (${nm[pos(3)]}): sentido ${cw?"horário":"anti-horário"}.`);
   return {ans:cw?"R":"S",steps,final:{...p},arc:[pos(1),pos(2),pos(3),cw]}}
-function tHead(p,c,tr,lead){p.appendChild(el("div","chap-head",`<div class="num">Capítulo ${c.num} · prática guiada</div><h2>${tr.label}</h2><p>${lead}</p>`))}
+function tHead(p,c,tr,lead){p.appendChild(el("div","chap-head",`<div class="num">${c.lab||"Capítulo "+c.num} · prática guiada</div><h2>${tr.label}</h2><p>${lead}</p>`))}
 function tLoop(m,c,tr,lead,draw){const p=el("div","panel");tHead(p,c,tr,lead);const box=el("div","ex");p.appendChild(box);m.appendChild(p);let i=0,ok=0;
   const next=()=>{box.innerHTML="";if(i>=tr.items.length){box.appendChild(el("h3",null,`Fim do treino: ${ok} de ${tr.items.length} certas de primeira`));const b=el("button","btn","Treinar de novo");b.onclick=()=>{i=0;ok=0;next()};box.appendChild(b);return}
     box.appendChild(el("p","legend",`${i+1} de ${tr.items.length} · ${tr.items[i].nome}`));
