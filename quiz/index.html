@@ -106,10 +106,17 @@ button:focus-visible,.chip:focus-within{outline:3px solid var(--acc);outline-off
 <script>
 /* Banco de questões. MC: o = [[texto, explicação se escolhida], ...], c = índice da certa. VF: v = verdadeiro/falso, e = explicação. */
 const CAPS = [
- {k:"q2",m:"q",n:2,t:"Isomeria configuracional geométrica"},
- {k:"q3",m:"q",n:3,t:"Isomeria configuracional óptica"},
- {k:"q5",m:"q",n:5,t:"Reações de adição"},
- {k:"qn",m:"q",n:"Nom.",t:"Nomenclatura: regras e grupos"},
+ {k:"q4",m:"q",n:4,tag:"4",lb:"Cap. 4",t:"Identificação das funções orgânicas"},
+ {k:"qn",m:"q",n:5,tag:"5 Nom.",lb:"Cap. 5 (nomenclatura)",t:"Regras básicas de nomenclatura orgânica"},
+ {k:"q6",m:"q",n:6,tag:"6",lb:"Cap. 6",t:"Estudo dos hidrocarbonetos"},
+ {k:"q11",m:"q",n:11,tag:"11",lb:"Cap. 11",t:"Álcoois, fenóis, éteres e cetonas"},
+ {k:"q12",m:"q",n:12,tag:"12",lb:"Cap. 12",t:"Ácidos carboxílicos, aldeídos, ésteres e sais orgânicos"},
+ {k:"q14",m:"q",n:14,tag:"14",lb:"Cap. 14",t:"Funções nitrogenadas, haletos e Grignard"},
+ {k:"qu",m:"q",n:0,tag:"Usuais",lb:"Nomes usuais",t:"Nomes usuais e utilidade prática"},
+ {k:"q1",m:"q",n:1,tag:"Iso 1",lb:"Isomeria · Cap. 1",t:"Isomeria plana"},
+ {k:"q2",m:"q",n:2,tag:"Iso 2",lb:"Isomeria · Cap. 2",t:"Isomeria configuracional geométrica"},
+ {k:"q3",m:"q",n:3,tag:"Iso 3",lb:"Isomeria · Cap. 3",t:"Isomeria configuracional óptica"},
+ {k:"q5",m:"q",n:5,tag:"Reaç. 5",lb:"Reações · Cap. 5",t:"Reações de adição"},
  {k:"b5",m:"b",n:5,t:"Morfologia e anatomia da raiz"},
  {k:"b6",m:"b",n:6,t:"Morfologia e anatomia do caule"},
  {k:"b7",m:"b",n:7,t:"Morfologia e anatomia da folha"},
@@ -1033,10 +1040,10 @@ const Q = [
 {k:"qn",s:"O prefixo \"iso\" entra na ordem alfabética, mas \"sec\" e \"terc\" não.",v:true,e:"Isopropil é ordenado pela letra i. Já terc-butil é ordenado pela letra b."},
 /* ---- nível prova ---- */
 {k:"qn",lv:2,s:"O nome correto de CH₃–CH(CH₃)–CH₂–CH(CH₃)–CH₂–CH₃ é",c:3,o:[
- ["3,5-dimetil-hexano.","Numerou pela ponta errada. A soma dos localizadores precisa ser a menor: 2 e 4, não 3 e 5."],
+ ["3,5-dimetilexano.","Numerou pela ponta errada. A soma dos localizadores precisa ser a menor: 2 e 4, não 3 e 5."],
  ["4-etil-2-metilpentano.","A cadeia principal não é a mais longa. Seguindo pelo etil, ela tem 6 carbonos, não 5."],
- ["2-metil-4-metil-hexano.","Grupos iguais são agrupados com di: 2,4-dimetil."],
- ["2,4-dimetil-hexano.","Isso. Cadeia mais longa: 6 carbonos. Numerando pela ponta mais perto das ramificações: metis no 2 e no 4."],
+ ["2-metil-4-metilexano.","Grupos iguais são agrupados com di: 2,4-dimetil."],
+ ["2,4-dimetilexano.","Isso. Cadeia mais longa: 6 carbonos. Numerando pela ponta mais perto das ramificações: metis no 2 e no 4."],
  ["1,3-dimetilpentano.","Metil no carbono 1 aumenta a cadeia. Ramificação nunca fica na ponta."]]},
 {k:"qn",lv:2,s:"O nome correto de CH₃–CH(CH₃)–CH(CH₂CH₃)–CH₂–CH₃ é",c:0,o:[
  ["3-etil-2-metilpentano.","Isso. Cadeia de 5 carbonos, numerada pela ponta mais perto das ramificações (2 e 3), e os grupos em ordem alfabética: etil antes de metil."],
@@ -1115,13 +1122,368 @@ const Q = [
  ["começa em qualquer carbono, porque é um anel.","Há regra: a dupla fica entre C1 e C2, e as ramificações recebem os menores números."],
  ["põe a dupla entre C1 e C2 e dá o número 1 ao carbono da dupla que tem o metil.","Isso. Assim o metil fica com o menor número possível (1)."],
  ["põe a dupla entre C2 e C3.","A dupla do ciclo sempre recebe os números 1 e 2."],
- ["não precisa numerar, porque só tem um metil.","Precisa, porque o metil poderia estar num carbono da dupla ou fora dela."]]}
+ ["não precisa numerar, porque só tem um metil.","Precisa, porque o metil poderia estar num carbono da dupla ou fora dela."]]},
+/* ===== QUÍMICA · CAP. 4 FUNÇÕES (q4) ===== */
+{k:"q4",s:"Funções orgânicas são",c:1,o:[
+ ["compostos que só têm carbono e hidrogênio.","Isso define hidrocarboneto, que é só uma das funções."],
+ ["grupos de compostos com propriedades químicas e estruturais semelhantes.","Isso. É a definição do livro; o que eles têm em comum é o grupo funcional."],
+ ["compostos que têm o mesmo número de carbonos.","O número de carbonos não define a função: metanol e etanol são da mesma função."],
+ ["moléculas que desviam a luz polarizada.","Isso é atividade óptica (cap. 3), não função."],
+ ["compostos inorgânicos com carbono.","Funções orgânicas são grupos de compostos orgânicos."]]},
+{k:"q4",s:"OH ligado a carbono de dupla que NÃO pertence a anel benzênico caracteriza",c:3,o:[
+ ["álcool.","Álcool tem OH em carbono saturado (sem dupla)."],
+ ["fenol.","Fenol tem OH em carbono de dupla do anel benzênico."],
+ ["éter.","Éter tem –O– entre carbonos, sem H."],
+ ["enol.","Isso. OH em carbono de dupla fora do anel: enol (ex.: CH<sub>2</sub>=CH–OH)."],
+ ["aldeído.","Aldeído tem C=O na ponta (–CHO), não OH."]]},
+{k:"q4",s:"(UFRJ) Na adrenalina (anel com duas OH e cadeia –CH(OH)–CH<sub>2</sub>–NH–CH<sub>3</sub>) há as funções",c:1,o:[
+ ["álcool, fenol e amida.","Não há C=O ligado ao N: não é amida."],
+ ["fenol, amina e álcool.","Isso. OH no anel (fenol), OH na cadeia (álcool), NH ligado a dois carbonos (amina)."],
+ ["amida, ácido carboxílico e fenol.","Não há COOH nem C=O na molécula."],
+ ["carbilamina, álcool e fenol.","Carbilamina é –NC (isonitrila); aqui o N está em NH."],
+ ["álcool, amina e éter.","Não há O entre dois carbonos; as OH são de fenol e de álcool."]]},
+{k:"q4",lv:2,s:"(UNIRIO) Na cocaína há um N ligado a três carbonos, um grupo –COOCH<sub>3</sub> e um grupo –O–CO–C<sub>6</sub>H<sub>5</sub>. As funções são",c:1,o:[
+ ["amina e álcool.","Não há OH na cocaína."],
+ ["amina e éster.","Isso. N com três carbonos (amina terciária) e dois grupos –COO– (éster)."],
+ ["amida e éster.","O N não está ligado a nenhum C=O: é amina, não amida."],
+ ["cetona e fenol.","Os C=O fazem parte de –COO– (éster); não há OH no anel."],
+ ["ácido e amida.","Não há COOH livre nem N ligado a C=O."]]},
+{k:"q4",lv:2,s:"(UFOP-MG) Na tiroxina (anéis com I, OH no anel, O entre os anéis, –CH<sub>2</sub>–CH(NH<sub>2</sub>)–COOH) as funções são",c:3,o:[
+ ["álcool, haleto de acila, éster, amida e aldeído.","O OH está no anel (fenol), o O entre anéis é éter e há COOH, não aldeído."],
+ ["fenol, haleto de acila, éster, amina e aldeído.","O iodo está no anel (haleto orgânico); não há éster nem aldeído."],
+ ["álcool, haleto orgânico, éter, amida e ácido carboxílico.","O OH está no anel (fenol) e o N não está ligado a C=O (amina)."],
+ ["fenol, haleto orgânico, éter, amina e ácido carboxílico.","Isso. OH no anel, iodo no anel, O entre anéis, NH<sub>2</sub> e COOH."],
+ ["álcool, haleto orgânico, amida, éster e aldeído.","Não há álcool, amida, éster nem aldeído."]]},
+{k:"q4",lv:2,s:"(UFPR 2023) 1. Aminas e amidas são hidroxiladas. 2. Éteres e ésteres são nitrogenadas. 3. Fenóis e alcoóis são oxigenadas. 4. Cetonas e aldeídos são carboniladas. Estão corretas",c:2,o:[
+ ["2 apenas.","Éteres e ésteres são oxigenadas, não nitrogenadas."],
+ ["1 e 4 apenas.","Aminas e amidas são nitrogenadas, não hidroxiladas."],
+ ["3 e 4 apenas.","Isso. Fenóis e alcoóis têm O; cetonas e aldeídos têm C=O."],
+ ["1, 2 e 3 apenas.","1 e 2 estão erradas."],
+ ["1, 2, 3 e 4.","1 e 2 estão erradas."]]},
+{k:"q4",lv:2,s:"Com a fórmula C<sub>3</sub>H<sub>6</sub>O, um composto de cadeia mista e heterocíclica é",c:4,o:[
+ ["propanona.","Cadeia acíclica com carbonila."],
+ ["propanal.","Cadeia acíclica com formila."],
+ ["ciclopropanol.","Anel só de carbonos (homocíclico)."],
+ ["prop-2-en-1-ol.","Cadeia aberta."],
+ ["metiloxirano.","Isso. Anel com O (heterocíclico) e um metil pendurado (mista): é um éter."]]},
+{k:"q4",s:"O cloreto de ácido tem o grupo",c:0,o:[
+ ["–COCl.","Isso. O Cl substitui o OH da carboxila."],
+ ["–Cl ligado a carbono saturado.","Isso é haleto orgânico."],
+ ["–COO<sup>–</sup>Na<sup>+</sup>.","Isso é sal orgânico."],
+ ["–MgCl.","Isso é composto de Grignard."],
+ ["–NC.","Isso é isonitrila."]]},
+{k:"q4",s:"No álcool benzílico (C<sub>6</sub>H<sub>5</sub>–CH<sub>2</sub>–OH), a função é fenol, porque há anel benzênico.",v:false,e:"O OH está no CH<sub>2</sub>, carbono saturado: é álcool."},
+{k:"q4",s:"Todo aminoácido tem as funções ácido carboxílico e amina.",v:true,e:"Exemplo do livro: alanina, ácido aspártico, ácido glutâmico."},
+{k:"q4",s:"Isonitrila e nitrila são a mesma função.",v:false,e:"Nitrila: –C≡N (C preso à cadeia). Isonitrila: –N≡C (N preso à cadeia)."},
+
+/* ===== CAP. 6 HIDROCARBONETOS (q6) ===== */
+{k:"q6",s:"Um alcano tem 64 átomos de hidrogênio. O número de carbonos é",c:1,o:[
+ ["30","2·30 + 2 = 62, não 64."],
+ ["31","Isso. 2n + 2 = 64 → n = 31."],
+ ["32","2·32 + 2 = 66."],
+ ["62","62 é o valor de 2n, não de n."],
+ ["64","64 é o número de H."]]},
+{k:"q6",s:"Ciclanos e alcenos têm a fórmula geral",c:2,o:[
+ ["C<sub>n</sub>H<sub>2n+2</sub>.","Essa é a do alcano."],
+ ["C<sub>n</sub>H<sub>2n−2</sub>.","Essa é a de alcino, alcadieno e cicleno."],
+ ["C<sub>n</sub>H<sub>2n</sub>.","Isso. O anel tira 2 H, assim como a dupla."],
+ ["C<sub>n</sub>H<sub>n</sub>.","Não é fórmula geral desses grupos."],
+ ["C<sub>n</sub>H<sub>2n−6</sub>.","Essa é a de aromáticos do tipo benzeno."]]},
+{k:"q6",lv:2,s:"A ordem crescente de PE de heptano (A), 3-metilexano (B) e 2,3-dimetilpentano (C) é",c:3,o:[
+ ["A < B < C","É a ordem decrescente."],
+ ["B < A < C","O mais ramificado (C) tem o menor PE."],
+ ["A < C < B","O heptano, sem ramificação, tem o maior PE."],
+ ["C < B < A","Isso. Mesmo nº de C: mais ramificações, menor PE."],
+ ["todos iguais","São isômeros, mas as ramificações mudam o PE."]]},
+{k:"q6",s:"Os alcanos",c:0,o:[
+ ["são apolares, insolúveis em água e menos densos que ela.","Isso. São as parafinas."],
+ ["são polares e muito solúveis em água.","São apolares."],
+ ["são mais densos que a água.","São menos densos (resolução oficial)."],
+ ["são mais reativos que os alcinos.","Os alcinos são mais reativos."],
+ ["têm fórmula C<sub>n</sub>H<sub>2n</sub>.","Essa é a de alcenos e ciclanos."]]},
+{k:"q6",lv:2,s:"C<sub>3</sub>H<sub>4</sub> pode ser",c:2,o:[
+ ["alcano ou alceno.","Alcano seria C<sub>3</sub>H<sub>8</sub>; alceno, C<sub>3</sub>H<sub>6</sub>."],
+ ["ciclano.","Ciclopropano é C<sub>3</sub>H<sub>6</sub>."],
+ ["alcino, alcadieno ou cicleno.","Isso. Obedece C<sub>n</sub>H<sub>2n−2</sub> com n = 3: propino, propadieno ou ciclopropeno."],
+ ["só aromático.","Aromático precisa de anel benzênico (6 C)."],
+ ["nenhuma subfunção.","Obedece à fórmula 2n − 2."]]},
+{k:"q6",s:"Existe ciclano com dois carbonos.",v:false,e:"O menor anel possível tem 3 carbonos (ciclopropano)."},
+{k:"q6",s:"Tolueno é o metilbenzeno.",v:true,e:"Benzeno com um metil."},
+
+/* ===== CAP. 11 (q11) ===== */
+{k:"q11",s:"Álcool com a hidroxila em carbono ligado a três outros carbonos é",c:2,o:[
+ ["primário.","Primário: carbono da OH ligado a um carbono."],
+ ["secundário.","Secundário: ligado a dois carbonos."],
+ ["terciário.","Isso. Ex.: (CH<sub>3</sub>)<sub>3</sub>C–OH."],
+ ["poliálcool.","Poliálcool fala do número de OH (3 ou mais), não do carbono."],
+ ["fenol.","Fenol tem OH no anel benzênico."]]},
+{k:"q11",lv:2,s:"(UNIUBE) O nome oficial do isopropil-metilcarbinol é",c:2,o:[
+ ["2-metilbutan-1-ol.","O OH não está na ponta: o carbinol tem dois grupos ligados."],
+ ["3-metilbutan-1-ol.","O OH estaria na ponta; no carbinol ele está no carbono com metil e isopropil."],
+ ["3-metilbutan-2-ol.","Isso. CH<sub>3</sub>–CH(OH)–CH(CH<sub>3</sub>)<sub>2</sub>: OH no 2, metil no 3."],
+ ["2-metilbutan-3-ol.","Numeração errada: a OH deve ter o menor número."],
+ ["3-metilbutan-3-ol.","A OH está no C2."]]},
+{k:"q11",s:"No sistema de Kolbe, o etanol chama-se",c:0,o:[
+ ["metilcarbinol.","Isso. O carbono da OH (carbinol) tem um metil ligado."],
+ ["etilcarbinol.","Etilcarbinol seria propan-1-ol."],
+ ["carbinol.","Carbinol é o metanol."],
+ ["dimetilcarbinol.","Dimetilcarbinol é o propan-2-ol."],
+ ["álcool etílico.","Esse é o nome usual, não o de Kolbe."]]},
+{k:"q11",s:"O nome IUPAC de CH<sub>3</sub>–O–CH<sub>2</sub>–CH<sub>2</sub>–CH<sub>3</sub> é",c:3,o:[
+ ["propoximetano.","O grupo menor (metil) é que vira \"oxi\"."],
+ ["butanol.","Não há OH: é éter."],
+ ["éter metílico e propílico.","Esse é o nome usual."],
+ ["1-metoxipropano.","Isso. Menor (metil) + oxi + maior (propano)."],
+ ["2-metoxipropano.","O O está no C1 do propano, não no C2."]]},
+{k:"q11",lv:2,s:"(UFRJ) O rincoferol, CH<sub>3</sub>–CH=CH–CH(OH)–CH<sub>2</sub>–CH(CH<sub>3</sub>)<sub>2</sub>, chama-se",c:4,o:[
+ ["6,6-dimetilex-2-en-4-ol.","A cadeia principal tem 7 C, não 6."],
+ ["2-metilept-5-en-4-ol.","Numeração pela ponta errada: com a OH empatada, a dupla desempata."],
+ ["6-metilept-3-en-4-ol.","A dupla está entre C2 e C3."],
+ ["2,6-dimetilex-5-en-4-ol.","Cadeia e numeração erradas."],
+ ["6-metilept-2-en-4-ol.","Isso. OH no 4 pelas duas pontas; a dupla desempata (2); metil no 6."]]},
+{k:"q11",s:"Entre etanol e pentan-1-ol, o mais solúvel em água é",c:0,o:[
+ ["o etanol, porque tem cadeia apolar menor.","Isso. A OH polar \"manda\" mais em cadeias curtas."],
+ ["o pentan-1-ol, porque tem mais carbonos.","Mais carbonos = mais parte apolar = menos solúvel."],
+ ["os dois na mesma medida.","A cadeia muda a solubilidade."],
+ ["nenhum, pois álcoois são insolúveis.","O etanol se mistura com água em qualquer proporção."],
+ ["o pentan-1-ol, porque faz mais ligações de H.","Os dois têm uma OH só."]]},
+{k:"q11",lv:2,s:"Para compostos de massa molar próxima, a ordem de ponto de ebulição é",c:1,o:[
+ ["aldeído > cetona > álcool.","É o contrário."],
+ ["álcool > cetona > aldeído.","Isso. Álcool faz ligação de H; cetona é mais polar que aldeído."],
+ ["cetona > álcool > aldeído.","O álcool vence a cetona por causa das ligações de H."],
+ ["éter > álcool > cetona.","O éter tem PE baixo (sem ligação de H entre si)."],
+ ["todos iguais.","Interações diferentes dão PE diferentes."]]},
+{k:"q11",lv:2,s:"Quantos fenóis existem com a fórmula C<sub>7</sub>H<sub>8</sub>O?",c:2,o:[
+ ["1","Há mais de uma posição para o metil."],
+ ["2","Faltou uma posição."],
+ ["3","Isso. Orto, meta e para-cresol (o álcool benzílico é álcool e o metoxibenzeno é éter)."],
+ ["4","Contou o álcool benzílico, que não é fenol."],
+ ["5","Contou álcool e éter, que não são fenóis."]]},
+{k:"q11",s:"Não existe álcool estável com duas hidroxilas no mesmo carbono.",v:true,e:"O livro diz que seria extremamente instável."},
+{k:"q11",s:"A propanona é chamada usualmente de dimetilcetona ou acetona.",v:true,e:"Grupos ligados à carbonila: dois metis."},
+{k:"q11",s:"Os éteres têm ponto de ebulição maior que os álcoois de massa parecida.",v:false,e:"Menor: éteres não fazem ligação de hidrogênio entre si."},
+
+/* ===== CAP. 12 (q12) ===== */
+{k:"q12",s:"O grupo –CHO também é chamado de",c:3,o:[
+ ["carboxila.","Carboxila é –COOH."],
+ ["hidroxila.","Hidroxila é –OH."],
+ ["carbonila.","Carbonila é o C=O em geral; o –CHO tem um nome próprio."],
+ ["formila (aldoxila ou metanoíla).","Isso. É o grupo dos aldeídos."],
+ ["acila.","Acila é R–CO–, usado nas amidas."]]},
+{k:"q12",s:"Ácido carboxílico + álcool forma",c:1,o:[
+ ["sal orgânico + água.","Isso acontece com ácido + base."],
+ ["éster + água.","Isso. É a esterificação."],
+ ["éter + água.","Éter não vem dessa reação."],
+ ["aldeído + água.","Não."],
+ ["amida + água.","Amida vem da amônia."]]},
+{k:"q12",lv:2,s:"(FEI) X = CH<sub>3</sub>CH(CH<sub>3</sub>)CH<sub>2</sub>COOCH<sub>3</sub>; Y = CH<sub>3</sub>CH(CH<sub>3</sub>)CH<sub>2</sub>COOH; Z = CH<sub>3</sub>CH<sub>2</sub>CH(CH<sub>3</sub>)CHO. Os nomes são",c:2,o:[
+ ["3-metilpropanoato de metila, ácido 3-metilpropanoico, 3-metilpentanal.","A cadeia de X e Y tem 4 C (butanoato), e Z tem 4 C (butanal)."],
+ ["4-metilbutanoato de metila, ácido 2-metilbutanoico, 2-metilpentan-2-ona.","O C da função é o 1: metil no 3 em X e Y; Z é aldeído, não cetona."],
+ ["3-metilbutanoato de metila, ácido 3-metilbutanoico, 2-metilbutanal.","Isso. O C da função (COO, COOH, CHO) é sempre o 1."],
+ ["ácido 3-metilpentanoico, 3-metilbutanona, 3-metilbutanoato de etila.","Funções trocadas."],
+ ["3-metilbutanoato de etila, ácido 3-metilbutanoico, 3-metilbutanona.","X tem metila (não etila) e Z é aldeído."]]},
+{k:"q12",s:"O formol é",c:0,o:[
+ ["metanal em solução aquosa a 37% em massa.","Isso. Tome nota do livro."],
+ ["metanol puro.","Metanol é álcool."],
+ ["ácido metanoico.","Esse é o ácido fórmico."],
+ ["etanal.","Etanal é o acetaldeído."],
+ ["propanona.","Propanona é a acetona."]]},
+{k:"q12",lv:2,s:"O aroma de banana (C<sub>7</sub>H<sub>14</sub>O<sub>2</sub>) vem do",c:4,o:[
+ ["butanoato de etila.","Tem 6 C (C<sub>6</sub>H<sub>12</sub>O<sub>2</sub>)."],
+ ["acetato de isobutila.","Tem 6 C."],
+ ["propanoato de isopentila.","Tem 8 C."],
+ ["acetato de butila.","Tem 6 C."],
+ ["acetato de isopentila.","Isso. Acetato (2 C) + isopentila (5 C) = 7 C."]]},
+{k:"q12",s:"(MACKENZIE) CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>–COO–CH<sub>2</sub>CH<sub>3</sub> chama-se",c:1,o:[
+ ["etanoato de butila.","Invertido: o lado do C=O tem 4 C."],
+ ["butanoato de etila.","Isso. Lado do C=O: butanoato; lado do O: etila."],
+ ["ácido etil-propil-metanoico.","É éster, não ácido."],
+ ["propanoato de metila.","Contagem errada dos dois lados."],
+ ["butanoato de metila.","O lado do O tem 2 C (etila)."]]},
+{k:"q12",lv:2,s:"Ácidos carboxílicos têm PE maior que álcoois de massa próxima porque",c:3,o:[
+ ["têm mais carbonos.","A comparação é com massa próxima."],
+ ["são apolares.","São muito polares."],
+ ["não fazem ligações de hidrogênio.","Fazem, e muitas."],
+ ["fazem o dobro de ligações de hidrogênio.","Isso. Afirmação do livro."],
+ ["são compostos iônicos.","Iônicos são os sais orgânicos."]]},
+{k:"q12",s:"Sais orgânicos são compostos iônicos obtidos pela neutralização de ácido carboxílico com base inorgânica.",v:true,e:"Definição do livro."},
+{k:"q12",s:"O nome usual do metanoato de metila é acetato de metila.",v:false,e:"Metanoato = formiato. Acetato de metila é o etanoato de metila."},
+{k:"q12",s:"Ácidos carboxílicos de cadeia longa são chamados de ácidos graxos.",v:true,e:"Com 10 C ou mais, são sólidos com aspecto de cera."},
+
+/* ===== CAP. 14 (q14) ===== */
+{k:"q14",s:"Aminas são obtidas pela substituição dos hidrogênios",c:0,o:[
+ ["da amônia por grupos derivados de hidrocarbonetos.","Isso. É a definição do livro."],
+ ["da água por grupos acila.","Isso não descreve amina."],
+ ["do ácido carboxílico por nitrogênio.","Não."],
+ ["da amônia por grupos acila.","Grupos acila (R–CO–) formam amidas."],
+ ["do HCN por grupos de carbono.","Isso forma nitrilas."]]},
+{k:"q14",s:"Dimetilamina, CH<sub>3</sub>–NH–CH<sub>3</sub>, é uma amina",c:1,o:[
+ ["primária.","Primária tem o N ligado a 1 carbono."],
+ ["secundária.","Isso. N ligado a dois carbonos."],
+ ["terciária.","Terciária tem N ligado a 3 carbonos."],
+ ["aromática.","Não há anel."],
+ ["amida.","Não há C=O ligado ao N."]]},
+{k:"q14",lv:2,s:"(UCDB) A xilocaína, C<sub>6</sub>H<sub>3</sub>(CH<sub>3</sub>)<sub>2</sub>–NH–CO–CH<sub>2</sub>–N(C<sub>2</sub>H<sub>5</sub>)<sub>2</sub>, apresenta",c:4,o:[
+ ["amida e amina secundária.","O segundo N está ligado a três carbonos: terciária."],
+ ["cetona, amina secundária e amina terciária.","O C=O está ligado ao N: é amida, não cetona."],
+ ["cetona e duas aminas secundárias.","Há amida e amina terciária."],
+ ["um aminoácido.","Não há COOH."],
+ ["amida e amina terciária.","Isso. NH ligado ao C=O (amida) e N(C<sub>2</sub>H<sub>5</sub>)<sub>2</sub> (amina terciária)."]]},
+{k:"q14",s:"O nome IUPAC de CH<sub>3</sub>–CN é",c:2,o:[
+ ["metanonitrilo.","O C do CN conta: são 2 C."],
+ ["cianeto de etila.","O usual é cianeto de METILA (o grupo preso ao CN)."],
+ ["etanonitrilo.","Isso. Usual: cianeto de metila."],
+ ["metilcarbilamina.","Isso seria CH<sub>3</sub>–NC (isonitrila)."],
+ ["etanamida.","Amida tem CONH<sub>2</sub>."]]},
+{k:"q14",s:"CH<sub>3</sub>CH<sub>2</sub>MgCl chama-se",c:1,o:[
+ ["cloreto de metilmagnésio.","O radical tem 2 C: etil."],
+ ["cloreto de etilmagnésio.","Isso. Halogênio (cloreto) + de + radical (etil) + magnésio."],
+ ["cloreto de etanoíla.","Isso seria CH<sub>3</sub>COCl."],
+ ["cloroetano.","Faltou o magnésio: é Grignard."],
+ ["cloreto de magnésio.","Faltou o radical etil."]]},
+{k:"q14",lv:2,s:"O nome de CH<sub>3</sub>–CO–N(CH<sub>3</sub>)<sub>2</sub> é",c:3,o:[
+ ["dimetilamina.","Há C=O ligado ao N: é amida."],
+ ["N-metiletanamida.","São dois metis no N."],
+ ["2,2-dimetiletanamida.","Os metis estão no N, não no C2."],
+ ["N,N-dimetiletanamida.","Isso. Dois metis no N + etanamida."],
+ ["N,N-dimetilmetanamida.","A parte acila tem 2 C (etanamida)."]]},
+{k:"q14",lv:2,s:"No haleto 4-clorobut-1-eno, a numeração",c:0,o:[
+ ["favoreceu a insaturação (dupla no C1).","Isso. O livro escreve: prevalece a insaturação."],
+ ["favoreceu o cloro.","Se favorecesse o cloro, seria 1-clorobut-3-eno."],
+ ["seguiu a ordem alfabética.","A ordem alfabética só desempata."],
+ ["começou pelo carbono do meio.","Numeração começa por uma ponta."],
+ ["não importa.","Importa: a dupla tem prioridade."]]},
+{k:"q14",s:"A maioria das aminas tem odor semelhante ao de peixe e elas são bases orgânicas.",v:true,e:"Propriedades do livro."},
+{k:"q14",s:"Compostos de Grignard formam soluções aquosas estáveis.",v:false,e:"Reagem com a água; ficam em éter etílico anidro."},
+{k:"q14",s:"O TNT é um nitrocomposto.",v:true,e:"2,4,6-trinitrotolueno."},
+
+/* ===== NOMES USUAIS (qu) ===== */
+{k:"qu",s:"A acetona (removedor de esmalte) é a",c:1,o:[
+ ["propanal, um aldeído.","Propanal é aldeído; a acetona é cetona."],
+ ["propanona, uma cetona.","Isso. Dimetilcetona."],
+ ["propan-2-ol, um álcool.","Esse é o álcool isopropílico."],
+ ["etanoato de etila, um éster.","Esse é o acetato de etila (também removedor)."],
+ ["etanal, um aldeído.","Etanal é o acetaldeído."]]},
+{k:"qu",s:"O acetileno do maçarico é o",c:2,o:[
+ ["eteno.","Eteno é o etileno."],
+ ["etano.","Etano é alcano."],
+ ["etino.","Isso. HC≡CH."],
+ ["benzeno.","Benzeno é aromático."],
+ ["propino.","Propino tem 3 C."]]},
+{k:"qu",s:"O ácido do vinagre é o",c:3,o:[
+ ["ácido metanoico.","Esse é o fórmico (formigas)."],
+ ["ácido butanoico.","Esse é o butírico (manteiga)."],
+ ["ácido benzoico.","Não é o do vinagre."],
+ ["ácido etanoico.","Isso. Ácido acético (latim acetum = vinagre)."],
+ ["ácido propanoico.","Não é o do vinagre."]]},
+{k:"qu",s:"A ureia, usada em fertilizantes, pertence à função",c:0,o:[
+ ["amida.","Isso. H<sub>2</sub>N–CO–NH<sub>2</sub>."],
+ ["amina.","O N está ligado ao C=O: amida."],
+ ["nitrocomposto.","Não há NO<sub>2</sub>."],
+ ["cetona.","O C=O está ligado a N, não a carbonos."],
+ ["nitrila.","Não há C≡N."]]},
+{k:"qu",lv:2,s:"Qual associação está ERRADA?",c:4,o:[
+ ["metanol – álcool da madeira – tóxico.","Está correta."],
+ ["tolueno – metilbenzeno – solvente.","Está correta."],
+ ["clorofórmio – triclorometano – anestésico.","Está correta."],
+ ["anilina – fenilamina – corantes.","Está correta."],
+ ["formol – metanol – conservante.","Isso, está errada: formol é metanal (aldeído) em solução, não metanol."]]},
+{k:"qu",lv:2,s:"O álcool 70% é antisséptico porque",c:1,o:[
+ ["evapora rápido e esfria a pele.","Isso não inativa os vírus."],
+ ["dissolve o envelope viral lipoproteico.","Isso. Explicação do livro (cap. 11)."],
+ ["é um ácido forte.","Etanol não é ácido forte."],
+ ["reage com a água do vírus.","Não é o mecanismo descrito."],
+ ["é um aldeído.","Etanol é álcool."]]},
+{k:"qu",s:"A naftalina é um hidrocarboneto aromático.",v:true,e:"Naftaleno, dois anéis aromáticos."},
+{k:"qu",s:"Os fréons protegem a camada de ozônio.",v:false,e:"Prejudicam a camada de ozônio."},
+
+/* ===== ISOMERIA PLANA (q1) ===== */
+{k:"q1",s:"Isômeros são compostos que têm",c:2,o:[
+ ["a mesma fórmula estrutural.","Se a estrutura fosse igual, seria o mesmo composto."],
+ ["o mesmo ponto de ebulição.","Isômeros costumam ter propriedades diferentes."],
+ ["a mesma fórmula molecular e estruturas diferentes.","Isso. É a definição."],
+ ["a mesma função, sempre.","Há isômeros de função diferente."],
+ ["o mesmo nome.","Têm nomes diferentes."]]},
+{k:"q1",s:"Butano e metilpropano são isômeros de",c:0,o:[
+ ["cadeia.","Isso. Mesma função; normal × ramificada."],
+ ["posição.","Na posição, a cadeia é a mesma e muda o número."],
+ ["função.","Os dois são alcanos."],
+ ["metameria.","Não há heteroátomo."],
+ ["tautomeria.","Não há equilíbrio entre eles."]]},
+{k:"q1",s:"Etanol e metoximetano (C<sub>2</sub>H<sub>6</sub>O) são isômeros de",c:3,o:[
+ ["cadeia.","As funções são diferentes."],
+ ["posição.","As funções são diferentes."],
+ ["metameria.","Metameria é entre compostos da mesma função."],
+ ["função.","Isso. Álcool × éter."],
+ ["óptica.","Não há carbono assimétrico."]]},
+{k:"q1",lv:2,s:"Etanoato de etila e propanoato de metila são isômeros de",c:1,o:[
+ ["função.","Os dois são ésteres."],
+ ["metameria (compensação).","Isso. Mesma função; a \"ponte\" COO muda de lugar entre as cadeias."],
+ ["cadeia.","Os dois têm cadeia heterogênea, aberta e normal."],
+ ["posição.","O que muda é a posição do heteroátomo: metameria."],
+ ["tautomeria.","Não estão em equilíbrio."]]},
+{k:"q1",lv:2,s:"O equilíbrio propen-2-ol ⇌ propanona é exemplo de",c:4,o:[
+ ["isomeria de cadeia.","A função muda (enol → cetona)."],
+ ["metameria.","Não há heteroátomo mudando entre cadeias."],
+ ["isomeria de posição.","A função muda."],
+ ["isomeria óptica.","Não envolve luz polarizada."],
+ ["tautomeria ceto-enólica.","Isso. Isomeria de função em equilíbrio dinâmico."]]},
+{k:"q1",lv:2,s:"(UFRGS) Qual par está corretamente classificado?",c:2,o:[
+ ["pentano × metilbutano: posição.","É cadeia (normal × ramificada)."],
+ ["but-1-eno × but-2-eno: cadeia.","É posição (da dupla)."],
+ ["propan-1-amina × etilmetilamina: cadeia.","Isso. Homogênea × heterogênea (resposta c da UFRGS no livro)."],
+ ["ácido propanoico × etanoato de metila: metameria.","É função (ácido × éster)."],
+ ["etoxietano × metoxipropano: função.","É metameria (dois éteres)."]]},
+{k:"q1",s:"Propan-1-ol e propan-2-ol são isômeros de posição.",v:true,e:"A hidroxila muda de carbono."},
+{k:"q1",s:"Na tautomeria, os isômeros se convertem um no outro em equilíbrio dinâmico.",v:true,e:"Ex.: enol ⇌ aldeído ou cetona."},
+{k:"q1",s:"Etano e eteno são isômeros de cadeia.",v:false,e:"Têm fórmulas moleculares diferentes: não são isômeros."}
 
 ];
 
 
 /* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
 const DICAS = {
+ q4:[
+ [/UFPR/,"Oxigenadas e nitrogenadas","Oxigenadas: álcool, fenol, éter, aldeído, cetona, ácido, éster. Nitrogenadas: amina, amida, nitro, nitrila. Carboniladas: aldeído e cetona (C=O).","Cap. 4 · Reconhecendo as funções orgânicas"],
+ [/adrenalina|cocaína|tiroxina|aminoácido/i,"Funções mistas","Percorra a molécula grupo por grupo: OH no anel (fenol), OH na cadeia (álcool), N só com carbonos (amina), N no C=O (amida), COOH, COO (éster), O entre carbonos (éter), halogênio (haleto).","Cap. 4 · Leitura complementar: funções mistas"],
+ [/nitrila|COCl|cloreto de ácido|heterocíclica/i,"Grupos e cadeias especiais","–COCl cloreto de ácido; –CN nitrila; –NC isonitrila; –MgX Grignard. Anel com O = cadeia heterocíclica.","Cap. 4 · Ácido carboxílico e derivados; Funções nitrogenadas"],
+ [/OH|hidroxila|benzílico|enol/i,"Hidroxila: álcool, fenol ou enol","OH em C saturado: álcool; no anel benzênico: fenol; em C de dupla fora do anel: enol.","Cap. 4 · Hidrocarboneto, álcool, fenol e enol"],
+ [/./,"O que é função orgânica","Função = grupo de compostos com propriedades semelhantes por terem o mesmo grupo funcional.","Cap. 4 · Reconhecendo as funções orgânicas"]],
+ q6:[
+ [/ebulição|de PE/i,"Ponto de ebulição","Mesmo número de C: mais ramificações, menor PE. Cadeia maior: PE maior.","Cap. 6 · Propriedades dos hidrocarbonetos"],
+ [/Os alcanos/,"Propriedades dos alcanos","Apolares, insolúveis em água, menos densos que ela; chamados de parafinas.","Cap. 6 · Propriedades dos hidrocarbonetos"],
+ [/tolueno/i,"Aromáticos","Benzeno; tolueno = metilbenzeno; xilenos = dimetilbenzenos; naftalina = naftaleno.","Cap. 6 · Aromáticos"],
+ [/./,"Fórmulas gerais","Alcano 2n+2; alceno e ciclano 2n; alcino, alcadieno e cicleno 2n−2. Anéis precisam de pelo menos 3 C.","Cap. 6 · Subfunções e fórmulas gerais"]],
+ q11:[
+ [/Kolbe|carbinol/i,"Nomenclatura de Kolbe","Metanol = carbinol. Outros: grupos ligados ao carbono da OH (ordem alfabética) + carbinol. Etanol = metilcarbinol.","Cap. 11 · Álcoois: nomenclatura"],
+ [/terciário|primário|secundário|mesmo carbono|três outros/i,"Classificação dos álcoois","Conte os carbonos ligados ao carbono da OH: 1 primário, 2 secundário, 3 terciário. Duas OH no mesmo carbono: instável.","Cap. 11 · Álcoois: classificação"],
+ [/ebulição|solúvel/i,"Propriedades","Álcool faz ligação de H (PE alto); cadeia maior, menos solúvel em água. PE: álcool > cetona > aldeído; éter tem PE baixo.","Cap. 11 · Álcoois: propriedades"],
+ [/fenóis|fenol/i,"Fenóis","OH no anel benzênico; metilfenóis = cresóis (o, m, p).","Cap. 11 · Fenóis"],
+ [/O–CH|éter|metoxi/i,"Éteres","IUPAC: menor + oxi + maior (1-metoxipropano). Usual: éter + grupos em ordem alfabética + ico.","Cap. 11 · Éteres"],
+ [/cetona|propanona/i,"Cetonas","prefixo + infixo + ona; usual: grupos + cetona (dimetilcetona = acetona).","Cap. 11 · Cetonas"],
+ [/./,"Nomenclatura de álcoois","Cadeia mais longa com o carbono da OH; numere pela ponta mais perto da OH; se empatar, a dupla desempata.","Cap. 11 · Álcoois: nomenclatura"]],
+ q12:[
+ [/formol|formila|aldoxila|CHO também/i,"Aldeídos","–CHO (formila); sufixo -al; formol = metanal 37%; usual: aldeído + nome do ácido (formaldeído).","Cap. 12 · Aldeídos"],
+ [/esterificação|álcool forma|aroma|COO–CH|metanoato/i,"Ésteres","Ácido + álcool ⇌ éster + água. Nome: …ato de …ila (lado do C=O + lado do O).","Cap. 12 · Ésteres"],
+ [/Sais|neutralização/i,"Sais orgânicos","Ácido + base → sal + água. Nome: …ato de (metal). Iônicos, sólidos, PF alto; sabões.","Cap. 12 · Sais orgânicos"],
+ [/./,"Ácidos carboxílicos","ácido + prefixo + infixo + oico; fazem o dobro de ligações de H do álcool (PE maior); cadeia longa = ácido graxo.","Cap. 12 · Ácidos carboxílicos"]],
+ q14:[
+ [/Grignard|Mg/i,"Compostos de Grignard","R–MgX; nome: halogênio (eto) + de + radical + magnésio; ficam em éter anidro.","Cap. 14 · Compostos de Grignard"],
+ [/–CN|nitrilo|carbilamina/i,"Nitrilas e isonitrilas","Nitrila –C≡N: hidrocarboneto (contando o C do CN) + nitrilo; usual cianeto de …ila. Isonitrila –NC: grupo + carbilamina.","Cap. 14 · Nitrilas e isonitrilas"],
+ [/clorobut|haleto/i,"Haletos orgânicos","Halogênio + hidrocarboneto; a insaturação manda na numeração; usual …eto de …ila.","Cap. 14 · Haletos orgânicos"],
+ [/TNT|nitro/i,"Nitrocompostos","–NO<sub>2</sub>; prefixo nitro; TNT = 2,4,6-trinitrotolueno.","Cap. 14 · Nitrocompostos"],
+ [/CO–N\(|amida/i,"Amidas","Grupo acila no N; prefixo + infixo + amida; N- e N,N- para grupos no nitrogênio.","Cap. 14 · Amidas"],
+ [/./,"Aminas","H da amônia trocados por grupos de carbono: primária (N com 1 C), secundária (2), terciária (3). N ligado a C=O já é amida.","Cap. 14 · Aminas"]],
+ qu:[
+ [/./,"Nomes usuais","Ligue: nome usual → nome oficial → função → uso. Acetona = propanona; formol = metanal 37%; vinagre = ácido etanoico; ureia = amida; acetileno = etino.","Nomes usuais e utilidade prática"]],
+ q1:[
+ [/UFRGS/,"Roteiro da isomeria plana","Mesma fórmula? → mesma função? → mesmo tipo de cadeia? → heteroátomo mudou? → senão, posição.","Isomeria plana · Roteiro"],
+ [/tautomeria|⇌/,"Tautomeria","Isomeria de função em equilíbrio dinâmico: enol ⇌ aldeído ou cetona.","Isomeria plana · Tautomeria"],
+ [/propanoato de metila|metameria/i,"Metameria","Mesma função; o heteroátomo muda de posição entre as cadeias.","Isomeria plana · Metameria"],
+ [/metoximetano/i,"Isomeria de função","Funções diferentes com a mesma fórmula: álcool × éter, aldeído × cetona, ácido × éster.","Isomeria plana · Função"],
+ [/propan-1-ol e propan-2-ol/i,"Isomeria de posição","Mesma função e mesma cadeia; muda a posição do grupo, da dupla ou da ramificação.","Isomeria plana · Posição"],
+ [/metilpropano|cadeia/i,"Isomeria de cadeia","Mesma função; muda o tipo de cadeia: normal × ramificada, aberta × fechada, homogênea × heterogênea.","Isomeria plana · Cadeia"],
+ [/./,"O que é isomeria","Isômeros: mesma fórmula molecular, estruturas diferentes. Fórmula diferente = não são isômeros.","Isomeria plana · Conceito"]],
 q2:[
  [/isômero em que|maior prioridade no C2/i,"Sistema (E)-(Z)","Em cada carbono da dupla, ache o ligante de maior prioridade (número atômico; empatou, olhe os vizinhos). Mesmo lado = Z; lados opostos = E. Cuidado: não compare H com H nem metila com metila.","Sistema (E)-(Z) para nomear estereoisômeros geométricos"],
  [/maleico/i,"Estabilidade e polaridade de cis e trans","O trans costuma ser mais estável (menos energia). O cis é o mais polar e ferve a uma temperatura maior. Cis e trans são diastereoisômeros geométricos.","Isômeros geométricos com ligação dupla"],
@@ -1206,7 +1568,7 @@ b12:[
  qn:[
  [/ordem alfabética|CH₂CH₃\)/i,"Ordem alfabética e cadeia principal","Escolha a maior cadeia; numere pela ponta mais perto das ramificações; escreva os grupos em ordem alfabética (di, tri, sec e terc não contam; iso conta).","Consulta rápida · Regras 1 a 4"],
  [/prefixo que indica|infixo|sufixo|ácido carboxílico termina/i,"Prefixo, infixo e sufixo","Nome = prefixo (nº de C) + infixo (an, en, in) + sufixo (função). Ex.: pent + en + ol = pent-en-ol.","Consulta rápida (tela inicial do quiz)"],
- [/grupo/i,"Grupos substituintes","Isopropil e terc-butil prendem pelo carbono do meio; propil, butil e isobutil, pela ponta (CH₂). Vinil = CH=CH₂; fenil = C₆H₅; benzil = CH₂–C₆H₅.","Consulta rápida · Grupos substituintes"],
+ [/grupo/i,"Radicais (grupos substituintes)","Isopropil e terc-butil prendem pelo carbono do meio; propil, butil e isobutil, pela ponta (CH₂). Vinil = CH=CH₂; fenil = C₆H₅; benzil = CH₂–C₆H₅.","Consulta rápida · Grupos substituintes"],
  [/funções|COO|CHO|benzeno/i,"Funções e casos especiais","Só a função de maior prioridade vira sufixo; a outra vira prefixo (hidroxi). Aldeído e ácido: carbono da função é o 1. Benzeno: orto 1,2, meta 1,3, para 1,4.","Consulta rápida · Sufixos e Regras 6 a 8"],
  [/./,"Numeração","Menor número para: 1º a função, 2º a dupla ou tripla, 3º as ramificações. No ciclo com dupla, a dupla fica entre C1 e C2.","Consulta rápida · Regra 2"]],
 };
@@ -1219,7 +1581,7 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const label=c=>c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
+const label=c=>c.lb?(c.m==="q"?"Química":"Biologia")+" · "+c.lb:c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const L="ABCDE";
@@ -1255,7 +1617,7 @@ function setup(){
   <div class="seg" id="lv">${[2,1,0].map(v=>`<button data-lv="${v}" aria-pressed="${cfg.lv===v}">${LVN[v]}</button>`).join("")}</div>
   <p class="small" style="margin:0">${cfg.lv===2?"Questões no estilo de prova e vestibular: várias etapas, análise de afirmações e pegadinhas do livro.":cfg.lv===1?"Questões diretas para fixar os conceitos de cada capítulo.":"Mistura as questões básicas e as de nível prova."}</p>
   <div class="eyebrow">3. Capítulos</div>
-  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k&&inLv(q)).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
+  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k&&inLv(q)).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.tag||c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
   <div class="row small"><button class="chip" style="display:inline-flex;padding:6px 12px" id="all">Marcar todos</button><button class="chip" style="display:inline-flex;padding:6px 12px" id="none">Desmarcar todos</button></div>
   <div class="eyebrow">4. Quantas perguntas?</div>
   <div class="seg" id="qtd">${[10,20,0].map(n=>`<button data-n="${n}" aria-pressed="${cfg.n===n}">${n||"Todas"}</button>`).join("")}</div>
@@ -1401,7 +1763,7 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.k==="qn"?`Química · ${r}`:c.m==="q"?`Química · Cap. ${c.n} · ${r}`:r.startsWith("Biologia")?r:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
@@ -1410,7 +1772,7 @@ function finish(){
  <header><div class="eyebrow">Resultado</div><h1>${run.ok} de ${done} certas</h1></header>
  <section class="panel"><div class="row" style="gap:18px"><span class="big">${pct}%</span><p style="margin:0;max-width:40ch">${msg}</p></div></section>
  <section class="panel"><h2>Desempenho por capítulo</h2>
-  <div class="caps">${caps.map(b=>{const [st,cl]=status(b.p);return `<div class="cap"><div class="capt"><span class="tag ${b.c.m}">${b.c.m==="q"?"Quí":"Bio"} ${b.c.n}</span><span class="capn">${esc(b.c.t)}</span><span class="st ${cl}">${st}</span></div><div class="capbar"><i class="${cl}" style="width:${Math.round(b.p*100)}%"></i></div><div class="small">${b.ok} de ${b.n} certas · ${Math.round(b.p*100)}%</div></div>`}).join("")}</div></section>
+  <div class="caps">${caps.map(b=>{const [st,cl]=status(b.p);return `<div class="cap"><div class="capt"><span class="tag ${b.c.m}">${b.c.m==="q"?"Quí":"Bio"} ${b.c.tag||b.c.n}</span><span class="capn">${esc(b.c.t)}</span><span class="st ${cl}">${st}</span></div><div class="capbar"><i class="${cl}" style="width:${Math.round(b.p*100)}%"></i></div><div class="small">${b.ok} de ${b.n} certas · ${Math.round(b.p*100)}%</div></div>`}).join("")}</div></section>
  ${topics.length?`<section class="panel"><h2>Onde focar agora</h2><p class="small" style="margin:0">Os temas em que você mais errou, com o macete para fixar e o lugar do resumo para reler.</p>
   <div class="tips">${topics.slice(0,4).map(g=>`<div class="tip"><div class="tiph"><b>${g.t[1]}</b><span class="small">${g.n} ${g.n>1?"erros":"erro"}</span></div><p><span class="lbl2">Macete</span> ${g.t[2]}</p><p class="small"><span class="lbl2">Releia no resumo</span> ${where(g.k,g.t[3])}</p></div>`).join("")}</div>
   ${topics.length>4?`<p class="small" style="margin:0">Mais ${topics.length-4} ${topics.length-4>1?"temas":"tema"} com erro aparecem na revisão abaixo.</p>`:""}</section>`:""}
