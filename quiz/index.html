@@ -113,7 +113,7 @@ const CAPS = [
  {k:"q12",m:"q",n:12,tag:"12",lb:"Cap. 12",t:"Ácidos carboxílicos, aldeídos, ésteres e sais orgânicos"},
  {k:"q14",m:"q",n:14,tag:"14",lb:"Cap. 14",t:"Funções nitrogenadas, haletos e Grignard"},
  {k:"qu",m:"q",n:0,tag:"Usuais",lb:"Nomes usuais",t:"Nomes usuais e utilidade prática"},
- {k:"q1",m:"q",n:1,tag:"Iso 1",lb:"Isomeria · Cap. 1",t:"Isomeria plana"},
+ {k:"q1",m:"q",n:1,tag:"Iso 1",lb:"Isomeria · Cap. 1",t:"Isomeria constitucional (plana)"},
  {k:"q2",m:"q",n:2,tag:"Iso 2",lb:"Isomeria · Cap. 2",t:"Isomeria configuracional geométrica"},
  {k:"q3",m:"q",n:3,tag:"Iso 3",lb:"Isomeria · Cap. 3",t:"Isomeria configuracional óptica"},
  {k:"q5",m:"q",n:5,tag:"Reaç. 5",lb:"Reações · Cap. 5",t:"Reações de adição"},
@@ -1422,7 +1422,7 @@ const Q = [
  ["cadeia.","Os dois têm cadeia heterogênea, aberta e normal."],
  ["posição.","O que muda é a posição do heteroátomo: metameria."],
  ["tautomeria.","Não estão em equilíbrio."]]},
-{k:"q1",lv:2,s:"O equilíbrio propen-2-ol ⇌ propanona é exemplo de",c:4,o:[
+{k:"q1",lv:2,s:"O equilíbrio prop-1-en-2-ol ⇌ propanona é exemplo de",c:4,o:[
  ["isomeria de cadeia.","A função muda (enol → cetona)."],
  ["metameria.","Não há heteroátomo mudando entre cadeias."],
  ["isomeria de posição.","A função muda."],
@@ -1436,7 +1436,40 @@ const Q = [
  ["etoxietano × metoxipropano: função.","É metameria (dois éteres)."]]},
 {k:"q1",s:"Propan-1-ol e propan-2-ol são isômeros de posição.",v:true,e:"A hidroxila muda de carbono."},
 {k:"q1",s:"Na tautomeria, os isômeros se convertem um no outro em equilíbrio dinâmico.",v:true,e:"Ex.: enol ⇌ aldeído ou cetona."},
-{k:"q1",s:"Etano e eteno são isômeros de cadeia.",v:false,e:"Têm fórmulas moleculares diferentes: não são isômeros."}
+{k:"q1",s:"Etano e eteno são isômeros de cadeia.",v:false,e:"Têm fórmulas moleculares diferentes: não são isômeros."},
+{k:"q1",s:"Pelo livro, ciclopropano e propeno (C<sub>3</sub>H<sub>6</sub>) são isômeros de",c:1,o:[
+ ["função.","Os dois são hidrocarbonetos: mesma função."],
+ ["cadeia (saturada × insaturada).","Isso. O livro classifica esse par como isomeria de cadeia."],
+ ["posição.","Na posição o tipo de cadeia é o mesmo; aqui um é anel e o outro é aberto e insaturado."],
+ ["metameria.","Não há heteroátomo."],
+ ["tautomeria.","Não há equilíbrio nem funções diferentes."]]},
+{k:"q1",s:"Propanonitrila (CH<sub>3</sub>CH<sub>2</sub>CN) e etilcarbilamina (CH<sub>3</sub>CH<sub>2</sub>NC) são isômeros de",c:3,o:[
+ ["cadeia.","As funções são diferentes (nitrilo × isonitrilo)."],
+ ["posição.","As funções são diferentes."],
+ ["metameria.","Metameria exige a mesma função."],
+ ["função.","Isso. Nitrilos e isonitrilos são um dos casos de isomeria de função do livro."],
+ ["tautomeria.","Não estão em equilíbrio dinâmico."]]},
+{k:"q1",lv:2,s:"(UECE) Para o éter comum (etoxietano), um isômero de função e um de compensação são, respectivamente,",c:2,o:[
+ ["butanona e 1-metoxipropano.","Butanona é C<sub>4</sub>H<sub>8</sub>O: nem é isômero do éter (C<sub>4</sub>H<sub>10</sub>O)."],
+ ["butanona e butan-1-ol.","Butanona não é isômero; e butan-1-ol é de função, não de compensação."],
+ ["butan-1-ol e 1-metoxipropano.","Isso. Álcool (função diferente) e outro éter com o O em outra posição (compensação)."],
+ ["butan-2-ol e butanona.","Butanona tem fórmula diferente."],
+ ["2-metilpropanona e propanal.","Fórmulas diferentes de C<sub>4</sub>H<sub>10</sub>O."]]},
+{k:"q1",lv:2,s:"(PUC-MG) Um isômero de função da 4-metilpentan-2-ona (C<sub>6</sub>H<sub>12</sub>O) é",c:1,o:[
+ ["hexan-1-ol.","Álcool com 6 C é C<sub>6</sub>H<sub>14</sub>O: fórmula diferente."],
+ ["hexanal.","Isso. Aldeído C<sub>6</sub>H<sub>12</sub>O: mesma fórmula, outra função."],
+ ["4-metilbutanal.","Tem só 5 C."],
+ ["4-metilpentan-1-ol.","É C<sub>6</sub>H<sub>14</sub>O."],
+ ["3-metilpentan-3-ona.","É cetona também: mesma função."]]},
+{k:"q1",lv:2,s:"(FAMECA) Exemplifica isomeria constitucional de cadeia o par",c:1,o:[
+ ["propanal e propanona.","Função (aldeído × cetona)."],
+ ["propilamina e metil-etilamina.","Isso. Homogênea × heterogênea (N na ponta ou no meio)."],
+ ["butan-1-ol e butan-2-ol.","Posição (da OH)."],
+ ["1-metoxipropano e etoxietano.","Metameria (O muda de lugar)."],
+ ["ácido propanoico e metanoato de etila.","Função (ácido × éster)."]]},
+{k:"q1",s:"Em cadeias fechadas, a isomeria de cadeia é chamada de isomeria de núcleo.",v:true,e:"Tome nota do livro (ciclopentano, metilciclobutano, etilciclopropano)."},
+{k:"q1",s:"Wöhler obteve ureia aquecendo cianato de amônio, o que ajudou a derrubar a Teoria da Força Vital.",v:true,e:"Experimento de 1828, abertura do capítulo."}
+
 
 ];
 
@@ -1477,13 +1510,13 @@ const DICAS = {
  qu:[
  [/./,"Nomes usuais","Ligue: nome usual → nome oficial → função → uso. Acetona = propanona; formol = metanal 37%; vinagre = ácido etanoico; ureia = amida; acetileno = etino.","Nomes usuais e utilidade prática"]],
  q1:[
- [/UFRGS/,"Roteiro da isomeria plana","Mesma fórmula? → mesma função? → mesmo tipo de cadeia? → heteroátomo mudou? → senão, posição.","Isomeria plana · Roteiro"],
- [/tautomeria|⇌/,"Tautomeria","Isomeria de função em equilíbrio dinâmico: enol ⇌ aldeído ou cetona.","Isomeria plana · Tautomeria"],
- [/propanoato de metila|metameria/i,"Metameria","Mesma função; o heteroátomo muda de posição entre as cadeias.","Isomeria plana · Metameria"],
- [/metoximetano/i,"Isomeria de função","Funções diferentes com a mesma fórmula: álcool × éter, aldeído × cetona, ácido × éster.","Isomeria plana · Função"],
- [/propan-1-ol e propan-2-ol/i,"Isomeria de posição","Mesma função e mesma cadeia; muda a posição do grupo, da dupla ou da ramificação.","Isomeria plana · Posição"],
- [/metilpropano|cadeia/i,"Isomeria de cadeia","Mesma função; muda o tipo de cadeia: normal × ramificada, aberta × fechada, homogênea × heterogênea.","Isomeria plana · Cadeia"],
- [/./,"O que é isomeria","Isômeros: mesma fórmula molecular, estruturas diferentes. Fórmula diferente = não são isômeros.","Isomeria plana · Conceito"]],
+ [/UFRGS/,"Roteiro da isomeria plana","Mesma fórmula? → mesma função? → mesmo tipo de cadeia? → heteroátomo mudou? → senão, posição.","Cap. 1 · Roteiro"],
+ [/tautomeria|⇌/,"Tautomeria","Isomeria de função em equilíbrio dinâmico: enol ⇌ aldeído ou cetona.","Cap. 1 · Tautomeria"],
+ [/propanoato de metila|metameria/i,"Metameria","Mesma função; o heteroátomo muda de posição entre as cadeias.","Cap. 1 · Metameria"],
+ [/metoximetano|carbilamina|PUC-MG|\(UECE\)/i,"Isomeria de função","Funções diferentes com a mesma fórmula: álcool × éter, aldeído × cetona, ácido × éster, nitrilo × isonitrilo, fenol × álcool × éter aromáticos.","Cap. 1 · Função"],
+ [/propan-1-ol e propan-2-ol/i,"Isomeria de posição","Mesma função e mesma cadeia; muda a posição do grupo, da dupla ou da ramificação.","Cap. 1 · Posição"],
+ [/ciclopropano e propeno|núcleo|FAMECA|metilpropano|cadeia/i,"Isomeria de cadeia","Mesma função; muda o tipo de cadeia: normal × ramificada, heterogênea × homogênea, saturada × insaturada, aberta × fechada (em anel: núcleo).","Cap. 1 · Cadeia"],
+ [/./,"O que é isomeria","Isômeros: mesma fórmula molecular, estruturas diferentes. Fórmula diferente = não são isômeros.","Cap. 1 · Conceito"]],
 q2:[
  [/isômero em que|maior prioridade no C2/i,"Sistema (E)-(Z)","Em cada carbono da dupla, ache o ligante de maior prioridade (número atômico; empatou, olhe os vizinhos). Mesmo lado = Z; lados opostos = E. Cuidado: não compare H com H nem metila com metila.","Sistema (E)-(Z) para nomear estereoisômeros geométricos"],
  [/maleico/i,"Estabilidade e polaridade de cis e trans","O trans costuma ser mais estável (menos energia). O cis é o mais polar e ferve a uma temperatura maior. Cis e trans são diastereoisômeros geométricos.","Isômeros geométricos com ligação dupla"],

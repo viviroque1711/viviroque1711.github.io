@@ -181,7 +181,7 @@ footer.note{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);co
     <nav class="trail" id="trail" aria-label="Capítulos e seções"></nav>
     <main id="main"></main>
   </div>
-  <footer class="note">Conferido com os livros do SAS: Compostos de carbono (caps. 4, 5, 11, 12 e 14; cap. 6 pela resolução oficial) e Isomeria e Reações Orgânicas (caps. 2, 3 e 5). O cap. 1 (isomeria plana) e a lista de nomes usuais seguem o conteúdo padrão. Títulos e nomes seguem o livro. Onde o livro parece ter erro, há um aviso "Confira com o professor".</footer>
+  <footer class="note">Conferido com os livros do SAS: Compostos de carbono (caps. 4, 5, 11, 12 e 14; cap. 6 pela resolução oficial) e Isomeria e Reações Orgânicas (caps. 1, 2, 3 e 5). A lista de nomes usuais segue os livros e o conteúdo padrão. Títulos e nomes seguem o livro. Onde o livro parece ter erro, há um aviso "Confira com o professor".</footer>
 </div>
 
 <script>
@@ -2116,137 +2116,180 @@ return {id:"c9",num:0,lab:"Nomes usuais",title:"Nomes usuais e utilidade prátic
 
 const CAP1=(()=>{
 const S = [
- {id:"s1",label:"Isomeria: o que é e como se divide",kicker:"Isomeria e Reações · Cap. 1",title:"Isomeria",
-  sobre:"Isômeros são compostos diferentes com a mesma fórmula molecular. A isomeria se divide em plana (constitucional) e espacial (configuracional).",
-  hook:"A prova pede para classificar pares de compostos: \"são isômeros de quê?\". Este capítulo é a base dos caps. 2 e 3.",
-  ideia:"<b>Isômeros</b>: mesma fórmula molecular, estruturas diferentes. <b>Isomeria plana</b>: a diferença aparece na fórmula estrutural plana (ligações diferentes). <b>Isomeria espacial</b>: mesma ligação, arranjo diferente no espaço (geométrica e óptica, caps. 2 e 3).",
-  analogia:"Com as mesmas peças de Lego (mesma fórmula), você monta objetos diferentes. Se muda a ordem das peças, é isomeria plana. Se a ordem é igual e muda só a posição no espaço, é espacial.",
+ {id:"s1",label:"Isomeria constitucional (abertura)",kicker:"Cap. 1 · pág. 2",title:"Isomeria constitucional",
+  sobre:"Como uma experiência de 1828 com a ureia mostrou que substâncias com os mesmos átomos podem ser diferentes, e o que o capítulo pede.",
+  hook:"A ureia do fertilizante abriu um capítulo inteiro da Química. E na prova, \"classifique os isômeros\" é uma das questões mais comuns.",
+  ideia:"Em 1828, <b>Friedrich Wöhler</b> produziu <b>ureia</b> (CH<sub>4</sub>N<sub>2</sub>O) aquecendo <b>cianato de amônio</b> (NH<sub>4</sub>CNO). Mesmos elementos, mesma proporção, propriedades diferentes: nascia a <b>isomeria</b>.",
+  analogia:"As mesmas letras formam palavras diferentes: AMOR e ROMA. Mesmas \"peças\", arrumação diferente, significado diferente.",
   blocks:[
-   {h:"Os cinco tipos de isomeria plana",items:["<b>Cadeia</b>: muda o tipo de cadeia.","<b>Posição</b>: muda a posição de um grupo, insaturação ou ramificação.","<b>Função</b>: muda a função orgânica.","<b>Metameria (compensação)</b>: muda a posição do heteroátomo.","<b>Tautomeria</b>: isômeros de função em equilíbrio dinâmico."]},
-   {h:"Primeiro passo de qualquer questão",items:["Confira se as fórmulas moleculares são iguais. Se não forem, <b>não são isômeros</b>."]}
+   {h:"A síntese de Wöhler",items:["Wöhler aqueceu cianato de amônio (NH<sub>4</sub>CNO) e obteve ureia (CH<sub>4</sub>N<sub>2</sub>O).","Esse experimento deu início à queda da <b>Teoria da Força Vital</b>.","Mostrou que compostos com os mesmos elementos, na mesma proporção, podem ter propriedades físicas e químicas distintas.","Hoje a ureia é usada como fertilizante."]},
+   {h:"Expectativas de aprendizagem",items:["Reconhecer compostos isômeros.","Identificar casos de isomeria constitucional."]}
   ],
-  tables:[{head:["Isomeria","Subtipos"],rows:[["Plana (constitucional)","cadeia, posição, função, metameria, tautomeria"],["Espacial (configuracional)","geométrica (cis-trans, E/Z) e óptica"]],
-   ex:[["Plana (constitucional)","A diferença já aparece no desenho plano: os átomos estão ligados de outro jeito."],["Espacial (configuracional)","O desenho plano é igual; muda o arranjo em 3D (caps. 2 e 3)."]]}],
-  notes:["O capítulo 1 do livro (Isomeria plana) não foi enviado. Este bloco segue o conteúdo padrão do ensino médio e a classificação usada nos exercícios do cap. 2 (ex.: UFRGS)."],
-  trap:["Isômeros nunca têm fórmulas moleculares diferentes. Conte C, H e O antes de tudo."],
-  check:[{q:"O que é isomeria?",a:"Compostos diferentes com a mesma fórmula molecular."},{q:"Quais são os tipos de isomeria plana?",a:"Cadeia, posição, função, metameria e tautomeria."}]},
+  tables:[],
+  trap:["Ureia e cianato de amônio têm a mesma fórmula (CH<sub>4</sub>N<sub>2</sub>O), mas são substâncias diferentes."],
+  check:[{q:"Que experimento deu origem à ideia de isomeria?",a:"A síntese da ureia por Wöhler (1828), a partir do cianato de amônio."}]},
 
- {id:"s2",label:"Isomeria de cadeia",kicker:"Isomeria plana",title:"Isomeria de cadeia",
-  sobre:"Mesma função, mas tipos de cadeia diferentes.",
-  hook:"Butano e metilpropano (isobutano) são o exemplo mais clássico de prova.",
-  ideia:"Isômeros de <b>cadeia</b> têm a mesma função e diferem no <b>tipo de cadeia</b>: normal × ramificada, aberta × fechada, homogênea × heterogênea.",
-  analogia:"As mesmas pessoas numa fila reta (normal) ou com alguém saindo para o lado (ramificada).",
+ {id:"s2",label:"Isômeros e classificação geral da isomeria",kicker:"Cap. 1 · pág. 3",title:"Isômeros",
+  sobre:"Por que a fórmula molecular não basta para dar nome a uma substância, e o esquema geral da isomeria.",
+  hook:"C<sub>4</sub>H<sub>10</sub> pode ser butano ou isobutano. Se você escrever só \"butano\", pode estar errado.",
+  ideia:"<b>Isômeros</b>: substâncias diferentes (estrutura e propriedades) com a <b>mesma fórmula molecular</b>. A palavra vem de <i>iso</i> = mesmo e <i>meros</i> = partes.",
+  analogia:"Gêmeos idênticos no RG (mesma fórmula), mas com personalidades diferentes (propriedades).",
   blocks:[
-   {h:"Exemplos",items:["<b>Normal × ramificada</b>: butano (CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>3</sub>) × metilpropano (CH<sub>3</sub>CH(CH<sub>3</sub>)CH<sub>3</sub>), C<sub>4</sub>H<sub>10</sub>.","<b>Aberta × fechada</b>: but-1-eno × ciclobutano, C<sub>4</sub>H<sub>8</sub>.","<b>Homogênea × heterogênea</b>: propan-1-amina (CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>NH<sub>2</sub>) × etilmetilamina (CH<sub>3</sub>–NH–CH<sub>2</sub>CH<sub>3</sub>), C<sub>3</sub>H<sub>9</sub>N (como na questão da UFRGS do cap. 2)."]}
+   {h:"Butano × isobutano",items:["Os dois têm fórmula <b>C<sub>4</sub>H<sub>10</sub></b>: 4 mol de C e 10 mol de H por mol.","Butano: PF = −138,3 °C; PE = −0,5 °C. Isobutano: PF = −159,6 °C; PE = −11,7 °C.","PF e PE são propriedades específicas: se são diferentes, as substâncias são diferentes."]},
+   {h:"Classificação geral (esquema do livro)",items:["<b>Constitucional</b> (plana): de função, de posição, de cadeia, de compensação ou metameria, dinâmica ou tautomeria.","<b>Estereoisomeria</b> → configuracional: geométrica e óptica (caps. 2 e 3)."]}
   ],
-  tables:[{head:["Par","Fórmula","Diferença"],rows:[["butano × metilpropano","C<sub>4</sub>H<sub>10</sub>","normal × ramificada"],["but-1-eno × ciclobutano","C<sub>4</sub>H<sub>8</sub>","aberta × fechada"],["propan-1-amina × etilmetilamina","C<sub>3</sub>H<sub>9</sub>N","homogênea × heterogênea"]],
-   ex:[["butano × metilpropano","Os dois são alcanos; um é reto, o outro ramificado."],["but-1-eno × ciclobutano","Um é alceno aberto, o outro é anel. Ambos são hidrocarbonetos."],["propan-1-amina × etilmetilamina","No 2º, o N fica entre carbonos (heteroátomo na cadeia)."]]}],
-  trap:["Se a função mudar, não é de cadeia: é de função."],
-  check:[{q:"Butano e metilpropano são isômeros de quê?",a:"De cadeia (normal × ramificada)."}]},
+  tables:[{head:["Isomeria","Tipos"],rows:[["Constitucional","função; posição; cadeia; compensação ou metameria; dinâmica ou tautomeria"],["Estereoisomeria (configuracional)","geométrica; óptica"]],
+   ex:[["Constitucional","A diferença aparece no desenho plano: muda a conectividade."],["Estereoisomeria (configuracional)","O desenho plano é igual; muda o arranjo no espaço (caps. 2 e 3)."]]}],
+  trap:["Isômeros nunca têm fórmulas moleculares diferentes. Conte os átomos antes de classificar."],
+  check:[{q:"Por que butano e isobutano são substâncias diferentes?",a:"Porque têm PF e PE diferentes, embora tenham a mesma fórmula."},{q:"O que significa isomeria?",a:"Iso = mesmo; meros = partes."}]},
 
- {id:"s3",label:"Isomeria de posição",kicker:"Isomeria plana",title:"Isomeria de posição",
-  sobre:"Mesma função e mesma cadeia, mas um grupo, uma insaturação ou uma ramificação em outra posição.",
-  hook:"No cap. 5 (adição), o pent-2-eno + HBr dá 2-bromopentano e 3-bromopentano: isômeros de posição.",
-  ideia:"Isômeros de <b>posição</b> têm a mesma função e o mesmo tipo de cadeia; muda só o <b>número</b> no nome.",
-  analogia:"A mesma rua e a mesma casa; muda só o número do endereço.",
+ {id:"s3",label:"Isomeria constitucional: constituição e conectividade",kicker:"Cap. 1 · págs. 3 e 4",title:"Isomeria constitucional",
+  sobre:"O que muda entre isômeros constitucionais: a sequência e/ou a natureza das ligações.",
+  hook:"Entender \"conectividade\" ajuda a justificar qualquer classificação na prova discursiva.",
+  ideia:"<b>Isomeria constitucional é um caso de isomeria em que os isômeros diferenciam-se pela conectividade, ou seja, pela sequência e/ou natureza de suas ligações.</b>",
+  analogia:"Conectividade é o mapa de quem está de mãos dadas com quem. Mudou o mapa (sequência) ou o tipo de aperto de mão (natureza da ligação), mudou o composto.",
   blocks:[
-   {h:"Exemplos",items:["Insaturação: <b>but-1-eno × but-2-eno</b> (C<sub>4</sub>H<sub>8</sub>).","Grupo funcional: <b>propan-1-ol × propan-2-ol</b> (C<sub>3</sub>H<sub>8</sub>O).","Ramificação/halogênio: <b>1-cloropropano × 2-cloropropano</b>.","Benzeno: <b>o-, m- e p-xileno</b> (C<sub>8</sub>H<sub>10</sub>)."]}
+   {h:"Os termos do livro",items:["<b>Constituição</b>: a composição dos elementos de uma substância.","<b>Conectividade</b>: a capacidade de estabelecer ligações, ligada à <b>sequência</b> e/ou à <b>natureza</b> das ligações.","Compostos com conectividades diferentes e fórmulas moleculares iguais são <b>isômeros constitucionais</b>."]},
+   {h:"Os três exemplos do livro",items:["<b>But-1-eno × but-2-eno</b> (C<sub>4</sub>H<sub>8</sub>): muda a <b>sequência</b> (a dupla se deslocou).","<b>Metoxietano × propan-1-ol</b>: muda a <b>natureza</b> (o éter tem uma ligação C–O a mais; o álcool tem O–H).","<b>Propanal × prop-1-en-1-ol</b>: mudam a <b>sequência e a natureza</b> (C=O no aldeído; C=C e O–H no enol)."]}
   ],
-  tables:[{head:["Par","O que muda de posição"],rows:[["but-1-eno × but-2-eno","a dupla"],["propan-1-ol × propan-2-ol","a hidroxila"],["2-metilpentano × 3-metilpentano","a ramificação"],["o-xileno × p-xileno","os metis no anel"]],
-   ex:[["but-1-eno × but-2-eno","Dupla no C1 ou no C2."],["propan-1-ol × propan-2-ol","OH na ponta ou no meio."],["2-metilpentano × 3-metilpentano","O metil muda de carbono."],["o-xileno × p-xileno","1,2 ou 1,4."]]}],
-  trap:["Isômeros de posição costumam ter o MESMO nome com números diferentes."],
-  check:[{q:"Propan-1-ol e propan-2-ol são isômeros de quê?",a:"De posição (da hidroxila)."}]},
+  tables:[{head:["Par","O que mudou"],rows:[["but-1-eno × but-2-eno","sequência das ligações"],["metoxietano × propan-1-ol","natureza das ligações"],["propanal × prop-1-en-1-ol","sequência e natureza"]],
+   ex:[["but-1-eno × but-2-eno","Mesmos tipos de ligação; a dupla mudou de lugar."],["metoxietano × propan-1-ol","Surge ou some a ligação O–H."],["propanal × prop-1-en-1-ol","C=O vira C=C e aparece O–H."]]}],
+  trap:["\"Plana\" e \"constitucional\" são nomes da mesma isomeria."],
+  check:[{q:"O que é conectividade?",a:"A capacidade de estabelecer ligações: a sequência e/ou a natureza das ligações."}]},
 
- {id:"s4",label:"Isomeria de função",kicker:"Isomeria plana",title:"Isomeria de função",
-  sobre:"Mesma fórmula molecular, funções diferentes. Os pares clássicos.",
-  hook:"Etanol e metoximetano têm a mesma fórmula (C<sub>2</sub>H<sub>6</sub>O): um é o álcool da bebida, o outro é um gás.",
-  ideia:"Isômeros de <b>função</b> pertencem a funções diferentes. Os pares clássicos: <b>álcool × éter</b>, <b>aldeído × cetona</b>, <b>ácido carboxílico × éster</b>, <b>álcool aromático × fenol × éter</b>.",
-  analogia:"Com os mesmos ingredientes você faz um bolo ou uma panqueca: a receita (função) muda tudo.",
+ {id:"s4",label:"Isomeria de função ou funcional",kicker:"Cap. 1 · pág. 4",title:"Isomeria de função ou funcional",
+  sobre:"Isômeros que pertencem a funções químicas diferentes. Os cinco casos do livro.",
+  hook:"Etanol e metoximetano têm a mesma fórmula: um é a bebida, o outro é um gás.",
+  ideia:"Isômeros de <b>função</b>: conectividades diferentes e <b>funções químicas diferentes</b>.",
+  analogia:"Com os mesmos ingredientes você faz bolo ou panqueca: a receita (função) muda tudo.",
   blocks:[
-   {h:"Pares clássicos",items:["C<sub>2</sub>H<sub>6</sub>O: <b>etanol</b> (álcool) × <b>metoximetano</b> (éter).","C<sub>3</sub>H<sub>6</sub>O: <b>propanal</b> (aldeído) × <b>propanona</b> (cetona).","C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>: <b>ácido etanoico</b> (ácido) × <b>metanoato de metila</b> (éster).","C<sub>7</sub>H<sub>8</sub>O: <b>álcool benzílico</b> (álcool) × <b>metilfenóis</b> (fenol) × <b>metoxibenzeno</b> (éter)."]}
+   {h:"Principais casos (livro)",items:["<b>Álcool e éter</b>: propan-1-ol × metoxietano (C<sub>3</sub>H<sub>8</sub>O).","<b>Aldeído e cetona</b>: propanal × propanona (C<sub>3</sub>H<sub>6</sub>O).","<b>Ácido carboxílico e éster</b>: ácido propanoico × etanoato de metila (C<sub>3</sub>H<sub>6</sub>O<sub>2</sub>).","<b>Nitrilos e isonitrilos</b>: propanonitrila (CH<sub>3</sub>CH<sub>2</sub>CN) × etilcarbilamina (CH<sub>3</sub>CH<sub>2</sub>NC) (C<sub>3</sub>H<sub>5</sub>N).","<b>Fenol, álcool e éter (aromáticos)</b>: o-cresol × álcool benzílico × metoxibenzeno (C<sub>7</sub>H<sub>8</sub>O)."]}
   ],
-  tables:[{head:["Fórmula","Isômero 1","Isômero 2"],rows:[["C<sub>2</sub>H<sub>6</sub>O","etanol (álcool)","metoximetano (éter)"],["C<sub>3</sub>H<sub>6</sub>O","propanal (aldeído)","propanona (cetona)"],["C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>","ácido etanoico (ácido)","metanoato de metila (éster)"],["C<sub>7</sub>H<sub>8</sub>O","álcool benzílico (álcool)","metoxibenzeno (éter) e cresóis (fenol)"]],
-   ex:[["C<sub>2</sub>H<sub>6</sub>O","O mesmo O: com H (OH) é álcool; entre carbonos é éter."],["C<sub>3</sub>H<sub>6</sub>O","C=O na ponta (aldeído) ou no meio (cetona)."],["C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>","COOH (ácido) ou COO–C (éster)."],["C<sub>7</sub>H<sub>8</sub>O","Três funções possíveis com a mesma fórmula."]]}],
-  trap:["Função diferente vence qualquer outra diferença: se a função mudou, a resposta é isomeria de função."],
+  tables:[{head:["Caso","Exemplo","Fórmula"],rows:[["Álcool e éter","propan-1-ol × metoxietano","C<sub>3</sub>H<sub>8</sub>O"],["Aldeído e cetona","propanal × propanona","C<sub>3</sub>H<sub>6</sub>O"],["Ácido e éster","ácido propanoico × etanoato de metila","C<sub>3</sub>H<sub>6</sub>O<sub>2</sub>"],["Nitrilo e isonitrilo","propanonitrila × etilcarbilamina","C<sub>3</sub>H<sub>5</sub>N"],["Fenol, álcool e éter","o-cresol × álcool benzílico × metoxibenzeno","C<sub>7</sub>H<sub>8</sub>O"]],
+   ex:[["Álcool e éter","O O com H (álcool) ou entre carbonos (éter)."],["Aldeído e cetona","C=O na ponta ou no meio."],["Ácido e éster","COOH ou COO entre cadeias."],["Nitrilo e isonitrilo","–CN ou –NC."],["Fenol, álcool e éter","OH no anel, OH no CH<sub>2</sub>, ou O entre anel e metil."]]}],
+  trap:["Se a função mudou, é isomeria de função, mesmo que a cadeia também tenha mudado."],
   check:[{q:"Propanal e propanona são isômeros de quê?",a:"De função (aldeído × cetona)."}]},
 
- {id:"s5",label:"Metameria (compensação)",kicker:"Isomeria plana",title:"Metameria ou isomeria de compensação",
-  sobre:"Mesma função, mas o heteroátomo muda de posição entre as cadeias carbônicas.",
-  hook:"Etoxietano × metoxipropano é o exemplo da questão da UFRGS no cap. 2.",
-  ideia:"Na <b>metameria</b>, o <b>heteroátomo</b> (O, N, S) muda de lugar dentro da cadeia, \"compensando\" o tamanho dos dois lados.",
-  analogia:"Uma gangorra com o mesmo número de crianças: o apoio (heteroátomo) muda de lugar e elas se redistribuem dos dois lados.",
+ {id:"s5",label:"Isomeria de cadeia",kicker:"Cap. 1 · pág. 5",title:"Isomeria de cadeia",
+  sobre:"Mesma função, tipo de cadeia diferente. Os quatro casos do livro e a isomeria de núcleo.",
+  hook:"Butano × isobutano é o exemplo mais cobrado.",
+  ideia:"Isômeros de <b>cadeia</b>: conectividades diferentes, <b>mesma função</b> e <b>tipo de cadeia diferente</b>.",
+  analogia:"As mesmas pessoas numa fila reta (normal), com alguém saindo para o lado (ramificada) ou de mãos dadas em roda (fechada).",
   blocks:[
-   {h:"Exemplos",items:["Éteres C<sub>4</sub>H<sub>10</sub>O: <b>etoxietano</b> (C<sub>2</sub>–O–C<sub>2</sub>) × <b>metoxipropano</b> (C<sub>1</sub>–O–C<sub>3</sub>).","Aminas C<sub>4</sub>H<sub>11</sub>N: <b>dietilamina</b> × <b>metilpropilamina</b>.","Ésteres C<sub>4</sub>H<sub>8</sub>O<sub>2</sub>: <b>etanoato de etila</b> × <b>propanoato de metila</b>."]}
+   {h:"Principais casos (livro)",items:["<b>Normal × ramificada</b>: butano × isobutano (C<sub>4</sub>H<sub>10</sub>).","<b>Heterogênea × homogênea</b>: etilmetilamina × propilamina (C<sub>3</sub>H<sub>9</sub>N).","<b>Saturada × insaturada</b>: ciclopropano × propeno (C<sub>3</sub>H<sub>6</sub>).","<b>Aberta × fechada</b>: hex-1-eno × ciclo-hexano (C<sub>6</sub>H<sub>12</sub>)."]},
+   {h:"Tome nota: isomeria de núcleo",items:["Em compostos de cadeia fechada, a isomeria de cadeia é chamada de <b>isomeria de núcleo</b>.","Ex.: ciclopentano, metilciclobutano e etilciclopropano (C<sub>5</sub>H<sub>10</sub>)."]}
   ],
-  tables:[{head:["Par","Heteroátomo","Lados"],rows:[["etoxietano × metoxipropano","O","2+2 × 1+3"],["dietilamina × metilpropilamina","N","2+2 × 1+3"],["etanoato de etila × propanoato de metila","O do éster","2+2 × 3+1"]],
-   ex:[["etoxietano × metoxipropano","Os dois são éteres; o O mudou de lugar."],["dietilamina × metilpropilamina","Duas aminas secundárias; o N mudou de lugar."],["etanoato de etila × propanoato de metila","Dois ésteres; a \"ponte\" COO mudou de lugar."]]}],
-  trap:["Metameria exige heteroátomo ENTRE carbonos nos dois isômeros (cadeia heterogênea). Se um é homogêneo e o outro heterogêneo, o livro considera isomeria de cadeia."],
-  check:[{q:"Etoxietano e metoxipropano são isômeros de quê?",a:"Metameria (compensação)."}]},
+  tables:[{head:["Caso","Exemplo","Fórmula"],rows:[["Normal × ramificada","butano × isobutano","C<sub>4</sub>H<sub>10</sub>"],["Heterogênea × homogênea","etilmetilamina × propilamina","C<sub>3</sub>H<sub>9</sub>N"],["Saturada × insaturada","ciclopropano × propeno","C<sub>3</sub>H<sub>6</sub>"],["Aberta × fechada","hex-1-eno × ciclo-hexano","C<sub>6</sub>H<sub>12</sub>"],["Núcleo (cadeia fechada)","ciclopentano × metilciclobutano × etilciclopropano","C<sub>5</sub>H<sub>10</sub>"]],
+   ex:[["Normal × ramificada","Os dois são alcanos."],["Heterogênea × homogênea","Duas aminas: o N entre carbonos ou na ponta."],["Saturada × insaturada","O livro conta como cadeia: o ciclopropano é saturado e o propeno tem dupla."],["Aberta × fechada","Dois hidrocarbonetos; um é anel."],["Núcleo (cadeia fechada)","Anéis de tamanhos diferentes."]]}],
+  trap:["Pelo livro, ciclopropano × propeno é isomeria de CADEIA (saturada × insaturada), não de função.","Heterogênea × homogênea (amina com N no meio × N na ponta) também é de cadeia."],
+  check:[{q:"Ciclopentano e metilciclobutano são isômeros de quê?",a:"De cadeia, chamada isomeria de núcleo."}]},
 
- {id:"s6",label:"Tautomeria",kicker:"Isomeria plana",title:"Tautomeria",
-  sobre:"Isômeros de função que se transformam um no outro sem parar: um equilíbrio dinâmico.",
-  hook:"No cap. 5 de Reações, a hidratação do alcino forma um enol que vira aldeído ou cetona: isso é tautomeria.",
-  ideia:"<b>Tautomeria</b>: isomeria de função em <b>equilíbrio dinâmico</b>. O mais comum: <b>enol ⇌ aldeído</b> (aldo-enólica) e <b>enol ⇌ cetona</b> (ceto-enólica).",
-  analogia:"Um H \"pula\" de um lugar para outro o tempo todo, e a dupla muda junto: a molécula alterna entre duas formas.",
+ {id:"s6",label:"Isomeria de posição",kicker:"Cap. 1 · pág. 5",title:"Isomeria de posição",
+  sobre:"Mesma função, mesmo tipo de cadeia, mas algo em outra posição.",
+  hook:"No cap. 5 de Reações, o pent-2-eno + HBr dá 2-bromopentano e 3-bromopentano: isômeros de posição.",
+  ideia:"Isômeros de <b>posição</b>: conectividades diferentes, mesma função, <b>mesmo tipo de cadeia</b>, e diferem na posição da <b>insaturação</b>, do <b>substituinte</b> ou do <b>grupo funcional</b>.",
+  analogia:"A mesma rua e a mesma casa; muda só o número.",
   blocks:[
-   {h:"Exemplos",items:["<b>Aldo-enólica</b>: CH<sub>2</sub>=CH–OH (etenol) ⇌ CH<sub>3</sub>–CHO (etanal).","<b>Ceto-enólica</b>: CH<sub>2</sub>=C(OH)–CH<sub>3</sub> (propen-2-ol) ⇌ CH<sub>3</sub>–CO–CH<sub>3</sub> (propanona).","O equilíbrio fica deslocado para a forma <b>carbonílica</b> (aldeído ou cetona), mais estável."]}
+   {h:"Principais casos (livro)",items:["<b>Da insaturação</b>: pent-1-eno × pent-2-eno (C<sub>5</sub>H<sub>10</sub>).","<b>Do substituinte</b>: 1-cloropropano × 2-cloropropano (C<sub>3</sub>H<sub>7</sub>Cl).","<b>Do grupo funcional</b>: o-cresol × p-cresol (C<sub>7</sub>H<sub>8</sub>O)."]}
   ],
-  tables:[{head:["Tipo","Equilíbrio"],rows:[["aldo-enólica","enol ⇌ aldeído"],["ceto-enólica","enol ⇌ cetona"]],
-   ex:[["aldo-enólica","Etenol ⇌ etanal: hidratação do etino."],["ceto-enólica","Propen-2-ol ⇌ propanona: hidratação do propino."]]}],
-  trap:["Tautomeria é um caso especial de isomeria de FUNÇÃO, com equilíbrio."],
-  check:[{q:"O que é tautomeria?",a:"Isomeria de função em equilíbrio dinâmico (ex.: enol ⇌ aldeído)."}]},
+  tables:[{head:["Posição de quê","Exemplo"],rows:[["Insaturação","pent-1-eno × pent-2-eno"],["Substituinte","1-cloropropano × 2-cloropropano"],["Grupo funcional","o-cresol × p-cresol"]],
+   ex:[["Insaturação","A dupla no C1 ou no C2."],["Substituinte","O Cl na ponta ou no meio."],["Grupo funcional","O OH em relação ao CH<sub>3</sub>: orto ou para."]]}],
+  trap:["Isômeros de posição costumam ter o mesmo nome com números diferentes."],
+  check:[{q:"Pent-1-eno e pent-2-eno?",a:"Isômeros de posição (da insaturação)."}]},
 
- {id:"s7",label:"Como classificar um par de isômeros",kicker:"Isomeria plana · roteiro de prova",title:"Roteiro para classificar isômeros planos",
-  sobre:"Uma sequência de perguntas que resolve qualquer questão de isomeria plana.",
+ {id:"s7",label:"Isomeria de compensação ou metameria",kicker:"Cap. 1 · pág. 6",title:"Isomeria de compensação ou metameria",
+  sobre:"Mesma função, mas o heteroátomo muda de posição na cadeia.",
+  hook:"Etoxietano × 1-metoxipropano é o exemplo do livro e cai muito.",
+  ideia:"Metâmeros: conectividades diferentes, mesma função, e diferem pela <b>posição do heteroátomo</b> na cadeia carbônica.",
+  analogia:"Uma gangorra com as mesmas crianças: o apoio (heteroátomo) muda de lugar e elas se redistribuem dos dois lados.",
+  blocks:[
+   {h:"Exemplos",items:["Livro: <b>etoxietano × 1-metoxipropano</b> (C<sub>4</sub>H<sub>10</sub>O).","Exercício do livro: <b>dietilamina × metilpropilamina</b> (C<sub>4</sub>H<sub>11</sub>N)."]}
+  ],
+  tables:[{head:["Par","Heteroátomo"],rows:[["etoxietano × 1-metoxipropano","O"],["dietilamina × metilpropilamina","N"]],
+   ex:[["etoxietano × 1-metoxipropano","2 C de cada lado × 1 C de um lado e 3 do outro."],["dietilamina × metilpropilamina","Duas aminas secundárias; o N mudou de lugar."]]}],
+  trap:["Se um tem o heteroátomo no meio e o outro na ponta (homogênea × heterogênea), o livro chama de CADEIA, não de metameria."],
+  check:[{q:"Etoxietano e 1-metoxipropano?",a:"Metâmeros (isomeria de compensação)."}]},
+
+ {id:"s8",label:"Isomeria dinâmica ou tautomeria",kicker:"Cap. 1 · pág. 6",title:"Isomeria dinâmica ou tautomeria",
+  sobre:"Isômeros de funções diferentes que se transformam um no outro sem parar.",
+  hook:"No cap. 5 de Reações, a hidratação dos alcinos forma enóis, que viram aldeído ou cetona. É tautomeria.",
+  ideia:"Tautômeros: conectividades diferentes, <b>funções diferentes</b>, que <b>coexistem em equilíbrio químico dinâmico</b> em uma <b>solução alelotrópica</b> (que contém os dois tautômeros).",
+  analogia:"Um H \"pula\" de lugar o tempo todo, e a dupla muda junto: a molécula alterna entre duas formas.",
+  blocks:[
+   {h:"Principais casos (livro)",items:["<b>Aldeído-enol</b>: etanal ⇌ etenol (<b>tautomeria aldoenólica</b>).","<b>Cetona-enol</b>: propanona ⇌ prop-1-en-2-ol (<b>tautomeria cetoenólica</b>).","O movimento dos elétrons pi e do íon H<sup>+</sup> dentro do enol resulta <b>principalmente</b> na formação do aldeído ou da cetona."]}
+  ],
+  tables:[{head:["Tipo","Equilíbrio"],rows:[["Aldoenólica","etanal ⇌ etenol"],["Cetoenólica","propanona ⇌ prop-1-en-2-ol"]],
+   ex:[["Aldoenólica","O H passa do O para o C, e a dupla vai do C=C para o C=O."],["Cetoenólica","Mesma ideia com a cetona."]]}],
+  trap:["Tautomeria é um caso especial com funções diferentes EM EQUILÍBRIO. Dois álcoois nunca são tautômeros."],
+  check:[{q:"O que é solução alelotrópica?",a:"A solução que contém os dois tautômeros em equilíbrio."}]},
+
+ {id:"s9",label:"Leitura complementar: Aplicações da isomeria",kicker:"Cap. 1 · pág. 6",title:"Aplicações da isomeria",
+  sobre:"O Nobel de Química de 2001 e a produção de remédios com a \"imagem certa\" da molécula.",
+  hook:"No aspartame, uma das imagens da molécula é doce e a outra é amarga.",
+  ideia:"Moléculas quirais são quase idênticas, mas uma diferença sutil muda o efeito no corpo. Os ganhadores do Nobel de 2001 criaram catalisadores que produzem só a imagem desejada.",
+  analogia:"Como luvas da mão direita e da esquerda: parecem iguais, mas só uma serve em cada mão.",
+  blocks:[
+   {h:"O que o texto conta",items:["<b>Ryoji Noyori, William S. Knowles e K. Barry Sharpless</b>: Nobel de Química de 2001.","Criaram métodos para obter um produto puro e específico (ex.: remédio contra Parkinson ou para o coração).","Numa reação comum, as duas imagens são produzidas e é difícil separá-las.","Os catalisadores criados levam só à imagem desejada.","Mercado mundial de remédios dessa pesquisa: cerca de 370 bilhões de reais.","Produtos: <b>ℓ-dopa</b> (Parkinson), betabloqueadores (coração), antibióticos, adoçantes e flavorizantes, inseticidas."]}
+  ],
+  tables:[],
+  trap:["Este texto já é sobre isomeria óptica (cap. 3): moléculas quirais."],
+  check:[{q:"Por que foi importante produzir só uma imagem da molécula?",a:"Porque as duas imagens podem ter efeitos diferentes (ex.: doce × amargo, remédio × sem efeito)."}]},
+
+ {id:"s10",label:"Roteiro para classificar isômeros constitucionais",kicker:"Cap. 1 · roteiro de prova",title:"Roteiro para classificar isômeros constitucionais",
+  sobre:"Uma sequência de perguntas que resolve qualquer questão de isomeria constitucional, seguindo as definições do livro.",
   hook:"Na prova discursiva, escrever o raciocínio passo a passo vale ponto mesmo se errar o final.",
   ideia:"Pergunte nesta ordem: <b>mesma fórmula?</b> → <b>mesma função?</b> → <b>mesmo tipo de cadeia?</b> → <b>heteroátomo mudou de lugar?</b> → senão, é <b>posição</b>.",
-  analogia:"É um teste de eliminação: cada \"não\" já te dá a resposta.",
+  analogia:"Um teste de eliminação: cada \"não\" já dá a resposta.",
   blocks:[
-   {h:"Roteiro",items:["1. Fórmulas moleculares iguais? Não → não são isômeros.","2. Mesma função? Não → <b>função</b> (se em equilíbrio, <b>tautomeria</b>).","3. Mesmo tipo de cadeia (normal/ramificada, aberta/fechada, homo/heterogênea)? Não → <b>cadeia</b>.","4. O heteroátomo mudou de lugar? Sim → <b>metameria</b>.","5. Senão, mudou a posição de grupo, insaturação ou ramificação → <b>posição</b>.","6. Se nada disso mudou no plano, pense em isomeria <b>espacial</b> (caps. 2 e 3)."]}
+   {h:"Roteiro",items:["1. Fórmulas moleculares iguais? Não → não são isômeros.","2. Mesma função? Não → <b>função</b> (se estão em equilíbrio, <b>tautomeria</b>).","3. Mesmo tipo de cadeia (normal/ramificada, homo/heterogênea, saturada/insaturada, aberta/fechada)? Não → <b>cadeia</b>.","4. O heteroátomo mudou de posição? Sim → <b>compensação (metameria)</b>.","5. Senão, mudou a posição da insaturação, do substituinte ou do grupo funcional → <b>posição</b>."]}
   ],
-  tables:[{head:["Pergunta","Se a resposta for \"não\""],rows:[["Mesma fórmula?","não são isômeros"],["Mesma função?","função (ou tautomeria)"],["Mesmo tipo de cadeia?","cadeia"],["Heteroátomo no mesmo lugar?","metameria"]],
-   ex:[["Mesma fórmula?","Sem isso, nem são isômeros."],["Mesma função?","Função diferente decide logo."],["Mesmo tipo de cadeia?","Reta × ramificada, aberta × fechada."],["Heteroátomo no mesmo lugar?","Se mudou, é metameria; se não, é posição."]]}],
+  tables:[{head:["Pergunta","Se a resposta for \"não\""],rows:[["Mesma fórmula?","não são isômeros"],["Mesma função?","função (ou tautomeria)"],["Mesmo tipo de cadeia?","cadeia"],["Heteroátomo no mesmo lugar?","compensação (metameria)"]],
+   ex:[["Mesma fórmula?","Sem isso, nem são isômeros."],["Mesma função?","Função diferente decide logo."],["Mesmo tipo de cadeia?","Use os quatro casos do livro."],["Heteroátomo no mesmo lugar?","Se mudou, é metameria; se não, é posição."]]}],
   trap:["Siga a ordem: a função vem antes da cadeia."],
-  check:[{q:"Pentano e 2-metilbutano?",a:"Cadeia."},{q:"Ácido propanoico e etanoato de metila?",a:"Função (ácido × éster)."}]}
+  check:[{q:"Cicloexano e metilciclopentano?",a:"Cadeia (isomeria de núcleo)."}]}
 ];
 const MC = [
- {s:"Butano e metilpropano são isômeros de",o:["posição.","função.","cadeia.","metameria.","tautomeria."],c:2,e:"Mesma função; um é normal, o outro ramificado."},
- {s:"Etanol e metoximetano (C<sub>2</sub>H<sub>6</sub>O) são isômeros de",o:["cadeia.","posição.","função.","metameria.","geométrica."],c:2,e:"Álcool × éter."},
- {s:"Etoxietano e metoxipropano são isômeros de",o:["função.","metameria (compensação).","posição.","cadeia.","tautomeria."],c:1,e:"Dois éteres; o O mudou de posição entre as cadeias."},
- {s:"But-1-eno e but-2-eno são isômeros de",o:["posição.","função.","cadeia.","metameria.","óptica."],c:0,e:"A dupla muda de posição."},
- {s:"O equilíbrio etenol ⇌ etanal é um caso de",o:["isomeria de cadeia.","metameria.","tautomeria (aldo-enólica).","isomeria óptica.","isomeria de posição."],c:2,e:"Isomeria de função em equilíbrio dinâmico."},
- {s:"Propanal e propanona são isômeros de",o:["cadeia.","posição.","função.","metameria.","não são isômeros."],c:2,e:"Aldeído × cetona, C<sub>3</sub>H<sub>6</sub>O."}
+ {s:"Ciclopropano e propeno (C<sub>3</sub>H<sub>6</sub>) são, pelo livro, isômeros de",o:["função.","posição.","cadeia (saturada × insaturada).","metameria.","tautomeria."],c:2,e:"Os dois são hidrocarbonetos; muda o tipo de cadeia."},
+ {s:"Propanonitrila e etilcarbilamina (C<sub>3</sub>H<sub>5</sub>N) são isômeros de",o:["cadeia.","função.","posição.","metameria.","tautomeria."],c:1,e:"Nitrilo × isonitrilo: funções diferentes."},
+ {s:"(UECE) Para o éter comum (etoxietano), um isômero de função e um de compensação são, respectivamente,",o:["butanona e 1-metoxipropano.","butanona e butan-1-ol.","butan-1-ol e 1-metoxipropano.","butan-2-ol e butanona.","2-metilpropanona e propanal."],c:2,e:"Função: um álcool C<sub>4</sub>H<sub>10</sub>O. Compensação: outro éter com o O em outra posição."},
+ {s:"(PUC-MG) Um isômero de função da 4-metilpentan-2-ona (C<sub>6</sub>H<sub>12</sub>O) é",o:["hexan-1-ol.","hexanal.","4-metilbutanal.","4-metilpentan-1-ol.","3-metilpentan-3-ona."],c:1,e:"Aldeído com 6 C: C<sub>6</sub>H<sub>12</sub>O. Os álcoois são C<sub>6</sub>H<sub>14</sub>O; a outra cetona é da mesma função."},
+ {s:"(FAMECA) Um caso de isomeria de cadeia é",o:["propanal e propanona.","propilamina e metil-etilamina.","butan-1-ol e butan-2-ol.","1-metoxipropano e etoxietano.","ácido propanoico e metanoato de etila."],c:1,e:"Homogênea × heterogênea (o N na ponta ou no meio)."},
+ {s:"O equilíbrio propanona ⇌ prop-1-en-2-ol é",o:["tautomeria aldoenólica.","tautomeria cetoenólica.","isomeria de cadeia.","metameria.","isomeria de posição."],c:1,e:"Cetona ⇌ enol."}
 ];
 const VF = [
- {s:"Isômeros têm a mesma fórmula molecular.",v:true,e:"É a definição."},
- {s:"Ácido etanoico e metanoato de metila são isômeros de função.",v:true,e:"Ácido × éster, C<sub>2</sub>H<sub>4</sub>O<sub>2</sub>."},
- {s:"Na tautomeria, os isômeros não se convertem um no outro.",v:false,e:"Convertem-se: equilíbrio dinâmico."},
- {s:"O-xileno e p-xileno são isômeros de posição.",v:true,e:"Os metis mudam de posição no anel."},
- {s:"Etano e eteno são isômeros.",v:false,e:"Fórmulas diferentes (C<sub>2</sub>H<sub>6</sub> e C<sub>2</sub>H<sub>4</sub>)."},
- {s:"But-1-eno e ciclobutano são isômeros de cadeia.",v:true,e:"Aberta × fechada, C<sub>4</sub>H<sub>8</sub>."}
+ {s:"Isômeros constitucionais diferenciam-se pela conectividade (sequência e/ou natureza das ligações).",v:true,e:"Definição do livro."},
+ {s:"Em cadeias fechadas, a isomeria de cadeia é chamada de isomeria de núcleo.",v:true,e:"Tome nota do livro."},
+ {s:"Tautômeros pertencem à mesma função química.",v:false,e:"Pertencem a funções diferentes (ex.: aldeído e enol)."},
+ {s:"Wöhler obteve ureia aquecendo cianato de amônio.",v:true,e:"Em 1828; início da queda da Teoria da Força Vital."},
+ {s:"Butano e isobutano têm o mesmo ponto de ebulição.",v:false,e:"Butano −0,5 °C; isobutano −11,7 °C."},
+ {s:"Etoxietano e 1-metoxipropano são metâmeros.",v:true,e:"O heteroátomo (O) muda de posição."}
 ];
-const MATCH = {cols:["Cadeia","Posição","Função","Metameria","Tautomeria"],rows:[["butano × metilpropano",1],["propan-1-ol × propan-2-ol",2],["etanol × metoximetano",3],["etoxietano × metoxipropano",4],["etenol ⇌ etanal",5]]};
-const GAPS = [["Isômeros têm a mesma fórmula","molecular","."],["Álcool × éter de mesma fórmula: isomeria de","função","."],["Heteroátomo mudando de posição: metameria ou isomeria de","compensação","."],["Enol ⇌ aldeído é um exemplo de","tautomeria","."],["Butano × metilpropano: isomeria de","cadeia","."],["Propan-1-ol × propan-2-ol: isomeria de","posição","."]];
-const BANK = ["tautomeria","cadeia","função","molecular","compensação","posição"];
+const MATCH = {cols:["Cadeia","Posição","Função","Metameria","Tautomeria"],rows:[["butano × isobutano",1],["pent-1-eno × pent-2-eno",2],["propanal × propanona",3],["etoxietano × 1-metoxipropano",4],["etanal ⇌ etenol",5]]};
+const GAPS = [["Isômeros têm a mesma fórmula","molecular","."],["A palavra isomeria vem de iso (mesmo) e meros (","partes",")."],["Na cadeia fechada, a isomeria de cadeia chama-se isomeria de","núcleo","."],["A solução que contém os dois tautômeros chama-se","alelotrópica","."],["Wöhler produziu","ureia","a partir do cianato de amônio."],["Heteroátomo mudando de posição: isomeria de compensação ou","metameria","."]];
+const BANK = ["núcleo","ureia","alelotrópica","molecular","metameria","partes"];
 const DISC = [
- {s:"Classifique os pares e justifique: a) pentano × 2-metilbutano; b) propan-1-ol × metoxietano; c) etanoato de etila × propanoato de metila; d) pent-1-eno × pent-2-eno.",m:"a) Cadeia: mesma função (alcano), normal × ramificada. b) Função: álcool × éter (C<sub>3</sub>H<sub>8</sub>O). c) Metameria: dois ésteres; a ponte COO muda de lugar entre as cadeias. d) Posição: a dupla muda do C1 para o C2.",k:["a) cadeia (normal × ramificada).","b) função (álcool × éter).","c) metameria (ésteres, heteroátomo muda de lugar).","d) posição (da dupla)."]},
- {s:"Explique o que é tautomeria usando a hidratação do etino como exemplo.",m:"Na hidratação do etino, forma-se o etenol (CH<sub>2</sub>=CH–OH), um enol. O enol está em equilíbrio dinâmico com o etanal (CH<sub>3</sub>–CHO): um H muda de lugar e a dupla passa do C=C para o C=O. Esses isômeros de função em equilíbrio são tautômeros (tautomeria aldo-enólica).",k:["Forma-se um enol (etenol).","Enol ⇌ etanal em equilíbrio dinâmico.","É isomeria de função em equilíbrio: tautomeria aldo-enólica."]},
- {s:"Escreva e nomeie dois isômeros de função de fórmula C<sub>3</sub>H<sub>8</sub>O.",m:"Propan-1-ol (CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>OH), um álcool, e metoxietano (CH<sub>3</sub>–O–CH<sub>2</sub>CH<sub>3</sub>), um éter. (Também vale propan-2-ol com metoxietano.)",k:["Um álcool C<sub>3</sub>H<sub>8</sub>O com nome.","Um éter C<sub>3</sub>H<sub>8</sub>O com nome.","Funções diferentes: isomeria de função."]}
+ {s:"(Agora é com você 1) Classifique os pares: a) but-1-eno × but-2-eno; b) ácido propanoico × etanoato de metila; c) dietilamina × metilpropilamina; d) pentano × 2-metilbutano; e) propanona × prop-1-en-2-ol.",m:"a) Posição (da insaturação). b) Função (ácido × éster). c) Metâmeros (o N muda de posição entre as cadeias). d) Cadeia (normal × ramificada). e) Tautômeros (cetona ⇌ enol, em equilíbrio).",k:["a) posição.","b) função.","c) metâmeros.","d) cadeia.","e) tautômeros."]},
+ {s:"(Agora é com você 2) Para C<sub>4</sub>H<sub>10</sub>O, escreva e nomeie pelo menos três isômeros constitucionais.",m:"Butan-1-ol (CH<sub>3</sub>CH<sub>2</sub>CH<sub>2</sub>CH<sub>2</sub>OH), butan-2-ol (CH<sub>3</sub>CH(OH)CH<sub>2</sub>CH<sub>3</sub>), 2-metilpropan-1-ol, 2-metilpropan-2-ol, etoxietano, 1-metoxipropano e 2-metoxipropano.",k:["Três estruturas C<sub>4</sub>H<sub>10</sub>O corretas.","Nomes corretos (álcoois com -ol, éteres com -oxi-)."]},
+ {s:"Explique, usando a síntese de Wöhler, por que a fórmula molecular não basta para identificar uma substância.",m:"Wöhler aqueceu cianato de amônio (NH<sub>4</sub>CNO) e obteve ureia (CH<sub>4</sub>N<sub>2</sub>O): as duas têm os mesmos átomos na mesma proporção, mas são substâncias diferentes, com propriedades diferentes. Como a mesma fórmula pode representar estruturas diferentes (isômeros), é preciso conhecer a estrutura (conectividade) para identificar a substância.",k:["Cianato de amônio → ureia.","Mesma fórmula, propriedades diferentes.","Isômeros: precisa da estrutura."]}
 ];
 const LIVRO = [
- ["Treino: butano × metilpropano","Cadeia (normal × ramificada)."],
- ["Treino: propan-1-ol × propan-2-ol","Posição (da hidroxila)."],
- ["Treino: etanol × metoximetano","Função (álcool × éter)."],
- ["Treino: etoxietano × metoxipropano","Metameria (compensação)."],
- ["Treino: propen-2-ol ⇌ propanona","Tautomeria ceto-enólica."],
- ["Cap. 2 · UFRGS (Atividade 1)","Pentano × metilbutano: cadeia. But-1-eno × but-2-eno: posição. Ácido × éster: função. Etoxietano × metoxipropano: metameria. Aminas homogênea × heterogênea: cadeia (alternativa correta, c)."]
+ ["Pág. 7 · Agora é com você 1","a) posição; b) função; c) metâmeros; d) cadeia; e) tautômeros."],
+ ["Pág. 7 · Agora é com você 2","C<sub>4</sub>H<sub>10</sub>O: butan-1-ol, butan-2-ol, 2-metilpropan-1-ol, 2-metilpropan-2-ol, etoxietano, 1-metoxipropano e 2-metoxipropano."],
+ ["Pág. 7 · Agora é com você 3 (PUC)","e) acetato de etila, ácido metilpropanoico e propanoato de metila (todos C<sub>4</sub>H<sub>8</sub>O<sub>2</sub>)."],
+ ["Pág. 7 · Agora é com você 4 (UEL)","I e III corretas (alternativa b, parcialmente coberta na imagem). I: fórmulas diferentes (C<sub>7</sub>H<sub>14</sub> × C<sub>7</sub>H<sub>12</sub>), não são isômeros. II: falsa (tautômero de enol é aldeído ou cetona). III: metoxibenzeno × álcool benzílico, isômeros. IV: falsa (a OH muda de posição: posição, não cadeia)."],
+ ["Pág. 8 · Agora é com você 5 (UDESC)","e) I e II são isômeros de função (álcool × éter) e I e IV são isômeros de cadeia."],
+ ["Pág. 8 · Atividade 1 (UECE)","c) butan-1-ol e 1-metoxipropano."],
+ ["Pág. 8 · Atividade 2 (UEM)","e) tautomeria, compensação, posição, função e cadeia."],
+ ["Pág. 8 · Atividade 3 (PUC-MG)","b) hexanal."],
+ ["Pág. 8 · Atividade 4 (FAMECA)","b) propilamina e metil-etilamina."],
+ ["Pág. 8 · Atividade 5 (UFRGS)","C<sub>4</sub>H<sub>11</sub>N. I: butan-1-amina × butan-2-amina, posição. II: metilpropilamina × dietilamina, metameria. III e alternativas: questão cortada na imagem; confira com o livro."]
 ];
-const QUICK = [["Isômeros têm o quê igual?","A fórmula molecular."],["Normal × ramificada?","Cadeia."],["Grupo em outro carbono?","Posição."],["Funções diferentes?","Função."],["Heteroátomo muda de lugar?","Metameria."],["Enol ⇌ aldeído?","Tautomeria."]];
-return {id:"c1",num:1,lab:"Isomeria e Reações · Cap. 1",title:"Isomeria plana (constitucional)",pages:"capítulo não enviado: conteúdo padrão",intro:"Isomeria plana: cadeia, posição, função, metameria e tautomeria, com um roteiro para classificar qualquer par de isômeros.",
- big3:["<b>Primeiro</b>: confira a fórmula molecular. Diferente? Não são isômeros.","<b>Função</b> diferente → isomeria de função (com equilíbrio → tautomeria).","<b>Mesma função</b>: tipo de cadeia diferente → cadeia; heteroátomo mudou → metameria; senão → posição."],
- livroLead:"Treino rápido de classificação (o capítulo do livro não foi enviado).",
- S,TABLE_EX:{},MC,VF,MATCH,GAPS,BANK,DISC,LIVRO,QUICK,
- AVISOS:[["—","O capítulo 1 (Isomeria plana) do livro não foi enviado.","Este bloco segue o conteúdo padrão do ensino médio, coerente com os exercícios do cap. 2.","Confira com o livro e com as apresentações do caderno SAS."]]};
+const QUICK = [["Isômeros têm o quê igual?","A fórmula molecular."],["O que diferencia isômeros constitucionais?","A conectividade."],["Funções diferentes?","Isomeria de função."],["Cadeia fechada de tipos diferentes?","Isomeria de núcleo."],["Heteroátomo muda de lugar?","Metameria."],["Funções diferentes em equilíbrio?","Tautomeria."]];
+const AVISOS=[["7","Agora é com você 4 (UEL): a letra da alternativa com \"I e III\" está coberta pelo botão \"Salvar anotações\".","Pelo raciocínio, as corretas são I e III.","Confira a letra no livro."],["8","Atividade 5 (UFRGS): a questão continua na página 9, que não foi recebida.","Os pares I (posição) e II (metameria) foram resolvidos.","Confira o par III e as alternativas no livro."]];
+return {id:"c1",num:1,lab:"Isomeria e Reações · Cap. 1",title:"Isomeria constitucional",pages:"págs. 2 a 8",intro:"Isômeros e a isomeria constitucional (plana): de função, de cadeia, de posição, de compensação (metameria) e dinâmica (tautomeria), com os exemplos e as atividades do livro.",
+ big3:["<b>Isômeros constitucionais</b>: mesma fórmula molecular, conectividade diferente (sequência e/ou natureza das ligações).","<b>Função</b> diferente → função (em equilíbrio → tautomeria). <b>Mesma função</b>: cadeia, posição ou metameria.","<b>Cadeia</b> no livro: normal × ramificada, heterogênea × homogênea, saturada × insaturada, aberta × fechada (fechada = núcleo)."],
+ livroLead:"Gabarito das atividades do livro, resolvido e explicado (não há resolução oficial deste capítulo).",
+ S,TABLE_EX:{},MC,VF,MATCH,GAPS,BANK,DISC,LIVRO,QUICK,AVISOS};
 })();
 
 const CAPD=(()=>{
