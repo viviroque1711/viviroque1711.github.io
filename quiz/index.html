@@ -84,6 +84,18 @@ button:focus-visible,.chip:focus-within{outline:3px solid var(--acc);outline-off
 .tip p{margin:0}
 .tiph{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
 .lbl2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--acc);margin-right:4px}
+.lvb{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bad);background:var(--bad-soft);border-radius:6px;padding:2px 8px}
+.ref summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;list-style:none}
+.ref summary::-webkit-details-marker{display:none}
+.ref[open] summary{margin-bottom:4px}
+.ref p{margin:4px 0 0}
+.refgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.tw{overflow-x:auto}
+.ref table{border-collapse:collapse;width:100%;font-size:15px}
+.ref th,.ref td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.ref th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ref td:nth-child(2){font-variant-numeric:tabular-nums;white-space:nowrap}
+.rules{margin:4px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .kbd{font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
 @media (max-width:480px){.stem{font-size:18px}.vf{flex-direction:column}}
@@ -97,6 +109,7 @@ const CAPS = [
  {k:"q2",m:"q",n:2,t:"Isomeria configuracional geométrica"},
  {k:"q3",m:"q",n:3,t:"Isomeria configuracional óptica"},
  {k:"q5",m:"q",n:5,t:"Reações de adição"},
+ {k:"qn",m:"q",n:"Nom.",t:"Nomenclatura: regras e grupos"},
  {k:"b5",m:"b",n:5,t:"Morfologia e anatomia da raiz"},
  {k:"b6",m:"b",n:6,t:"Morfologia e anatomia do caule"},
  {k:"b7",m:"b",n:7,t:"Morfologia e anatomia da folha"},
@@ -625,113 +638,494 @@ const Q = [
  ["ácido abscísico.","O ácido abscísico é hormônio do estresse e da dormência."]]},
 {k:"b12",s:"A raiz é menos sensível à auxina que o caule.",v:false,e:"A raiz é MUITO MAIS sensível. A dose que estimula o caule inibe a raiz."},
 {k:"b12",s:"O caule tem gravitropismo negativo e a raiz, gravitropismo positivo.",v:true,e:"O caule cresce para cima, contra a gravidade. A raiz cresce para baixo, a favor dela."},
+/* ================= QUÍMICA · NÍVEL PROVA (lv:2) ================= */
+/* ---- Cap. 2 ---- */
+{k:"q2",lv:2,s:"Considere o 3-metilpent-2-eno, CH₃–CH=C(CH₃)–CH₂–CH₃. No isômero em que o grupo etila (do C3) e o hidrogênio (do C2) estão do mesmo lado da dupla, a configuração é",c:0,o:[
+ ["(E), porque os ligantes de maior prioridade (CH₃ no C2 e etila no C3) ficam em lados opostos.","Isso. C2: CH₃ > H. C3: empate no C, mas a etila tem (C, H, H) e a metila (H, H, H), então etila > metila. Se a etila está do lado do H, ela está do lado oposto ao CH₃ do C2: (E)."],
+ ["(Z), porque a etila e o H estão do mesmo lado.","O sistema (E)-(Z) compara os ligantes de MAIOR prioridade. O H é o de menor prioridade no C2."],
+ ["(Z), porque os ligantes de maior prioridade ficam do mesmo lado.","Faça o ranking: no C2 vence o CH₃, no C3 vence a etila. Estão em lados opostos."],
+ ["(E), porque a metila do C3 tem prioridade maior que a etila.","A conclusão (E) está certa, mas o motivo está errado: no desempate a etila vence a metila (Regra 2)."],
+ ["Não há isomeria geométrica, porque o C3 não tem hidrogênio.","Não precisa ter H. Basta que cada carbono da dupla tenha dois ligantes diferentes: C2 (CH₃, H) e C3 (CH₃, C₂H₅)."]]},
+{k:"q2",lv:2,s:"No 2-bromo-3-metilpent-2-eno, CH₃–CBr=C(CH₃)–CH₂CH₃, o isômero em que o Br e a metila do C3 estão do mesmo lado é nomeado como",c:1,o:[
+ ["(Z), porque o Br e a metila estão juntos.","A metila não é o ligante de maior prioridade do C3: a etila vence no desempate."],
+ ["(E), porque o Br (maior no C2) fica do lado oposto à etila (maior no C3).","Isso. C2: Br (Z = 35) > CH₃. C3: etila > metila. Br do lado da metila = Br do lado oposto à etila = (E)."],
+ ["cis, porque há grupos iguais do mesmo lado.","Em alceno trissubstituído ou tetrassubstituído, cis/trans fica ambíguo. O livro recomenda o sistema (E)-(Z)."],
+ ["trans, porque o Br e a etila estão em lados opostos.","Mesmo problema: cis/trans é ambíguo aqui. A resposta esperada usa (E)-(Z)."],
+ ["Não tem isomeria geométrica.","Tem: C2 (Br, CH₃) e C3 (CH₃, C₂H₅) têm ligantes diferentes."]]},
+{k:"q2",lv:2,s:"Pelas regras de Cahn-Ingold-Prelog, qual destes grupos tem a MAIOR prioridade?",c:1,o:[
+ ["–CCl₃","Pegadinha clássica: três Cl parecem mais que um Br, mas a comparação é átomo a átomo, começando pelo maior. Br (35) vence Cl (17) logo no primeiro confronto."],
+ ["–CH₂Br","Isso. Todos começam com C. Depois compara-se o átomo de maior número atômico de cada conjunto: Br (35) contra Cl (17) ou O (8). Br vence, e o resto não importa."],
+ ["–COOH","O –COOH tem (O, O, O), mas o maior átomo dele é O (8), que perde para o Br (35) do –CH₂Br."],
+ ["–CH₂CH₂Br","O primeiro carbono tem (C, H, H). O Br está longe demais: o desempate para no primeiro ponto de diferença."],
+ ["–CH(CH₃)₂","Tem (C, C, H). Perde para qualquer grupo com halogênio ou oxigênio ligado ao primeiro carbono."]]},
+{k:"q2",lv:2,s:"Qual é a ordem DECRESCENTE de prioridade (Cahn-Ingold-Prelog) dos grupos –CHO, –COOH, –CH₂OH e –CH₂CH₃?",c:3,o:[
+ ["–CHO > –COOH > –CH₂OH > –CH₂CH₃","O –COOH tem (O, O, O) pela replicação da dupla; o –CHO tem (O, O, H). O –COOH vence."],
+ ["–CH₂OH > –CHO > –COOH > –CH₂CH₃","Esqueceu a Regra 3: a dupla C=O conta o O duas vezes."],
+ ["–COOH > –CH₂OH > –CHO > –CH₂CH₃","–CHO (O, O, H) vence –CH₂OH (O, H, H): empata no primeiro O e ganha no segundo."],
+ ["–COOH > –CHO > –CH₂OH > –CH₂CH₃","Isso. Modelos: COOH (O, O, O) > CHO (O, O, H) > CH₂OH (O, H, H) > CH₂CH₃ (C, H, H). É o mesmo raciocínio do exercício resolvido do livro."],
+ ["–CH₂CH₃ > –CH₂OH > –CHO > –COOH","É a ordem invertida (crescente)."]]},
+{k:"q2",lv:2,s:"Analise as afirmações. I. O pent-2-eno apresenta isomeria geométrica. II. O 2-metilbut-2-eno apresenta isomeria geométrica. III. O 1,2-dimetilciclobutano apresenta isômeros cis e trans. IV. O cis-1,2-dicloroeteno tem ponto de ebulição menor que o trans. Estão corretas",c:1,o:[
+ ["I e II.","II está errada: no 2-metilbut-2-eno o C2 tem dois CH₃ iguais."],
+ ["I e III.","Isso. I: C2 (H, CH₃) e C3 (H, C₂H₅). III: metilas em carbonos diferentes do anel. IV está errada: o cis é polar e ferve a uma temperatura MAIOR."],
+ ["II e IV.","II: C2 com dois CH₃ não permite isomeria. IV: o cis ferve a uma temperatura maior que o trans."],
+ ["III e IV.","IV está errada: o cis (polar) tem ponto de ebulição maior."],
+ ["I, III e IV.","IV está errada: o cis-1,2-dicloroeteno é polar e ferve a ≈ 60 °C; o trans, apolar, a ≈ 48 °C."]]},
+{k:"q2",lv:2,s:"Quantos isômeros geométricos existem para o hexa-2,4-dieno, CH₃–CH=CH–CH=CH–CH₃?",c:2,o:[
+ ["2","Cada dupla pode ser E ou Z. Com duas duplas há mais de duas combinações."],
+ ["4","Pegadinha: (2E,4Z) e (2Z,4E) são a mesma molécula, porque a cadeia é simétrica (é só ler do outro lado)."],
+ ["3","Isso. (2E,4E), (2Z,4Z) e (2E,4Z), que é o mesmo que (2Z,4E) por simetria."],
+ ["1","As duas duplas têm, em cada carbono, H e um grupo diferente: há isomeria."],
+ ["6","Não há tantas combinações: são só duas duplas, cada uma E ou Z."]]},
+{k:"q2",lv:2,s:"Os ácidos maleico (cis) e fumárico (trans) são isômeros do ácido butenodioico. A conversão do maleico em fumárico libera energia. É correto afirmar que",c:0,o:[
+ ["o fumárico é o mais estável, o maleico é o mais polar e os dois são diastereoisômeros geométricos.","Isso. Liberar energia na conversão quer dizer que o produto (fumárico) tem menos energia. No cis os dipolos não se anulam. E o livro os cita como diastereoisômeros geométricos."],
+ ["o maleico é o mais estável, porque a conversão libera energia.","Se a conversão maleico → fumárico libera energia, quem fica com menos energia (mais estável) é o fumárico."],
+ ["o fumárico é o mais polar, porque é trans.","No trans os dipolos tendem a se anular. O mais polar é o cis (maleico)."],
+ ["são enantiômeros, porque um é a imagem do outro.","Cis e trans não são par objeto-imagem: são diastereoisômeros."],
+ ["não são isômeros, porque têm propriedades diferentes.","Têm a mesma fórmula molecular (C₄H₄O₄): são isômeros. Propriedades diferentes são justamente o esperado."]]},
+{k:"q2",lv:2,s:"Qual composto NÃO apresenta isomeria geométrica?",c:3,o:[
+ ["1,2-dimetilciclopropano.","Tem: metilas em carbonos diferentes do anel."],
+ ["1,3-dimetilciclobutano.","Tem: C1 (CH₃, H) e C3 (CH₃, H) podem ter os metilas do mesmo lado ou em lados opostos."],
+ ["1-bromo-2-cloro-1-metilciclobutano.","Tem, é exemplo resolvido do livro: C1 (Br, CH₃) e C2 (Cl, H) → (Z) e (E)."],
+ ["1,1,2-trimetilciclopropano.","Isso. O C1 tem dois CH₃ iguais e o C3 tem dois H. Só o C2 tem ligantes diferentes; é preciso pelo menos dois carbonos do anel com ligantes diferentes."],
+ ["1,2-diclorociclo-hexano.","Tem: Cl em carbonos diferentes do anel."]]},
+{k:"q2",lv:2,s:"Considerando isômeros planos e geométricos, quantos compostos diferentes têm a fórmula C₃H₅Cl?",c:2,o:[
+ ["3","Faltaram estruturas: há quatro isômeros planos, e um deles tem cis e trans."],
+ ["4","São quatro isômeros planos, mas o 1-cloroprop-1-eno tem duas formas, (E) e (Z)."],
+ ["5","Isso. 1-cloroprop-1-eno (E e Z), 2-cloroprop-1-eno, 3-cloroprop-1-eno e clorociclopropano."],
+ ["6","O 2-cloroprop-1-eno e o 3-cloroprop-1-eno não têm isomeria geométrica: o C1 deles tem dois H."],
+ ["7","Contou formas que não existem. Só o 1-cloroprop-1-eno tem (E) e (Z)."]]},
+{k:"q2",lv:2,s:"No ácido 2-metilpent-2-enoico, CH₃CH₂–CH=C(CH₃)–COOH, os ligantes de maior prioridade no C2 e no C3 são, respectivamente,",c:0,o:[
+ ["–COOH e –CH₂CH₃.","Isso. C2: COOH (O, O, O) > CH₃. C3: etila > H. Se ficarem em lados opostos, é o ácido (E)-2-metilpent-2-enoico, como no livro."],
+ ["–CH₃ e –H.","São os de MENOR prioridade em cada carbono."],
+ ["–COOH e –H.","No C3, a etila (Z do C = 6) vence o H (1)."],
+ ["–CH₃ e –CH₂CH₃.","No C2, o –COOH vence o –CH₃: (O, O, O) contra (H, H, H)."],
+ ["–CH₂CH₃ e –COOH.","A ordem está trocada: o –COOH está no C2 e a etila no C3."]]},
+{k:"q2",lv:2,s:"Na retina, a luz converte o 11-cis-retinal em 11-trans-retinal, e uma enzima refaz o cis. Essa conversão",c:4,o:[
+ ["é isomeria óptica, porque envolve luz.","Envolver luz não é critério. É uma mudança cis → trans: isomeria geométrica."],
+ ["acontece espontaneamente, porque a dupla gira livremente.","A dupla NÃO gira livremente: a ligação π impede."],
+ ["muda a fórmula molecular do retinal.","Isômeros têm a mesma fórmula molecular."],
+ ["é uma tautomeria.","Tautomeria é um equilíbrio de isomeria plana (como enol ⇌ aldeído)."],
+ ["é uma interconversão de isômeros geométricos, que só ocorre com energia (luz ou enzima) capaz de romper momentaneamente a ligação π.","Isso. É o exemplo de abertura do capítulo 2."]]},
+/* ---- Cap. 3 ---- */
+{k:"q3",lv:2,s:"Para o 2,3-dibromopentano, CH₃–CHBr–CHBr–CH₂–CH₃, o número de isômeros opticamente ativos e de misturas racêmicas é, respectivamente,",c:1,o:[
+ ["3 e 1","Esse seria o caso de dois C* IGUAIS (com meso). Aqui os C* são diferentes: um tem CH₃ e o outro tem C₂H₅."],
+ ["4 e 2","Isso. Dois C* diferentes: 2² = 4 ativos e 4 ÷ 2 = 2 pares racêmicos."],
+ ["2 e 1","Isso seria para um único C*."],
+ ["4 e 1","Os pares racêmicos são a metade dos ativos: 4 ÷ 2 = 2."],
+ ["8 e 4","Seria 2³, para três C* diferentes. Aqui são dois."]]},
+{k:"q3",lv:2,s:"O ácido tartárico, HOOC–CH(OH)–CH(OH)–COOH, tem dois carbonos assimétricos IGUAIS. É correto afirmar que ele apresenta",c:2,o:[
+ ["4 isômeros ativos e 2 misturas racêmicas.","Pegadinha: van't Hoff não se aplica quando há composto meso."],
+ ["2 isômeros ativos e nenhum inativo.","Falta o meso, que é inativo por compensação interna."],
+ ["2 isômeros ativos (dextro e levo), 1 meso inativo e 1 mistura racêmica.","Isso. Com dois C* iguais, uma das combinações tem plano de simetria (meso). Sobram dois ativos, que formam um racemato."],
+ ["3 isômeros ativos.","O meso não é ativo."],
+ ["apenas o composto meso.","Também existem os dois enantiômeros ativos."]]},
+{k:"q3",lv:2,s:"A glicose de cadeia aberta é HOCH₂–CH(OH)–CH(OH)–CH(OH)–CH(OH)–CHO. O número de isômeros opticamente ativos e de pares racêmicos é",c:3,o:[
+ ["4 e 2","Contou só dois C*. Os carbonos 2, 3, 4 e 5 têm quatro ligantes diferentes."],
+ ["5 e 2","Não é n nem n + 1: a fórmula é 2ⁿ."],
+ ["8 e 4","Seria para 3 C*. São 4: os carbonos 2, 3, 4 e 5."],
+ ["16 e 8","Isso. 4 C* diferentes: 2⁴ = 16 ativos e 16 ÷ 2 = 8 pares racêmicos."],
+ ["32 e 16","Seria para 5 C*. O C1 (CHO) e o C6 (CH₂OH) não são assimétricos."]]},
+{k:"q3",lv:2,s:"Qual dos compostos apresenta isomeria óptica?",c:2,o:[
+ ["3-metilpentano.","O C3 tem H, CH₃ e duas etilas IGUAIS: não é C*."],
+ ["2-metilbutano.","O C2 tem dois CH₃ iguais: não é C*."],
+ ["3-metil-hexano.","Isso. O C3 tem H, CH₃, etila e propila: quatro ligantes diferentes."],
+ ["Pentan-3-ol.","O C3 tem H, OH e duas etilas iguais: não é C*."],
+ ["2,2-dimetilpropano.","Não tem nenhum carbono com quatro ligantes diferentes."]]},
+{k:"q3",lv:2,s:"Qual destes compostos cíclicos tem carbono assimétrico?",c:3,o:[
+ ["Metilciclo-hexano.","O C1 tem H, CH₃ e dois \"caminhos\" do anel iguais nos dois sentidos. Não é C*."],
+ ["1-metilciclo-hexanol.","O C1 tem OH e CH₃, mas os dois caminhos do anel são iguais."],
+ ["4-metilciclo-hexanol.","Do C1, os dois caminhos chegam ao C4 da mesma forma: são iguais. Nenhum C*."],
+ ["2-metilciclo-hexanol.","Isso. No C1, um caminho começa no C2 (que tem CH₃) e o outro no C6 (CH₂): caminhos diferentes. O C2 também é C*."],
+ ["Ciclo-hexanol.","Os dois caminhos do anel a partir do C1 são iguais."]]},
+{k:"q3",lv:2,s:"Numa projeção de Fischer, o ligante de prioridade 4 está numa linha HORIZONTAL, e a sequência 1 → 2 → 3 aparece no sentido horário. A configuração do C* é",c:1,o:[
+ ["(R), porque o sentido é horário.","Só vale ler direto quando o 4 está na vertical (afastado do leitor). Na horizontal ele aponta para você."],
+ ["(S), porque, com o 4 na horizontal, o sentido observado se inverte.","Isso. Pelo método do livro: duas permutas levam o 4 para baixo sem mudar o C*, e aí o sentido aparece anti-horário."],
+ ["(R), porque a horizontal se afasta do leitor.","Na projeção de Fischer, a horizontal se APROXIMA do leitor."],
+ ["Dextrogiro.","R/S não diz nada sobre o desvio da luz. E a pergunta é sobre configuração."],
+ ["Não é possível determinar sem polarímetro.","A configuração (R)/(S) sai da estrutura. O polarímetro é que mede (+)/(–)."]]},
+{k:"q3",lv:2,s:"No gliceraldeído, OHC–CH(OH)–CH₂OH, a ordem de prioridade dos ligantes do carbono assimétrico é",c:0,o:[
+ ["–OH > –CHO > –CH₂OH > –H","Isso. O OH tem o átomo O (Z = 8) ligado direto. Entre os grupos com C: CHO (O, O, H) > CH₂OH (O, H, H)."],
+ ["–CHO > –OH > –CH₂OH > –H","Compare o átomo ligado direto: O do OH (8) vence o C do CHO (6)."],
+ ["–OH > –CH₂OH > –CHO > –H","Pela Regra 3, o CHO tem (O, O, H) e vence o CH₂OH (O, H, H)."],
+ ["–CH₂OH > –CHO > –OH > –H","Os grupos com carbono perdem para o OH."],
+ ["–H > –CH₂OH > –CHO > –OH","É a ordem invertida."]]},
+{k:"q3",lv:2,s:"Analise. I. Enantiômeros têm o mesmo ponto de fusão. II. Diastereoisômeros têm propriedades físicas diferentes. III. Uma mistura racêmica desvia a luz polarizada para a direita. IV. O composto meso tem carbonos assimétricos, mas é opticamente inativo. Estão corretas",c:4,o:[
+ ["I e III.","III está errada: o racemato é inativo (compensação externa). II também está certa."],
+ ["II e III.","III está errada. E I está certa: enantiômeros só diferem no sentido do desvio da luz."],
+ ["I e IV.","Falta a II: diastereoisômeros têm propriedades físicas e químicas diferentes."],
+ ["II, III e IV.","III está errada: mistura racêmica não desvia a luz."],
+ ["I, II e IV.","Isso. Só a III está errada: a mistura racêmica é opticamente inativa."]]},
+{k:"q3",lv:2,s:"O ácido (S)-láctico desvia a luz polarizada em +3,3°. Sobre o ácido (R)-láctico, é correto afirmar que ele",c:2,o:[
+ ["é dextrogiro, porque R vem de rectus (direita).","R/S não indica o sentido do desvio. Rectus fala do sentido da sequência de prioridades."],
+ ["é opticamente inativo.","Ele tem C* e não é meso: é ativo."],
+ ["desvia a luz em –3,3°, porque é o enantiômero do (S).","Isso. Enantiômeros desviam a luz com o mesmo ângulo e sentidos opostos."],
+ ["desvia a luz em +6,6°.","O ângulo é o mesmo em módulo; só o sentido muda."],
+ ["só pode ter o desvio descoberto com polarímetro, sem relação com o (S).","Para um composto qualquer, sim. Mas aqui sabemos o desvio do enantiômero, e enantiômeros têm desvios opostos."]]},
+{k:"q3",lv:2,s:"A (R)-talidomida é sedativa e a (S)-talidomida é teratogênica. O livro afirma que o (R) se converte em (S) no organismo. Por isso,",c:3,o:[
+ ["bastaria vender só o (R) para eliminar o risco.","Não: dentro do corpo, parte do (R) vira (S)."],
+ ["os dois enantiômeros têm o mesmo efeito no corpo.","O exemplo mostra o contrário: os efeitos são muito diferentes."],
+ ["o problema seria resolvido vendendo a mistura racêmica.","A mistura racêmica já contém 50% de (S)."],
+ ["mesmo o (R) puro pode gerar o (S) no organismo, e o risco permanece.","Isso. Por isso não foi possível conter as consequências do isômero (S)."],
+ ["a diferença entre eles é só o sentido do desvio da luz, sem efeito biológico.","Fora do corpo, quase só isso. Mas dentro dele, as moléculas que reconhecem os remédios também são quirais e distinguem os dois."]]},
+{k:"q3",lv:2,s:"Sobre os estereoisômeros do 2,3-dibromobutano, CH₃–CHBr–CHBr–CH₃, é correto afirmar:",c:0,o:[
+ ["São três: (R,R), (S,S) e o meso; o meso e o (R,R) são diastereoisômeros.","Isso. Os C* são iguais, então uma combinação é meso. (R,R) e (S,S) são enantiômeros; o meso não é imagem de nenhum deles."],
+ ["São quatro, pela fórmula de van't Hoff.","A fórmula não vale quando há meso."],
+ ["O meso e o (S,S) são enantiômeros.","O meso é idêntico à própria imagem. Com o (S,S) ele é diastereoisômero."],
+ ["A mistura equimolecular de (R,R) e (S,S) é opticamente ativa.","É uma mistura racêmica: inativa por compensação externa."],
+ ["O meso é opticamente ativo.","O meso é inativo por compensação interna."]]},
+{k:"q3",lv:2,s:"Duas projeções de Fischer de um composto com dois C*. Para passar de uma para a outra, foi feita uma permuta só no primeiro C*. As duas estruturas são",c:1,o:[
+ ["enantiômeros.","Para serem enantiômeros, os DOIS C* teriam de inverter."],
+ ["diastereoisômeros, e uma mistura equimolecular delas é opticamente ativa.","Isso, é o caso 5 do livro: só um C* mudou. Diastereoisômeros não se compensam totalmente, então a mistura não é racêmica."],
+ ["o mesmo composto.","Uma permuta (número ímpar) altera aquele C*."],
+ ["um composto meso.","Meso exige C* iguais com plano de simetria; não é consequência de uma permuta."],
+ ["diastereoisômeros, e a mistura deles é racêmica.","Racêmica é só a mistura equimolecular de ENANTIÔMEROS."]]},
+{k:"q3",lv:2,s:"A dopa, HOOC–CH(NH₂)–CH₂–C₆H₃(OH)₂, apresenta isomeria óptica, e a dopamina, H₂N–CH₂–CH₂–C₆H₃(OH)₂, não. Isso acontece porque",c:4,o:[
+ ["a dopamina não tem anel aromático.","As duas têm o mesmo anel com duas OH."],
+ ["a dopa tem mais oxigênios.","Ter mais átomos não cria C*. O que importa é ter quatro ligantes diferentes num carbono."],
+ ["a dopamina tem ligação dupla.","As duas têm o mesmo anel; isso não explica a diferença."],
+ ["a dopa é um ácido e todo ácido é quiral.","O ácido acético é ácido e não tem C*."],
+ ["na dopa, o carbono ligado ao NH₂ tem H, NH₂, COOH e CH₂–anel (quatro diferentes); na dopamina, os carbonos da cadeia têm dois H.","Isso. É a questão da UNESP no livro."]]},
+/* ---- Cap. 5 ---- */
+{k:"q5",lv:2,s:"O propino reage com HBr em excesso (2 mol), sem peróxido. O produto final é",c:2,o:[
+ ["1,2-dibromopropano.","Os dois Br não se dividem entre C1 e C2. Pela regra de Markovnikov, os dois vão para o C2."],
+ ["1,1-dibromopropano.","Isso seria anti-Markovnikov duas vezes, o que só aconteceria com peróxido."],
+ ["2,2-dibromopropano.","Isso. 1ª adição: 2-bromopropeno. 2ª adição: o H vai de novo para o C1 (mais hidrogenado) e o Br para o C2. É o exemplo do livro."],
+ ["1,2-dibromopropeno.","Esse é o produto do Br₂ (1:1), não do HBr."],
+ ["2-bromopropeno.","Esse é só o produto intermediário, com 1 mol de HBr."]]},
+{k:"q5",lv:2,s:"O 2-metilpropeno reage com HCl EM PRESENÇA DE PERÓXIDO. O produto principal é",c:0,o:[
+ ["2-cloro-2-metilpropano, porque o efeito do peróxido só acontece com HBr.","Isso. Com HCl, vale Markovnikov mesmo com peróxido: H no C1 (mais hidrogenado) e Cl no C2."],
+ ["1-cloro-2-metilpropano, pela regra de Kharasch.","A regra de Kharasch só vale para HBr. O livro diz que o efeito do peróxido não ocorre com os demais haletos."],
+ ["1,2-dicloro-2-metilpropano.","Com HCl entra só um Cl."],
+ ["2-metilpropan-2-ol.","Não há água nessa reação."],
+ ["Não há reação, porque o peróxido impede.","O peróxido não impede a adição; ele só mudaria o produto no caso do HBr."]]},
+{k:"q5",lv:2,s:"Um alceno X reagiu com HBr, sem peróxido, e formou como produto principal o 2-bromo-2-metilbutano. X pode ser",c:3,o:[
+ ["pent-1-eno.","Daria 2-bromopentano: cadeia sem ramificação."],
+ ["pent-2-eno.","Daria mistura de 2-bromopentano e 3-bromopentano, sem ramificação."],
+ ["2-metilbutano.","É um alcano: não tem dupla para fazer adição."],
+ ["2-metilbut-1-eno.","Isso. CH₂=C(CH₃)–CH₂CH₃: o H entra no C1 (mais hidrogenado) e o Br no C2, que tem a metila."],
+ ["but-1-eno.","Tem só 4 carbonos; o produto tem 5."]]},
+{k:"q5",lv:2,s:"Qual alceno forma, com HBr (sem peróxido), um único produto de posição, sem mistura?",c:2,o:[
+ ["Pent-2-eno.","C2 e C3 têm um H cada: Markovnikov não desempata, e forma-se mistura de 2- e 3-bromopentano (questão da PUC-RJ no livro)."],
+ ["Hex-2-eno.","C2 e C3 têm um H cada: mistura de 2- e 3-bromo-hexano."],
+ ["Hex-3-eno.","Isso. A molécula é simétrica: o Br no C3 ou no C4 dá o mesmo composto, 3-bromo-hexano."],
+ ["Hept-3-eno.","C3 e C4 têm um H cada, e a molécula não é simétrica: mistura de 3- e 4-bromo-heptano."],
+ ["Oct-3-eno.","Não é simétrico: forma mistura de 3- e 4-bromo-octano."]]},
+{k:"q5",lv:2,s:"1 mol de um hidrocarboneto X consome 2 mol de H₂ na hidrogenação total e forma 2-metilbutano. X pode ser",c:1,o:[
+ ["2-metilbut-2-eno.","Tem só uma dupla: consome 1 mol de H₂."],
+ ["2-metilbuta-1,3-dieno (isopreno).","Isso. Duas duplas → 2 mol de H₂, e o esqueleto ramificado vira 2-metilbutano."],
+ ["Penta-1,3-dieno.","Consome 2 mol de H₂, mas forma pentano, sem ramificação."],
+ ["3-metilbut-1-eno.","Uma dupla só: 1 mol de H₂."],
+ ["Ciclopentano.","É saturado; não faz adição de H₂ como os insaturados."]]},
+{k:"q5",lv:2,s:"Relacione as reações com o produto: ciclo-hexeno + Br₂, e 1,2-dimetilciclo-hexeno + H₂ (Pt). Os produtos são, respectivamente,",c:4,o:[
+ ["cis-1,2-dibromociclo-hexano e trans-1,2-dimetilciclo-hexano.","Está invertido: o Br₂ entra em trans e o H₂ entra em cis."],
+ ["trans-1,2-dibromociclo-hexano e trans-1,2-dimetilciclo-hexano.","A hidrogenação catalítica é adição cis: os H entram do mesmo lado, e os metilas ficam do mesmo lado."],
+ ["cis-1,2-dibromociclo-hexano e cis-1,2-dimetilciclo-hexano.","A adição de Br₂ é trans, pelo íon bromônio."],
+ ["1,1-dibromociclo-hexano e metilciclo-hexano.","Os Br entram um em cada carbono da dupla. E o H₂ não arranca metila."],
+ ["trans-1,2-dibromociclo-hexano e cis-1,2-dimetilciclo-hexano.","Isso. Br₂: adição trans (íon bromônio). H₂/Pt: adição cis (superfície do catalisador). Junta os caps. 2 e 5."]]},
+{k:"q5",lv:2,s:"A hidratação catalítica do but-1-ino (Hg²⁺/H₂SO₄) forma como produto final",c:0,o:[
+ ["butanona.","Isso. A água entra seguindo Markovnikov (OH no C2), forma um enol, e o enol vira cetona por tautomerização. Só o etino dá aldeído."],
+ ["butanal.","Aldeído só sai da hidratação do etino."],
+ ["but-1-en-2-ol.","Esse é o enol, um intermediário instável. Ele se converte em butanona."],
+ ["butan-2-ol.","Álcool sai da hidratação de ALCENO. Do alcino sai enol → carbonila."],
+ ["ácido butanoico.","Hidratação não forma ácido carboxílico."]]},
+{k:"q5",lv:2,s:"Analise. I. Propeno + HBr com peróxido forma 1-bromopropano. II. Propeno + HCl com peróxido forma 1-cloropropano. III. Propeno + HBr sem peróxido forma 2-bromopropano. IV. Sem peróxido, o H do haleto vai para o carbono mais hidrogenado da dupla. Estão corretas",c:3,o:[
+ ["I e II.","II está errada: com HCl o peróxido não muda nada; forma 2-cloropropano."],
+ ["II e III.","II está errada pelo mesmo motivo."],
+ ["I e III.","Faltou a IV, que é exatamente a regra de Markovnikov."],
+ ["I, III e IV.","Isso. Só a II está errada."],
+ ["Todas.","A II está errada: Kharasch só vale para HBr."]]},
+{k:"q5",lv:2,s:"O buta-1,3-dieno reage com 1 mol de HBr. O produto principal é",c:1,o:[
+ ["3-bromobut-1-eno.","Esse é o produto da adição 1,2, que é minoritária."],
+ ["1-bromobut-2-eno.","Isso. Adição 1,4: H no C1, Br no C4, e a dupla migra para o meio (C2=C3). É a questão da UFBA no livro."],
+ ["2-bromobutano.","Para isso seria preciso adicionar também H₂."],
+ ["1,4-dibromobut-2-eno.","Esse sai com Br₂, não com HBr."],
+ ["1-bromobutano.","Sobra uma dupla: com 1 mol de HBr, só uma insaturação é consumida."]]},
+{k:"q5",lv:2,s:"Pelo livro, as adições de HCN e de água (Hg²⁺) ao etino e a adição de Br₂ ao eteno são classificadas, respectivamente, como",c:2,o:[
+ ["eletrofílica, eletrofílica e nucleofílica.","Está invertido: no etino, o primeiro ataque do reagente é nucleofílico."],
+ ["radicalar, radicalar e eletrofílica.","Radicalar é o caso do HBr com peróxido."],
+ ["nucleofílica, nucleofílica e eletrofílica.","Isso. O livro classifica HCN e hidratação de alcinos como adição nucleofílica, e halogênios em alcenos como eletrofílica."],
+ ["nucleofílica, eletrofílica e radicalar.","A hidratação do alcino é nucleofílica; o Br₂ no eteno é eletrofílico (íon bromônio)."],
+ ["todas eletrofílicas.","O livro diferencia: HCN e hidratação do alcino são nucleofílicas."]]},
+{k:"q5",lv:2,s:"O 2-metilbut-2-eno reage com água em meio ácido (H₂SO₄). O produto principal é",c:3,o:[
+ ["3-metilbutan-2-ol.","O OH foi para o carbono com mais H. Pela regra de Markovnikov, o H vai para ele, e o OH para o carbono com menos H (C2)."],
+ ["2-metilbutan-1-ol.","O C1 não fazia parte da dupla."],
+ ["3-metilbutan-1-ol.","O OH tem de entrar num carbono da dupla (C2 ou C3)."],
+ ["2-metilbutan-2-ol.","Isso. H no C3 (que tem 1 H), OH no C2 (que tem 0 H). É a questão do MACKENZIE no livro."],
+ ["2-metilbutanal.","Hidratação de alceno forma álcool, não aldeído."]]},
+{k:"q5",lv:2,s:"Na reação propanona + H₂ (Pt), o Nox do carbono da carbonila",c:0,o:[
+ ["passa de +2 para 0, e a reação é uma redução.","Isso. A propanona vira propan-2-ol. O Nox do carbono diminui: redução, e o H₂ é o agente redutor."],
+ ["passa de 0 para +2, e a reação é uma oxidação.","É o contrário: o carbono ganha H e o Nox diminui."],
+ ["passa de +1 para –1.","Esses são os valores do etanal → etanol."],
+ ["não muda, porque é só uma adição.","Adição de H₂ em carbonila é redução: o Nox muda."],
+ ["passa de +2 para +4.","O Nox diminui, não aumenta."]]},
+{k:"q5",lv:2,s:"Dois isômeros de fórmula C₄H₈ consomem 1 mol de H₂ cada e formam o MESMO produto, o butano. Esses isômeros são",c:1,o:[
+ ["but-2-eno e 2-metilpropeno.","O 2-metilpropeno forma metilpropano (ramificado), não butano."],
+ ["but-1-eno e but-2-eno.","Isso. Os dois têm cadeia normal de 4 carbonos; com H₂ formam butano."],
+ ["ciclobutano e but-1-eno.","O ciclobutano é saturado e não faz essa adição."],
+ ["but-1-ino e but-2-eno.","O but-1-ino é C₄H₆ e consumiria 2 mol de H₂."],
+ ["2-metilpropeno e metilciclopropano.","Nenhum dos dois forma butano (cadeia normal)."]]},
+{k:"q5",lv:2,s:"Calores de hidrogenação: cis-but-2-eno, –119,7 kJ/mol; trans-but-2-eno, –115,6 kJ/mol. A diferença de energia entre os isômeros e o mais estável são",c:4,o:[
+ ["4,1 kJ/mol; cis.","A diferença está certa, mas o mais estável é o de menor |ΔH|: o trans."],
+ ["235,3 kJ/mol; trans.","Somou os valores. A diferença é 119,7 – 115,6."],
+ ["4,1 kJ/mol; os dois são igualmente estáveis.","Se houvesse a mesma energia, os calores seriam iguais."],
+ ["115,6 kJ/mol; trans.","Esse é só o calor do trans, não a diferença."],
+ ["4,1 kJ/mol; trans.","Isso. 119,7 – 115,6 = 4,1. O trans libera menos calor porque já tinha menos energia: é mais estável."]]}
+,
 /* ================= BIOLOGIA · INTEGRAÇÃO DOS SISTEMAS ================= */
-{k:"bi",s:"Qual sequência mostra corretamente o caminho da água, do solo até a atmosfera?",c:2,o:[
- ["Coifa → floema da raiz → floema do caule → estômato.","A coifa protege a ponta, não absorve. E a água sobe pelo xilema, não pelo floema."],
- ["Pelo absorvente → xilema → floema → cutícula.","A água não passa do xilema para o floema para sair. E a cutícula é justamente o que impede a saída."],
+{k:"bi",lv:2,s:"Qual sequência mostra corretamente o caminho da água, do solo até a atmosfera?",c:2,o:[
+ ["Pelo absorvente → córtex → endoderme → floema (raiz, caule, nervuras) → mesofilo → estômato.","Quase tudo certo, mas a água sobe pelo xilema. O floema leva a seiva elaborada."],
+ ["Pelo absorvente → endoderme → córtex → xilema (raiz, caule, nervuras) → mesofilo → estômato.","A ordem de córtex e endoderme está trocada: a endoderme é a última camada antes dos vasos."],
  ["Pelo absorvente → córtex → endoderme → xilema (raiz, caule, nervuras) → mesofilo → estômato.","Isso. Ela atravessa o sistema de revestimento, o fundamental e o vascular, e sai como vapor pelo estômato."],
- ["Pelo absorvente → endoderme → córtex → floema → hidatódio.","A ordem está trocada (o córtex vem antes da endoderme), e a água sobe pelo xilema. O hidatódio é a saída da gutação, não da transpiração."],
- ["Estômato → mesofilo → xilema → raiz → solo.","Esse é o caminho ao contrário. A água entra pela raiz e sai pela folha."]]},
-{k:"bi",s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos. Na chegada da água até a folha, qual é o papel de cada um?",c:0,o:[
+ ["Coifa → córtex → endoderme → xilema (raiz, caule, nervuras) → mesofilo → hidatódio, como vapor.","A água entra pelos pelos absorventes, não pela coifa. E o vapor sai pelo estômato; o hidatódio é a saída da água líquida (gutação)."],
+ ["Pelo absorvente → córtex → endoderme → xilema (raiz, caule, nervuras) → mesofilo → cutícula.","A cutícula é cera: ela reduz a saída de água. A principal saída do vapor é o estômato."]]},
+{k:"bi",lv:2,s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos. Na chegada da água até a folha, qual é o papel de cada um?",c:0,o:[
  ["Revestimento absorve (epiderme com pelos), fundamental deixa passar (córtex) e vascular conduz (xilema).","Isso. Os três sistemas trabalham em sequência, como uma linha de montagem."],
- ["Só o sistema vascular participa; os outros dois não têm relação com a água.","Antes de chegar ao xilema, a água entra pela epiderme e atravessa o córtex."],
- ["O revestimento conduz, o fundamental absorve e o vascular protege.","Os papéis estão trocados."],
- ["O sistema fundamental absorve a água pelo floema.","Floema é vascular, não fundamental. E ele leva açúcar, não água do solo."],
- ["O sistema de revestimento faz fotossíntese e manda a água para baixo.","A fotossíntese acontece no mesofilo (fundamental), e a água sobe."]]},
-{k:"bi",s:"Um ramo de salsão é colocado em água com corante. Horas depois, as nervuras das folhas ficam coloridas. Esse experimento mostra que",c:3,o:[
- ["o floema leva o corante da folha até a base.","O corante subiu da água até a folha. Quem sobe a seiva bruta é o xilema."],
- ["a folha absorve o corante pelos estômatos.","O corante estava na água da base do ramo, não em contato com a folha."],
- ["o corante se espalha por todas as células igualmente.","Ficaram coloridas as nervuras, que são os vasos, e não tudo igual."],
- ["o xilema é contínuo da base do caule até as nervuras, e a água é puxada para cima pela transpiração.","Isso. Caule e folha formam um único sistema de tubulação, e a transpiração é o motor."],
- ["a pressão de raiz empurra o corante.","O ramo foi cortado: não tem raiz. Quem puxou foi a transpiração das folhas."]]},
-{k:"bi",s:"As folhas de uma planta são cobertas com vaselina, que tapa os estômatos. O que acontece com a subida de água no xilema?",c:1,o:[
- ["Aumenta, porque a água fica presa na folha.","A água presa não puxa nada. Sem perder água, a folha deixa de criar a tensão que puxa a coluna."],
+ ["Revestimento conduz (epiderme), fundamental absorve (pelos do córtex) e vascular armazena (xilema).","Papéis trocados: quem absorve é a epiderme com pelos, e quem conduz é o xilema."],
+ ["Só o sistema vascular participa: o xilema absorve a água direto do solo e a leva até a folha.","Antes de chegar ao xilema, a água entra pela epiderme (pelos) e atravessa o córtex."],
+ ["Revestimento absorve (epiderme com pelos), fundamental conduz (floema) e vascular filtra (endoderme).","Floema é vascular, não fundamental, e leva açúcar. E a endoderme não é tecido vascular."],
+ ["Revestimento impermeabiliza (cutícula), fundamental absorve (córtex) e vascular conduz (floema).","Na raiz não há cutícula barrando a água, e quem conduz a água é o xilema, não o floema."]]},
+{k:"bi",lv:2,s:"Um ramo de salsão é colocado em água com corante. Horas depois, as nervuras das folhas ficam coloridas. Esse experimento mostra que",c:3,o:[
+ ["o floema é contínuo do caule às nervuras, e a fotossíntese das folhas puxa a água para cima.","Quem forma o caminho da água é o xilema, e quem puxa é a transpiração."],
+ ["o xilema é contínuo do caule às nervuras, e a pressão de raiz empurra a água para cima.","O ramo foi cortado: não tem raiz. Quem puxou foi a transpiração das folhas."],
+ ["as folhas absorvem o corante pelos estômatos, e ele se acumula nas nervuras por difusão.","O corante estava na água da base do ramo, não em contato com as folhas."],
+ ["o xilema é contínuo do caule às nervuras, e a transpiração das folhas puxa a água para cima.","Isso. Caule e folha formam um único sistema de tubulação, e a transpiração é o motor."],
+ ["o corante se espalha igualmente por todas as células, e as nervuras só parecem mais escuras.","Ficaram coloridas as nervuras, que são os vasos: o corante seguiu o xilema."]]},
+{k:"bi",lv:2,s:"As folhas de uma planta são cobertas com vaselina, que tapa os estômatos. O que acontece com a subida de água no xilema?",c:1,o:[
+ ["Aumenta, porque sem perder vapor a folha guarda água e puxa mais seiva bruta.","A água presa não puxa nada. Sem perder água, a folha deixa de criar a tensão que puxa a coluna."],
  ["Diminui muito, porque a transpiração, que é o motor da subida, quase para.","Isso. Coesão-tensão: sem transpiração, quase não há puxão. Ligação direta entre folha (cap. 11) e condução (cap. 10)."],
- ["Não muda, porque quem sobe a água é a pressão de raiz.","A pressão de raiz é um empurrão fraco. O principal é o puxão da transpiração."],
- ["A água passa a subir pelo floema.","O floema não substitui o xilema."],
- ["A raiz para de absorver sais, mas a água continua igual.","A subida de água cai junto com a transpiração."]]},
-{k:"bi",s:"Num dia quente e seco, a planta fecha os estômatos. Qual cadeia de consequências está correta?",c:4,o:[
- ["Mais transpiração → mais CO₂ → mais fotossíntese.","Fechar o estômato diminui a transpiração e a entrada de CO₂."],
- ["Menos transpiração → mais subida de água → folhas mais túrgidas.","Com menos transpiração, a subida de água diminui."],
- ["Menos CO₂ → mais açúcar no floema → frutos maiores.","Menos CO₂ quer dizer menos fotossíntese e menos açúcar."],
- ["Nada muda, porque o estômato só controla a saída de água.","O estômato também é a porta de entrada do CO₂."],
- ["Menos perda de água, mas menos CO₂ → menos fotossíntese → menos açúcar enviado pelo floema às raízes e frutos.","Isso. Um ajuste na folha afeta a planta inteira: transpiração, condução e distribuição de açúcar."]]},
-{k:"bi",s:"Na seca, o ácido abscísico fecha os estômatos. Do ponto de vista da planta inteira, esse hormônio",c:2,o:[
- ["só age na raiz, aumentando a absorção.","Ele age nas células-guarda das folhas."],
- ["acelera o crescimento, porque aumenta a fotossíntese.","Com estômato fechado, a fotossíntese cai, e o crescimento desacelera."],
+ ["Não muda, porque a subida depende só da pressão de raiz, que continua igual.","A pressão de raiz é um empurrão fraco. O principal é o puxão da transpiração."],
+ ["Diminui pouco, porque o floema passa a levar a água que o xilema deixou de subir.","O floema não substitui o xilema. E a queda é grande, porque o motor (transpiração) quase parou."],
+ ["Não muda, porque a água continua saindo pela cutícula no mesmo ritmo de antes.","A perda pela cutícula é pequena; a via estomática é a maior. Tapando os estômatos, a transpiração cai muito."]]},
+{k:"bi",lv:2,s:"Num dia quente e seco, a planta fecha os estômatos. Qual cadeia de consequências está correta?",c:4,o:[
+ ["Menos perda de água e mais CO₂ retido na folha → mais fotossíntese → mais açúcar no floema.","O CO₂ entra pelos estômatos. Fechados, entra menos CO₂."],
+ ["Menos perda de água → mais subida de seiva bruta → folhas mais túrgidas → mais fotossíntese.","Com menos transpiração, a subida de água diminui, não aumenta."],
+ ["Mais perda de água pela cutícula → mais CO₂ → mais fotossíntese → mais açúcar no floema.","Fechar o estômato diminui a perda de água e a entrada de CO₂."],
+ ["Menos perda de água, e a fotossíntese não muda, porque o CO₂ entra pela raiz.","O CO₂ entra pelas folhas, pelos estômatos."],
+ ["Menos perda de água, mas menos CO₂ → menos fotossíntese → menos açúcar no floema.","Isso. Um ajuste na folha afeta a planta inteira: transpiração, condução e distribuição de açúcar."]]},
+{k:"bi",lv:2,s:"Na seca, o ácido abscísico fecha os estômatos. Do ponto de vista da planta inteira, esse hormônio",c:2,o:[
+ ["aumenta a absorção de água pela raiz, compensando a água que a folha perde pelos estômatos.","Ele age nas células-guarda das folhas, fechando os estômatos."],
+ ["acelera o crescimento, porque o estômato fechado retém CO₂ na folha e aumenta a fotossíntese.","Estômato fechado reduz a entrada de CO₂, e a fotossíntese cai."],
  ["troca crescimento por sobrevivência: economiza água, mas reduz a entrada de CO₂ e a produção de açúcar.","Isso. O hormônio (cap. 12) conecta o estado da água (cap. 11) com a produção de alimento (fotossíntese)."],
- ["amadurece os frutos para a planta se reproduzir antes de morrer.","Quem amadurece frutos é o etileno."],
- ["abre os estômatos para resfriar a folha.","O ácido abscísico fecha, não abre."]]},
-{k:"bi",s:"Depois do anel de Malpighi, as folhas continuam verdes por semanas e a árvore só morre meses depois. Por quê?",c:0,o:[
- ["O xilema, mais interno, continua levando água às folhas, que seguem fazendo fotossíntese; mas o açúcar não chega à raiz, que morre de fome e, aí sim, para de absorver água.","Isso. Os dois sistemas de transporte são independentes: um corte que tira só o floema demora a matar."],
- ["O floema continua funcionando por dentro do tronco.","O floema fica na casca, e foi justamente ele que saiu com o anel."],
- ["A raiz faz fotossíntese e se sustenta sozinha.","A raiz fica no escuro e depende do açúcar que vem das folhas."],
- ["As folhas param de transpirar logo depois do corte.","Elas continuam transpirando, porque o xilema está intacto."],
- ["O anel tira o xilema, mas a água sobe pela casca.","É o contrário: o anel tira o floema (casca), e o xilema fica."]]},
-{k:"bi",s:"Um produtor arranca muitas folhas de um pé de tomate carregado de frutos. Os frutos tendem a ficar menores porque",c:3,o:[
- ["as folhas protegiam os frutos do sol.","O efeito principal não é sombra: é falta de alimento."],
- ["sem folhas, a raiz para de absorver água imediatamente.","A raiz continua absorvendo; o problema é o açúcar."],
- ["o etileno das folhas deixa de chegar aos frutos.","Não é o etileno que faz o fruto crescer."],
+ ["amadurece frutos e sementes rapidamente, para a planta se reproduzir antes de secar.","Quem amadurece frutos é o etileno."],
+ ["abre os estômatos para resfriar a folha pela transpiração, protegendo os tecidos do calor.","O ácido abscísico fecha os estômatos, não abre."]]},
+{k:"bi",lv:2,s:"Depois do anel de Malpighi, as folhas continuam verdes por semanas e a árvore só morre meses depois. Por quê?",c:0,o:[
+ ["O xilema continua levando água às folhas, que seguem fazendo fotossíntese; mas o açúcar não chega à raiz, que morre aos poucos.","Isso. Os dois sistemas de transporte são independentes: um corte que tira só o floema demora a matar."],
+ ["O floema, mais interno, continua levando açúcar à raiz; só o xilema, retirado com a casca, deixou de levar água.","É o contrário: o floema fica na casca e sai com o anel; o xilema fica por dentro."],
+ ["As folhas continuam verdes porque guardam água; a árvore morre quando essa reserva acaba, sem relação com a raiz.","A água continua chegando pelo xilema. Quem morre primeiro é a raiz, sem açúcar."],
+ ["A raiz passa a fazer fotossíntese e se sustenta por meses, até que o tronco acima do corte apodrece.","A raiz fica no escuro e depende do açúcar que vem das folhas."],
+ ["O açúcar desce pelo xilema enquanto o floema se regenera; a árvore só morre se o floema não voltar a crescer.","O xilema leva água e sais, não açúcar."]]},
+{k:"bi",lv:2,s:"Um produtor arranca muitas folhas de um pé de tomate carregado de frutos. Os frutos tendem a ficar menores porque",c:3,o:[
+ ["as folhas protegiam os frutos do sol, e sem sombra eles perdem água e param de crescer.","O efeito principal não é a sombra: é a falta de alimento."],
+ ["sem folhas, a raiz deixa de absorver água, e os frutos murcham por falta de seiva bruta.","A raiz continua absorvendo; o problema principal é o açúcar."],
+ ["o etileno produzido pelas folhas deixa de chegar aos frutos, que param de amadurecer.","Não é o etileno que faz o fruto crescer de tamanho."],
  ["a fonte de açúcar (folhas) diminuiu, e o floema leva menos açúcar ao dreno (frutos).","Isso. Fonte (folha) e dreno (fruto) estão ligados pelo floema: menos fonte, menos crescimento do dreno."],
- ["o xilema passa a levar açúcar para as folhas novas.","O xilema leva água e sais, não açúcar."]]},
-{k:"bi",s:"A planta tem um sistema radicular e um sistema caulinar. O que cada um entrega ao outro?",c:1,o:[
- ["A raiz manda açúcar para as folhas, e as folhas mandam água para a raiz.","Está invertido."],
+ ["o xilema passa a levar o açúcar dos frutos para as folhas novas que começam a brotar.","O xilema leva água e sais, não açúcar."]]},
+{k:"bi",lv:2,s:"A planta tem um sistema radicular e um sistema caulinar. O que cada um entrega ao outro?",c:1,o:[
+ ["A raiz manda açúcar pelo floema; as folhas mandam água e sais pelo xilema. O caule liga os dois.","Está invertido: água e sais vêm da raiz; açúcar vem das folhas."],
  ["A raiz manda água e sais pelo xilema; as folhas mandam açúcar pelo floema. O caule liga os dois.","Isso. Um depende do outro: sem raiz a folha seca; sem folha a raiz passa fome."],
- ["Os dois são independentes; cada um produz o que precisa.","A raiz não faz fotossíntese, e a folha não absorve água do solo."],
- ["A raiz manda hormônios e as folhas mandam sais minerais.","Sais vêm do solo, pela raiz."],
- ["O caule produz todo o açúcar e a água da planta.","O caule conduz. Água vem da raiz e açúcar vem principalmente das folhas."]]},
-{k:"bi",s:"No cacto, as folhas viraram espinhos. Como a planta continua fazendo fotossíntese e sobrevivendo à seca?",c:4,o:[
- ["Os espinhos fazem a fotossíntese.","Espinhos são folhas reduzidas, sem mesofilo suficiente para isso."],
- ["A raiz faz a fotossíntese no subsolo.","Raiz não recebe luz."],
- ["O cacto não faz fotossíntese; vive só da água armazenada.","Toda planta verde precisa fazer fotossíntese para produzir açúcar."],
- ["O cacto abre os estômatos o dia todo para captar mais CO₂.","Isso faria perder muita água na seca."],
- ["O caule verde faz a fotossíntese e guarda água em parênquima de reserva, enquanto os espinhos reduzem a perda de água.","Isso. A adaptação é do conjunto: caule, folha e tecidos de reserva mudaram juntos."]]},
-{k:"bi",s:"Uma planta perto da janela se curva para a luz. Pensando na planta inteira, essa curvatura",c:2,o:[
- ["acontece porque a auxina vai para o lado iluminado.","A auxina vai para o lado da sombra, que cresce mais."],
- ["serve para a raiz receber mais luz.","Quem se curva para a luz é o caule. A raiz tem gravitropismo positivo."],
+ ["A raiz manda água e sais pelo floema; as folhas mandam açúcar pelo xilema. O caule liga os dois.","Os vasos estão trocados: água pelo xilema, açúcar pelo floema."],
+ ["Os dois são independentes: a raiz faz seu próprio açúcar e a folha absorve água da chuva.","A raiz não faz fotossíntese, e a folha não é o órgão de absorção."],
+ ["A raiz manda água pelo xilema; o caule produz o açúcar e o envia à raiz e às folhas.","O açúcar vem principalmente das folhas. O caule conduz."]]},
+{k:"bi",lv:2,s:"No cacto, as folhas viraram espinhos. Como a planta continua fazendo fotossíntese e sobrevivendo à seca?",c:4,o:[
+ ["Os espinhos fazem a fotossíntese, e o caule só guarda água para os períodos de seca.","Espinhos são folhas reduzidas, sem mesofilo suficiente para isso."],
+ ["A raiz faz a fotossíntese no subsolo úmido, e o caule só conduz a seiva para cima.","Raiz não recebe luz."],
+ ["O cacto não faz fotossíntese: vive da água e do açúcar guardados no caule.","Toda planta verde precisa fazer fotossíntese para produzir açúcar."],
+ ["Os espinhos abrem os estômatos o dia todo para captar mais CO₂ e água do ar.","Isso faria perder muita água na seca."],
+ ["O caule verde faz a fotossíntese e guarda água, e os espinhos reduzem a perda de água.","Isso. A adaptação é do conjunto: caule, folha e tecidos de reserva mudaram juntos."]]},
+{k:"bi",lv:2,s:"Uma planta perto da janela se curva para a luz. Pensando na planta inteira, essa curvatura",c:2,o:[
+ ["acontece porque a auxina se acumula no lado iluminado, que cresce mais e empurra a ponta.","A auxina vai para o lado da sombra, que cresce mais."],
+ ["acontece porque o etileno liberado pela luz amolece o lado escuro do caule.","Fototropismo é comandado pela auxina."],
  ["coloca as folhas na luz, aumentando a fotossíntese e o açúcar que o floema distribui para a planta.","Isso. Um hormônio (cap. 12) muda o crescimento do caule (cap. 6) para beneficiar a folha (cap. 7)."],
- ["aumenta a absorção de água pela raiz.","A curvatura é do caule, ligada à luz, não à absorção."],
- ["é causada pelo etileno liberado pela luz.","Fototropismo é comandado pela auxina."]]},
-{k:"bi",s:"Qual sequência descreve o ciclo da reprodução de uma angiosperma, da flor até a nova planta?",c:1,o:[
- ["Fecundação → polinização → fruto → flor → germinação.","A polinização vem antes da fecundação, e a flor vem primeiro."],
+ ["serve para a raiz receber mais luz, porque raiz e caule crescem para o mesmo lado.","Quem se curva para a luz é o caule. A raiz tem gravitropismo positivo."],
+ ["aumenta a absorção de água pela raiz, porque o caule curvado puxa mais seiva bruta.","A curvatura é do caule e está ligada à luz, não à absorção."]]},
+{k:"bi",lv:2,s:"Qual sequência descreve o ciclo da reprodução de uma angiosperma, da flor até a nova planta?",c:1,o:[
+ ["Fecundação → polinização → ovário vira fruto e óvulo vira semente → dispersão → germinação.","A polinização (chegada do pólen) vem antes da fecundação."],
  ["Polinização → fecundação → ovário vira fruto e óvulo vira semente → dispersão → germinação.","Isso. Liga a flor (cap. 8) ao fruto e à semente (cap. 9)."],
- ["Polinização → germinação → fecundação → dispersão → fruto.","A germinação é a última etapa, quando a semente já foi dispersa."],
- ["Germinação → polinização → semente → flor → fruto.","A semente se forma depois da fecundação, não antes da flor."],
- ["Dispersão → polinização → fruto → fecundação → semente.","A dispersão acontece com o fruto e a semente prontos."]]},
-{k:"bi",s:"A banana comercial não tem semente. Como a bananeira é multiplicada?",c:0,o:[
+ ["Polinização → fecundação → óvulo vira fruto e ovário vira semente → dispersão → germinação.","Trocado: o ovário vira fruto e o óvulo vira semente."],
+ ["Polinização → fecundação → ovário vira fruto e óvulo vira semente → germinação → dispersão.","A dispersão vem antes da germinação: a semente é levada e depois germina."],
+ ["Polinização → dispersão → fecundação → ovário vira fruto e óvulo vira semente → germinação.","A dispersão é do fruto e da semente já formados, depois da fecundação."]]},
+{k:"bi",lv:2,s:"A banana comercial não tem semente. Como a bananeira é multiplicada?",c:0,o:[
  ["Por propagação vegetativa: o rizoma, um caule subterrâneo, tem gemas que originam novas plantas.","Isso. Junta partenocarpia (cap. 9) com gemas e tipos de caule (cap. 6)."],
- ["Pelas sementes escondidas na casca.","A banana comercial é partenocárpica: não forma sementes."],
- ["Pela raiz, que tem gemas.","Gemas são marca do caule. O rizoma da bananeira é caule."],
- ["Pela polinização do vento.","Polinização forma semente; aqui não há semente."],
- ["Pelas folhas, que caem e enraízam.","A bananeira é multiplicada pelo rizoma."]]},
-{k:"bi",s:"Uma semente de feijão foi enterrada fundo demais e a plântula morreu antes de sair do solo. A explicação mais provável é que",c:3,o:[
- ["faltou polinização.","A polinização já aconteceu lá na flor, antes de a semente existir."],
- ["a semente estava dormente.","Ela germinou: a plântula chegou a crescer."],
- ["a radícula não saiu.","Se a plântula cresceu, a radícula saiu."],
+ ["Por sementes muito pequenas escondidas na polpa, que germinam quando o fruto cai no solo.","A banana comercial é partenocárpica: não forma sementes."],
+ ["Pela raiz: a raiz da bananeira tem gemas que brotam e originam novas plantas.","Gemas são marca do caule. O rizoma da bananeira é caule subterrâneo."],
+ ["Por polinização pelo vento, que forma novos frutos mesmo sem formar sementes.","Polinização não gera uma planta nova."],
+ ["Por folhas que caem, enraízam no solo úmido e formam novas plantas a partir das nervuras.","A bananeira é multiplicada pelo rizoma, não pelas folhas."]]},
+{k:"bi",lv:2,s:"Uma semente de feijão foi enterrada fundo demais e a plântula morreu antes de sair do solo. A explicação mais provável é que",c:3,o:[
+ ["faltou luz para a semente germinar, porque toda semente de feijão precisa de luz.","Ela germinou: a plântula chegou a crescer."],
+ ["a semente estava dormente, e por isso a plântula não conseguiu crescer até a superfície.","Se houve plântula, a dormência já tinha sido quebrada."],
+ ["a radícula não saiu, então a plântula não conseguiu absorver água para crescer.","Se a plântula cresceu, a radícula saiu."],
  ["ela gastou as reservas dos cotilédones antes de chegar à luz e começar a fotossíntese.","Isso. A plântula vive da reserva da semente até ter folhas fazendo fotossíntese."],
- ["o endosperma é triploide.","Ser triploide não mata a plântula."]]},
-{k:"bi",s:"Qual associação entre estrutura e função está ERRADA?",c:4,o:[
+ ["o endosperma triploide é tóxico para o embrião quando a semente fica no escuro.","Ser triploide não torna o endosperma tóxico."]]},
+{k:"bi",lv:2,s:"Qual associação entre estrutura e função está ERRADA?",c:4,o:[
  ["Pelos absorventes → aumentam a superfície de absorção.","Essa está certa."],
  ["Mesofilo lacunoso → facilita a troca de gases.","Essa está certa."],
  ["Colênquima → sustentação flexível.","Essa está certa."],
  ["Súber → impermeabiliza e isola.","Essa está certa."],
  ["Elementos de vaso → conduzem seiva elaborada.","Isso, essa é a errada. Elementos de vaso são do xilema e conduzem seiva bruta; a elaborada vai pelo floema (tubo crivado)."]]},
-{k:"bi",s:"De madrugada, com solo úmido e ar saturado, aparecem gotas na borda das folhas. Comparando com o meio-dia ensolarado, é correto dizer que",c:2,o:[
- ["nos dois horários a água sobe pelo mesmo motor, a transpiração.","De madrugada a transpiração quase para."],
- ["de madrugada a planta transpira mais que ao meio-dia.","Com ar saturado e sem sol, transpira menos."],
+{k:"bi",lv:2,s:"De madrugada, com solo úmido e ar saturado, aparecem gotas na borda das folhas. Comparando com o meio-dia ensolarado, é correto dizer que",c:2,o:[
+ ["nos dois horários a transpiração puxa a água; de madrugada ela só fica mais visível.","De madrugada, com ar saturado, a transpiração quase para."],
+ ["de madrugada a planta transpira mais que ao meio-dia, e o vapor sai como gotas pela borda.","Com ar saturado e sem sol, transpira menos. E as gotas são água líquida."],
  ["de madrugada a pressão de raiz empurra a água (gutação); ao meio-dia, a transpiração puxa a água.","Isso. São dois mecanismos que se alternam conforme o ambiente."],
- ["as gotas são vapor da transpiração que condensou.","Gutação é água líquida saindo pelos hidatódios, empurrada pela raiz."],
- ["ao meio-dia a planta faz gutação.","Ao meio-dia domina a transpiração."]]},
-{k:"bi",s:"Se o xilema for bloqueado no caule, as folhas murcham mesmo que a raiz esteja absorvendo água normalmente.",v:true,e:"A água absorvida não tem como chegar às folhas. Raiz, caule e folha só funcionam ligados pelo xilema."},
-{k:"bi",s:"A fotossíntese da folha não depende da raiz.",v:false,e:"Depende: a água usada na fotossíntese e que mantém as células-guarda túrgidas (estômato aberto) vem da raiz, pelo xilema."},
-{k:"bi",s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos: revestimento, fundamental e vascular.",v:true,e:"O que muda de um órgão para outro é como cada sistema é organizado e o que ele faz ali."},
-{k:"bi",s:"O floema só transporta açúcar de cima para baixo.",v:false,e:"O floema vai da fonte ao dreno. Se o dreno for um fruto ou um broto no alto, o açúcar sobe."}
+ ["as gotas são vapor da transpiração que condensou na folha fria, como o orvalho.","Gutação é água líquida saindo pelos hidatódios, empurrada pela raiz."],
+ ["ao meio-dia a pressão de raiz empurra a água; de madrugada a transpiração puxa a água.","Está invertido."]]},
+{k:"bi",lv:2,s:"Se o xilema for bloqueado no caule, as folhas murcham mesmo que a raiz esteja absorvendo água normalmente.",v:true,e:"A água absorvida não tem como chegar às folhas. Raiz, caule e folha só funcionam ligados pelo xilema."},
+{k:"bi",lv:2,s:"A fotossíntese da folha não depende da raiz.",v:false,e:"Depende: a água usada na fotossíntese e que mantém as células-guarda túrgidas (estômato aberto) vem da raiz, pelo xilema."},
+{k:"bi",lv:2,s:"Raiz, caule e folha têm os mesmos três sistemas de tecidos: revestimento, fundamental e vascular.",v:true,e:"O que muda de um órgão para outro é como cada sistema é organizado e o que ele faz ali."},
+{k:"bi",lv:2,s:"O floema só transporta açúcar de cima para baixo.",v:false,e:"O floema vai da fonte ao dreno. Se o dreno for um fruto ou um broto no alto, o açúcar sobe."}
+,
+/* ================= QUÍMICA · NOMENCLATURA: REGRAS E GRUPOS ================= */
+{k:"qn",s:"O prefixo que indica uma cadeia principal de 5 carbonos é",c:2,o:[
+ ["but-","But- é 4 carbonos."],
+ ["hex-","Hex- é 6 carbonos."],
+ ["pent-","Isso. Met 1, et 2, prop 3, but 4, pent 5, hex 6, hept 7, oct 8, non 9, dec 10."],
+ ["prop-","Prop- é 3 carbonos."],
+ ["hept-","Hept- é 7 carbonos."]]},
+{k:"qn",s:"No nome but-2-eno, o infixo \"en\" indica",c:1,o:[
+ ["só ligações simples.","Só simples é o infixo \"an\"."],
+ ["uma ligação dupla.","Isso. an = simples, en = dupla, in = tripla, dien = duas duplas."],
+ ["uma ligação tripla.","Tripla é o infixo \"in\"."],
+ ["duas ligações duplas.","Duas duplas é \"dien\" (buta-1,3-dieno)."],
+ ["um anel.","Anel é indicado pela palavra \"ciclo\"."]]},
+{k:"qn",s:"Os sufixos -ol, -al e -ona indicam, respectivamente,",c:3,o:[
+ ["aldeído, álcool e cetona.","Está trocado: -ol é álcool e -al é aldeído."],
+ ["álcool, cetona e aldeído.","-al é aldeído e -ona é cetona."],
+ ["cetona, aldeído e álcool.","É o contrário."],
+ ["álcool, aldeído e cetona.","Isso. Etanol, etanal, propanona."],
+ ["ácido, éster e amina.","Ácido carboxílico usa \"ácido ...oico\"; éster, \"...oato de ...ila\"; amina, \"-amina\"."]]},
+{k:"qn",s:"Qual é o nome do composto CH₃–CH₂–CH₂–OH?",c:0,o:[
+ ["Propan-1-ol.","Isso. 3 carbonos (prop), só simples (an), álcool (ol) no carbono 1."],
+ ["Propan-2-ol.","No propan-2-ol o OH fica no carbono do meio: CH₃–CH(OH)–CH₃."],
+ ["Propanal.","Propanal é aldeído (–CHO)."],
+ ["Propanona.","Propanona é cetona (C=O no meio da cadeia)."],
+ ["Propan-3-ol.","A numeração começa pela ponta mais próxima do OH: é 1, não 3."]]},
+{k:"qn",s:"O grupo substituinte –CH(CH₃)₂ chama-se",c:3,o:[
+ ["propil.","Propil é –CH₂–CH₂–CH₃, ligado pela ponta."],
+ ["metil.","Metil é –CH₃."],
+ ["terc-butil.","Terc-butil é –C(CH₃)₃, com 4 carbonos."],
+ ["isopropil.","Isso. Três carbonos, ligado pelo carbono do meio."],
+ ["etil.","Etil é –CH₂–CH₃."]]},
+{k:"qn",s:"O grupo substituinte –C(CH₃)₃ chama-se",c:2,o:[
+ ["isobutil.","Isobutil é –CH₂–CH(CH₃)₂: ligado por um CH₂."],
+ ["sec-butil.","Sec-butil é –CH(CH₃)–CH₂–CH₃: ligado por um carbono secundário."],
+ ["terc-butil.","Isso. Ligado por um carbono terciário (ligado a três outros carbonos)."],
+ ["butil.","Butil é a cadeia reta –CH₂CH₂CH₂CH₃."],
+ ["isopropil.","Isopropil tem 3 carbonos."]]},
+{k:"qn",s:"Os grupos –CH=CH₂ e –C₆H₅ chamam-se, respectivamente,",c:0,o:[
+ ["vinil (etenil) e fenil.","Isso. Vinil é o eteno menos um H; fenil é o benzeno menos um H."],
+ ["etil e benzil.","Etil é –CH₂CH₃ (sem dupla). Benzil é –CH₂–C₆H₅."],
+ ["vinil e benzil.","Benzil tem um CH₂ antes do anel: –CH₂–C₆H₅."],
+ ["etenil e ciclo-hexil.","Ciclo-hexil é o anel saturado C₆H₁₁, não o aromático."],
+ ["alil e fenil.","Alil é –CH₂–CH=CH₂ (3 carbonos)."]]},
+{k:"qn",s:"O nome correto de CH₂=CH–CH₂–CH₃ é",c:1,o:[
+ ["but-3-eno.","A numeração começa pela ponta mais perto da dupla: a dupla fica no 1, não no 3."],
+ ["but-1-eno.","Isso. A dupla recebe o menor número possível."],
+ ["butano.","Butano não tem dupla."],
+ ["but-2-eno.","No but-2-eno a dupla está no meio: CH₃–CH=CH–CH₃."],
+ ["buteno-3.","Pela regra atual, o número vem antes do infixo: but-1-eno."]]},
+{k:"qn",s:"O nome de CH₃–CH(CH₃)–CH₃ é",c:1,o:[
+ ["butano.","Butano é a cadeia reta de 4 carbonos. Aqui a cadeia principal tem 3."],
+ ["metilpropano.","Isso. Cadeia principal de 3 carbonos com um metil no meio. Não precisa do número 2, porque não há outra posição possível."],
+ ["2-metilbutano.","Teria 5 carbonos no total. Aqui são 4."],
+ ["isopropano.","\"Iso\" é usado para grupos (isopropil), não para o nome desse alcano."],
+ ["1-metilpropano.","Um metil no carbono 1 aumentaria a cadeia: seria butano."]]},
+{k:"qn",s:"Na ordem alfabética dos grupos substituintes, os prefixos di, tri e tetra não são considerados.",v:true,e:"Exemplo: 3-etil-2,2-dimetilpentano. O \"etil\" vem antes do \"metil\" (e vence o d de dimetil, que não conta)."},
+{k:"qn",s:"O nome de um ácido carboxílico termina em \"-ona\".",v:false,e:"Ácido carboxílico: \"ácido ...oico\" (ácido etanoico). \"-ona\" é cetona."},
+{k:"qn",s:"O prefixo \"iso\" entra na ordem alfabética, mas \"sec\" e \"terc\" não.",v:true,e:"Isopropil é ordenado pela letra i. Já terc-butil é ordenado pela letra b."},
+/* ---- nível prova ---- */
+{k:"qn",lv:2,s:"O nome correto de CH₃–CH(CH₃)–CH₂–CH(CH₃)–CH₂–CH₃ é",c:3,o:[
+ ["3,5-dimetil-hexano.","Numerou pela ponta errada. A soma dos localizadores precisa ser a menor: 2 e 4, não 3 e 5."],
+ ["4-etil-2-metilpentano.","A cadeia principal não é a mais longa. Seguindo pelo etil, ela tem 6 carbonos, não 5."],
+ ["2-metil-4-metil-hexano.","Grupos iguais são agrupados com di: 2,4-dimetil."],
+ ["2,4-dimetil-hexano.","Isso. Cadeia mais longa: 6 carbonos. Numerando pela ponta mais perto das ramificações: metis no 2 e no 4."],
+ ["1,3-dimetilpentano.","Metil no carbono 1 aumenta a cadeia. Ramificação nunca fica na ponta."]]},
+{k:"qn",lv:2,s:"O nome correto de CH₃–CH(CH₃)–CH(CH₂CH₃)–CH₂–CH₃ é",c:0,o:[
+ ["3-etil-2-metilpentano.","Isso. Cadeia de 5 carbonos, numerada pela ponta mais perto das ramificações (2 e 3), e os grupos em ordem alfabética: etil antes de metil."],
+ ["2-metil-3-etilpentano.","Os números estão certos, mas os grupos têm de vir em ordem alfabética: etil (e) antes de metil (m)."],
+ ["3-etil-4-metilpentano.","Numerou pela ponta errada: 2 e 3 é menor que 3 e 4."],
+ ["2-isopropilbutano.","A cadeia principal não é a mais longa."],
+ ["3-metil-2-etilpentano.","Ordem alfabética e numeração erradas."]]},
+{k:"qn",lv:2,s:"O nome correto de CH₃–CH(CH₃)–CH=CH–CH₃ é",c:2,o:[
+ ["2-metilpent-3-eno.","Numerou para favorecer a ramificação. A dupla tem prioridade sobre a ramificação na numeração."],
+ ["2-metilpent-2-eno.","A dupla está entre os carbonos 2 e 3 contando pela direita, e o metil fica no 4."],
+ ["4-metilpent-2-eno.","Isso. A dupla recebe o menor número (2); o metil fica, então, no 4."],
+ ["4-metilpent-3-eno.","A dupla começa no carbono 2, não no 3."],
+ ["isopropilpropeno.","A cadeia principal tem de ser a maior que contém a dupla: 5 carbonos."]]},
+{k:"qn",lv:2,s:"O nome correto de CH₃–CH(OH)–CH₂–CH(CH₃)–CH₃ é",c:1,o:[
+ ["2-metilpentan-4-ol.","O grupo funcional (OH) tem prioridade na numeração e recebe o menor número."],
+ ["4-metilpentan-2-ol.","Isso. Numerando pela ponta mais perto do OH: OH no 2, metil no 4."],
+ ["4-metilpentan-1-ol.","O OH está no carbono 2, não na ponta."],
+ ["2-metilpentan-2-ol.","O OH e o metil estão em carbonos diferentes."],
+ ["isobutiletanol.","A cadeia principal é a maior que contém o carbono do OH: 5 carbonos."]]},
+{k:"qn",lv:2,s:"O nome de CH₃–CCl=CH–CO–CH₃ (um exemplo do livro) é",c:4,o:[
+ ["2-cloropent-2-en-4-ona.","A função (cetona) tem prioridade na numeração: a C=O deve ter o menor número possível."],
+ ["4-cloropent-2-en-3-ona.","O C=O está no carbono 2 quando se numera pela ponta mais perto dele."],
+ ["2-cloropent-3-en-4-ona.","Numerou pela ponta errada."],
+ ["4-cloropent-3-enal.","Não é aldeído: o C=O está no meio da cadeia, então é cetona."],
+ ["4-cloropent-3-en-2-ona.","Isso. Cetona no 2 (menor número para a função), dupla no 3 e cloro no 4. Com prioridades, ele pode ser (Z) ou (E)."]]},
+{k:"qn",lv:2,s:"O nome de CH₃CH₂–CH=C(CH₃)–COOH (exemplo do livro) é",c:0,o:[
+ ["ácido 2-metilpent-2-enoico.","Isso. O carbono do COOH é sempre o 1. Dupla no 2, metil no 2."],
+ ["ácido 4-metilpent-3-enoico.","Numerou pela ponta errada. No ácido, o C1 é o do COOH."],
+ ["2-metilpent-2-enal.","\"-al\" é aldeído. Aqui é ácido carboxílico."],
+ ["ácido 2-metilpentanoico.","Faltou a dupla: tem de aparecer o infixo \"en\"."],
+ ["ácido 2-metil-hex-2-enoico.","A cadeia tem 5 carbonos contando o do COOH, não 6."]]},
+{k:"qn",lv:2,s:"O nome de CH≡C–CH(CH₃)–CH₃ é",c:3,o:[
+ ["2-metilbut-3-ino.","A tripla tem prioridade na numeração sobre a ramificação."],
+ ["3-metilbut-2-ino.","A tripla está entre C1 e C2."],
+ ["isopropiletino.","A cadeia principal é a maior que contém a tripla: 4 carbonos."],
+ ["3-metilbut-1-ino.","Isso. Tripla no 1, metil no 3."],
+ ["2-metilbutino.","Falta indicar a posição da tripla, e o metil está no 3."]]},
+{k:"qn",lv:2,s:"O nome oficial do isopreno, CH₂=C(CH₃)–CH=CH₂, é",c:1,o:[
+ ["3-metilbuta-1,3-dieno.","Numerando pela outra ponta, o metil fica no 2. Em empate das duplas (1 e 3), desempata a ramificação."],
+ ["2-metilbuta-1,3-dieno.","Isso. Duas duplas (dieno) nos carbonos 1 e 3, metil no 2. O \"a\" em \"buta\" é colocado antes de consoante para facilitar a pronúncia."],
+ ["2-metilbut-1,3-dieno.","Quase: com \"dieno\", acrescenta-se o \"a\": buta-1,3-dieno."],
+ ["2-metilbutadieno-1,3.","Pela regra atual, os números vêm antes do infixo."],
+ ["isopentadieno.","Não é um nome oficial."]]},
+{k:"qn",lv:2,s:"O composto CH₃–CH(CH₃)–CHO chama-se",c:2,o:[
+ ["butanal.","Butanal é a cadeia reta CH₃CH₂CH₂CHO."],
+ ["2-metilpropan-1-al.","No aldeído o –CHO é sempre o carbono 1, por isso o número da função não é escrito."],
+ ["2-metilpropanal.","Isso. 3 carbonos na cadeia principal (contando o CHO), metil no 2."],
+ ["2-metilpropanona.","\"-ona\" é cetona. O C=O aqui está na ponta: aldeído."],
+ ["isobutanol.","\"-ol\" é álcool."]]},
+{k:"qn",lv:2,s:"O grupo sec-butil é",c:1,o:[
+ ["–CH₂–CH₂–CH₂–CH₃","Esse é o butil."],
+ ["–CH(CH₃)–CH₂–CH₃","Isso. Ligado pelo carbono secundário (ligado a dois outros carbonos)."],
+ ["–CH₂–CH(CH₃)₂","Esse é o isobutil."],
+ ["–C(CH₃)₃","Esse é o terc-butil."],
+ ["–CH(CH₃)₂","Esse é o isopropil (3 carbonos)."]]},
+{k:"qn",lv:2,s:"No 1,3-diclorobenzeno, a posição relativa dos dois cloros é chamada de",c:3,o:[
+ ["orto.","Orto é 1,2 (carbonos vizinhos)."],
+ ["para.","Para é 1,4 (carbonos opostos)."],
+ ["alfa.","Alfa não é usado para posições no benzeno."],
+ ["meta.","Isso. 1,2 = orto; 1,3 = meta; 1,4 = para."],
+ ["cis.","Cis/trans é para dupla ou anel saturado, não para posições no benzeno."]]},
+{k:"qn",lv:2,s:"O composto CH₃–COO–CH₂–CH₃ (éster) chama-se",c:0,o:[
+ ["etanoato de etila.","Isso. A parte que vem do ácido (CH₃–COO, 2 carbonos) vira \"etanoato\"; a parte ligada ao O (CH₂CH₃) vira \"de etila\"."],
+ ["etanoato de metila.","A parte ligada ao O é etila (2 carbonos), não metila."],
+ ["propanoato de metila.","Seria CH₃CH₂–COO–CH₃."],
+ ["butanoato.","Falta separar as duas partes do éster."],
+ ["ácido etanoico.","Ácido etanoico é CH₃–COOH, sem a etila."]]},
+{k:"qn",lv:2,s:"O composto CH₃–CO–CH₂–CH₂–OH tem as funções cetona e álcool. Pela IUPAC, seu nome é",c:4,o:[
+ ["butan-1-ol-3-ona.","Só uma função entra como sufixo, a de maior prioridade. A outra vira prefixo."],
+ ["4-oxobutan-1-ol.","A cetona tem prioridade sobre o álcool, então ela é o sufixo."],
+ ["1-hidroxibutan-3-ona.","Numerou pela ponta errada: a função principal (cetona) deve ter o menor número."],
+ ["butanodiona.","Só há um C=O. O outro oxigênio é de um OH."],
+ ["4-hidroxibutan-2-ona.","Isso. Cetona > álcool: \"-ona\" no sufixo (menor número, 2) e OH como prefixo \"hidroxi\" (4)."]]},
+{k:"qn",lv:2,s:"No 1-metilciclo-hexeno (exemplo do livro), a numeração do anel",c:2,o:[
+ ["começa no carbono com metil e evita a dupla.","No ciclo com dupla, a dupla tem de ficar entre os carbonos 1 e 2."],
+ ["começa em qualquer carbono, porque é um anel.","Há regra: a dupla fica entre C1 e C2, e as ramificações recebem os menores números."],
+ ["põe a dupla entre C1 e C2 e dá o número 1 ao carbono da dupla que tem o metil.","Isso. Assim o metil fica com o menor número possível (1)."],
+ ["põe a dupla entre C2 e C3.","A dupla do ciclo sempre recebe os números 1 e 2."],
+ ["não precisa numerar, porque só tem um metil.","Precisa, porque o metil poderia estar num carbono da dupla ou fora dela."]]}
+
 ];
 
 
 /* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
 const DICAS = {
 q2:[
+ [/isômero em que|maior prioridade no C2/i,"Sistema (E)-(Z)","Em cada carbono da dupla, ache o ligante de maior prioridade (número atômico; empatou, olhe os vizinhos). Mesmo lado = Z; lados opostos = E. Cuidado: não compare H com H nem metila com metila.","Sistema (E)-(Z) para nomear estereoisômeros geométricos"],
+ [/maleico/i,"Estabilidade e polaridade de cis e trans","O trans costuma ser mais estável (menos energia). O cis é o mais polar e ferve a uma temperatura maior. Cis e trans são diastereoisômeros geométricos.","Isômeros geométricos com ligação dupla"],
+ [/retina/i,"Por que a dupla trava","A ligação π impede a rotação. Converter cis em trans exige energia (luz, calor ou enzima) para romper a π por um instante.","Isomeria configuracional geométrica (abertura)"],
  [/polar|ebuli|isômeros do 1,2-dicloroeteno/i,"Polaridade de cis e trans","Cis: os dipolos se somam, a molécula é polar e ferve a uma temperatura maior. Trans: os dipolos se anulam e a molécula é apolar.","Isômeros geométricos com ligação dupla"],
  [/cíclic|ciclo/i,"Isomeria em ciclos (bayeriana)","No anel, os substituintes precisam estar em dois carbonos DIFERENTES. Dois no mesmo carbono não contam.","Isômeros geométricos em compostos cíclicos (isomeria bayeriana)"],
  [/\(E\)|cis é \(Z\)/,"Sistema (E)-(Z)","Z = zusammen = juntos: os campeões de prioridade ficam do mesmo lado. E = entgegen = opostos. Cis não é sinônimo de Z: sempre faça o ranking.","Sistema (E)-(Z) para nomear estereoisômeros geométricos"],
@@ -740,6 +1134,10 @@ q2:[
  [/Estereoisômeros são/i,"O que é estereoisomeria","Mesmos átomos, ligados na mesma ordem. Só muda a arrumação no espaço.","Estereoisomeria"],
  [/./,"Condição para isomeria geométrica","Teste rápido: em CADA carbono da dupla, os dois ligantes são diferentes? Se um carbono tiver dois iguais (dois H, dois CH₃), não há isomeria.","Isômeros geométricos com ligação dupla"]],
 q3:[
+ [/tartárico|2,3-dibromobutano/i,"Composto meso","Dois C* IGUAIS: uma combinação é meso (inativa). Sobram 2 ativos e 1 racemato. A fórmula 2ⁿ não vale com meso.","Composto meso"],
+ [/Enantiômeros têm o mesmo ponto|talidomida/i,"Enantiômeros e diastereoisômeros","Enantiômeros: mesmas propriedades físicas, desvios opostos, mas efeitos diferentes no organismo. Diastereoisômeros: propriedades diferentes.","Alguns termos importantes: isômeros ópticos, enantiômeros e quiralidade"],
+ [/gliceraldeído/i,"Prioridades no C*","Compare o átomo ligado direto (O vence C). Entre grupos com C, replique as duplas: CHO (O, O, H) vence CH₂OH (O, H, H).","Nomenclatura (R)-(S) em perspectiva e em projeções de Fischer"],
+ [/opticamente ativos|glicose/i,"Fórmulas de van't Hoff","2ⁿ isômeros ativos e 2ⁿ ÷ 2 pares racêmicos (n = número de C* DIFERENTES). Conte os C* com cuidado e veja se há meso.","Fórmulas de van't Hoff"],
  [/van't Hoff|isômeros ópticos ativos|carbonos assimétricos diferentes/i,"Fórmulas de van't Hoff","2ⁿ isômeros ativos e 2ⁿ ÷ 2 pares racêmicos (n = número de C* diferentes). Não vale para composto meso.","Fórmulas de van't Hoff"],
  [/meso/i,"Composto meso","Meso é a borboleta: duas metades iguais e espelhadas que se anulam por dentro (compensação interna).","Composto meso"],
  [/racêmica/i,"Mistura racêmica","Racêmica é o cabo de guerra empatado: 50% (+) e 50% (–) se anulam (compensação externa).","Alguns termos importantes: diastereoisômeros, mistura racêmica e centro estereogênico"],
@@ -749,6 +1147,8 @@ q3:[
  [/polarímetro|dextrogira|desvi/i,"Luz polarizada e polarímetro","Dextrogira: direita (+). Levogira: esquerda (–). Quem mede o desvio é o polarímetro.","Polarímetro e substâncias opticamente ativas e inativas"],
  [/./,"Carbono assimétrico (C*)","C* = carbono com quatro ligantes diferentes. Com dupla, nunca. Dois ligantes iguais (dois CH₃, dois H) já eliminam.","Estereoisomeria configuracional óptica (abertura)"]],
 q5:[
+ [/água em meio ácido/i,"Hidratação de alcenos","Alceno + água (H₂SO₄) forma álcool seguindo Markovnikov: H no carbono mais hidrogenado, OH no outro. Alcino + água forma enol, que vira aldeído ou cetona.","Exercícios do livro (UNESP e MACKENZIE)"],
+ [/consomem 1 mol/i,"Hidrogenação catalítica","Cada dupla consome 1 mol de H₂; tripla ou dieno, 2 mol. O esqueleto de carbono não muda: cadeia normal vira alcano normal; ramificada, alcano ramificado.","Hidrogenação catalítica"],
  [/dieno/i,"Adição em alcadienos","Em alcadienos predomina a adição 1,4 (80%).","Adição em alcadienos"],
  [/sem peróxido/i,"Regra de Markovnikov","O H vai para o carbono da dupla que já tem mais H (\"quem tem mais, ganha mais\"). O Br fica no outro.","Adição de haletos de hidrogênio"],
  [/peróxido/i,"Regra de Kharasch","Só HBr com peróxido inverte a regra: mecanismo de radicais, e o Br vai para o carbono da ponta (C1).","Adição de haletos de hidrogênio"],
@@ -803,6 +1203,12 @@ b12:[
  [/açúcar|floema|anel|folhas de um pé|radicular|cacto|luz/i,"O caminho do açúcar","Folha (fonte) faz açúcar → floema → dreno (raiz, fruto, broto). Menos folha = menos açúcar; sem floema, a raiz passa fome.","Biologia · Caps. 6, 7 e 10"],
  [/semente|banana|reprodução|feijão/i,"O ciclo da reprodução","Flor → polinização → fecundação → ovário vira fruto e óvulo vira semente → dispersão → germinação → plântula vive da reserva até fazer fotossíntese.","Biologia · Caps. 6, 8 e 9"],
  [/./,"Estrutura e função","Cada órgão tem os três sistemas: revestimento (proteger e trocar), fundamental (fotossíntese, reserva, sustentação) e vascular (xilema sobe água, floema distribui açúcar).","Biologia · Caps. 5, 6 e 7"]],
+ qn:[
+ [/ordem alfabética|CH₂CH₃\)/i,"Ordem alfabética e cadeia principal","Escolha a maior cadeia; numere pela ponta mais perto das ramificações; escreva os grupos em ordem alfabética (di, tri, sec e terc não contam; iso conta).","Consulta rápida · Regras 1 a 4"],
+ [/prefixo que indica|infixo|sufixo|ácido carboxílico termina/i,"Prefixo, infixo e sufixo","Nome = prefixo (nº de C) + infixo (an, en, in) + sufixo (função). Ex.: pent + en + ol = pent-en-ol.","Consulta rápida (tela inicial do quiz)"],
+ [/grupo/i,"Grupos substituintes","Isopropil e terc-butil prendem pelo carbono do meio; propil, butil e isobutil, pela ponta (CH₂). Vinil = CH=CH₂; fenil = C₆H₅; benzil = CH₂–C₆H₅.","Consulta rápida · Grupos substituintes"],
+ [/funções|COO|CHO|benzeno/i,"Funções e casos especiais","Só a função de maior prioridade vira sufixo; a outra vira prefixo (hidroxi). Aldeído e ácido: carbono da função é o 1. Benzeno: orto 1,2, meta 1,3, para 1,4.","Consulta rápida · Sufixos e Regras 6 a 8"],
+ [/./,"Numeração","Menor número para: 1º a função, 2º a dupla ou tripla, 3º as ramificações. No ciclo com dupla, a dupla fica entre C1 e C2.","Consulta rápida · Regra 2"]],
 };
 const topicOf=q=>(DICAS[q.k]||[]).find(r=>r[0].test(q.s.replace(/<[^>]+>/g,"")));
 </script>
@@ -813,13 +1219,16 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const label=c=>c.k==="bi"?"Biologia · Integração dos sistemas":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
+const label=c=>c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const L="ABCDE";
 const why=t=>t.replace(/^Isso\.\s*/,"");
 
-let cfg={m:store.m||"q",sel:null,n:store.n||10};
+let cfg={m:store.m||"q",sel:null,n:store.n||10,lv:store.lv!=null?store.lv:2};
+const LVN={2:"Nível prova",1:"Básico",0:"Todos os níveis"};
+const inLv=q=>cfg.lv===0||(q.lv||1)===cfg.lv;
+
 let run=null;
 
 function setTheme(){document.body.classList.toggle("bio",cfg.m==="b")}
@@ -842,17 +1251,63 @@ function setup(){
    <button data-m="b" aria-pressed="${cfg.m==="b"}">Biologia</button>
    <button data-m="t" aria-pressed="${cfg.m==="t"}">Tudo misturado</button>
   </div>
-  <div class="eyebrow">2. Capítulos</div>
-  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
+  <div class="eyebrow">2. Nível</div>
+  <div class="seg" id="lv">${[2,1,0].map(v=>`<button data-lv="${v}" aria-pressed="${cfg.lv===v}">${LVN[v]}</button>`).join("")}</div>
+  <p class="small" style="margin:0">${cfg.lv===2?"Questões no estilo de prova e vestibular: várias etapas, análise de afirmações e pegadinhas do livro.":cfg.lv===1?"Questões diretas para fixar os conceitos de cada capítulo.":"Mistura as questões básicas e as de nível prova."}</p>
+  <div class="eyebrow">3. Capítulos</div>
+  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k&&inLv(q)).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
   <div class="row small"><button class="chip" style="display:inline-flex;padding:6px 12px" id="all">Marcar todos</button><button class="chip" style="display:inline-flex;padding:6px 12px" id="none">Desmarcar todos</button></div>
-  <div class="eyebrow">3. Quantas perguntas?</div>
+  <div class="eyebrow">4. Quantas perguntas?</div>
   <div class="seg" id="qtd">${[10,20,0].map(n=>`<button data-n="${n}" aria-pressed="${cfg.n===n}">${n||"Todas"}</button>`).join("")}</div>
   <div class="row"><button class="btn" id="go">Começar</button><span class="small" id="info"></span></div>
  </section>
+ ${cfg.m!=="b"?`<details class="panel ref" id="ref"><summary><b>Consulta rápida: regras e grupos de nomenclatura</b><span class="small">toque para abrir</span></summary>
+<div class="refgrid">
+<div><div class="eyebrow">Prefixo: nº de carbonos</div><p>1 met · 2 et · 3 prop · 4 but · 5 pent · 6 hex · 7 hept · 8 oct · 9 non · 10 dec</p></div>
+<div><div class="eyebrow">Infixo: ligações</div><p>an = só simples · en = 1 dupla · in = 1 tripla · dien = 2 duplas · enin = dupla e tripla</p></div>
+</div>
+<div class="eyebrow">Sufixo: função (da maior para a menor prioridade)</div>
+<div class="tw"><table><tr><th>Função</th><th>Nome</th><th>Exemplo</th></tr>
+<tr><td>Ácido carboxílico</td><td>ácido …oico</td><td>ácido etanoico</td></tr>
+<tr><td>Éster</td><td>…oato de …ila</td><td>etanoato de etila</td></tr>
+<tr><td>Aldeído</td><td>-al</td><td>etanal</td></tr>
+<tr><td>Cetona</td><td>-ona</td><td>propanona</td></tr>
+<tr><td>Álcool</td><td>-ol</td><td>propan-2-ol</td></tr>
+<tr><td>Amina</td><td>-amina</td><td>metanamina</td></tr>
+<tr><td>Hidrocarboneto</td><td>-o</td><td>but-2-eno</td></tr></table></div>
+<div class="eyebrow">Grupos substituintes</div>
+<div class="tw"><table><tr><th>Grupo</th><th>Fórmula</th><th>Como lembrar</th></tr>
+<tr><td>metil</td><td>–CH₃</td><td>1 carbono</td></tr>
+<tr><td>etil</td><td>–CH₂CH₃</td><td>2 carbonos</td></tr>
+<tr><td>propil</td><td>–CH₂CH₂CH₃</td><td>preso pela ponta</td></tr>
+<tr><td>isopropil</td><td>–CH(CH₃)₂</td><td>preso pelo carbono do meio</td></tr>
+<tr><td>butil</td><td>–CH₂CH₂CH₂CH₃</td><td>cadeia reta, pela ponta</td></tr>
+<tr><td>sec-butil</td><td>–CH(CH₃)CH₂CH₃</td><td>preso por carbono secundário</td></tr>
+<tr><td>isobutil</td><td>–CH₂CH(CH₃)₂</td><td>preso por um CH₂, ramificado na outra ponta</td></tr>
+<tr><td>terc-butil</td><td>–C(CH₃)₃</td><td>preso por carbono terciário</td></tr>
+<tr><td>vinil (etenil)</td><td>–CH=CH₂</td><td>eteno sem um H</td></tr>
+<tr><td>fenil</td><td>–C₆H₅</td><td>benzeno sem um H</td></tr>
+<tr><td>benzil</td><td>–CH₂–C₆H₅</td><td>CH₂ + anel</td></tr>
+<tr><td>flúor, cloro, bromo, iodo</td><td>–F, –Cl, –Br, –I</td><td>sempre como prefixo</td></tr>
+<tr><td>hidroxi</td><td>–OH</td><td>prefixo quando outra função é a principal</td></tr></table></div>
+<div class="eyebrow">Regras, passo a passo</div>
+<ol class="rules">
+<li><b>Cadeia principal:</b> a maior sequência de carbonos que contém o grupo funcional e as duplas ou triplas.</li>
+<li><b>Numeração:</b> menor número primeiro para o grupo funcional, depois para a dupla ou tripla, depois para as ramificações.</li>
+<li><b>Ramificações em ordem alfabética,</b> cada uma com seu número. Não contam: di, tri, tetra, sec e terc. Conta: iso.</li>
+<li><b>Grupos iguais:</b> di, tri, tetra, com todos os números: 2,2-dimetil.</li>
+<li><b>Escrita:</b> número e letra com hífen, números entre si com vírgula. O número vem antes do infixo ou do sufixo: but-2-eno, pentan-2-ol. Com dieno entra um "a": buta-1,3-dieno.</li>
+<li><b>Aldeído e ácido:</b> o carbono da função é sempre o 1, e o número não é escrito (propanal, ácido etanoico).</li>
+<li><b>Ciclo com dupla:</b> a dupla fica entre C1 e C2.</li>
+<li><b>Benzeno com dois grupos:</b> orto = 1,2 · meta = 1,3 · para = 1,4.</li>
+</ol>
+</details>
+`:""}
  ${Object.keys(best).length?`<section class="panel"><div class="eyebrow">Seus melhores resultados</div>${Object.entries(best).map(([k,v])=>`<div class="row small"><b style="color:var(--ink)">${k}</b><span>${v}</span></div>`).join("")}</section>`:""}`;
- const pool=()=>Q.filter(q=>cfg.sel.includes(q.k));
+ const pool=()=>Q.filter(q=>cfg.sel.includes(q.k)&&inLv(q));
  const info=()=>{const p=pool().length;const n=cfg.n?Math.min(cfg.n,p):p;document.getElementById("info").textContent=p?`${n} perguntas sorteadas de ${p}`:"Escolha pelo menos um capítulo";document.getElementById("go").disabled=!p};
  info();
+ app.querySelectorAll("#lv button").forEach(b=>b.onclick=()=>{cfg.lv=+b.dataset.lv;store.lv=cfg.lv;save();setup()});
  app.querySelectorAll("#mat button").forEach(b=>b.onclick=()=>{cfg.m=b.dataset.m;cfg.sel=null;store.m=cfg.m;save();setup()});
  app.querySelectorAll("#qtd button").forEach(b=>b.onclick=()=>{cfg.n=+b.dataset.n;store.n=cfg.n;save();app.querySelectorAll("#qtd button").forEach(x=>x.setAttribute("aria-pressed",x===b));info()});
  app.querySelectorAll("#caps input").forEach(i=>i.onchange=()=>{cfg.sel=[...app.querySelectorAll("#caps input:checked")].map(x=>x.value);info()});
@@ -879,6 +1334,7 @@ function ask(){
   <span class="score"><span>${run.i+1}/${tot}</span><span class="o">✓ ${run.ok}</span><span class="x">✗ ${run.bad}</span></span></div>
  <div class="bar"><i style="width:${run.i/tot*100}%"></i></div>
  <section class="panel" aria-live="polite">
+  ${q.lv===2?`<div><span class="lvb">Nível prova</span></div>`:""}
   ${q.o?"":`<div class="eyebrow">Verdadeiro ou falso?</div>`}
   <p class="stem">${q.s}</p>
   ${q.o?`<div class="opts">${q.ord.map((oi,p)=>`<button class="opt" data-i="${oi}"><b>${L[p]}</b><span>${q.o[oi][0]}</span></button>`).join("")}</div>`
@@ -930,7 +1386,7 @@ function finish(){
  const pct=Math.round(run.ok/done*100);
  const msg=pct===100?"Gabaritou! Esse conteúdo está dominado.":pct>=70?"Mandou bem! Veja abaixo onde ainda dá para melhorar.":pct>=50?"Está no caminho. Siga a orientação abaixo e refaça os erros.":"Sem problema: errar aqui é treino. Comece pelos macetes abaixo e refaça as que errou.";
  if(!run.retry){
-  const k=cfg.m==="q"?"Química":cfg.m==="b"?"Biologia":"Tudo misturado";
+  const k=(cfg.m==="q"?"Química":cfg.m==="b"?"Biologia":"Tudo misturado")+" · "+LVN[cfg.lv];
   store.best=store.best||{};
   const prev=store.best[k],prevPct=prev?parseInt(prev):-1;
   if(pct>=prevPct)store.best[k]=`${pct}% (${run.ok} de ${done})`;
@@ -945,7 +1401,7 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.m==="q"?`Química · Cap. ${c.n} · ${r}`:r.startsWith("Biologia")?r:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.k==="qn"?`Química · ${r}`:c.m==="q"?`Química · Cap. ${c.n} · ${r}`:r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
@@ -964,7 +1420,7 @@ function finish(){
  const r=document.getElementById("redo");
  if(r)r.onclick=()=>start(shuffle(run.miss.map(m=>Q.find(x=>x.s===m.q.s&&x.k===m.q.k))),true);
  const tr=document.getElementById("train");
- if(tr)tr.onclick=()=>start(shuffle(Q.filter(q=>q.k===worst.k)),true);
+ if(tr)tr.onclick=()=>start(shuffle(Q.filter(q=>q.k===worst.k&&inLv(q))),true);
  document.getElementById("new").onclick=setup;
  window.scrollTo({top:0});
 }
