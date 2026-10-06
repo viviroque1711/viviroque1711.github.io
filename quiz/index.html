@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Quiz de Química, Biologia, Literatura e Física</title>
+<title>Quiz do Ensino Médio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -7,7 +7,7 @@
 /* Layout: uma coluna de estudo (máx. 720px); configuração → pergunta → feedback → resultado. Cor da matéria no topo. */
 :root{
  --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
- --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --lit:#a3401c; --lit-soft:#fbeae3; --fis:#0f6e78; --fis-soft:#e0f2f3;
+ --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --lit:#a3401c; --lit-soft:#fbeae3; --fis:#0f6e78; --fis-soft:#e0f2f3; --his:#7a4b12; --his-soft:#f6ecdf;
  --ok:#1d7a45; --ok-soft:#e2f4e9; --mid:#9a6400; --mid-soft:#fbf0d9; --bad:#b4372f; --bad-soft:#fbe7e5;
  --acc:var(--qui); --acc-soft:var(--qui-soft);
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
@@ -22,7 +22,7 @@
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
  --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
-body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}body.lit{--acc:var(--lit);--acc-soft:var(--lit-soft)}body.fis{--acc:var(--fis);--acc-soft:var(--fis-soft)}
+body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}body.lit{--acc:var(--lit);--acc-soft:var(--lit-soft)}body.fis{--acc:var(--fis);--acc-soft:var(--fis-soft)}body.his{--acc:var(--his);--acc-soft:var(--his-soft)}
 .wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
 h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
@@ -38,7 +38,7 @@ h2{font-size:22px;font-weight:800}
 .chip input{accent-color:var(--acc);width:18px;height:18px;flex:none}
 .chip .n{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex:none}
 .chip .tag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;flex:none}
-.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}.tag.l{background:var(--lit-soft);color:var(--lit)}.tag.f{background:var(--fis-soft);color:var(--fis)}
+.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}.tag.l{background:var(--lit-soft);color:var(--lit)}.tag.f{background:var(--fis-soft);color:var(--fis)}.tag.h{background:var(--his-soft);color:var(--his)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:10px;padding:12px 20px;background:var(--acc);color:var(--card);cursor:pointer}
 .btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
@@ -132,10 +132,179 @@ const CAPS = [
  {k:"lr",m:"l",n:4,tag:"Revisão",lb:"Revisão do livro",t:"Revisão das escolas literárias (caps. 1 a 6 do livro)"},
  {k:"f6",m:"f",n:6,tag:"6",lb:"Cap. 6",t:"O som e suas características"},
  {k:"f7",m:"f",n:7,tag:"7",lb:"Cap. 7",t:"Efeitos sonoros"},
- {k:"f8",m:"f",n:8,tag:"8",lb:"Cap. 8",t:"Cordas sonoras"}
+ {k:"f8",m:"f",n:8,tag:"8",lb:"Cap. 8",t:"Cordas sonoras"},
+ {k:"h1",m:"h",n:1,tag:"1929",lb:"Crise de 1929 e New Deal",t:"Crise de 1929 e New Deal"},
+ {k:"h2",m:"h",n:2,tag:"Nazif.",lb:"Nazifascismo e Holocausto",t:"Nazifascismo, Holocausto e caminho da 2ª Guerra"},
+ {k:"h3",m:"h",n:3,tag:"Espanha",lb:"Guerra Civil Espanhola",t:"Guerra Civil Espanhola"},
+ {k:"h4",m:"h",n:4,tag:"Vargas",lb:"Era Vargas 1930–1934",t:"Revolução de 1930, Revolução de 1932 e Constituição de 1934"},
+ {k:"h5",m:"h",n:5,tag:"AIB/ANL",lb:"AIB, ANL, trabalhadores e mulheres",t:"AIB, ANL, trabalhadores e mulheres"}
 ];
 
 const Q = [
+/* ===== HISTÓRIA · CRISE DE 1929 E NEW DEAL ===== */
+{k:"h1",lv:2,s:"Sobre as causas da crise de 1929, considere:<br>I. O crescimento da produção industrial e agrícola norte-americana não foi acompanhado por aumento proporcional do poder de compra da população.<br>II. A recuperação das economias europeias reduziu as importações de produtos dos EUA.<br>III. A forte regulação estatal sobre a Bolsa de Valores impediu a especulação e provocou a quebra.<br>Está correto o que se afirma em",c:1,o:[
+ ["I, apenas.","A II também está correta: a Europa voltou a produzir e comprou menos dos EUA."],
+ ["I e II, apenas.","Isso. A III é falsa: o problema foi a <b>falta</b> de regulação (laissez-faire), que permitiu a especulação."],
+ ["II e III, apenas.","A III inverte a realidade: não havia regulação; havia especulação desenfreada."],
+ ["III, apenas.","A III é falsa; I e II descrevem a superprodução e o subconsumo."],
+ ["I, II e III.","A III é falsa."]]},
+{k:"h1",lv:2,s:"A crise iniciada em 1929 nos EUA atingiu rapidamente a Alemanha porque",c:3,o:[
+ ["a Alemanha era a principal compradora do café brasileiro.","Não é o mecanismo central; o elo foi financeiro."],
+ ["os EUA invadiram a Renânia para cobrar indenizações.","Os EUA não invadiram a Alemanha; quem ocupou o Ruhr em 1923 foi a França."],
+ ["o Tratado de Versalhes proibia a Alemanha de ter bancos.","Versalhes não proibiu bancos."],
+ ["a economia alemã dependia de empréstimos norte-americanos, que foram retirados após a quebra.","Isso. Os bancos dos EUA cobraram os empréstimos; desemprego e miséria cresceram e favoreceram o nazismo."],
+ ["a Alemanha havia adotado o New Deal antes dos EUA.","O New Deal é norte-americano, de 1933."]]},
+{k:"h1",lv:2,s:"O New Deal (1933) rompeu com a orientação econômica anterior dos EUA principalmente porque",c:0,o:[
+ ["ampliou a intervenção do Estado na economia, com obras públicas, regulação financeira e proteção social.","Isso. É o oposto do laissez-faire de Hoover."],
+ ["estatizou todas as indústrias e aboliu a propriedade privada.","Isso seria socialismo; o New Deal manteve o capitalismo."],
+ ["eliminou os sindicatos para baratear a mão de obra.","Ao contrário: reconheceu os sindicatos e a negociação coletiva."],
+ ["reduziu os gastos públicos para equilibrar o orçamento.","O New Deal aumentou o gasto público para gerar empregos."],
+ ["proibiu o comércio exterior para proteger o mercado interno.","Não houve proibição do comércio exterior."]]},
+{k:"h1",lv:2,s:"Na política agrícola do New Deal, o governo pagou para que agricultores reduzissem a produção. O objetivo era",c:2,o:[
+ ["acabar com a fome, distribuindo alimentos gratuitamente.","A medida reduzia a oferta; não era distribuição de alimentos."],
+ ["aumentar as exportações para a Europa.","Reduzir a produção não aumenta as exportações."],
+ ["elevar os preços agrícolas, que haviam despencado pela superprodução, e recuperar a renda do campo.","Isso. Menos oferta → preços maiores → renda do agricultor sobe."],
+ ["substituir a agricultura pela indústria.","Não havia esse objetivo."],
+ ["coletivizar as terras, como na URSS.","Não houve coletivização nos EUA."]]},
+{k:"h1",lv:2,s:"A relação entre o New Deal e o pensamento de John Maynard Keynes é corretamente descrita em:",c:4,o:[
+ ["Keynes defendia que o Estado não deveria intervir em crises, ideia aplicada por Roosevelt.","Keynes defendia o contrário: gasto público para estimular a demanda."],
+ ["O New Deal aplicou fielmente um livro que Keynes publicou antes de 1929.","A <i>Teoria geral</i> é de 1936, depois do início do New Deal."],
+ ["Keynes foi o presidente que substituiu Roosevelt.","Keynes foi um economista britânico."],
+ ["Keynes criticou o New Deal por ser liberal demais.","Não é a relação consagrada entre eles."],
+ ["As ideias de Keynes sobre o papel do gasto público para estimular a demanda sistematizaram práticas semelhantes às do New Deal.","Isso. Por isso o New Deal é associado ao keynesianismo e ao Estado de bem-estar."]]},
+{k:"h1",lv:2,s:"A crise de 1929 contribuiu para o fim da Primeira República no Brasil, entre outros fatores, porque derrubou o preço do café e enfraqueceu as oligarquias exportadoras.",v:true,e:"Correto. É o fator externo da Revolução de 1930, somado aos fatores internos (ruptura do café com leite, tenentismo)."},
+{k:"h1",lv:2,s:"A União Soviética foi o país mais atingido pela Grande Depressão, por depender das exportações para os EUA.",v:false,e:"Falso. A URSS, com economia planificada e pouco integrada ao mercado capitalista, ficou relativamente à margem da crise."},
+/* ===== HISTÓRIA · NAZIFASCISMO E HOLOCAUSTO ===== */
+{k:"h2",lv:2,s:"Considere as condições da Itália após a Primeira Guerra Mundial:<br>I. A sensação de “vitória mutilada”, por receber menos territórios do que esperava.<br>II. Greves e ocupações de fábricas que assustaram industriais e proprietários.<br>III. A estabilidade dos governos liberais, que dificultou a ação dos fascistas.<br>Contribuíram para a ascensão do fascismo:",c:2,o:[
+ ["I, apenas.","A II também contribuiu: o medo de revolução socialista levou as elites a apoiar Mussolini."],
+ ["II, apenas.","A I também contribuiu, alimentando o nacionalismo ressentido."],
+ ["I e II, apenas.","Isso. A III é falsa: os governos liberais eram instáveis, e isso favoreceu os fascistas."],
+ ["II e III, apenas.","A III é falsa."],
+ ["I, II e III.","A III é falsa."]]},
+{k:"h2",lv:2,s:"Hitler tornou-se chanceler da Alemanha em janeiro de 1933",c:1,o:[
+ ["após vencer uma guerra civil contra os comunistas.","Não houve guerra civil; ele foi nomeado."],
+ ["ao ser nomeado pelo presidente Hindenburg, após o partido nazista se tornar o maior do Parlamento, com apoio de setores conservadores.","Isso. Chegou pelas vias legais e depois destruiu as instituições (Lei de Plenos Poderes)."],
+ ["por meio do Putsch de Munique, que derrubou a República de Weimar.","O Putsch de 1923 fracassou e levou Hitler à prisão."],
+ ["depois de ser eleito diretamente com mais de 90% dos votos.","O chanceler não era eleito diretamente; os nazistas nunca tiveram maioria absoluta em eleições livres."],
+ ["por imposição dos Aliados, que queriam um governo forte.","Os Aliados não impuseram Hitler."]]},
+{k:"h2",lv:2,s:"Uma característica do nazismo que o distingue do fascismo italiano em sua origem é",c:3,o:[
+ ["o anticomunismo.","Os dois eram anticomunistas."],
+ ["o culto ao líder.","Os dois cultuavam o líder (Duce e Führer)."],
+ ["o partido único.","Os dois tinham partido único."],
+ ["a centralidade do racismo biológico e do antissemitismo na ideologia.","Isso. No fascismo italiano o centro era o Estado; as leis raciais só vieram em 1938."],
+ ["o militarismo.","Os dois eram militaristas e expansionistas."]]},
+{k:"h2",lv:2,s:"O Acordo de Munique (1938), em que Reino Unido e França aceitaram a anexação dos Sudetos pela Alemanha, é exemplo da",c:0,o:[
+ ["política de apaziguamento, que buscava evitar a guerra cedendo às exigências de Hitler.","Isso. E acabou encorajando novas agressões."],
+ ["Guerra Fria entre EUA e URSS.","A Guerra Fria começa depois de 1945."],
+ ["aliança entre Alemanha e URSS contra a Polônia.","Isso é o Pacto Germano-Soviético (1939)."],
+ ["política de não intervenção na Guerra Civil Espanhola.","Relacionada, mas Munique trata da Tchecoslováquia."],
+ ["imposição do Tratado de Versalhes.","Versalhes é de 1919 e foi imposto à Alemanha."]]},
+{k:"h2",lv:2,s:"Sobre o Holocausto, assinale a alternativa correta.",c:4,o:[
+ ["Foi uma reação espontânea da população durante a guerra, sem planejamento do Estado.","Foi política de Estado, planejada (Conferência de Wannsee, 1942) e executada por uma burocracia."],
+ ["Atingiu somente prisioneiros de guerra.","Atingiu sobretudo civis: cerca de 6 milhões de judeus, além de ciganos, pessoas com deficiência e outros grupos."],
+ ["Terminou com as Leis de Nuremberg de 1935.","As leis de 1935 foram uma etapa inicial da perseguição, não o fim."],
+ ["Não deixou documentos nem testemunhos, por isso sua dimensão é desconhecida.","Há farta documentação, testemunhos e julgamentos. Negar isso é negacionismo."],
+ ["Foi um processo gradual de perseguição, que foi da exclusão legal ao extermínio industrial em campos como Auschwitz-Birkenau.","Isso. Boicote (1933) → Nuremberg (1935) → Noite dos Cristais (1938) → guetos → extermínio."]]},
+{k:"h2",lv:2,s:"Após 1945, o conceito de genocídio passou a ser crime no direito internacional (Convenção da ONU de 1948), em grande parte como resposta ao Holocausto.",v:true,e:"Correto. O Tribunal de Nuremberg e a Convenção de 1948 marcam essa resposta."},
+{k:"h2",lv:2,s:"Mussolini chegou ao poder após vencer eleições livres com maioria absoluta, em 1925.",v:false,e:"Falso. Ele foi nomeado primeiro-ministro pelo rei após a Marcha sobre Roma (1922) e instalou a ditadura em 1925–1926."},
+{k:"h2",lv:2,s:"O Pacto Germano-Soviético (1939) surpreendeu porque",c:2,o:[
+ ["uniu dois países democráticos.","Nenhum dos dois era democrático."],
+ ["levou a URSS a declarar guerra aos EUA.","Não houve isso."],
+ ["aproximou dois regimes inimigos ideológicos (nazismo e comunismo), garantindo a Hitler que não lutaria em duas frentes ao invadir a Polônia.","Isso. Foi assinado dias antes da invasão da Polônia."],
+ ["devolveu à Alemanha os territórios perdidos em Versalhes.","O pacto não tratava disso."],
+ ["encerrou a Guerra Civil Espanhola.","A Guerra Civil Espanhola terminou com a vitória de Franco."]]},
+/* ===== HISTÓRIA · GUERRA CIVIL ESPANHOLA ===== */
+{k:"h3",lv:2,s:"Na Guerra Civil Espanhola (1936–1939), lutaram ao lado da República:",c:1,o:[
+ ["a Falange, os monarquistas e a Legião Condor.","Esses estavam do lado de Franco."],
+ ["socialistas, comunistas, anarquistas e nacionalistas bascos e catalães, com apoio da URSS e das Brigadas Internacionais.","Isso. Uma frente heterogênea, com divisões internas."],
+ ["tropas da Itália fascista.","A Itália enviou tropas para Franco."],
+ ["o exército inteiro, unido contra Franco.","Grande parte do exército aderiu ao golpe."],
+ ["os grandes proprietários rurais e a hierarquia da Igreja.","Em geral apoiaram os nacionalistas."]]},
+{k:"h3",lv:2,s:"O bombardeio de Guernica (1937), denunciado no quadro de Picasso, foi realizado",c:3,o:[
+ ["pela aviação republicana contra os franquistas.","Foi o contrário: atingiu uma cidade basca leal à República."],
+ ["pela Força Aérea britânica, que apoiava a República.","O Reino Unido adotou a “não intervenção”."],
+ ["pela URSS, para testar armas.","A URSS apoiava a República."],
+ ["pela Legião Condor alemã, a serviço de Franco, contra uma cidade basca, atingindo civis.","Isso. A Alemanha usou a Espanha para testar táticas de bombardeio."],
+ ["pelos anarquistas, contra a Igreja.","Não tem relação com Guernica."]]},
+{k:"h3",lv:2,s:"A Guerra Civil Espanhola é frequentemente chamada de “ensaio geral” da Segunda Guerra Mundial porque",c:0,o:[
+ ["opôs forças fascistas e antifascistas com apoio estrangeiro, e a Alemanha e a Itália testaram armas e táticas.","Isso. Hitler e Mussolini de um lado; URSS e brigadistas do outro."],
+ ["os EUA e o Japão lutaram em território espanhol.","Não houve participação direta dos EUA nem do Japão."],
+ ["terminou com a vitória dos republicanos sobre o fascismo.","Franco venceu em 1939."],
+ ["foi o primeiro uso de armas atômicas.","As bombas atômicas são de 1945."],
+ ["provocou a invasão da Polônia.","A invasão da Polônia tem outra origem."]]},
+{k:"h3",lv:2,s:"A política de “não intervenção” de Reino Unido e França na Guerra Civil Espanhola, na prática, favoreceu os republicanos.",v:false,e:"Falso. Enquanto as democracias se omitiam, Alemanha e Itália continuavam apoiando Franco. A não intervenção prejudicou a República."},
+{k:"h3",lv:2,s:"A Guerra Civil Espanhola resultou numa ditadura liderada por Francisco Franco, que durou até a morte dele, em 1975.",v:true,e:"Correto. O franquismo foi autoritário, católico conservador e anticomunista."},
+/* ===== HISTÓRIA · ERA VARGAS 1930–1934 ===== */
+{k:"h4",lv:2,s:"Sobre a Revolução de 1930, considere:<br>I. A crise de 1929 atingiu o café e enfraqueceu a oligarquia paulista.<br>II. A indicação do paulista Júlio Prestes por Washington Luís rompeu o acordo com Minas Gerais.<br>III. O movimento foi liderado pelo Partido Comunista, que tomou o poder.<br>Está correto o que se afirma em",c:2,o:[
+ ["I, apenas.","A II também está correta: a ruptura do café com leite levou Minas à Aliança Liberal."],
+ ["II, apenas.","A I também está correta: é o fator externo."],
+ ["I e II, apenas.","Isso. A III é falsa: o movimento uniu oligarquias dissidentes (MG, RS, PB) e tenentes, não comunistas."],
+ ["II e III, apenas.","A III é falsa."],
+ ["I, II e III.","A III é falsa."]]},
+{k:"h4",lv:2,s:"A Aliança Liberal (1929–1930) reunia",c:4,o:[
+ ["São Paulo e Minas Gerais, para manter a política do café com leite.","São Paulo apoiava Júlio Prestes, o candidato oficial."],
+ ["integralistas e comunistas contra Washington Luís.","AIB e ANL surgem depois (1932 e 1935)."],
+ ["apenas os tenentes, sem participação de oligarquias.","Havia oligarquias dissidentes de MG, RS e PB."],
+ ["os paulistas que fariam a Revolução de 1932.","Os paulistas estavam do lado oposto em 1930."],
+ ["Minas Gerais, Rio Grande do Sul e Paraíba, com Vargas para presidente e João Pessoa para vice.","Isso. Propunham voto secreto e leis trabalhistas."]]},
+{k:"h4",lv:2,s:"A Revolução Constitucionalista de 1932 teve entre suas motivações",c:1,o:[
+ ["a defesa do voto feminino, ainda não previsto em lei.","O voto feminino já estava no Código Eleitoral de fevereiro de 1932."],
+ ["a perda de autonomia de São Paulo, a nomeação de interventores e a exigência de uma Constituição.","Isso. SP queria a Constituinte e o fim do Governo Provisório."],
+ ["a luta contra o Estado Novo.","O Estado Novo é de 1937."],
+ ["a independência de São Paulo como objetivo oficial do movimento.","O objetivo declarado era a Constituição, não a separação."],
+ ["o apoio integral de Minas Gerais e do Rio Grande do Sul.","Esses estados acabaram ficando com Vargas."]]},
+{k:"h4",lv:2,s:"Embora derrotado militarmente, o movimento de 1932 teve um desdobramento político relevante:",c:3,o:[
+ ["Vargas renunciou e convocou eleições diretas para presidente.","Vargas não renunciou; foi eleito indiretamente em 1934."],
+ ["São Paulo tornou-se independente.","Não houve separação."],
+ ["O Congresso de 1930 foi reaberto com os mesmos deputados.","Houve uma nova Constituinte, eleita em 1933."],
+ ["a convocação da Assembleia Constituinte, que resultou na Constituição de 1934.","Isso. SP perdeu na guerra, mas ganhou a Constituinte."],
+ ["a imediata instauração do Estado Novo.","O Estado Novo veio só em 1937."]]},
+{k:"h4",lv:2,s:"A Constituição de 1934 trouxe, entre outras novidades,",c:0,o:[
+ ["direitos trabalhistas (salário mínimo, jornada de 8 horas, férias), voto secreto e feminino e representação classista na Câmara.","Isso. Inspirada na Constituição de Weimar."],
+ ["a extinção do Poder Legislativo e o fim das eleições.","Isso lembra a Constituição de 1937 (Estado Novo)."],
+ ["a volta da monarquia parlamentarista.","Não há nada parecido."],
+ ["a abolição da escravidão.","A abolição é de 1888."],
+ ["o voto obrigatório apenas para analfabetos.","Os analfabetos continuaram sem voto."]]},
+{k:"h4",lv:2,s:"A “representação classista” prevista na Constituição de 1934 consistia em",c:2,o:[
+ ["reservar cadeiras para os partidos comunistas.","Não tem relação com partidos comunistas."],
+ ["dar direito de voto apenas aos proprietários.","O voto não era censitário em 1934."],
+ ["eleger parte dos deputados por meio de sindicatos de patrões e de empregados, numa influência corporativista.","Isso. Era uma forma de o Estado organizar os grupos profissionais."],
+ ["dividir o Senado entre militares e civis.","Não era isso."],
+ ["eleger o presidente pelo voto dos sindicatos.","O presidente foi eleito pela Assembleia."]]},
+{k:"h4",lv:2,s:"O assassinato de João Pessoa, em 1930, teve motivações pessoais e políticas locais, mas foi usado pela Aliança Liberal para mobilizar o movimento armado.",v:true,e:"Correto. O crime virou bandeira para a revolta contra Washington Luís."},
+/* ===== HISTÓRIA · AIB, ANL, TRABALHADORES E MULHERES ===== */
+{k:"h5",lv:2,s:"A Ação Integralista Brasileira (AIB), fundada por Plínio Salgado em 1932,",c:1,o:[
+ ["defendia a revolução comunista e a reforma agrária radical.","Isso é a ANL; a AIB era anticomunista."],
+ ["inspirava-se no fascismo italiano, com lema “Deus, Pátria e Família”, uniformes verdes e forte anticomunismo.","Isso. Era nacionalista, antiliberal e corporativista."],
+ ["era liderada por Luís Carlos Prestes.","Prestes era o presidente de honra da ANL."],
+ ["lutava pela autonomia de São Paulo em 1932.","A AIB não tem relação com a Revolução Constitucionalista."],
+ ["defendia o liberalismo econômico e a democracia parlamentar.","A AIB era antiliberal."]]},
+{k:"h5",lv:2,s:"A Aliança Nacional Libertadora (ANL), de 1935, propunha",c:3,o:[
+ ["a implantação imediata de uma monarquia católica.","Não tinha esse programa."],
+ ["a aliança com Hitler contra o imperialismo britânico.","Era antifascista."],
+ ["o fechamento dos sindicatos e a proibição de greves.","Defendia as liberdades e os trabalhadores."],
+ ["reforma agrária, suspensão da dívida externa, nacionalização de empresas estrangeiras e combate ao fascismo.","Isso. Lema: “Pão, Terra e Liberdade”."],
+ ["o voto censitário para conter o comunismo.","Não fazia parte do programa."]]},
+{k:"h5",lv:2,s:"O Plano Cohen (1937) foi",c:0,o:[
+ ["um falso plano de revolução comunista, divulgado pelo governo e usado como pretexto para o golpe do Estado Novo.","Isso. O documento foi forjado."],
+ ["um plano econômico de combate à crise de 1929.","Não tem relação com economia."],
+ ["o programa da Aliança Liberal em 1930.","A Aliança Liberal é de 1929–1930."],
+ ["a lei que criou a carteira de trabalho.","A carteira de trabalho é de 1932."],
+ ["o acordo de paz que encerrou a Revolução de 1932.","Não."]]},
+{k:"h5",lv:2,s:"A política trabalhista de Vargas pode ser avaliada como",c:4,o:[
+ ["exclusivamente repressiva, sem nenhuma conquista para os trabalhadores.","Houve conquistas reais: carteira de trabalho, férias, salário mínimo, CLT."],
+ ["resultado apenas da bondade pessoal de Vargas, sem lutas operárias anteriores.","Essa é a visão da propaganda; houve lutas antes (greve de 1917)."],
+ ["inspirada no liberalismo, que defende a ausência do Estado nas relações de trabalho.","Era intervencionista, o oposto do liberalismo."],
+ ["contrária à existência de sindicatos.","Os sindicatos existiam, mas atrelados ao Estado."],
+ ["ambígua: ampliou direitos, mas atrelou os sindicatos ao Estado (sindicato único, controle do Ministério) e reprimiu a organização autônoma.","Isso. Conquista e controle ao mesmo tempo."]]},
+{k:"h5",lv:2,s:"Sobre as mulheres na Era Vargas, considere:<br>I. O voto feminino foi instituído pelo Código Eleitoral de 1932, resultado também da luta sufragista de Bertha Lutz.<br>II. Carlota Pereira de Queirós foi a primeira deputada federal do Brasil, eleita para a Constituinte de 1933.<br>III. A Constituição de 1934 proibiu as mulheres de trabalhar fora de casa.<br>Está correto o que se afirma em",c:2,o:[
+ ["I, apenas.","A II também está correta."],
+ ["II, apenas.","A I também está correta."],
+ ["I e II, apenas.","Isso. A III é falsa: a Constituição de 1934 proibiu salário diferente por sexo e protegeu a maternidade."],
+ ["II e III, apenas.","A III é falsa."],
+ ["I, II e III.","A III é falsa."]]},
+{k:"h5",lv:2,s:"A polarização entre AIB e ANL no Brasil reproduzia, em parte, o confronto mundial entre fascismo e antifascismo da década de 1930.",v:true,e:"Correto. A AIB se inspirava no fascismo; a ANL seguia a linha das frentes populares antifascistas."},
+{k:"h5",lv:2,s:"A Intentona Comunista (1935) levou os comunistas ao poder no Rio de Janeiro por dois anos.",v:false,e:"Falso. Os levantes de Natal, Recife e Rio foram derrotados em poucos dias e geraram forte repressão, preparando o Estado Novo."},
 /* ===== FÍSICA · CAP. 6 ===== */
 {k:"f6",lv:2,s:"Considere:<br>I. O som se propaga no vácuo, mas com velocidade menor.<br>II. Em geral, o som é mais rápido nos sólidos do que nos gases.<br>III. Infrassons e ultrassons são ondas sonoras, embora não audíveis pelo ser humano.<br>Está correto o que se afirma em",c:3,o:[
  ["I, apenas.","A I é falsa: o som é onda mecânica e não se propaga no vácuo."],
@@ -495,6 +664,23 @@ const Q = [
 
 /* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
 const DICAS = {
+ h1:[
+ [/New Deal|Keynes|Roosevelt|agricult/i,"New Deal","Estado intervém: obras públicas, regulação dos bancos e da Bolsa, apoio à agricultura (reduzir produção), sindicatos e previdência. Reforma o capitalismo; não é socialismo.","História · Resumo, tela 3"],
+ [/./,"Crise de 1929","Causa: superprodução + subconsumo + especulação a crédito + falta de regulação. A quebra da Bolsa foi o estopim. Efeitos: Depressão, retirada de empréstimos da Alemanha, crise do café no Brasil.","História · Resumo, telas 1 e 2"]],
+ h2:[
+ [/Holocausto|genocídio/i,"Holocausto","Política de Estado planejada: exclusão legal (1935) → Noite dos Cristais (1938) → guetos → Solução Final (Wannsee, 1942) → campos de extermínio. Cerca de 6 milhões de judeus e outros grupos.","História · Resumo, tela 9"],
+ [/Munique|Pacto|apaziguamento|1939/i,"Caminho da guerra","Renânia (1936) → Áustria e Munique (1938) → Pacto Germano-Soviético → Polônia (set. 1939). O apaziguamento encorajou Hitler.","História · Resumo, tela 8"],
+ [/./,"Ascensão do nazifascismo","Crise econômica, Versalhes ou “vitória mutilada”, medo do comunismo e democracias fracas. Hitler e Mussolini foram nomeados com apoio das elites.","História · Resumo, telas 4 a 7"]],
+ h3:[
+ [/./,"Guerra Civil Espanhola","República (Frente Popular, esquerdas, bascos e catalães, URSS, Brigadas) × nacionalistas de Franco (militares, Falange, Igreja, Alemanha e Itália). Guernica: Legião Condor. Ensaio da 2ª Guerra.","História · Resumo, tela 10"]],
+ h4:[
+ [/1932|paulista|Constitucionalista/i,"Revolução de 1932","SP contra os interventores e pela Constituinte. Perdeu na guerra, ganhou a Constituinte (Constituição de 1934).","História · Resumo, tela 12"],
+ [/Constituição de 1934|classista/i,"Constituição de 1934","Voto secreto e feminino, Justiça Eleitoral, direitos trabalhistas, deputados classistas, nacionalismo (subsolo e quedas-d’água).","História · Resumo, tela 13"],
+ [/./,"Revolução de 1930","Externo: crise de 1929 e o café. Internos: ruptura do café com leite (Júlio Prestes), Aliança Liberal, tenentismo, assassinato de João Pessoa.","História · Resumo, tela 11"]],
+ h5:[
+ [/mulher|Bertha|Carlota/i,"Mulheres","Voto feminino no Código Eleitoral de 1932 (luta de Bertha Lutz); Carlota Pereira de Queirós, primeira deputada (1933); igualdade salarial por sexo em 1934.","História · Resumo, tela 15"],
+ [/trabalhist|sindic/i,"Trabalhismo","Conquista e controle: carteira de trabalho, férias, CLT; mas sindicato único atrelado ao Estado e propaganda do “pai dos pobres”.","História · Resumo, tela 15"],
+ [/./,"AIB × ANL","AIB (Plínio Salgado, 1932): fascismo, “Deus, Pátria e Família”. ANL (Prestes, 1935): antifascismo, “Pão, Terra e Liberdade”. LSN, Intentona (1935), Plano Cohen e Estado Novo (1937).","História · Resumo, tela 14"]],
  f6:[
  [/dB|nível|decib|intensidade .* (dobra|ficou)/i,"Decibéis","N = 10·log(I/I₀). Cada ×10 na intensidade soma 10 dB; ×2 soma 3 dB. Decibéis não se somam direto.","Física · Resumo, tela 6"],
  [/W\/m²|potência|distância|metros da fonte|m da mesma fonte/i,"Intensidade e distância","I = Pot/(4πR²). Distância ×2 → intensidade ÷4; ×3 → ÷9.","Física · Resumo, tela 5"],
@@ -661,7 +847,7 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const MAT={q:"Química",b:"Biologia",l:"Literatura",f:"Física"},AB={q:"Quí",b:"Bio",l:"Lit",f:"Fís"};
+const MAT={q:"Química",b:"Biologia",l:"Literatura",f:"Física",h:"História"},AB={q:"Quí",b:"Bio",l:"Lit",f:"Fís",h:"His"};
 const label=c=>c.lb?MAT[c.m]+" · "+c.lb:c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -674,7 +860,7 @@ const inLv=q=>cfg.lv===0||(q.lv||1)===cfg.lv;
 
 let run=null;
 
-function setTheme(m){m=m||cfg.m;document.body.classList.toggle("bio",m==="b");document.body.classList.toggle("lit",m==="l");document.body.classList.toggle("fis",m==="f")}
+function setTheme(m){m=m||cfg.m;document.body.classList.toggle("bio",m==="b");document.body.classList.toggle("lit",m==="l");document.body.classList.toggle("fis",m==="f");document.body.classList.toggle("his",m==="h")}
 
 function setup(){
  cfg.lv=2;
@@ -685,7 +871,7 @@ function setup(){
  app.innerHTML=`
  <header>
   <div class="eyebrow"><a href="../" style="font-size:13px;font-weight:700;color:inherit;opacity:.75;text-decoration:none;margin-right:8px">← Início</a>Treino para a recuperação · 2ª série do ensino médio</div>
-  <h1>Quiz de Química, Biologia, Literatura e Física</h1>
+  <h1>Quiz: Química, Biologia, Literatura, Física e História</h1>
   <p class="lead">Responda e veja na hora se acertou. Quando errar, a explicação mostra por que aquela alternativa está errada e qual é a certa.</p>
  </header>
  <section class="panel">
@@ -695,6 +881,7 @@ function setup(){
    <button data-m="b" aria-pressed="${cfg.m==="b"}">Biologia</button>
    <button data-m="l" aria-pressed="${cfg.m==="l"}">Literatura</button>
    <button data-m="f" aria-pressed="${cfg.m==="f"}">Física</button>
+   <button data-m="h" aria-pressed="${cfg.m==="h"}">História</button>
    <button data-m="t" aria-pressed="${cfg.m==="t"}">Tudo misturado</button>
   </div>
   <p class="small" style="margin:0">Todas as questões são de <b>nível prova</b>: análise de afirmações, situações-problema, trechos para interpretar e as pegadinhas mais cobradas.</p>
@@ -844,7 +1031,7 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):c.m==="l"||c.m==="f"?r:r.startsWith("Biologia")?r:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):c.m==="l"||c.m==="f"||c.m==="h"?r:r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;

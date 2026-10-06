@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resumo de História</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<meta name="color-scheme" content="light">
+<style>
+:root{--bg:#fff;--ink:#18212b;--muted:#5b6876;--line:#d8dee5;--acc:#7a4b12;--acc-soft:#f6ecdf;--warn:#a34a00;--warn-soft:#fff1e3;--ok:#23784a;--ok-soft:#e3f2e9;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px}
+.top a{color:var(--acc);font-weight:700;text-decoration:none}
+.bar{height:6px;background:var(--acc-soft);border-radius:4px;margin:14px 0 18px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1.12;margin:6px 0 16px;text-wrap:balance}
+.box{border-radius:12px;padding:12px 14px;margin:14px 0}
+.box b.lb{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ideia{background:var(--acc-soft)}.ideia b.lb{color:var(--acc)}
+.trap{background:var(--warn-soft)}.trap b.lb{color:var(--warn)}
+.mac{background:var(--ok-soft)}.mac b.lb{color:var(--ok)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.ex{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.ex .q{font-weight:700;margin:0 0 6px}
+.ex ol{margin:0 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ex .r{background:var(--ok-soft);border-radius:8px;padding:6px 10px;font-weight:700}
+ul.l{margin:12px 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.nav div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+button{font:inherit;font-weight:700;white-space:nowrap;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;flex:1}
+button:disabled{opacity:.4;cursor:default}
+#cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+#idx{display:none}
+#idx.on{display:block}
+#idx h2{font-family:var(--display);font-size:18px;margin:18px 0 6px}
+#idx ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+#idx li button{width:100%;text-align:left;font-weight:400;padding:8px 10px;display:flex;gap:10px}
+#idx li button span{color:var(--muted);min-width:2ch;font-weight:700}
+#idx li button.cur{border-color:var(--acc);background:var(--acc-soft)}
+.fim{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.aviso{font-size:14px;color:var(--muted);background:#f6f7f9;border-radius:10px;padding:10px 12px;margin:14px 0 0}
+.fim a{color:var(--acc);font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="top"><a href="../">← Início</a><span><a href="../quiz/">Quiz</a></span></div>
+ <p class="aviso">Conteúdo montado a partir da lista de objetivos da prova (não veio das páginas do livro). Confira datas e termos com o caderno ou com o professor.</p>
+ <div class="bar"><i id="pb"></i></div>
+ <section id="tela" aria-live="polite"></section>
+ <section id="idx"></section>
+</main>
+<nav class="nav" aria-label="Telas"><div>
+ <button id="prev" aria-label="Tela anterior">←</button>
+ <button id="menu">Índice</button>
+ <span id="cnt"></span>
+ <button id="next" class="pri">Próxima →</button>
+</div></nav>
+<script>
+const TELAS=[
+/* ===== CRISE DE 1929 E NEW DEAL ===== */
+{g:"Crise de 1929 e New Deal",k:"EUA",t:"Causas da crise de 1929",
+ ideia:"Nos anos 1920 os EUA viveram a euforia dos “anos loucos”. Mas a economia crescia sobre bases frágeis: <b>produzia-se mais do que se conseguia vender</b>, e muita gente comprava ações a crédito apostando que elas só subiriam.",
+ tab:{head:["Causa","Explicação"],rows:[
+  ["Superprodução","Indústria e agricultura mecanizadas produziam em grande escala."],
+  ["Subconsumo","Salários não acompanharam a produção; renda concentrada nos mais ricos."],
+  ["Recuperação europeia","A Europa voltou a produzir após a 1ª Guerra e passou a comprar menos dos EUA."],
+  ["Especulação","Ações compradas com dinheiro emprestado; preços sem relação com o lucro real das empresas."],
+  ["Crédito fácil","Consumo e investimento financiados por dívidas."],
+  ["Liberalismo econômico","<i>Laissez-faire</i>: o Estado não regulava bancos nem a Bolsa."]]},
+ trap:"A crise não foi “causada pela quebra da Bolsa”. A quebra foi o <b>estopim</b>; a causa estrutural foi o <b>desequilíbrio entre produção e consumo</b>, somado à especulação.",
+ mac:"<b>Produziu demais + vendeu de menos + especulou com dinheiro emprestado</b> = 1929."},
+{g:"Crise de 1929 e New Deal",k:"EUA e mundo",t:"A quebra e as consequências",
+ ideia:"Em <b>outubro de 1929</b> a Bolsa de Nova York despencou (a “quinta-feira negra”, dia 24, e a “terça-feira negra”, dia 29). Começou a <b>Grande Depressão</b>, que atravessou os anos 1930.",
+ list:["<b>Nos EUA:</b> falência de milhares de bancos e empresas; desemprego de cerca de <b>25%</b> em 1933; queda dos preços agrícolas; filas de sopa e favelas (“Hoovervilles”).",
+  "<b>O presidente Hoover</b> (republicano, liberal) apostou que o mercado se corrigiria sozinho e fez pouco.",
+  "<b>No mundo:</b> os bancos americanos cobraram de volta os empréstimos feitos à Europa, sobretudo à <b>Alemanha</b>; o comércio internacional despencou; os países adotaram <b>protecionismo</b>.",
+  "<b>No Brasil:</b> o preço do <b>café</b>, principal exportação, desabou, o que abalou as oligarquias e ajudou a derrubar a República Oligárquica (Revolução de 1930).",
+  "<b>Na política:</b> o liberalismo ficou desacreditado. Abriu-se espaço para o <b>intervencionismo</b> (New Deal), mas também para os <b>regimes totalitários</b>."],
+ trap:"A crise afetou <b>quase todo o mundo capitalista</b>. A URSS, com economia planificada, ficou relativamente fora dela, o que foi usado como propaganda pelo socialismo.",
+ mac:"1929 liga tudo: <b>Depressão nos EUA → crise na Alemanha (nazismo) → crise do café (Vargas)</b>."},
+{g:"Crise de 1929 e New Deal",k:"EUA",t:"O New Deal de Roosevelt",
+ ideia:"<b>Franklin D. Roosevelt</b> (democrata) tomou posse em <b>1933</b> e lançou o <b>New Deal</b> (“novo acordo”): o Estado passa a <b>intervir na economia</b> para gerar empregos, regular o mercado e proteger os mais pobres.",
+ tab:{head:["Área","Medidas"],rows:[
+  ["Bancos e finanças","Fechamento e saneamento de bancos; garantia de depósitos; criação de um órgão para fiscalizar a Bolsa (SEC)."],
+  ["Emprego","Grandes <b>obras públicas</b> (estradas, pontes, represas como as do vale do Tennessee, a TVA) e programas de trabalho para jovens."],
+  ["Agricultura","Pagamento para os agricultores <b>reduzirem a produção</b> e os preços subirem (AAA)."],
+  ["Trabalho","Reconhecimento dos <b>sindicatos</b> e da negociação coletiva; salário mínimo e limite de jornada."],
+  ["Proteção social","<b>Previdência social</b> (1935): aposentadoria e seguro-desemprego."]]},
+ list:["A ideia de que o <b>gasto do Estado</b> estimula a demanda e tira a economia da crise foi sistematizada por <b>John Maynard Keynes</b> (<i>Teoria geral</i>, 1936). Por isso o New Deal é associado ao <b>keynesianismo</b>.",
+  "Base do <b>Estado de bem-estar social</b> (<i>Welfare State</i>) do pós-guerra.",
+  "Limites: enfrentou a Suprema Corte e a oposição dos empresários; o desemprego só acabou de vez com a <b>economia de guerra</b> na 2ª Guerra Mundial."],
+ trap:"O New Deal <b>não</b> foi socialismo: manteve a propriedade privada e o capitalismo. Ele <b>reformou</b> o capitalismo com intervenção estatal.",
+ mac:"New Deal = <b>Estado investe, regula e protege</b>. Liberalismo = Estado não interfere."},
+/* ===== NAZIFASCISMO ===== */
+{g:"Nazifascismo",k:"Itália e Alemanha",t:"Por que surgiram na Itália e na Alemanha",
+ ideia:"O nazifascismo nasceu da combinação de <b>crise econômica</b>, <b>frustração nacional</b> depois da 1ª Guerra, <b>fraqueza das democracias liberais</b> e <b>medo do comunismo</b> após a Revolução Russa (1917).",
+ tab:{head:["","Itália","Alemanha"],rows:[
+  ["Pós-guerra","Estava entre os vencedores, mas recebeu menos territórios do que esperava: a “<b>vitória mutilada</b>”.","Derrotada; o <b>Tratado de Versalhes</b> (1919) impôs culpa pela guerra, perda de territórios, desmilitarização e enormes indenizações."],
+  ["Economia","Inflação, desemprego e dívidas de guerra.","Hiperinflação de <b>1923</b>; depois a crise de <b>1929</b> levou o desemprego a cerca de 6 milhões."],
+  ["Política","Governos liberais instáveis; greves e ocupação de fábricas em 1919–1920 (“biênio vermelho”).","<b>República de Weimar</b> frágil, atacada pela direita e pela esquerda; o mito da “punhalada nas costas”."],
+  ["Quem apoiou","Industriais, proprietários rurais e classes médias com medo de uma revolução socialista.","Grandes empresários, militares, classes médias arruinadas e desempregados."]]},
+ trap:"Hitler e Mussolini chegaram ao poder <b>dentro das regras</b> (nomeados pelo chefe de Estado), com apoio das elites, e só <b>depois</b> destruíram as instituições.",
+ mac:"<b>Crise + humilhação + medo do comunismo + democracia fraca</b> = terreno do nazifascismo."},
+{g:"Nazifascismo",k:"Itália",t:"O fascismo italiano",
+ ideia:"<b>Benito Mussolini</b> (o <i>Duce</i>) criou os <i>Fasci di Combattimento</i> em 1919, com milícias de <b>camisas negras</b> que atacavam sindicatos e socialistas. O nome vem do <i>fascio</i>, feixe de varas símbolo de autoridade na Roma antiga.",
+ list:["<b>1922 – Marcha sobre Roma:</b> pressionado, o rei Vítor Emanuel III nomeia Mussolini primeiro-ministro.",
+  "<b>1924:</b> assassinato do deputado socialista <b>Giacomo Matteotti</b>, que denunciou fraudes; a partir de 1925–1926 instala-se a <b>ditadura</b> de partido único.",
+  "<b>Estado corporativo:</b> patrões e empregados reunidos em corporações controladas pelo Estado; greves proibidas (<i>Carta del Lavoro</i>, 1927).",
+  "<b>1929 – Pactos de Latrão:</b> acordo com a Igreja que cria o Estado do Vaticano.",
+  "<b>Expansionismo:</b> invasão da Etiópia (1935–1936).",
+  "Lema: “<b>Tudo no Estado, nada fora do Estado, nada contra o Estado</b>”."],
+ trap:"O fascismo italiano não começou antissemita: as leis raciais vieram em <b>1938</b>, com a aproximação de Hitler.",
+ mac:"Itália = <b>Duce, camisas negras, Marcha sobre Roma (1922), corporativismo</b>."},
+{g:"Nazifascismo",k:"Alemanha",t:"O nazismo alemão",
+ ideia:"<b>Adolf Hitler</b> liderou o Partido Nacional-Socialista dos Trabalhadores Alemães (<b>NSDAP</b>). Depois de um golpe fracassado em 1923, escreveu <i>Mein Kampf</i>, com as ideias de raça, antissemitismo e “espaço vital”.",
+ tab:{head:["Ano","Passo para a ditadura"],rows:[
+  ["1932","O partido nazista se torna o <b>maior</b> do Parlamento (Reichstag)."],
+  ["Jan. 1933","Hitler é nomeado <b>chanceler</b> pelo presidente Hindenburg."],
+  ["Fev.–mar. 1933","Incêndio do Reichstag, culpa atribuída aos comunistas; a <b>Lei de Plenos Poderes</b> dá a Hitler o poder de legislar sozinho."],
+  ["1933–1934","Partidos e sindicatos fechados; a “Noite das Facas Longas” elimina rivais internos."],
+  ["Ago. 1934","Morre Hindenburg: Hitler se torna <b>Führer</b>, chefe de Estado e de governo."],
+  ["1935","<b>Leis de Nuremberg</b>: judeus perdem a cidadania."],
+  ["1938","<b>Noite dos Cristais</b>: ataque a sinagogas, lojas e casas de judeus."]]},
+ list:["<b>Instrumentos:</b> propaganda (Goebbels), polícia política (<b>Gestapo</b>), <b>SS</b>, campos de concentração, censura e Juventude Hitlerista.",
+  "<b>Economia:</b> obras públicas e <b>rearmamento</b> reduziram o desemprego, preparando a guerra."],
+ trap:"Hitler <b>não</b> tomou o poder num golpe armado em 1933: foi <b>nomeado</b> chanceler. O golpe armado (o Putsch de Munique, em 1923) <b>fracassou</b>.",
+ mac:"Alemanha = <b>Führer, Versalhes, 1929, raça, espaço vital</b>."},
+{g:"Nazifascismo",k:"Características",t:"Características comuns e diferenças",
+ ideia:"Fascismo e nazismo são <b>regimes totalitários</b>: o Estado busca controlar todas as esferas da vida, inclusive o pensamento.",
+ tab:{head:["Característica","Como aparece"],rows:[
+  ["Totalitarismo","Estado acima do indivíduo; controle da vida pública e privada."],
+  ["Partido único e culto ao líder","<i>Duce</i> e <i>Führer</i> como guias infalíveis."],
+  ["Nacionalismo extremado","Glorificação da nação e de um passado mítico."],
+  ["Anticomunismo e antiliberalismo","Contra o socialismo, a democracia parlamentar e o liberalismo."],
+  ["Militarismo e expansionismo","Guerra vista como virtude; conquista de territórios."],
+  ["Propaganda e repressão","Rádio, cinema e desfiles; censura e polícia política."],
+  ["Corporativismo","Conflito entre classes negado e controlado pelo Estado."]]},
+ list:["<b>Diferença central:</b> no nazismo o <b>racismo biológico</b> e o <b>antissemitismo</b> estão no centro da ideologia (a suposta “raça ariana”). No fascismo italiano o centro é o <b>Estado</b>."],
+ trap:"Totalitarismo não é qualquer ditadura: é a que busca <b>mobilizar e controlar toda a sociedade</b> com uma ideologia oficial.",
+ mac:"Nazifascismo é <b>anti</b>: anticomunista, antiliberal, antidemocrático (e o nazismo, antissemita)."},
+{g:"Nazifascismo",k:"Caminho da guerra",t:"Do nazifascismo à Segunda Guerra",
+ ideia:"O expansionismo nazifascista e a <b>política de apaziguamento</b> de Reino Unido e França (ceder para evitar guerra) levaram ao conflito.",
+ tab:{head:["Ano","Fato"],rows:[
+  ["1935","Alemanha retoma o serviço militar (contra Versalhes); Itália invade a Etiópia."],
+  ["1936","Alemanha remilitariza a Renânia; <b>Eixo Roma-Berlim</b>; pacto anticomunista com o Japão; Guerra Civil Espanhola."],
+  ["1938","<b>Anexação da Áustria</b> (Anschluss); <b>Acordo de Munique</b> entrega à Alemanha a região dos Sudetos (Tchecoslováquia)."],
+  ["Ago. 1939","<b>Pacto Germano-Soviético</b> de não agressão (Molotov-Ribbentrop)."],
+  ["1º set. 1939","Alemanha invade a <b>Polônia</b>; Reino Unido e França declaram guerra."]]},
+ trap:"O Acordo de Munique (1938) <b>não evitou</b> a guerra: mostrou a Hitler que podia avançar sem resistência.",
+ mac:"Linha da guerra: <b>Renânia → Áustria → Sudetos → Polônia</b>."},
+{g:"Nazifascismo",k:"Memória",t:"O Holocausto",
+ ideia:"O <b>Holocausto</b> (em hebraico, <i>Shoá</i>, “catástrofe”) foi o <b>genocídio</b> sistemático de cerca de <b>6 milhões de judeus</b> pelo Estado nazista e seus colaboradores. É um dos episódios mais vergonhosos da história humana e precisa ser lembrado para nunca se repetir.",
+ list:["<b>Foi um processo gradual:</b> boicote a lojas judaicas (1933) → Leis de Nuremberg (1935) → Noite dos Cristais (1938) → guetos → fuzilamentos em massa no Leste → a “<b>Solução Final</b>”, planejada na Conferência de Wannsee (1942).",
+  "<b>Campos de extermínio</b> como Auschwitz-Birkenau, Treblinka e Sobibor, com câmaras de gás.",
+  "<b>Outras vítimas:</b> ciganos (roma e sinti), pessoas com deficiência, homossexuais, Testemunhas de Jeová, opositores políticos, prisioneiros de guerra soviéticos e outros povos eslavos.",
+  "<b>Depois da guerra:</b> o Tribunal de Nuremberg (1945–1946) julgou líderes nazistas; a ONU aprovou a Convenção contra o Genocídio (1948) e a Declaração Universal dos Direitos Humanos (1948).",
+  "<b>Memória:</b> o diário de Anne Frank e o testemunho de sobreviventes como Primo Levi; o Dia Internacional em Memória das Vítimas do Holocausto é <b>27 de janeiro</b> (libertação de Auschwitz).",
+  "<b>Combater hoje:</b> enfrentar o <b>negacionismo</b> (negar ou diminuir o Holocausto), o antissemitismo e todo racismo. No Brasil, o racismo é crime inafiançável, e divulgar o nazismo é crime (Lei 7.716/1989)."],
+ trap:"O Holocausto não foi “efeito colateral” da guerra: foi uma <b>política de Estado</b>, planejada, burocrática e industrial.",
+ mac:"<b>Lembrar, estudar e denunciar</b>: memória contra o negacionismo."},
+/* ===== GUERRA CIVIL ESPANHOLA ===== */
+{g:"Guerra Civil Espanhola",k:"1936–1939",t:"A Guerra Civil Espanhola",
+ ideia:"Em <b>1931</b> a Espanha virou república e fez reformas (reforma agrária, separação entre Igreja e Estado, autonomia para a Catalunha e o País Basco, reforma do exército). A sociedade se polarizou. Em <b>fevereiro de 1936</b> venceu a <b>Frente Popular</b>, de esquerda; em <b>julho de 1936</b> militares liderados por <b>Francisco Franco</b> deram um golpe, e começou a guerra.",
+ tab:{head:["","Republicanos (legalistas)","Nacionalistas (golpistas)"],rows:[
+  ["Quem","Liberais republicanos, socialistas, comunistas, anarquistas (CNT-FAI), POUM; nacionalistas bascos e catalães","Militares, Falange (fascista), monarquistas, grande parte da Igreja, latifundiários"],
+  ["Ideias","Defesa da República; correntes buscando revolução social","Ordem, catolicismo tradicional, unidade da Espanha, anticomunismo"],
+  ["Apoio externo","URSS, México e as <b>Brigadas Internacionais</b> (voluntários de vários países)","<b>Alemanha nazista</b> (Legião Condor) e <b>Itália fascista</b> (tropas e armas)"]]},
+ list:["<b>Participação alemã:</b> a <b>Legião Condor</b> bombardeou a cidade basca de <b>Guernica</b> (26 de abril de 1937), matando civis. Picasso pintou <i>Guernica</i> como denúncia. A Alemanha usou a Espanha para <b>testar armas e táticas</b> da guerra aérea.",
+  "Reino Unido e França adotaram a “<b>não intervenção</b>”, o que na prática prejudicou a República.",
+  "Os republicanos se dividiram internamente (comunistas contra anarquistas e o POUM).",
+  "<b>Resultado:</b> vitória de Franco em <b>1939</b> e ditadura (franquismo) até a morte dele em <b>1975</b>."],
+ trap:"“Nacionalistas” aqui são os <b>golpistas de Franco</b>, não os nacionalistas bascos e catalães, que lutaram do lado <b>republicano</b>.",
+ mac:"Espanha = <b>ensaio geral da 2ª Guerra</b>: fascismo × antifascismo, com Hitler e Mussolini de um lado e a URSS do outro."},
+/* ===== ERA VARGAS ===== */
+{g:"Era Vargas (1930–1934)",k:"Brasil",t:"A Revolução de 1930",
+ ideia:"Em 1930 um movimento armado depôs o presidente Washington Luís e levou <b>Getúlio Vargas</b> ao poder, encerrando a <b>República Oligárquica</b> (1894–1930). Muitos historiadores o chamam de <b>golpe</b>, porque impediu a posse do eleito, Júlio Prestes. Outros o chamam de <b>revolução</b>, pelas mudanças que abriu.",
+ tab:{head:["Fatores","O que pesou"],rows:[
+  ["<b>Externo</b>","<b>Crise de 1929</b>: o preço do café desabou; os cafeicultores paulistas ficaram sem crédito, e o governo não conseguiu salvá-los."],
+  ["Interno: oligarquias","<b>Ruptura da política do café com leite</b>: Washington Luís (eleito por SP) indicou o paulista <b>Júlio Prestes</b> em vez de um mineiro."],
+  ["Interno: oposição","<b>Aliança Liberal</b> (MG, RS e PB): Vargas para presidente e <b>João Pessoa</b> para vice; propunha voto secreto, leis trabalhistas e incentivo à indústria."],
+  ["Interno: tenentismo","Jovens oficiais revoltados desde <b>1922</b> (Os 18 do Forte, 1924, Coluna Prestes) queriam moralizar a política e centralizar o país."],
+  ["Interno: sociedade","Crescimento urbano, classes médias e operários sem espaço no sistema oligárquico."]]},
+ list:["<b>Março de 1930:</b> Júlio Prestes vence a eleição, marcada por fraudes, como sempre na Primeira República.",
+  "<b>Julho de 1930:</b> <b>João Pessoa é assassinado</b> no Recife, por motivos pessoais e políticos locais; o crime foi usado para mobilizar a revolta.",
+  "<b>Outubro de 1930:</b> levante armado a partir do RS, MG e Nordeste; uma junta militar depõe Washington Luís (24/10); Vargas assume o <b>Governo Provisório</b> em 3 de novembro."],
+ trap:"A crise de 1929 é o fator <b>externo</b>; a ruptura do café com leite, o tenentismo e a fraude eleitoral são fatores <b>internos</b>. Questão pede para separar os dois.",
+ mac:"1930 = <b>café despenca + café com leite rompe + tenentes + João Pessoa</b>."},
+{g:"Era Vargas (1930–1934)",k:"Brasil",t:"Governo Provisório e Revolução de 1932",
+ ideia:"No <b>Governo Provisório</b> (1930–1934) Vargas fechou o Congresso, suspendeu a Constituição de 1891 e nomeou <b>interventores</b> (muitos deles tenentes) para governar os estados. São Paulo, que perdera o poder, reagiu.",
+ list:["<b>Motivos paulistas:</b> perda da autonomia; interventor “de fora” (o pernambucano João Alberto); demora em convocar uma Constituinte; ressentimento das elites do café.",
+  "Os dois partidos paulistas se uniram (Frente Única Paulista). Em <b>maio de 1932</b> morreram quatro jovens num protesto (Martins, Miragaia, Dráusio e Camargo), que deram nome ao <b>MMDC</b>.",
+  "<b>9 de julho de 1932:</b> começa a <b>Revolução Constitucionalista</b>, que exigia uma nova Constituição.",
+  "Minas e Rio Grande do Sul, que prometeram apoio, ficaram com Vargas; SP lutou praticamente sozinho e <b>se rendeu em outubro</b>.",
+  "<b>Desdobramentos:</b> derrotado militarmente, SP venceu politicamente. Vargas convocou a <b>Assembleia Constituinte</b> (eleita em 1933), nomeou um interventor civil e paulista e assumiu dívidas dos bancos com os cafeicultores."],
+ trap:"Antes da guerra, Vargas já tinha feito o <b>Código Eleitoral de 1932</b> (voto secreto, voto feminino, Justiça Eleitoral). O movimento paulista queria a <b>Constituição</b>, não o voto feminino.",
+ mac:"1932: <b>SP perde na guerra, ganha a Constituinte</b>."},
+{g:"Era Vargas (1930–1934)",k:"Brasil",t:"A Constituição de 1934",
+ ideia:"Promulgada em <b>16 de julho de 1934</b>, inspirada na Constituição alemã de Weimar (1919). Juntou <b>direitos sociais</b> novos com a estrutura liberal. No dia seguinte, a Assembleia elegeu Vargas presidente (eleição indireta).",
+ tab:{head:["Área","Mudança"],rows:[
+  ["Voto","<b>Voto secreto</b> e <b>voto feminino</b> (vindos do Código Eleitoral de 1932) entram na Constituição; criação da <b>Justiça Eleitoral</b>."],
+  ["Trabalho","Salário mínimo, jornada de 8 horas, férias anuais remuneradas, descanso semanal, proibição de trabalho de menores de 14 anos, proteção à gestante; previsão da <b>Justiça do Trabalho</b>."],
+  ["Representação","<b>Deputados classistas</b>: parte da Câmara eleita por sindicatos de patrões e de empregados (corporativismo)."],
+  ["Economia","Nacionalismo: <b>subsolo, minas e quedas-d’água</b> passam a depender de autorização federal."],
+  ["Educação","Ensino primário gratuito e obrigatório."],
+  ["Mulheres","Igualdade sem distinção de sexo e proibição de salários diferentes por sexo."]]},
+ trap:"A Constituição de 1934 durou pouco: em <b>1937</b> Vargas deu o golpe do <b>Estado Novo</b> e outorgou uma nova Constituição, autoritária (a “Polaca”).",
+ mac:"1934 = <b>voto secreto e feminino + direitos trabalhistas + deputados classistas + nacionalismo</b>."},
+{g:"Era Vargas (1930–1934)",k:"Brasil",t:"AIB e ANL: a polarização no Brasil",
+ ideia:"Nos anos 1930 o Brasil reproduziu a disputa mundial entre <b>fascismo</b> e <b>antifascismo</b>.",
+ tab:{head:["","AIB — Ação Integralista Brasileira","ANL — Aliança Nacional Libertadora"],rows:[
+  ["Fundação","1932, por <b>Plínio Salgado</b>","1935; presidente de honra <b>Luís Carlos Prestes</b>"],
+  ["Inspiração","<b>Fascismo</b> italiano","Frente ampla <b>antifascista</b>; liderança comunista (Comintern)"],
+  ["Lema e símbolos","“<b>Deus, Pátria e Família</b>”; camisas verdes; letra grega sigma (Σ); saudação “Anauê!”","“<b>Pão, Terra e Liberdade</b>”"],
+  ["Propostas","Estado forte e corporativo, nacionalismo, anticomunismo, antiliberalismo (havia antissemitismo em parte do movimento)","Anti-imperialismo, reforma agrária, suspensão da dívida externa, nacionalização de empresas estrangeiras, defesa das liberdades"]]},
+ list:["<b>1935:</b> a <b>Lei de Segurança Nacional</b> (abril) permite fechar a ANL (julho). Em novembro, comunistas tentam um levante em Natal, Recife e Rio, a <b>Intentona Comunista</b>, que é derrotado e gera forte repressão.",
+  "<b>1937:</b> o governo divulga o <b>Plano Cohen</b>, um falso plano comunista inventado, e o usa como pretexto para o golpe do <b>Estado Novo</b> (10/11/1937), com apoio dos integralistas.",
+  "<b>1938:</b> excluídos do poder, os integralistas atacam o Palácio Guanabara (Levante Integralista) e são reprimidos."],
+ trap:"Vargas usou o <b>medo do comunismo</b> para concentrar poder e depois descartou também os integralistas: nenhum dos dois extremos chegou ao governo.",
+ mac:"<b>Verde = integralista (direita, fascismo).</b> <b>ANL = Prestes (esquerda, antifascismo).</b>"},
+{g:"Era Vargas (1930–1934)",k:"Brasil",t:"Trabalhadores e mulheres",
+ ideia:"A Era Vargas mudou a relação do Estado com os <b>trabalhadores</b> e trouxe a primeira grande conquista política das <b>mulheres</b>, o voto.",
+ list:["<b>Trabalhismo:</b> Ministério do Trabalho, Indústria e Comércio (1930); <b>carteira de trabalho</b> (1932); leis de jornada, férias e trabalho de mulheres e menores; Justiça do Trabalho (prevista em 1934, instalada em 1941); salário mínimo (1940); <b>CLT</b> (1943).",
+  "<b>Sindicatos atrelados ao Estado:</b> a Lei de Sindicalização (1931) criou o sindicato <b>único por categoria</b>, reconhecido e controlado pelo Ministério. Direitos vieram junto com <b>controle</b> e repressão às greves e aos sindicatos independentes.",
+  "<b>Mentalidade:</b> a propaganda apresentou os direitos como “dádiva” de Vargas, o “pai dos pobres”. Mas eles também resultaram de <b>lutas anteriores</b> do movimento operário (como a greve geral de 1917).",
+  "<b>Mulheres:</b> o movimento sufragista de <b>Bertha Lutz</b> (Federação Brasileira pelo Progresso Feminino, 1922) conquistou o <b>voto feminino</b> no <b>Código Eleitoral de 1932</b>, confirmado em 1934.",
+  "<b>Carlota Pereira de Queirós</b> (SP) foi a <b>primeira deputada federal</b>, eleita para a Constituinte de 1933; Bertha Lutz assumiu como deputada em 1936.",
+  "A Constituição de 1934 trouxe igualdade sem distinção de sexo, proibição de salário diferente por sexo e proteção à maternidade."],
+ trap:"“Direitos dados por Vargas” é só metade da resposta. A banca quer ver os dois lados: <b>conquista</b> (direitos, voto) <b>e controle</b> (sindicato atrelado, propaganda).",
+ mac:"Trabalhadores: <b>direitos + controle</b>. Mulheres: <b>voto em 1932, Bertha Lutz e Carlota de Queirós</b>."},
+/* ===== PROVA ===== */
+{g:"Revisão e prova",k:"Linha do tempo",t:"Linha do tempo e conexões",
+ ideia:"Na prova de universidade pública, o que pesa é <b>relacionar</b> os fatos: o mundo e o Brasil se explicam um pelo outro.",
+ tab:{head:["Ano","Mundo","Brasil"],rows:[
+  ["1922","Marcha sobre Roma","Os 18 do Forte (tenentismo)"],
+  ["1929","Quebra da Bolsa","Crise do café"],
+  ["1930","Depressão","Revolução de 1930: Vargas no poder"],
+  ["1932","Nazistas maior partido","Código Eleitoral; Revolução Constitucionalista; AIB"],
+  ["1933","Hitler chanceler; New Deal","Eleição da Constituinte"],
+  ["1934","Hitler Führer","Constituição de 1934"],
+  ["1935","Leis de Nuremberg","ANL, LSN, Intentona Comunista"],
+  ["1936","Guerra Civil Espanhola; Eixo","—"],
+  ["1937","Guernica","Plano Cohen; Estado Novo"],
+  ["1939","Invasão da Polônia: 2ª Guerra","—"]]},
+ list:["<b>Como responder:</b> 1) contexto (o que acontecia); 2) causa e consequência com conectivos (“porque”, “o que levou a”); 3) um exemplo concreto (nome, data, lei); 4) conclusão ligando ao tema da pergunta."],
+ trap:"Não confunda: <b>1930</b> é a chegada de Vargas; <b>1932</b> é a revolta paulista; <b>1934</b> é a Constituição; <b>1937</b> é o golpe do Estado Novo.",
+ mac:"Sempre <b>ligue o Brasil ao mundo</b>: 1929 → 1930; fascismo → AIB; antifascismo → ANL."}
+];
+const N=TELAS.length,$=id=>document.getElementById(id);
+let i=0;try{i=Math.min(N-1,Math.max(0,+localStorage.getItem("his1")||0))}catch(e){}
+function show(n){i=n;try{localStorage.setItem("his1",i)}catch(e){}
+ const t=TELAS[i];let h=`<div class="eyebrow">${t.g} · ${t.k}</div><h1>${t.t}</h1><div class="box ideia"><b class="lb">Ideia central</b>${t.ideia}</div>`;
+ if(t.tab)h+=`<div class="tw"><table><thead><tr>${t.tab.head.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${t.tab.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+ if(t.ex)h+=t.ex.map(e=>`<div class="ex"><p class="q">${e.q}</p><ol>${e.p.map(s=>`<li>${s}</li>`).join("")}</ol><div class="r">Resposta: ${e.r}</div></div>`).join("");
+ if(t.list)h+=`<ul class="l">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(t.trap)h+=`<div class="box trap"><b class="lb">Pegadinha</b>${t.trap}</div>`;
+ if(t.mac)h+=`<div class="box mac"><b class="lb">Macete</b>${t.mac}</div>`;
+ if(i==N-1)h+=`<p class="fim">Fim do resumo. Agora faça o <a href="../quiz/">quiz de História</a>.</p>`;
+ $("tela").innerHTML=h;$("idx").classList.remove("on");$("tela").style.display="";
+ $("cnt").textContent=`Tela ${i+1} de ${N}`;$("pb").style.width=((i+1)/N*100)+"%";
+ $("prev").disabled=i==0;$("next").disabled=i==N-1;$("menu").textContent="Índice";scrollTo(0,0)}
+function index(){if($("idx").classList.contains("on"))return show(i);
+ let h="",g="";TELAS.forEach((t,n)=>{if(t.g!=g){h+=(g?"</ol>":"")+`<h2>${t.g}</h2><ol>`;g=t.g}
+  h+=`<li><button data-n="${n}" class="${n==i?"cur":""}"><span>${n+1}</span>${t.t}</button></li>`});
+ $("idx").innerHTML=h+"</ol>";$("idx").classList.add("on");$("tela").style.display="none";$("menu").textContent="Fechar";scrollTo(0,0)}
+$("idx").onclick=e=>{const b=e.target.closest("button[data-n]");if(b)show(+b.dataset.n)};
+$("prev").onclick=()=>i>0&&show(i-1);$("next").onclick=()=>i<N-1&&show(i+1);$("menu").onclick=index;
+document.addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("next").click();if(e.key=="ArrowLeft")$("prev").click()});
+show(i);
+</script>
+</body>
+</html>
