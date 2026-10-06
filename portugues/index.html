@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resumo de Português</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<meta name="color-scheme" content="light">
+<style>
+:root{--bg:#fff;--ink:#18212b;--muted:#5b6876;--line:#d8dee5;--acc:#9b2c55;--acc-soft:#f8e6ee;--warn:#a34a00;--warn-soft:#fff1e3;--ok:#23784a;--ok-soft:#e3f2e9;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px}
+.top a{color:var(--acc);font-weight:700;text-decoration:none}
+.bar{height:6px;background:var(--acc-soft);border-radius:4px;margin:14px 0 18px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1.12;margin:6px 0 16px;text-wrap:balance}
+.box{border-radius:12px;padding:12px 14px;margin:14px 0}
+.box b.lb{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ideia{background:var(--acc-soft)}.ideia b.lb{color:var(--acc)}
+.trap{background:var(--warn-soft)}.trap b.lb{color:var(--warn)}
+.mac{background:var(--ok-soft)}.mac b.lb{color:var(--ok)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.ex{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.ex .q{font-weight:700;margin:0 0 6px}
+.ex ol{margin:0 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ex .r{background:var(--ok-soft);border-radius:8px;padding:6px 10px;font-weight:700}
+ul.l{margin:12px 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.nav div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+button{font:inherit;font-weight:700;white-space:nowrap;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;flex:1}
+button:disabled{opacity:.4;cursor:default}
+#cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+#idx{display:none}
+#idx.on{display:block}
+#idx h2{font-family:var(--display);font-size:18px;margin:18px 0 6px}
+#idx ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+#idx li button{width:100%;text-align:left;font-weight:400;padding:8px 10px;display:flex;gap:10px}
+#idx li button span{color:var(--muted);min-width:2ch;font-weight:700}
+#idx li button.cur{border-color:var(--acc);background:var(--acc-soft)}
+.fim{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.aviso{font-size:14px;color:var(--muted);background:#f6f7f9;border-radius:10px;padding:10px 12px;margin:14px 0 0}
+.fim a{color:var(--acc);font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="top"><a href="../">← Início</a><span><a href="../quiz/">Quiz</a></span></div>
+ <p class="aviso">Período composto: coordenadas, subordinadas, período misto e sequenciação de orações em textos literários. Faça a análise junto: conte os verbos e marque as orações.</p>
+ <div class="bar"><i id="pb"></i></div>
+ <section id="tela" aria-live="polite"></section>
+ <section id="idx"></section>
+</main>
+<nav class="nav" aria-label="Telas"><div>
+ <button id="prev" aria-label="Tela anterior">←</button>
+ <button id="menu">Índice</button>
+ <span id="cnt"></span>
+ <button id="next" class="pri">Próxima →</button>
+</div></nav>
+<script>
+const TELAS=[
+{g:"Base",k:"Período composto",t:"Oração, período e os dois tipos de ligação",
+ ideia:"<b>Oração</b> = enunciado organizado em torno de um <b>verbo</b> (ou locução verbal). <b>Período simples</b> tem 1 oração; <b>período composto</b>, 2 ou mais. Para começar, <b>conte os verbos</b>.",
+ tab:{head:["","Coordenação","Subordinação"],rows:[
+  ["Relação","Orações <b>independentes</b> sintaticamente: uma não é termo da outra","Uma oração <b>exerce função sintática</b> (sujeito, objeto, adjunto…) dentro da outra (a principal)"],
+  ["Imagem","Vagões lado a lado","Peça encaixada dentro de outra"],
+  ["Exemplo","<i>Cheguei cedo</i>, <i>mas ninguém estava lá</i>.","<i>Percebi</i> <i>que ninguém estava lá</i>. (= Percebi <b>isso</b>: objeto direto)"]]},
+ list:["<b>Período misto</b> = tem as duas coisas: coordenação <b>e</b> subordinação.",
+  "Locução verbal (<i>vou estudar</i>, <i>tinha saído</i>) conta como <b>um</b> verbo só."],
+ trap:"“Independente sintaticamente” não quer dizer “sem relação de sentido”: em <i>Estudou, logo passou</i> há relação de conclusão, mas cada oração é completa na estrutura.",
+ mac:"<b>Conte os verbos → separe as orações → ache os conectivos → pergunte: é termo da outra?</b>"},
+{g:"Coordenação",k:"Coordenadas",t:"Orações coordenadas",
+ ideia:"<b>Assindéticas</b>: sem conjunção, só vírgula (<i>Vim, vi, venci</i>). <b>Sindéticas</b>: com conjunção; o tipo é dado pela <b>relação de sentido</b>.",
+ tab:{head:["Sindética","Sentido","Conjunções"],rows:[
+  ["Aditiva","Soma","e, nem, não só… mas também"],
+  ["Adversativa","Oposição, quebra de expectativa","mas, porém, contudo, todavia, entretanto, no entanto"],
+  ["Alternativa","Escolha, alternância","ou… ou, ora… ora, quer… quer, seja… seja"],
+  ["Conclusiva","Conclusão","logo, portanto, por isso, pois (depois do verbo)"],
+  ["Explicativa","Justificativa do que se disse","pois (antes do verbo), porque, que (após imperativo)"]]},
+ list:["<b>“e” adversativo:</b> <i>Estudou muito <b>e</b> não passou</i> = “mas não passou”.",
+  "<b>“pois”:</b> antes do verbo → explicativa (<i>Saia, <b>pois</b> vai chover</i>); depois do verbo, entre vírgulas → conclusiva (<i>Choveu; a rua está, <b>pois</b>, molhada</i>).",
+  "<b>Vírgula:</b> antes de <i>mas</i> sempre; antes de <i>e</i> quando os sujeitos são diferentes (<i>Ele saiu, e a casa ficou vazia</i>) ou com valor adversativo."],
+ trap:"Explicativa × causal: “<i>Choveu, <b>porque</b> a rua está molhada</i>” é <b>explicativa</b> (a rua molhada não causou a chuva; só justifica o que eu disse).",
+ mac:"Classifique pela <b>relação de sentido</b>, não pela palavra decorada."},
+{g:"Subordinação",k:"Substantivas",t:"Subordinadas substantivas",
+ ideia:"Fazem o papel de um <b>substantivo</b>. Começam, em geral, por <b>que</b> ou <b>se</b> (conjunções integrantes). <b>Macete:</b> troque a oração por <b>ISSO</b> e veja a função.",
+ tab:{head:["Tipo","Função","Exemplo (troque por ISSO)"],rows:[
+  ["Subjetiva","Sujeito","<i>É necessário <b>que você estude</b></i> → Isso é necessário."],
+  ["Objetiva direta","Objeto direto","<i>Sei <b>que ele virá</b></i> → Sei isso."],
+  ["Objetiva indireta","Objeto indireto (com preposição)","<i>Lembrei-me <b>de que era feriado</b></i> → Lembrei-me disso."],
+  ["Completiva nominal","Completa um nome","<i>Tenho certeza <b>de que acertei</b></i> → certeza disso."],
+  ["Predicativa","Predicativo (após verbo de ligação)","<i>O problema é <b>que ninguém leu</b></i> → O problema é isso."],
+  ["Apositiva","Aposto (após dois-pontos)","<i>Só quero uma coisa: <b>que me escutem</b></i>."]]},
+ list:["<b>“se” integrante</b>: <i>Não sei <b>se</b> ele vem</i> (objetiva direta), diferente de “se” condicional."],
+ trap:"Objetiva indireta × completiva nominal: a preposição é exigida por um <b>verbo</b> (objetiva indireta) ou por um <b>nome</b> (completiva nominal)?",
+ mac:"Verbo de ligação + oração = <b>predicativa</b>. “É + adjetivo + que…” = <b>subjetiva</b>."},
+{g:"Subordinação",k:"Adjetivas",t:"Subordinadas adjetivas",
+ ideia:"Fazem o papel de um <b>adjetivo</b>: caracterizam um substantivo anterior. Começam por <b>pronome relativo</b> (que = <b>o qual</b>, quem, cujo, onde, quanto).",
+ tab:{head:["Tipo","Sentido","Exemplo"],rows:[
+  ["Restritiva (sem vírgula)","Restringe: só uma parte do grupo","<i>Os alunos <b>que estudaram</b> passaram</i> (só alguns)."],
+  ["Explicativa (entre vírgulas)","Explica algo de todo o grupo","<i>Os alunos, <b>que estudaram</b>, passaram</i> (todos estudaram)."]]},
+ list:["<b>Teste do relativo:</b> se dá para trocar “que” por <b>o qual / a qual</b>, é pronome relativo, e a oração é adjetiva. Se dá para trocar a oração por <b>isso</b>, é conjunção integrante, e a oração é substantiva.",
+  "<b>Exemplo literário:</b> “Minha terra tem palmeiras, / <b>Onde canta o Sabiá</b>” (Gonçalves Dias): adjetiva introduzida por <b>onde</b> (= nas quais).",
+  "“Amor é fogo <b>que arde sem se ver</b>” (Camões): adjetiva restritiva (que = o qual).",
+  "<b>Cujo</b> indica posse e concorda com o possuído: <i>O autor <b>cujo livro</b> li</i> (nunca “cujo o”)."],
+ trap:"A vírgula <b>muda o sentido</b>. A banca adora perguntar o que acontece ao tirar ou pôr as vírgulas de uma adjetiva.",
+ mac:"<b>que = o qual → adjetiva.</b> <b>que → isso → substantiva.</b>"},
+{g:"Subordinação",k:"Adverbiais",t:"Subordinadas adverbiais",
+ ideia:"Fazem o papel de <b>advérbio</b>: indicam circunstância (causa, tempo, condição…). O tipo vem da <b>conjunção</b> e do <b>sentido</b>.",
+ tab:{head:["Tipo","Conjunções típicas"],rows:[
+  ["Causal","porque, como (no início), já que, visto que, uma vez que"],
+  ["Consecutiva","que (após <b>tão, tanto, tal</b>), de modo que"],
+  ["Comparativa","como, (mais/menos) do que, assim como"],
+  ["Conformativa","conforme, como (= conforme), segundo, consoante"],
+  ["Concessiva","embora, ainda que, mesmo que, conquanto, se bem que, apesar de que"],
+  ["Condicional","se, caso, desde que (+ subjuntivo), contanto que, a menos que"],
+  ["Final","para que, a fim de que"],
+  ["Temporal","quando, enquanto, logo que, assim que, desde que (= a partir de)"],
+  ["Proporcional","à medida que, à proporção que, quanto mais… (mais)"]]},
+ list:["<b>Causa × consequência:</b> <i>Choveu <b>tanto que</b> a rua alagou</i> (alagou = consequência).",
+  "<b>Concessiva:</b> admite um obstáculo que <b>não impede</b> o fato: <i><b>Embora</b> chovesse, saímos</i>.",
+  "<b>“Como”</b> tem três valores: causal (<i>Como chovia, ficamos</i>), comparativa (<i>Corre como um raio</i>), conformativa (<i>Fiz como pediram</i>)."],
+ trap:"<b>“Desde que”</b>: com subjuntivo é <b>condicional</b> (<i>desde que estude</i>); com indicativo é <b>temporal</b> (<i>desde que chegou</i>).",
+ mac:"Concessiva = “<b>mesmo assim</b>”. Consecutiva = “<b>tão… que</b>”."},
+{g:"Subordinação",k:"Reduzidas",t:"Orações reduzidas",
+ ideia:"Oração <b>reduzida</b> não tem conjunção nem pronome relativo, e o verbo fica no <b>infinitivo</b>, no <b>gerúndio</b> ou no <b>particípio</b>. Para classificar, <b>desenvolva</b>: transforme-a em oração com conectivo.",
+ tab:{head:["Reduzida","Desenvolvida","Classificação"],rows:[
+  ["<i><b>Ao chegar</b>, liguei.</i> (infinitivo)","<i>Quando cheguei</i>","Adverbial temporal"],
+  ["<i>É preciso <b>estudar</b>.</i> (infinitivo)","<i>que se estude</i>","Substantiva subjetiva"],
+  ["<i><b>Estudando</b>, você passará.</i> (gerúndio)","<i>Se estudar</i>","Adverbial condicional"],
+  ["<i><b>Terminada a prova</b>, saímos.</i> (particípio)","<i>Depois que a prova terminou</i>","Adverbial temporal"],
+  ["<i>Vi um menino <b>chorando</b>.</i> (gerúndio)","<i>que chorava</i>","Adjetiva"]]},
+ trap:"O mesmo gerúndio pode ter valores diferentes conforme o contexto: <b>desenvolva</b> sempre antes de classificar.",
+ mac:"Reduzida → <b>desenvolva</b> → classifique pela desenvolvida."},
+{g:"Período misto",k:"Análise passo a passo",t:"Como analisar um período misto",
+ ideia:"Período misto tem coordenação e subordinação ao mesmo tempo. Analise em <b>5 passos</b>.",
+ list:["<b>1. Conte os verbos</b> e separe as orações com colchetes.",
+  "<b>2. Ache os conectivos</b>: conjunções (coordenativas ou subordinativas) e pronomes relativos.",
+  "<b>3. Identifique a oração principal</b>: a que recebe as subordinadas.",
+  "<b>4. Classifique cada subordinada</b> pela função (substantiva = isso; adjetiva = o qual; adverbial = circunstância).",
+  "<b>5. Classifique as coordenadas</b> pela relação de sentido.",
+  "<b>Exemplo:</b> [<i>Quando o sinal tocou</i>,] [<i>os alunos perceberam</i>] [<i>que a prova acabara</i>] [<i>e entregaram as folhas</i>.]",
+  "→ <i>Quando o sinal tocou</i>: subordinada adverbial <b>temporal</b>. <i>os alunos perceberam</i>: <b>principal</b>. <i>que a prova acabara</i>: subordinada substantiva <b>objetiva direta</b> (perceberam isso). <i>e entregaram as folhas</i>: coordenada sindética <b>aditiva</b> (ligada à principal)."],
+ trap:"A coordenada pode se ligar à <b>principal</b> ou a uma <b>subordinada</b>. Veja com qual oração ela forma par.",
+ mac:"<b>Colchetes primeiro, nomes depois.</b>"},
+{g:"Sequenciação",k:"Coesão",t:"Sequenciação de orações e conectivos",
+ ideia:"<b>Sequenciação</b> é o modo como as orações se encadeiam para fazer o texto avançar (coesão sequencial). O <b>conectivo</b> define a <b>relação lógica</b>: trocar o conectivo pode manter ou mudar o sentido.",
+ tab:{head:["Relação","Conectivos equivalentes"],rows:[
+  ["Oposição","mas, porém, contudo, todavia, no entanto, entretanto"],
+  ["Concessão","embora, ainda que, mesmo que, conquanto, apesar de (+ infinitivo)"],
+  ["Causa","porque, visto que, já que, uma vez que, como (no início)"],
+  ["Conclusão","logo, portanto, por isso, assim, por conseguinte"],
+  ["Condição","se, caso, desde que, contanto que"],
+  ["Finalidade","para que, a fim de que, para (+ infinitivo)"]]},
+ list:["<b>Reescrita com troca de conectivo:</b> <i>Estudou, <b>mas</b> não passou</i> = <i><b>Embora</b> tenha estudado, não passou</i> (o verbo vai para o <b>subjuntivo</b>).",
+  "<b>Correlação dos tempos:</b> <i>Se eu <b>estudasse</b>, <b>passaria</b></i> (imperfeito do subjuntivo + futuro do pretérito); <i>Se eu <b>estudar</b>, <b>passarei</b></i> (futuro do subjuntivo + futuro do presente).",
+  "<b>Pontuação:</b> adverbial <b>anteposta</b> vem com vírgula (<i>Quando cheguei, todos saíram</i>); nunca separe sujeito e verbo com vírgula."],
+ trap:"“Porém” e “embora” têm sentido próximo, mas estrutura diferente: “porém” é <b>coordenativa</b>; “embora” é <b>subordinativa</b> e pede subjuntivo.",
+ mac:"Na reescrita, confira <b>3 coisas</b>: relação lógica, modo verbal e pontuação."},
+{g:"Textos literários",k:"Efeito de sentido",t:"Período composto na literatura",
+ ideia:"Nos textos literários, a escolha entre coordenar e subordinar produz <b>efeito de sentido</b>. A prova pede para <b>analisar e explicar o efeito</b>.",
+ tab:{head:["Recurso","Efeito","Exemplo"],rows:[
+  ["Assíndeto (coordenadas sem conjunção)","Rapidez, acúmulo, tom seco","“Não tive filhos, não transmiti a nenhuma criatura o legado da nossa miséria.” (Machado de Assis, <i>Memórias póstumas</i>)"],
+  ["Polissíndeto (e… e… e…)","Insistência, ritmo, acúmulo que cansa ou intensifica","<i>E chora, e grita, e pede, e implora…</i>"],
+  ["Subordinação encadeada","Hierarquia de ideias, raciocínio, argumentação","Períodos longos de Machado e Saramago"],
+  ["Inversão da ordem (adverbial antes)","Destaca a circunstância","“Quando Ismália enlouqueceu, / Pôs-se na torre a sonhar…” (Alphonsus de Guimaraens)"]]},
+ list:["<b>Coordenação</b> tende a <b>narrar e acumular</b> (ações em sequência); <b>subordinação</b> tende a <b>explicar, condicionar e argumentar</b>.",
+  "Saramago, estudado em Literatura, usa períodos longos, cheios de orações e diálogos embutidos: <b>sequenciação</b> pela vírgula."],
+ trap:"Não basta classificar: explique <b>o que a escolha produz</b> (ritmo, ênfase, hierarquia).",
+ mac:"Coordenar = <b>somar e narrar</b>. Subordinar = <b>hierarquizar e argumentar</b>."},
+{g:"Revisão e estudo",k:"Pegadinhas",t:"Os conectivos que mais confundem",
+ ideia:"A mesma palavra pode ter funções diferentes. Decida pelo <b>teste</b> e pelo <b>sentido</b>.",
+ tab:{head:["Palavra","Valores possíveis","Teste rápido"],rows:[
+  ["<b>que</b>","Pronome relativo (adjetiva); conjunção integrante (substantiva); consecutiva (tão… que); explicativa; comparativa (mais… que)","o qual? → relativo. isso? → integrante."],
+  ["<b>se</b>","Conjunção integrante (substantiva); condicional (adverbial)","“Não sei se…” = integrante; “Se chover…” = condicional."],
+  ["<b>como</b>","Causal; comparativa; conformativa","porque? / igual a? / conforme?"],
+  ["<b>desde que</b>","Temporal (indicativo); condicional (subjuntivo)","Olhe o modo verbal."],
+  ["<b>pois</b>","Explicativa (antes do verbo); conclusiva (depois do verbo)","Olhe a posição."],
+  ["<b>e</b>","Aditiva; adversativa","Dá para trocar por “mas”?"]]},
+ trap:"Decorar listas não basta: a banca escolhe exatamente os conectivos com <b>mais de um valor</b>.",
+ mac:"<b>Teste antes de classificar.</b>"},
+{g:"Revisão e estudo",k:"Orientação da escola",t:"Como estudar para a prova",
+ ideia:"Orientação do colégio para a prova (Estudo AA1, 1º trimestre), mais um roteiro para o nível dos vestibulares.",
+ list:["Acesse <b>Materiais Complementares</b> na sala virtual e abra o arquivo <b>“Estudo AA1 - 1TRI”</b>: há vídeos e links sobre o conteúdo.",
+  "<b>Marque</b> no livro ou no caderno os exercícios que você não conseguiu fazer sozinho e <b>refaça-os</b> depois de estudar o capítulo.",
+  "<b>Roteiro diário (30 min):</b> 10 min de teoria (uma tela por vez) → 15 min analisando períodos (colchetes + classificação) → 5 min revendo os erros.",
+  "<b>Treino de reescrita:</b> pegue um período e troque o conectivo mantendo o sentido (mas → embora; porque → visto que; portanto → logo). Confira o modo verbal e a vírgula.",
+  "<b>No quiz:</b> faça o bloco de Português e leia a explicação de cada erro."],
+ trap:"Ler a teoria e não praticar análise é o erro mais comum. Período composto se aprende <b>analisando</b>.",
+ mac:"<b>Colchetes → conectivo → teste (isso / o qual / sentido) → nome.</b>"}
+];
+const N=TELAS.length,$=id=>document.getElementById(id);
+let i=0;try{i=Math.min(N-1,Math.max(0,+localStorage.getItem("por1")||0))}catch(e){}
+function show(n){i=n;try{localStorage.setItem("por1",i)}catch(e){}
+ const t=TELAS[i];let h=`<div class="eyebrow">${t.g} · ${t.k}</div><h1>${t.t}</h1><div class="box ideia"><b class="lb">Ideia central</b>${t.ideia}</div>`;
+ if(t.tab)h+=`<div class="tw"><table><thead><tr>${t.tab.head.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${t.tab.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+ if(t.ex)h+=t.ex.map(e=>`<div class="ex"><p class="q">${e.q}</p><ol>${e.p.map(s=>`<li>${s}</li>`).join("")}</ol><div class="r">Resposta: ${e.r}</div></div>`).join("");
+ if(t.list)h+=`<ul class="l">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(t.trap)h+=`<div class="box trap"><b class="lb">Pegadinha</b>${t.trap}</div>`;
+ if(t.mac)h+=`<div class="box mac"><b class="lb">Macete</b>${t.mac}</div>`;
+ if(i==N-1)h+=`<p class="fim">Fim do resumo. Agora faça o <a href="../quiz/">quiz de Português</a>.</p>`;
+ $("tela").innerHTML=h;$("idx").classList.remove("on");$("tela").style.display="";
+ $("cnt").textContent=`Tela ${i+1} de ${N}`;$("pb").style.width=((i+1)/N*100)+"%";
+ $("prev").disabled=i==0;$("next").disabled=i==N-1;$("menu").textContent="Índice";scrollTo(0,0)}
+function index(){if($("idx").classList.contains("on"))return show(i);
+ let h="",g="";TELAS.forEach((t,n)=>{if(t.g!=g){h+=(g?"</ol>":"")+`<h2>${t.g}</h2><ol>`;g=t.g}
+  h+=`<li><button data-n="${n}" class="${n==i?"cur":""}"><span>${n+1}</span>${t.t}</button></li>`});
+ $("idx").innerHTML=h+"</ol>";$("idx").classList.add("on");$("tela").style.display="none";$("menu").textContent="Fechar";scrollTo(0,0)}
+$("idx").onclick=e=>{const b=e.target.closest("button[data-n]");if(b)show(+b.dataset.n)};
+$("prev").onclick=()=>i>0&&show(i-1);$("next").onclick=()=>i<N-1&&show(i+1);$("menu").onclick=index;
+document.addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("next").click();if(e.key=="ArrowLeft")$("prev").click()});
+show(i);
+</script>
+</body>
+</html>

@@ -11,7 +11,7 @@
 /* Layout: coluna única de 720px; três cartões de destino (resumo de Química, resumo de Botânica, quiz). */
 :root{
  --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
- --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --quiz:#8a4fbf; --quiz-soft:#f1e8fa; --lit:#a3401c; --lit-soft:#fbeae3; --fis:#0f6e78; --fis-soft:#e0f2f3; --his:#7a4b12; --his-soft:#f6ecdf;
+ --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --quiz:#8a4fbf; --quiz-soft:#f1e8fa; --lit:#a3401c; --lit-soft:#fbeae3; --fis:#0f6e78; --fis-soft:#e0f2f3; --his:#7a4b12; --his-soft:#f6ecdf; --por:#9b2c55; --por-soft:#f8e6ee;
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
 }
@@ -32,7 +32,7 @@ a.card:focus-visible{box-shadow:0 0 0 3px var(--c-soft)}
 .card h2{font-family:var(--display);font-size:20px;margin:0;line-height:1.2}
 .card p{margin:2px 0 0;color:var(--muted);font-size:15px}
 .card .go{color:var(--c);font-weight:700;font-size:20px}
-.qui{--c:var(--qui);--c-soft:var(--qui-soft)}.bio{--c:var(--bio);--c-soft:var(--bio-soft)}.quiz{--c:var(--quiz);--c-soft:var(--quiz-soft)}.lit{--c:var(--lit);--c-soft:var(--lit-soft)}.fis{--c:var(--fis);--c-soft:var(--fis-soft)}.his{--c:var(--his);--c-soft:var(--his-soft)}
+.qui{--c:var(--qui);--c-soft:var(--qui-soft)}.bio{--c:var(--bio);--c-soft:var(--bio-soft)}.quiz{--c:var(--quiz);--c-soft:var(--quiz-soft)}.lit{--c:var(--lit);--c-soft:var(--lit-soft)}.fis{--c:var(--fis);--c-soft:var(--fis-soft)}.his{--c:var(--his);--c-soft:var(--his-soft)}.por{--c:var(--por);--c-soft:var(--por-soft)}
 .how{border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:15px}
 .how ol{margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
 </style>
@@ -50,7 +50,8 @@ a.card:focus-visible{box-shadow:0 0 0 3px var(--c-soft)}
   <a class="card lit" href="literatura/"><span class="badge">Li</span><span><h2>Resumo de Literatura</h2><p>9 telas: Concretismo e Neoconcretismo, poesia marginal e contemporânea, José Saramago e como responder na prova discursiva</p></span><span class="go" aria-hidden="true">→</span></a>
   <a class="card fis" href="fisica/"><span class="badge">Fí</span><span><h2>Resumo de Física</h2><p>Ondulatória (caps. 6, 7 e 8): som, decibéis, eco, interferência, batimento e cordas, com as 42 questões do livro resolvidas passo a passo</p></span><span class="go" aria-hidden="true">→</span></a>
   <a class="card his" href="historia/"><span class="badge">Hi</span><span><h2>Resumo de História</h2><p>9 telas: crise de 1929 e New Deal, nazifascismo e Holocausto, Guerra Civil Espanhola e Era Vargas (1930, 1932, Constituição de 1934, AIB e ANL)</p></span><span class="go" aria-hidden="true">→</span></a>
-  <a class="card quiz" href="quiz/"><span class="badge">?!</span><span><h2>Quiz de Química, Biologia, Literatura, Física e História</h2><p>285 questões, todas em nível prova (estilo vestibular), com explicação a cada resposta e orientação de estudo no final</p></span><span class="go" aria-hidden="true">→</span></a>
+  <a class="card por" href="portugues/"><span class="badge">Po</span><span><h2>Resumo de Português</h2><p>Período composto: coordenadas, subordinadas, período misto e sequenciação de orações em textos literários</p></span><span class="go" aria-hidden="true">→</span></a>
+  <a class="card quiz" href="quiz/"><span class="badge">?!</span><span><h2>Quiz de revisão (6 matérias)</h2><p>325 questões, todas em nível prova (estilo vestibular), com explicação a cada resposta e orientação de estudo no final</p></span><span class="go" aria-hidden="true">→</span></a>
  </nav>
  <section class="how">
   <b style="color:var(--ink)">Como estudar</b>
