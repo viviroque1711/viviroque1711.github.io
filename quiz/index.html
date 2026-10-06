@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Quiz de Química e Biologia</title>
+<title>Quiz de Química, Biologia e Literatura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -7,7 +7,7 @@
 /* Layout: uma coluna de estudo (máx. 720px); configuração → pergunta → feedback → resultado. Cor da matéria no topo. */
 :root{
  --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
- --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9;
+ --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --lit:#a3401c; --lit-soft:#fbeae3;
  --ok:#1d7a45; --ok-soft:#e2f4e9; --mid:#9a6400; --mid-soft:#fbf0d9; --bad:#b4372f; --bad-soft:#fbe7e5;
  --acc:var(--qui); --acc-soft:var(--qui-soft);
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
@@ -22,7 +22,7 @@
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
  --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
-body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}
+body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}body.lit{--acc:var(--lit);--acc-soft:var(--lit-soft)}
 .wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
 h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
@@ -38,7 +38,7 @@ h2{font-size:22px;font-weight:800}
 .chip input{accent-color:var(--acc);width:18px;height:18px;flex:none}
 .chip .n{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex:none}
 .chip .tag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;flex:none}
-.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}
+.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}.tag.l{background:var(--lit-soft);color:var(--lit)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:10px;padding:12px 20px;background:var(--acc);color:var(--card);cursor:pointer}
 .btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
@@ -125,10 +125,221 @@ const CAPS = [
  {k:"b10",m:"b",n:10,t:"Fisiologia da absorção: condução de seiva"},
  {k:"b11",m:"b",n:11,t:"Fisiologia da absorção: transpiração vegetal"},
  {k:"b12",m:"b",n:12,t:"Hormônios vegetais"},
- {k:"bi",m:"b",n:"Sist.",t:"Integração dos sistemas (caps. 5 a 12)"}
+ {k:"bi",m:"b",n:"Sist.",t:"Integração dos sistemas (caps. 5 a 12)"},
+ {k:"l1",m:"l",n:1,tag:"Concr.",lb:"Concretismo e Neoconcretismo",t:"Tendências contemporâneas: Concretismo e Neoconcretismo"},
+ {k:"l2",m:"l",n:2,tag:"Marg.",lb:"Poesia marginal e contemporânea",t:"Poesia marginal e contemporânea"},
+ {k:"l3",m:"l",n:3,tag:"Saram.",lb:"José Saramago",t:"Literatura portuguesa contemporânea: José Saramago"},
+ {k:"lr",m:"l",n:4,tag:"Revisão",lb:"Revisão do livro",t:"Revisão das escolas literárias (caps. 1 a 6 do livro)"}
 ];
 
 const Q = [
+/* ================= LITERATURA · CONCRETISMO E NEOCONCRETISMO ================= */
+{k:"l1",lv:1,s:"O Concretismo brasileiro surgiu",c:2,o:[
+ ["na Semana de Arte Moderna de 1922.","A Semana de 22 é o início do Modernismo. O Concretismo é uma vanguarda bem posterior, dos anos 1950."],
+ ["no Rio de Janeiro, com o Manifesto de 1959.","1959 no Rio é o Manifesto <b>Neoconcreto</b>, que rompeu com os concretos."],
+ ["em São Paulo, nos anos 1950, com o grupo Noigandres e a exposição de 1956.","Isso. Augusto e Haroldo de Campos e Décio Pignatari (revista Noigandres, 1952); marco: Exposição Nacional de Arte Concreta, 1956."],
+ ["nos anos 1970, com a geração mimeógrafo.","Geração mimeógrafo é a poesia <b>marginal</b> dos anos 70."],
+ ["em Portugal, depois da Revolução dos Cravos.","A Revolução dos Cravos (1974) é o contexto de Saramago, não do Concretismo, que é brasileiro."]]},
+{k:"l1",lv:1,s:"O “Plano-piloto para poesia concreta” (1958) anunciava",c:0,o:[
+ ["o fim do ciclo histórico do verso.","Isso. O poema concreto abandona o verso e usa o espaço da página como estrutura."],
+ ["a volta ao soneto e à métrica clássica.","Isso é o ideal <b>parnasiano</b>. Os concretos rejeitam o verso e a métrica."],
+ ["a valorização do eu lírico sentimental.","É justamente o contrário: o Concretismo é objetivo e recusa o sentimentalismo."],
+ ["a poesia feita para ser vendida de mão em mão.","Isso descreve a poesia <b>marginal</b> dos anos 70."],
+ ["a participação física do público na obra.","Essa é a proposta do <b>Neoconcretismo</b> (teoria do não-objeto)."]]},
+{k:"l1",lv:1,s:"A palavra “verbivocovisual”, usada pelos concretos, quer dizer que a palavra no poema é",c:3,o:[
+ ["apenas um desenho, sem sentido.","Não: o sentido (verbal) continua importante. Ele se soma ao som e à forma."],
+ ["escrita para ser cantada com música.","O som (vocal) é uma das três dimensões, mas não a única."],
+ ["um verso longo, com rima e métrica.","Os concretos aboliram o verso, a rima e a métrica tradicionais."],
+ ["ao mesmo tempo sentido, som e forma visual.","Isso. Verbal (sentido) + vocal (som) + visual (forma). As três juntas constroem o poema."],
+ ["uma palavra estrangeira, de origem latina.","É um termo inventado (de James Joyce) que junta “verbal”, “vocal” e “visual”."]]},
+{k:"l1",lv:1,s:"Os três poetas fundadores do Concretismo foram",c:1,o:[
+ ["Chacal, Cacaso e Ana Cristina Cesar.","Esses são poetas <b>marginais</b> dos anos 70."],
+ ["Augusto de Campos, Haroldo de Campos e Décio Pignatari.","Isso. É o grupo Noigandres, de São Paulo."],
+ ["Ferreira Gullar, Lygia Clark e Hélio Oiticica.","Esses nomes são do <b>Neoconcretismo</b>, do Rio."],
+ ["Olavo Bilac, Raimundo Correia e Alberto de Oliveira.","É a tríade <b>parnasiana</b> do fim do século XIX."],
+ ["Oswald de Andrade, Mário de Andrade e Manuel Bandeira.","São modernistas da 1ª fase (1922). Oswald influenciou os concretos, mas não fundou o movimento."]]},
+{k:"l1",lv:2,s:"Num poema concreto, a palavra “chuva” se repete descendo pela página, letra por letra, como se escorresse. Esse recurso, em que a forma visual reproduz o sentido, chama-se",c:4,o:[
+ ["paronomásia.","Paronomásia é aproximar palavras de som parecido e sentido diferente (lixo/luxo). Aqui o recurso é a forma imitar o sentido."],
+ ["enjambement.","Enjambement é o verso que continua no seguinte. Poema concreto nem tem verso."],
+ ["sinestesia.","Sinestesia mistura sensações (cor, som, cheiro). Não é o caso."],
+ ["anáfora.","Anáfora é repetir a mesma palavra no início de versos. Aqui o que importa é o desenho."],
+ ["isomorfismo.","Isso. Forma e conteúdo têm a mesma “forma”: o poema sobre chuva cai na página."]]},
+{k:"l1",lv:2,s:"No poema “luxo/lixo”, de Augusto de Campos, a palavra LUXO aparece em letras grandes formadas por muitas palavras “lixo”. Que leitura crítica o poema permite?",c:2,o:[
+ ["Elogio à riqueza e ao consumo de produtos caros.","O poema faz o oposto: mostra que o luxo é feito de lixo."],
+ ["Saudade da infância pobre do poeta.","Não há eu lírico autobiográfico; a poesia concreta é objetiva."],
+ ["O luxo é feito de lixo: crítica ao consumismo e ao valor de fachada.","Isso. A paronomásia (luxo/lixo) e a forma visual juntas criticam o consumo e a ostentação."],
+ ["A natureza deve ser preservada do lixo urbano.","Leitura ecológica possível de modo amplo, mas o poema joga com <b>luxo</b> × <b>lixo</b>, isto é, com a ostentação."],
+ ["Uma homenagem à poesia parnasiana.","O poema não tem verso, rima ou métrica; está longe do Parnasianismo."]]},
+{k:"l1",lv:2,s:"O poema “beba coca cola”, de Décio Pignatari (1957), transforma um slogan publicitário em palavras como “babe”, “caco” e “cloaca”. O efeito é",c:0,o:[
+ ["criticar a propaganda e a sociedade de consumo usando a própria linguagem dela.","Isso. O poema desmonta o slogan e revela o que ele esconde: é a fase em que a poesia concreta também critica."],
+ ["fazer propaganda gratuita do refrigerante.","Pelo contrário: as palavras derivadas (cloaca = esgoto) ridicularizam o anúncio."],
+ ["imitar uma cantiga medieval.","Não há relação com o trovadorismo."],
+ ["expressar a tristeza amorosa do poeta.","Não há eu lírico sentimental no poema concreto."],
+ ["defender a pureza da língua contra palavras estrangeiras.","O poema não trata de purismo linguístico."]]},
+{k:"l1",lv:2,s:"Sobre o Concretismo, assinale a alternativa <b>incorreta</b>.",c:3,o:[
+ ["Abandona o verso e usa o espaço da página como elemento de sentido.","Correta: é a base do movimento."],
+ ["Recebe influência de Mallarmé, Pound, Joyce e Oswald de Andrade.","Correta: são as influências declaradas pelos concretos."],
+ ["Aproveita recursos da publicidade, como concisão e tipografia.","Correta: o poema concreto conversa com o cartaz e o anúncio."],
+ ["Valoriza o eu lírico confessional e o desabafo sentimental.","Isso, esta é a incorreta. O Concretismo é objetivo e recusa o sentimentalismo; o “eu” praticamente desaparece."],
+ ["A partir de 1961 assume temas sociais, no chamado “salto participante”.","Correta: “sem forma revolucionária não há arte revolucionária”."]]},
+{k:"l1",lv:1,s:"O Manifesto Neoconcreto (1959) foi redigido por",c:1,o:[
+ ["Augusto de Campos.","Augusto é um dos fundadores do Concretismo, de quem os neoconcretos se separaram."],
+ ["Ferreira Gullar.","Isso. Publicado no Jornal do Brasil, no Rio, assinado também por Lygia Clark, Lygia Pape e outros."],
+ ["Paulo Leminski.","Leminski é dos anos 70 e 80, ligado à poesia marginal e ao haicai."],
+ ["José Saramago.","Saramago é romancista português."],
+ ["Heloísa Buarque de Hollanda.","Ela organizou a antologia <i>26 poetas hoje</i> (1976), da poesia marginal."]]},
+{k:"l1",lv:2,s:"O que distingue o Neoconcretismo do Concretismo?",c:4,o:[
+ ["O Neoconcretismo volta ao verso, à rima e ao soneto.","Não: ele continua experimental e visual."],
+ ["O Neoconcretismo nasce em São Paulo e o Concretismo, no Rio.","É o contrário: concretos em São Paulo, neoconcretos no Rio."],
+ ["O Neoconcretismo é mais matemático e geométrico.","É justamente o que ele critica nos concretos."],
+ ["O Neoconcretismo foi feito em mimeógrafo nos anos 70.","Isso é a poesia marginal."],
+ ["O Neoconcretismo rejeita o excesso de racionalismo e valoriza a expressão e a participação do espectador.","Isso. É a teoria do não-objeto: a obra se completa quando o público age sobre ela."]]},
+{k:"l1",lv:2,s:"Os <i>Bichos</i>, de Lygia Clark, são esculturas de metal com dobradiças que o público pode mexer e mudar de forma. Isso exemplifica a ideia neoconcreta de",c:2,o:[
+ ["arte pela arte, sem contato com o público.","Arte pela arte é o lema parnasiano; aqui o público é essencial."],
+ ["imitação fiel da natureza.","Os Bichos não imitam animais reais; o nome é poético."],
+ ["obra como “não-objeto”, completada pela participação do espectador.","Isso. O espectador deixa de só olhar e passa a participar."],
+ ["poema-piada, com humor e coloquialidade.","Poema-piada é recurso de Oswald e dos poetas marginais."],
+ ["denúncia da miséria por meio do determinismo.","Determinismo é do Naturalismo, século XIX."]]},
+{k:"l1",lv:1,s:"O Neoconcretismo surgiu no Rio de Janeiro, em 1959.",v:true,e:"Correto. O Manifesto Neoconcreto saiu no Jornal do Brasil, redigido por Ferreira Gullar."},
+{k:"l1",lv:1,s:"O poema concreto é sempre organizado em estrofes de versos com métrica regular.",v:false,e:"Falso. O Concretismo declarou o fim do verso: o poema se organiza pelo espaço da página."},
+{k:"l1",lv:2,s:"O Concretismo e o Parnasianismo valorizam a forma, mas o parnasiano usa forma fixa (soneto, métrica, rima) e o concreto cria uma forma nova, visual e sem verso.",v:true,e:"Correto. É uma comparação que cai: os dois cultuam a forma, mas de maneiras opostas."},
+{k:"l1",lv:2,s:"Paulo Leminski é considerado um poeta exclusivamente concretista, sem ligação com a poesia marginal.",v:false,e:"Falso. Leminski une o rigor concreto ao humor e à coloquialidade da poesia marginal; é o elo entre as duas tendências."},
+/* ================= LITERATURA · POESIA MARGINAL E CONTEMPORÂNEA ================= */
+{k:"l2",lv:1,s:"A poesia marginal recebeu esse nome porque",c:1,o:[
+ ["tratava apenas de crimes e da vida de marginais.","“Marginal” não se refere a bandidos; o tema principal é o cotidiano."],
+ ["circulava à margem das grandes editoras e da cultura oficial.","Isso. Livros artesanais, em mimeógrafo, vendidos de mão em mão."],
+ ["era escrita na margem das páginas de outros livros.","Não; o nome é figurado: fora do mercado editorial."],
+ ["foi proibida e nunca chegou a ser publicada.","Foi publicada, só que de modo independente."],
+ ["imitava a poesia do Parnasianismo.","É o oposto: coloquial e antiacadêmica."]]},
+{k:"l2",lv:1,s:"A poesia marginal é dos anos",c:3,o:[
+ ["1920, com a Semana de Arte Moderna.","1922 é o Modernismo. Oswald influenciou os marginais, mas eles são 50 anos depois."],
+ ["1950, com a Exposição de Arte Concreta.","Anos 50 = Concretismo."],
+ ["1890, com a Belle Époque.","Belle Époque = Parnasianismo e Simbolismo."],
+ ["1970, durante a ditadura militar.","Isso. Depois do AI-5 (1968), com censura; por isso a crítica vem disfarçada de humor."],
+ ["2010, com a poesia de internet.","Poesia de internet é parte da poesia contemporânea."]]},
+{k:"l2",lv:1,s:"A antologia que reuniu e divulgou a poesia marginal foi",c:0,o:[
+ ["<i>26 poetas hoje</i> (1976), organizada por Heloísa Buarque de Hollanda.","Isso. É o livro-marco da geração."],
+ ["<i>Noigandres</i> (1952).","Noigandres é a revista dos concretos."],
+ ["<i>Broquéis</i> (1893).","Broquéis é de Cruz e Sousa, marco do Simbolismo."],
+ ["<i>Poesias</i> (1888).","É o livro de Olavo Bilac, parnasiano."],
+ ["<i>Memorial do convento</i> (1982).","É romance de José Saramago."]]},
+{k:"l2",lv:2,s:"Qual conjunto de características descreve a poesia marginal?",c:2,o:[
+ ["Rigor formal, sintaxe espacial e abolição do verso.","Isso descreve o Concretismo."],
+ ["Soneto, rima rica, impassibilidade e temas clássicos.","Isso é Parnasianismo."],
+ ["Linguagem coloquial, humor, cotidiano, poema curto e crítica política velada.","Isso. É a poesia de conversa, do dia a dia, com ironia contra a ditadura."],
+ ["Sugestão, musicalidade, sinestesia e misticismo.","Isso é Simbolismo."],
+ ["Nacionalismo, indianismo e natureza idealizada.","Isso é a 1ª geração romântica."]]},
+{k:"l2",lv:2,s:"Por que a poesia marginal é vista como oposta ao Concretismo?",c:4,o:[
+ ["Porque os marginais escreviam em prosa.","Eles escreviam poemas; a diferença é o modo."],
+ ["Porque os concretos eram contra a ditadura e os marginais a favor.","Não; a oposição é estética, não de apoio político."],
+ ["Porque os marginais usavam soneto e métrica.","Os marginais também recusavam a forma fixa."],
+ ["Porque o Concretismo é da Europa e a poesia marginal é do Brasil.","Os dois são brasileiros."],
+ ["Porque troca o cálculo e o rigor visual pela espontaneidade e pela fala do dia a dia.","Isso. Concreto = planejado e geométrico; marginal = improvisado e coloquial."]]},
+{k:"l2",lv:2,s:"Um poema de Ana Cristina Cesar tem tom de diário, com datas, fragmentos e um “você” a quem o eu lírico se dirige. Essas marcas mostram",c:1,o:[
+ ["a impessoalidade parnasiana.","O texto é íntimo e pessoal, o contrário da impassibilidade."],
+ ["a escrita íntima e fragmentada típica da autora, que imita cartas e diários.","Isso. Ana C. (<i>A teus pés</i>, 1982) brinca com o gênero diário e carta."],
+ ["o isomorfismo concreto.","Não há uso visual da página; é escrita confessional."],
+ ["o narrador intruso de Saramago.","Saramago é romancista; aqui é poesia lírica."],
+ ["o determinismo naturalista.","Não há explicação científica do comportamento."]]},
+{k:"l2",lv:2,s:"Paulo Leminski é lembrado por",c:3,o:[
+ ["romances históricos sobre Portugal.","Isso é Saramago."],
+ ["sonetos parnasianos sobre a Grécia antiga.","Isso lembra Bilac e Francisca Júlia."],
+ ["poemas em mimeógrafo sobre a vida em Brasília.","Esse é Nicolas Behr."],
+ ["haicais e trocadilhos que unem o rigor concreto ao humor marginal.","Isso. <i>Caprichos &amp; relaxos</i> (1983)."],
+ ["ter redigido o Manifesto Neoconcreto.","Foi Ferreira Gullar."]]},
+{k:"l2",lv:1,s:"Chacal, Cacaso e Francisco Alvim são poetas",c:0,o:[
+ ["marginais dos anos 1970.","Isso. Chacal (<i>Muito prazer, Ricardo</i>), Cacaso (<i>Grupo escolar</i>), Alvim (poemas curtos feitos de falas)."],
+ ["concretistas dos anos 1950.","Concretistas: Augusto e Haroldo de Campos, Décio Pignatari."],
+ ["simbolistas do século XIX.","Simbolistas: Cruz e Sousa, Alphonsus de Guimaraens."],
+ ["portugueses contemporâneos.","São brasileiros."],
+ ["românticos da 2ª geração.","2ª geração romântica: Álvares de Azevedo, Casimiro de Abreu."]]},
+{k:"l2",lv:2,s:"A poesia brasileira contemporânea (dos anos 1980 até hoje) se caracteriza principalmente por",c:4,o:[
+ ["seguir uma única escola, com manifesto e regras.","Não há escola única hoje."],
+ ["voltar ao soneto e à métrica parnasiana.","Alguns poetas usam formas fixas, mas isso não define o período."],
+ ["proibir a poesia visual.","A poesia visual continua (Arnaldo Antunes)."],
+ ["tratar só de indígenas e da natureza nacional.","Isso é o indianismo romântico."],
+ ["pluralidade: convivem poesia visual, lírica do cotidiano, haicai e poesia falada (slam).","Isso. A marca é a diversidade de vozes e formas."]]},
+{k:"l2",lv:1,s:"O slam é uma batalha de poesia falada, muito presente nas periferias, e faz parte da poesia contemporânea.",v:true,e:"Correto. A poesia oral (saraus, slam) é uma das vertentes contemporâneas, ao lado da visual e da escrita."},
+{k:"l2",lv:1,s:"Os poetas marginais dependiam das grandes editoras para publicar.",v:false,e:"Falso. Eles publicavam de modo independente e artesanal, em mimeógrafo, e vendiam de mão em mão."},
+{k:"l2",lv:2,s:"O humor e o duplo sentido da poesia marginal também serviam para driblar a censura da ditadura.",v:true,e:"Correto. A crítica política aparece velada, disfarçada de piada, ironia e desbunde."},
+/* ================= LITERATURA · JOSÉ SARAMAGO ================= */
+{k:"l3",lv:1,s:"José Saramago é importante para a língua portuguesa porque",c:2,o:[
+ ["fundou a Academia Brasileira de Letras.","Quem fundou a ABL foi Machado de Assis."],
+ ["escreveu <i>Os lusíadas</i>.","<i>Os lusíadas</i> é de Camões, século XVI."],
+ ["foi o único autor de língua portuguesa a ganhar o Nobel de Literatura (1998).","Isso. Também ganhou o Prêmio Camões (1995)."],
+ ["criou a poesia concreta.","A poesia concreta é dos irmãos Campos e de Décio Pignatari."],
+ ["iniciou o Realismo em Portugal.","O Realismo português começa com Eça de Queirós (1875)."]]},
+{k:"l3",lv:1,s:"A marca de estilo mais conhecida de Saramago é",c:0,o:[
+ ["a pontuação própria: frases longas e diálogos sem travessão, separados por vírgula e marcados por letra maiúscula.","Isso. Aproxima o texto da fala e exige atenção do leitor."],
+ ["o uso de sonetos com rima rica.","Saramago é romancista, não poeta parnasiano."],
+ ["o poema visual sem verso.","Isso é Concretismo."],
+ ["capítulos curtíssimos narrados por um defunto.","Isso é <i>Memórias póstumas de Brás Cubas</i>, de Machado de Assis."],
+ ["a linguagem científica e determinista.","Isso é Naturalismo."]]},
+{k:"l3",lv:2,s:"Num trecho de Saramago, as falas de duas personagens aparecem no mesmo parágrafo, separadas só por vírgulas, cada uma começando com letra maiúscula. Essa escolha",c:3,o:[
+ ["é um erro de revisão que as editoras nunca corrigiram.","Não é erro: é escolha consciente de estilo."],
+ ["segue a norma tradicional dos diálogos em romance.","A norma tradicional usa travessão ou aspas; Saramago rompe com ela."],
+ ["mostra que o narrador é um personagem que não sabe escrever.","O narrador é culto e irônico; a escolha é estética."],
+ ["aproxima a narrativa da oralidade e obriga o leitor a participar ativamente.","Isso. O ritmo é de alguém contando a história em voz alta."],
+ ["imita a linguagem de manuais científicos.","Não há nada de científico nesse recurso."]]},
+{k:"l3",lv:2,s:"O narrador de Saramago costuma ser",c:1,o:[
+ ["um personagem em 1ª pessoa que só sabe o que viu.","Ele é onisciente e sabe mais que os personagens."],
+ ["onisciente e intruso: comenta, opina, ironiza e conversa com o leitor.","Isso. Faz digressões e usa ditados populares."],
+ ["neutro e impassível, como na poesia parnasiana.","Impassibilidade é ideal parnasiano; o narrador de Saramago opina o tempo todo."],
+ ["um defunto autor, como Brás Cubas.","É Machado de Assis."],
+ ["ausente, porque o romance só tem diálogos.","O narrador é muito presente."]]},
+{k:"l3",lv:1,s:"<i>Memorial do convento</i> (1982) conta",c:4,o:[
+ ["uma epidemia de cegueira branca numa cidade sem nome.","Isso é <i>Ensaio sobre a cegueira</i>."],
+ ["a viagem da Península Ibérica pelo mar.","Isso é <i>A jangada de pedra</i>."],
+ ["a volta de Ricardo Reis a Lisboa.","Isso é <i>O ano da morte de Ricardo Reis</i>."],
+ ["a vida de Jesus como homem comum.","Isso é <i>O Evangelho segundo Jesus Cristo</i>."],
+ ["a construção do convento de Mafra no século XVIII e o amor de Baltasar e Blimunda.","Isso. Pela ótica do povo que construiu a obra prometida pelo rei D. João V."]]},
+{k:"l3",lv:2,s:"Em <i>Memorial do convento</i>, a passarola do padre Bartolomeu de Gusmão voa graças às “vontades” recolhidas por Blimunda. O que essa mistura de fato histórico e fantasia permite ao autor?",c:2,o:[
+ ["Escrever um livro de história com datas exatas.","O romance não é livro didático: mistura fatos e invenção."],
+ ["Elogiar o poder do rei e da Inquisição.","O romance critica o rei e a Inquisição."],
+ ["Contar a história pelo lado dos anônimos e criticar o poder absoluto e a Igreja.","Isso. A fantasia (o sonho de voar) se opõe à opressão (Mafra, autos de fé)."],
+ ["Provar cientificamente que o ser humano pode voar.","Não há intenção científica; é alegoria."],
+ ["Imitar a forma das cantigas medievais.","Não há relação com o trovadorismo."]]},
+{k:"l3",lv:1,s:"Em <i>Ensaio sobre a cegueira</i>, quem continua enxergando e guia o grupo é",c:1,o:[
+ ["o primeiro cego.","Ele é o primeiro a perder a visão, no carro, num semáforo."],
+ ["a mulher do médico.","Isso. Ela finge estar cega para acompanhar o marido na quarentena."],
+ ["Blimunda.","Blimunda é de <i>Memorial do convento</i>."],
+ ["o rei D. João V.","Personagem de <i>Memorial do convento</i>."],
+ ["Ricardo Reis.","Personagem de <i>O ano da morte de Ricardo Reis</i>."]]},
+{k:"l3",lv:2,s:"A “cegueira branca” de <i>Ensaio sobre a cegueira</i> é uma alegoria. Ela representa principalmente",c:3,o:[
+ ["uma doença real que existiu em Portugal.","É ficção; vale pelo que simboliza."],
+ ["a vitória da ciência sobre a religião.","Não é esse o conflito do romance."],
+ ["a saudade da pátria distante.","Saudade da pátria é tema romântico (“Canção do exílio”)."],
+ ["a cegueira moral: perda da ética e da solidariedade, que leva a sociedade à barbárie.","Isso. As pessoas “veem, mas não reparam” umas nas outras."],
+ ["a beleza da cor branca, como em Cruz e Sousa.","O branco de Cruz e Sousa é simbolista; aqui é alegoria social."]]},
+{k:"l3",lv:2,s:"Por que as personagens de <i>Ensaio sobre a cegueira</i> não têm nome (“o médico”, “a rapariga dos óculos escuros”)?",c:0,o:[
+ ["Para universalizar a história: pode acontecer com qualquer pessoa, em qualquer cidade.","Isso. A falta de nomes reforça a alegoria."],
+ ["Porque o autor esqueceu de nomeá-las.","É escolha consciente."],
+ ["Porque a censura proibia nomes próprios.","Não há relação com censura."],
+ ["Para imitar o estilo parnasiano.","O Parnasianismo não tem relação com isso."],
+ ["Porque são personagens históricas reais.","São fictícias."]]},
+{k:"l3",lv:2,s:"Saramago costuma partir de uma hipótese absurda (“e se…?”). Qual obra corresponde a “e se a morte parasse de matar num país?”",c:4,o:[
+ ["<i>A jangada de pedra</i>.","Nela, a Península Ibérica se solta da Europa."],
+ ["<i>Ensaio sobre a lucidez</i>.","Nela, a maioria vota em branco."],
+ ["<i>Memorial do convento</i>.","É romance histórico sobre Mafra."],
+ ["<i>Levantado do chão</i>.","Trata dos camponeses do Alentejo."],
+ ["<i>As intermitências da morte</i>.","Isso (2005)."]]},
+{k:"l3",lv:1,s:"Saramago escreve no Portugal posterior à Revolução dos Cravos (1974), que encerrou a ditadura salazarista.",v:true,e:"Correto. Seus romances mais famosos são dos anos 1980 e 1990."},
+{k:"l3",lv:1,s:"José Saramago é um escritor brasileiro do Romantismo.",v:false,e:"Falso. É português e contemporâneo (1922–2010)."},
+{k:"l3",lv:2,s:"<i>O Evangelho segundo Jesus Cristo</i> causou polêmica, e o veto do governo português a esse livro levou Saramago a morar em Lanzarote, na Espanha.",v:true,e:"Correto. O veto foi em 1992; ele se mudou para Lanzarote (Canárias) e lá morreu em 2010."},
+/* ================= LITERATURA · REVISÃO DOS CAPÍTULOS 1 A 6 ================= */
+{k:"lr",lv:1,s:"“Arte pela arte”, culto da forma, soneto e impassibilidade são marcas do",c:3,o:[
+ ["Romantismo.","O Romantismo valoriza o sentimento e a liberdade formal."],
+ ["Naturalismo.","O Naturalismo é prosa e explica o ser humano pela ciência."],
+ ["Simbolismo.","O Simbolismo valoriza a sugestão e a musicalidade, não a impassibilidade."],
+ ["Parnasianismo.","Isso. Bilac: o poeta como ourives (“Profissão de fé”)."],
+ ["Concretismo.","O Concretismo também cultua a forma, mas sem soneto e sem verso."]]},
+{k:"lr",lv:2,s:"Na lista de questões sobre Realismo e Naturalismo, qual estrofe de Augusto dos Anjos melhor traduz o determinismo de Claude Bernard, segundo o gabarito?",c:1,o:[
+ ["A 1ª (“Eu, filho do carbono e do amoníaco”).","Também é determinista, mas o gabarito da lista escolheu as estrofes do verme."],
+ ["A 3ª e a última (o verme, “operário das ruínas”, que devolve o corpo à matéria inorgânica).","Isso. Mostram que vivos e “corpos brutos” seguem a mesma lei: o corpo vira matéria inerte."],
+ ["A 2ª (“Profundissimamente hipocondríaco”).","Ela fala do mal-estar do eu lírico; não é a escolhida."],
+ ["Nenhuma: o poema é romântico.","O poema é do início do século XX e tem marcas cientificistas, nada românticas."],
+ ["Todas igualmente; não há escolha.","A questão pede a estrofe que melhor traduz a ideia."]]},
+{k:"lr",lv:1,s:"No Realismo, a crítica à burguesia aparece muitas vezes pelo tema do adultério, como em <i>O primo Basílio</i> e <i>Dom Casmurro</i>.",v:true,e:"Correto. O adultério expõe a falsa moral e a fragilidade do casamento burguês."},
 /* ================= QUÍMICA · CAP. 2 ================= */
 {k:"q2",s:"Estereoisômeros são compostos que têm a mesma fórmula molecular e a mesma sequência de ligações, mas diferem",c:2,o:[
  ["na fórmula molecular.","Não: a fórmula molecular é a mesma. Isso vale para todo tipo de isômero."],
@@ -1476,6 +1687,21 @@ const Q = [
 
 /* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
 const DICAS = {
+ l1:[
+ [/neoconcret|Gullar|Bichos|Lygia|1959/i,"Concreto × Neoconcreto","Concretismo = São Paulo, anos 50, razão e geometria, poema para ver e ler. Neoconcretismo = Rio, 1959 (Gullar), expressão e participação do público (não-objeto).","Literatura · Resumo, telas 4 e 5"],
+ [/isomorf|chuva|luxo|coca|verbivocovisual|forma visual/i,"Forma = sentido","Verbivocovisual: sentido + som + forma. Isomorfismo: a forma imita o conteúdo. Paronomásia: luxo/lixo. Explique sempre como a forma reforça o sentido.","Literatura · Resumo, tela 2"],
+ [/./,"O que foi o Concretismo","Noigandres (1952), exposição de 1956, Plano-piloto (1958): fim do verso, palavra-coisa, influência da publicidade. Não é o Modernismo de 22.","Literatura · Resumo, telas 1 e 3"]],
+ l2:[
+ [/contempor|slam|pluralidade|1980/i,"Poesia contemporânea","Sem escola única: pluralidade. Visual (Arnaldo Antunes), cotidiano (Adélia Prado), haicai (Alice Ruiz, Leminski), poesia falada (slam, saraus).","Literatura · Resumo, tela 9"],
+ [/Leminski|Ana Cristina|Chacal|Cacaso|Alvim/i,"Autores marginais","Ana C. = diário e carta. Leminski = haicai e trocadilho (une concreto e marginal). Cacaso = ironia política. Chacal = poesia falada.","Literatura · Resumo, tela 8"],
+ [/./,"Por que “marginal”","Anos 70, ditadura (AI-5): livros em mimeógrafo, vendidos de mão em mão, fora das editoras. Linguagem coloquial, humor, cotidiano, crítica velada. É o oposto do rigor concreto.","Literatura · Resumo, telas 6 e 7"]],
+ l3:[
+ [/pontua|travessão|vírgula|diálogo|narrador/i,"O estilo de Saramago","Frases longas, só vírgula e ponto; falas sem travessão, separadas por vírgula e com maiúscula; narrador intruso que comenta e ironiza. Não é erro: é estilo.","Literatura · Resumo, tela 11"],
+ [/cegueira|médico|alegoria/i,"Ensaio sobre a cegueira","Cegueira branca = alegoria da cegueira moral (perda da ética e da solidariedade). A mulher do médico é a única que vê. Personagens sem nome = universalidade.","Literatura · Resumo, tela 13"],
+ [/Memorial|Mafra|Blimunda|Baltasar|passarola/i,"Memorial do convento","Convento de Mafra (D. João V, séc. XVIII) contado pelo povo; Baltasar e Blimunda; passarola de Gusmão movida a vontades; crítica ao poder absoluto e à Inquisição.","Literatura · Resumo, tela 12"],
+ [/./,"Quem foi Saramago","Português (1922–2010), único Nobel da língua portuguesa (1998). Escreve depois da Revolução dos Cravos (1974). Parte sempre de um “e se…?”.","Literatura · Resumo, telas 10 e 13"]],
+ lr:[
+ [/./,"As escolas em uma frase","Romântico sente; realista observa; naturalista explica pela ciência; parnasiano lapida a forma; simbolista sugere. Na lista de Realismo, a 4b é a estrofe do verme.","Literatura · Resumo, tela 14"]],
  q4:[
  [/UFPR/,"Oxigenadas e nitrogenadas","Oxigenadas: álcool, fenol, éter, aldeído, cetona, ácido, éster. Nitrogenadas: amina, amida, nitro, nitrila. Carboniladas: aldeído e cetona (C=O).","Cap. 4 · Reconhecendo as funções orgânicas"],
  [/adrenalina|cocaína|tiroxina|aminoácido/i,"Funções mistas","Percorra a molécula grupo por grupo: OH no anel (fenol), OH na cadeia (álcool), N só com carbonos (amina), N no C=O (amida), COOH, COO (éster), O entre carbonos (éter), halogênio (haleto).","Cap. 4 · Leitura complementar: funções mistas"],
@@ -1614,7 +1840,8 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const label=c=>c.lb?(c.m==="q"?"Química":"Biologia")+" · "+c.lb:c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
+const MAT={q:"Química",b:"Biologia",l:"Literatura"},AB={q:"Quí",b:"Bio",l:"Lit"};
+const label=c=>c.lb?MAT[c.m]+" · "+c.lb:c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const L="ABCDE";
@@ -1626,7 +1853,7 @@ const inLv=q=>cfg.lv===0||(q.lv||1)===cfg.lv;
 
 let run=null;
 
-function setTheme(){document.body.classList.toggle("bio",cfg.m==="b")}
+function setTheme(m){m=m||cfg.m;document.body.classList.toggle("bio",m==="b");document.body.classList.toggle("lit",m==="l")}
 
 function setup(){
  setTheme();
@@ -1636,7 +1863,7 @@ function setup(){
  app.innerHTML=`
  <header>
   <div class="eyebrow"><a href="../" style="font-size:13px;font-weight:700;color:inherit;opacity:.75;text-decoration:none;margin-right:8px">← Início</a>Treino para a recuperação · 2ª série do ensino médio</div>
-  <h1>Quiz de Química e Biologia</h1>
+  <h1>Quiz de Química, Biologia e Literatura</h1>
   <p class="lead">Responda e veja na hora se acertou. Quando errar, a explicação mostra por que aquela alternativa está errada e qual é a certa.</p>
  </header>
  <section class="panel">
@@ -1644,19 +1871,20 @@ function setup(){
   <div class="seg" id="mat">
    <button data-m="q" aria-pressed="${cfg.m==="q"}">Química</button>
    <button data-m="b" aria-pressed="${cfg.m==="b"}">Biologia</button>
+   <button data-m="l" aria-pressed="${cfg.m==="l"}">Literatura</button>
    <button data-m="t" aria-pressed="${cfg.m==="t"}">Tudo misturado</button>
   </div>
   <div class="eyebrow">2. Nível</div>
   <div class="seg" id="lv">${[2,1,0].map(v=>`<button data-lv="${v}" aria-pressed="${cfg.lv===v}">${LVN[v]}</button>`).join("")}</div>
   <p class="small" style="margin:0">${cfg.lv===2?"Questões no estilo de prova e vestibular: várias etapas, análise de afirmações e pegadinhas do livro.":cfg.lv===1?"Questões diretas para fixar os conceitos de cada capítulo.":"Mistura as questões básicas e as de nível prova."}</p>
   <div class="eyebrow">3. Capítulos</div>
-  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k&&inLv(q)).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${c.m==="q"?"Quí":"Bio"} ${c.tag||c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
+  <div class="chips" id="caps">${caps.map(c=>{const n=Q.filter(q=>q.k===c.k&&inLv(q)).length;return `<label class="chip"><input type="checkbox" value="${c.k}" ${cfg.sel.includes(c.k)?"checked":""}><span class="tag ${c.m}">${AB[c.m]} ${c.tag||c.n}</span><span>${c.t}</span><span class="n">${n} questões</span></label>`}).join("")}</div>
   <div class="row small"><button class="chip" style="display:inline-flex;padding:6px 12px" id="all">Marcar todos</button><button class="chip" style="display:inline-flex;padding:6px 12px" id="none">Desmarcar todos</button></div>
   <div class="eyebrow">4. Quantas perguntas?</div>
   <div class="seg" id="qtd">${[10,20,0].map(n=>`<button data-n="${n}" aria-pressed="${cfg.n===n}">${n||"Todas"}</button>`).join("")}</div>
   <div class="row"><button class="btn" id="go">Começar</button><span class="small" id="info"></span></div>
  </section>
- ${cfg.m!=="b"?`<details class="panel ref" id="ref"><summary><b>Consulta rápida: regras e grupos de nomenclatura</b><span class="small">toque para abrir</span></summary>
+ ${cfg.m==="q"||cfg.m==="t"?`<details class="panel ref" id="ref"><summary><b>Consulta rápida: regras e grupos de nomenclatura</b><span class="small">toque para abrir</span></summary>
 <div class="refgrid">
 <div><div class="eyebrow">Prefixo: nº de carbonos</div><p>1 met · 2 et · 3 prop · 4 but · 5 pent · 6 hex · 7 hept · 8 oct · 9 non · 10 dec</p></div>
 <div><div class="eyebrow">Infixo: ligações</div><p>an = só simples · en = 1 dupla · in = 1 tripla · dien = 2 duplas · enin = dupla e tripla</p></div>
@@ -1722,7 +1950,7 @@ function prep(q){
 
 function ask(){
  const q=run.list[run.i],c=capOf(q.k);
- document.body.classList.toggle("bio",c.m==="b");
+ setTheme(c.m);
  const tot=run.list.length;
  app.innerHTML=`
  <div class="top"><span class="eyebrow">${label(c)} · ${esc(c.t)}</span>
@@ -1781,7 +2009,7 @@ function finish(){
  const pct=Math.round(run.ok/done*100);
  const msg=pct===100?"Gabaritou! Esse conteúdo está dominado.":pct>=70?"Mandou bem! Veja abaixo onde ainda dá para melhorar.":pct>=50?"Está no caminho. Siga a orientação abaixo e refaça os erros.":"Sem problema: errar aqui é treino. Comece pelos macetes abaixo e refaça as que errou.";
  if(!run.retry){
-  const k=(cfg.m==="q"?"Química":cfg.m==="b"?"Biologia":"Tudo misturado")+" · "+LVN[cfg.lv];
+  const k=(MAT[cfg.m]||"Tudo misturado")+" · "+LVN[cfg.lv];
   store.best=store.best||{};
   const prev=store.best[k],prevPct=prev?parseInt(prev):-1;
   if(pct>=prevPct)store.best[k]=`${pct}% (${run.ok} de ${done})`;
@@ -1796,16 +2024,16 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):r.startsWith("Biologia")?r:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):c.m==="l"?r:r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
- document.body.classList.toggle("bio",cfg.m==="b");
+ setTheme();
  app.innerHTML=`
  <header><div class="eyebrow">Resultado</div><h1>${run.ok} de ${done} certas</h1></header>
  <section class="panel"><div class="row" style="gap:18px"><span class="big">${pct}%</span><p style="margin:0;max-width:40ch">${msg}</p></div></section>
  <section class="panel"><h2>Desempenho por capítulo</h2>
-  <div class="caps">${caps.map(b=>{const [st,cl]=status(b.p);return `<div class="cap"><div class="capt"><span class="tag ${b.c.m}">${b.c.m==="q"?"Quí":"Bio"} ${b.c.tag||b.c.n}</span><span class="capn">${esc(b.c.t)}</span><span class="st ${cl}">${st}</span></div><div class="capbar"><i class="${cl}" style="width:${Math.round(b.p*100)}%"></i></div><div class="small">${b.ok} de ${b.n} certas · ${Math.round(b.p*100)}%</div></div>`}).join("")}</div></section>
+  <div class="caps">${caps.map(b=>{const [st,cl]=status(b.p);return `<div class="cap"><div class="capt"><span class="tag ${b.c.m}">${AB[b.c.m]} ${b.c.tag||b.c.n}</span><span class="capn">${esc(b.c.t)}</span><span class="st ${cl}">${st}</span></div><div class="capbar"><i class="${cl}" style="width:${Math.round(b.p*100)}%"></i></div><div class="small">${b.ok} de ${b.n} certas · ${Math.round(b.p*100)}%</div></div>`}).join("")}</div></section>
  ${topics.length?`<section class="panel"><h2>Onde focar agora</h2><p class="small" style="margin:0">Os temas em que você mais errou, com o macete para fixar e o lugar do resumo para reler.</p>
   <div class="tips">${topics.slice(0,4).map(g=>`<div class="tip"><div class="tiph"><b>${g.t[1]}</b><span class="small">${g.n} ${g.n>1?"erros":"erro"}</span></div><p><span class="lbl2">Macete</span> ${g.t[2]}</p><p class="small"><span class="lbl2">Releia no resumo</span> ${where(g.k,g.t[3])}</p></div>`).join("")}</div>
   ${topics.length>4?`<p class="small" style="margin:0">Mais ${topics.length-4} ${topics.length-4>1?"temas":"tema"} com erro aparecem na revisão abaixo.</p>`:""}</section>`:""}
