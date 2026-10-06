@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resumo de Sociologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<meta name="color-scheme" content="light">
+<style>
+:root{--bg:#fff;--ink:#18212b;--muted:#5b6876;--line:#d8dee5;--acc:#3b5b8c;--acc-soft:#e5ecf6;--warn:#a34a00;--warn-soft:#fff1e3;--ok:#23784a;--ok-soft:#e3f2e9;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px}
+.top a{color:var(--acc);font-weight:700;text-decoration:none}
+.bar{height:6px;background:var(--acc-soft);border-radius:4px;margin:14px 0 18px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1.12;margin:6px 0 16px;text-wrap:balance}
+.box{border-radius:12px;padding:12px 14px;margin:14px 0}
+.box b.lb{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ideia{background:var(--acc-soft)}.ideia b.lb{color:var(--acc)}
+.trap{background:var(--warn-soft)}.trap b.lb{color:var(--warn)}
+.mac{background:var(--ok-soft)}.mac b.lb{color:var(--ok)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.ex{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.ex .q{font-weight:700;margin:0 0 6px}
+.ex ol{margin:0 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ex .r{background:var(--ok-soft);border-radius:8px;padding:6px 10px;font-weight:700}
+ul.l{margin:12px 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.nav div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+button{font:inherit;font-weight:700;white-space:nowrap;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;flex:1}
+button:disabled{opacity:.4;cursor:default}
+#cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+#idx{display:none}
+#idx.on{display:block}
+#idx h2{font-family:var(--display);font-size:18px;margin:18px 0 6px}
+#idx ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+#idx li button{width:100%;text-align:left;font-weight:400;padding:8px 10px;display:flex;gap:10px}
+#idx li button span{color:var(--muted);min-width:2ch;font-weight:700}
+#idx li button.cur{border-color:var(--acc);background:var(--acc-soft)}
+.fim{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.aviso{font-size:14px;color:var(--muted);background:#f6f7f9;border-radius:10px;padding:10px 12px;margin:14px 0 0}
+.fim a{color:var(--acc);font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="top"><a href="../">← Início</a><span><a href="../quiz/">Quiz</a></span></div>
+ <p class="aviso">3º trimestre: Fanon, Bauman, Foucault, sociedade de controle, relações de poder, violência e Direitos Humanos. A prova é discursiva: veja no fim como escrever a resposta e as respostas modelo.</p>
+ <div class="bar"><i id="pb"></i></div>
+ <section id="tela" aria-live="polite"></section>
+ <section id="idx"></section>
+</main>
+<nav class="nav" aria-label="Telas"><div>
+ <button id="prev" aria-label="Tela anterior">←</button>
+ <button id="menu">Índice</button>
+ <span id="cnt"></span>
+ <button id="next" class="pri">Próxima →</button>
+</div></nav>
+<script>
+const TELAS=[
+/* ===== FANON ===== */
+{g:"Frantz Fanon",k:"Racismo e colonialismo",t:"Fanon: o colonialismo produz desigualdade",
+ ideia:"<b>Frantz Fanon</b> (1925–1961), psiquiatra nascido na <b>Martinica</b> (colônia francesa no Caribe), atuou na <b>Argélia</b> durante a luta pela independência. Para ele, o colonialismo é um sistema que <b>divide o mundo em dois</b>: colonizadores e colonizados, com direitos, espaços e valores desiguais.",
+ list:["<b>Obras:</b> <i>Pele negra, máscaras brancas</i> (1952) e <i>Os condenados da terra</i> (1961).",
+  "<b>Mundo compartimentado:</b> a cidade do colono (iluminada, limpa, com serviços) e a cidade do colonizado (pobre, superlotada, vigiada). A desigualdade é <b>organizada</b> e mantida pela força.",
+  "<b>Maniqueísmo colonial:</b> o colonizador se apresenta como civilizado e bom e retrata o colonizado como atrasado e “mau”. Essa oposição justifica a exploração.",
+  "<b>Desigualdade entre grupos:</b> terras, trabalho, educação e poder político ficam com o grupo colonizador; ao colonizado sobram exclusão e trabalho explorado."],
+ trap:"Para Fanon, o colonialismo não é “encontro de culturas”: é <b>dominação</b>, sustentada pela violência e pelo racismo.",
+ mac:"Colonialismo = <b>mundo dividido em dois</b>, com um lado dominando o outro."},
+{g:"Frantz Fanon",k:"Identidade e cultura",t:"Fanon: colonização da identidade",
+ ideia:"A dominação colonial <b>não controla só territórios</b>. Ela invade a <b>cultura</b>, a <b>língua</b> e a forma como o colonizado <b>vê a si mesmo</b>.",
+ list:["<b>Alienação:</b> o colonizado aprende a ver sua cultura como inferior e passa a desejar ser reconhecido pelos valores do colonizador.",
+  "<b>“Máscaras brancas”:</b> pessoas negras são pressionadas a imitar o modelo branco (falar “como o colonizador”, adotar seus padrões de beleza e comportamento) para serem aceitas.",
+  "<b>Inferioridade interiorizada:</b> o racismo, repetido na escola, na língua e nos meios de comunicação, passa a fazer parte da autoimagem. Fanon chama isso de <b>epidermização</b> da inferioridade: o complexo de inferioridade “colado na pele”.",
+  "<b>Língua:</b> falar a língua do colonizador é assumir uma cultura; ela vira medida de “civilização”.",
+  "<b>Exemplo atual:</b> padrões de beleza que desvalorizam traços negros, e a cultura de matriz africana tratada como “folclore” ou com preconceito."],
+ trap:"A questão “colonização é só ocupar território?” tem resposta <b>não</b>: em Fanon ela é também <b>psicológica e cultural</b>.",
+ mac:"Fanon: a colonização chega à <b>mente</b> e à <b>identidade</b>."},
+{g:"Frantz Fanon",k:"Racismo e violência",t:"Fanon: racismo, violência e descolonização",
+ ideia:"O <b>racismo</b> é peça central do colonialismo: transforma diferença em <b>hierarquia</b> e justifica a <b>violência</b> e a <b>exclusão</b>.",
+ tab:{head:["Conceito","Em Fanon"],rows:[
+  ["Racismo","Sistema que inferioriza um grupo e naturaliza a desigualdade"],
+  ["Violência colonial","Física (repressão, guerra) e simbólica (desprezo pela cultura, desumanização)"],
+  ["Exclusão","Negação de direitos, de cidadania e de humanidade"],
+  ["Descolonização","Processo de libertação política <b>e</b> psicológica; recuperar a identidade e a dignidade"]]},
+ list:["Em <i>Os condenados da terra</i>, Fanon analisa a violência de quem foi submetido à violência colonial na luta pela libertação. É um ponto polêmico e muito debatido.",
+  "<b>Relação com o Brasil:</b> herança da escravidão, racismo estrutural, desigualdade racial no trabalho, na escola e na violência policial."],
+ trap:"Responder só “Fanon era contra o racismo” é vago. Explique <b>como</b> o racismo funciona: inferioriza, justifica a violência e exclui.",
+ mac:"<b>Colonialismo → racismo → identidade ferida → violência → descolonização.</b>"},
+/* ===== BAUMAN ===== */
+{g:"Zygmunt Bauman",k:"Modernidade líquida",t:"Bauman: modernidade sólida × líquida",
+ ideia:"<b>Zygmunt Bauman</b> (1925–2017), sociólogo polonês, usou a metáfora dos <b>líquidos</b>: eles não mantêm a forma por muito tempo. A sociedade atual (<b>modernidade líquida</b>) é marcada por <b>mudanças rápidas</b>, <b>instabilidade</b> e <b>insegurança</b>.",
+ tab:{head:["Modernidade sólida","Modernidade líquida"],rows:[
+  ["Emprego estável, carreira numa empresa","Trabalho flexível, temporário, “freela”"],
+  ["Instituições fortes (família, Estado, sindicato)","Instituições frágeis; cada um por si (individualização)"],
+  ["Planos de longo prazo","Foco no presente; tudo pode mudar"],
+  ["Identidade herdada e estável","Identidade escolhida e trocada"],
+  ["Sociedade de produtores","Sociedade de <b>consumidores</b>"]]},
+ trap:"“Líquido” não quer dizer “sem nada”: as estruturas existem, mas <b>mudam rápido demais</b> para durar.",
+ mac:"<b>Líquido = não segura a forma.</b>"},
+{g:"Zygmunt Bauman",k:"Relações líquidas",t:"Bauman: relações líquidas e consumo",
+ ideia:"Em <i>Amor líquido</i> (2003), Bauman mostra que os vínculos se tornam <b>frágeis e passageiros</b>. Em <i>Vida para consumo</i> (2007), mostra que o <b>consumo</b> molda relações e identidades.",
+ list:["<b>Conexões × relações:</b> nas redes, “conectar” e “desconectar” é fácil, sem custo. Relações exigem tempo e compromisso; conexões, não.",
+  "<b>Medo do compromisso:</b> desejamos vínculos, mas tememos perder a liberdade; vivemos a <b>ambivalência</b>.",
+  "<b>Lógica do consumo nas relações:</b> pessoas tratadas como produtos, “trocadas” quando deixam de satisfazer.",
+  "<b>Identidade pelo consumo:</b> marcas, roupas e estilos são usados para dizer “quem eu sou”; como a moda muda, a identidade também precisa mudar.",
+  "<b>Descarte:</b> objetos, empregos e até pessoas viram descartáveis. Quem não pode consumir é excluído (os “consumidores falhos”)."],
+ trap:"Bauman não diz que “não existem mais relações”: diz que elas ficaram <b>mais frágeis</b> e guiadas pela lógica do consumo.",
+ mac:"<b>Consumir para ser</b>; <b>conectar sem se prender</b>."},
+{g:"Zygmunt Bauman",k:"Insegurança",t:"Bauman: insegurança e incerteza",
+ ideia:"A liquidez traz <b>insegurança</b>: medo de perder o emprego, de ficar para trás, de não ter lugar. Fica difícil construir <b>vínculos e projetos duradouros</b>.",
+ list:["<b>Trabalho precário:</b> sem estabilidade, é difícil planejar casa, família, carreira.",
+  "<b>Riscos individualizados:</b> problemas sociais (desemprego, crise) são vividos como fracasso pessoal.",
+  "<b>Medo líquido</b> (2006): um medo difuso, sem objeto claro, explorado pela política e pela mídia.",
+  "<b>Exemplo:</b> o jovem que muda de curso, de emprego e de cidade várias vezes e sente que nada é seguro."],
+ trap:"Insegurança, em Bauman, não é só violência urbana: é a <b>incerteza</b> sobre trabalho, vínculos e futuro.",
+ mac:"<b>Tudo muda rápido → nada é seguro → difícil planejar.</b>"},
+/* ===== FOUCAULT ===== */
+{g:"Michel Foucault",k:"Poder",t:"Foucault: o poder está em toda parte",
+ ideia:"Para <b>Michel Foucault</b> (1926–1984), filósofo francês, o poder <b>não está só no Estado</b>. Ele circula nas <b>relações sociais</b> e nas <b>instituições</b>: família, escola, hospital, empresa. É a <b>microfísica do poder</b>.",
+ tab:{head:["Visão tradicional","Visão de Foucault"],rows:[
+  ["Poder é algo que se possui (rei, governo)","Poder é algo que se <b>exerce</b>, nas relações"],
+  ["Vem de cima para baixo","Funciona em <b>rede</b>, em muitas direções"],
+  ["Só proíbe e reprime","Também <b>produz</b>: comportamentos, saberes, identidades"]]},
+ trap:"Poder em Foucault <b>não é só repressão</b>: ele é <b>produtivo</b>, ensina como agir, pensar e ser.",
+ mac:"Foucault: poder é <b>rede</b>, não trono."},
+{g:"Michel Foucault",k:"Disciplina e vigilância",t:"Foucault: disciplina e vigilância",
+ ideia:"Em <i>Vigiar e punir</i> (1975), Foucault mostra que as <b>instituições disciplinares</b> (escola, prisão, hospital, fábrica, quartel) moldam os indivíduos e produzem <b>corpos dóceis</b>: úteis e obedientes.",
+ tab:{head:["Técnica disciplinar","Exemplo na escola"],rows:[
+  ["Controle do tempo","Horários, sinal, cronograma"],
+  ["Controle do espaço","Carteiras enfileiradas, lugar fixo"],
+  ["Vigilância hierárquica","Professor, coordenador, câmeras"],
+  ["Sanção normalizadora","Notas, advertências, recompensas"],
+  ["Exame","Provas que classificam e registram cada aluno"]]},
+ list:["<b>Panóptico</b> (projeto de prisão de Jeremy Bentham): uma torre central de onde se vê todas as celas, mas os presos não veem o vigia.",
+  "<b>Efeito:</b> como pode estar sendo observado <b>a qualquer momento</b>, o indivíduo passa a <b>controlar o próprio comportamento</b>. A vigilância é interiorizada.",
+  "<b>Hoje:</b> câmeras, monitoramento no trabalho, redes sociais."],
+ trap:"O ponto do Panóptico não é “ser sempre vigiado”, e sim <b>poder estar sendo vigiado</b>, o que basta para o autocontrole.",
+ mac:"<b>Vigiado sem saber → vigia a si mesmo.</b>"},
+{g:"Michel Foucault",k:"Poder-saber",t:"Foucault: poder, saber e “normal”",
+ ideia:"Para Foucault, <b>poder e saber andam juntos</b>. O que uma sociedade considera <b>verdadeiro</b> ou <b>normal</b> é produzido por discursos ligados a relações de poder (medicina, psiquiatria, direito, escola).",
+ list:["<b>Normal × anormal:</b> saberes classificam pessoas (são/louco, normal/desviante) e, com isso, justificam controlá-las, tratá-las ou excluí-las.",
+  "<b>Exemplo histórico:</b> a loucura passou a ser objeto da psiquiatria e os “loucos” foram internados (<i>História da loucura</i>, 1961).",
+  "<b>Biopoder:</b> o Estado moderno passa a gerir a <b>vida</b> da população (saúde, natalidade, higiene).",
+  "<b>Aplicação:</b> quando a ciência de uma época chamou certos grupos de “inferiores”, esse “saber” serviu à dominação (ligue com Fanon e o racismo científico)."],
+ trap:"Foucault não diz que “a ciência é mentira”: diz que todo saber está ligado a <b>relações de poder</b> e tem efeitos sobre as pessoas.",
+ mac:"<b>Quem define o normal, exerce poder.</b>"},
+/* ===== CONTROLE, PODER, DIREITOS ===== */
+{g:"Poder, controle e direitos",k:"Deleuze",t:"Sociedade de controle",
+ ideia:"O filósofo <b>Gilles Deleuze</b> (1990), continuando Foucault, disse que passamos das <b>sociedades disciplinares</b> (confinamento em instituições) para as <b>sociedades de controle</b> (controle contínuo, aberto, a distância).",
+ tab:{head:["Disciplina (Foucault)","Controle (Deleuze)"],rows:[
+  ["Instituições fechadas: escola, fábrica, prisão","Controle em todo lugar, sem muros"],
+  ["Começo e fim (a aula acaba)","Nunca termina: formação e avaliação permanentes"],
+  ["Assinatura, número de matrícula","Senhas, dados, cadastro, crédito"],
+  ["Vigia na torre","Algoritmos, GPS, câmeras, redes sociais"]]},
+ list:["<b>Hoje:</b> aplicativos que registram onde você está; anúncios feitos com seus dados; notas de avaliação de motoristas e trabalhadores; tornozeleira eletrônica.",
+  "<b>Ligue com Bauman:</b> controle “líquido”, flexível e espalhado."],
+ trap:"Sociedade de controle não “acaba” com a disciplina: ela <b>se espalha</b> para fora dos muros e fica contínua.",
+ mac:"<b>Disciplina = muros. Controle = dados.</b>"},
+{g:"Poder, controle e direitos",k:"Weber e outros",t:"Relações de poder nas sociedades",
+ ideia:"Cada sociedade organiza o poder de um jeito. Compare as principais teorias.",
+ tab:{head:["Autor","Ideia central"],rows:[
+  ["<b>Max Weber</b>","Poder = impor a vontade. <b>Dominação</b> = poder aceito como legítimo: <b>tradicional</b> (costume, como o rei), <b>carismática</b> (líder extraordinário), <b>racional-legal</b> (leis e burocracia). O <b>Estado</b> detém o monopólio do uso <b>legítimo</b> da violência."],
+  ["<b>Foucault</b>","Poder em rede, nas relações e instituições; disciplina e poder-saber."],
+  ["<b>Fanon</b>","Poder colonial e racial: dominação de um povo sobre outro."],
+  ["<b>Hannah Arendt</b>","Poder nasce da ação conjunta e do consenso; <b>violência não é poder</b> e aparece quando o poder está em crise."]]},
+ list:["<b>Sociedades tradicionais</b> tendem à dominação pela tradição; as <b>modernas</b>, à dominação racional-legal."],
+ trap:"Weber estuda o poder <b>a partir do Estado e da legitimidade</b>; Foucault, <b>a partir das relações e instituições</b>. Não troque os dois.",
+ mac:"Weber: <b>legitimidade</b>. Foucault: <b>rede</b>. Arendt: <b>poder ≠ violência</b>."},
+{g:"Poder, controle e direitos",k:"Direitos Humanos",t:"Política, violência e Direitos Humanos",
+ ideia:"Os <b>Direitos Humanos</b> são direitos de todas as pessoas, pelo simples fato de serem humanas. A <b>Declaração Universal</b> (ONU, <b>1948</b>) foi escrita depois dos horrores da 2ª Guerra e do Holocausto.",
+ tab:{head:["Tipo de violência","O que é","Exemplo"],rows:[
+  ["Física","Agressão ao corpo","Tortura, violência policial"],
+  ["Simbólica (Bourdieu)","Dominação pela cultura, aceita como natural","Preconceito na linguagem, padrões de beleza"],
+  ["Estrutural","Desigualdade embutida na sociedade","Falta de saneamento e escola em bairros pobres"]]},
+ list:["<b>Características dos DH:</b> universais, indivisíveis (civis, políticos, sociais), inalienáveis.",
+  "<b>Brasil:</b> a Constituição de <b>1988</b> (“Cidadã”) garante direitos fundamentais; o racismo é crime inafiançável.",
+  "<b>Política e violência:</b> o Estado deve garantir direitos, mas também pode violá-los (ditaduras, abusos). Por isso os DH limitam o poder do Estado."],
+ trap:"Direitos Humanos não são “direitos de bandido”: valem para <b>todos</b>, inclusive para garantir julgamento justo e vida digna.",
+ mac:"<b>1948</b>: resposta ao Holocausto. <b>1988</b>: Constituição Cidadã."},
+/* ===== COMO RESPONDER ===== */
+{g:"Prova discursiva",k:"Critérios do professor",t:"Como escrever a resposta",
+ ideia:"Você será avaliado por <b>estruturação, clareza, coerência, norma culta e produção autoral</b>. Siga as regras do professor.",
+ tab:{head:["Regra","Como fazer"],rows:[
+  ["Não começar com conectivo","Nunca “Pois…”, “Porque…”, “Que…”. Comece pelo <b>assunto</b>: “Para Michel Foucault, o poder…”."],
+  ["Texto independente","Quem não leu a pergunta deve entender: <b>repita o tema</b> e nomeie o autor."],
+  ["Todos os comandos","Se pedir citar, exemplificar, justificar ou comparar, faça <b>cada um</b>."],
+  ["Clareza e norma culta","Frases completas, concordância, pontuação; nomes próprios com maiúscula (Fanon, Bauman, Foucault)."],
+  ["Não ser prolixo","Vá direto: conceito → explicação → exemplo → conclusão."],
+  ["Autoral","Use suas palavras e um exemplo seu, não frases decoradas."]]},
+ list:["<b>Estrutura em 4 frases:</b> 1) autor + conceito; 2) explicação do conceito; 3) exemplo atual; 4) fechamento que responde à pergunta."],
+ trap:"Começar com “Porque…” ou “Sim, pois…” depende da pergunta para fazer sentido, e isso <b>tira ponto</b>.",
+ mac:"<b>Autor + conceito + explicação + exemplo + conclusão.</b>"},
+{g:"Prova discursiva",k:"Respostas modelo",t:"Respostas modelo",
+ ideia:"Respostas no padrão pedido: independentes da pergunta, sem começar com conectivo e com exemplo.",
+ list:["<b>Fanon e a identidade:</b> Para Frantz Fanon, a colonização não se limita ao controle de territórios, pois também atinge a cultura e a identidade dos povos colonizados. O colonizador impõe sua língua e seus valores como superiores, e o colonizado passa a ver a própria cultura como inferior, num processo de alienação. Um exemplo atual são os padrões de beleza que desvalorizam traços negros. Assim, a dominação colonial também é psicológica.",
+  "<b>Bauman e o consumo:</b> Na modernidade líquida descrita por Zygmunt Bauman, o consumo orienta estilos de vida, relacionamentos e a construção da identidade. As pessoas passam a se definir pelo que compram e tratam vínculos como produtos que podem ser descartados quando deixam de satisfazer. As amizades desfeitas com um clique nas redes sociais mostram essa lógica. Dessa forma, as relações se tornam frágeis e passageiras.",
+  "<b>Foucault e a vigilância:</b> Segundo Michel Foucault, a vigilância é uma técnica de poder que leva as pessoas a controlarem o próprio comportamento. No modelo do Panóptico, o vigiado não sabe quando está sendo observado e, por isso, age como se estivesse sempre sob vigilância. Câmeras em escolas e empresas produzem esse efeito. Portanto, o poder disciplinar funciona por meio do autocontrole.",
+  "<b>Foucault e o poder:</b> Michel Foucault afirma que o poder não está concentrado apenas no Estado, mas circula nas relações sociais e nas instituições, como escola, hospital e fábrica. Essas instituições organizam o tempo, o espaço e os comportamentos, produzindo indivíduos disciplinados. Os horários e as avaliações escolares são exemplos dessa disciplina. Assim, o poder está presente no cotidiano."],
+ trap:"Não copie os modelos: use a <b>estrutura</b> e troque o exemplo por um <b>seu</b> (produção autoral).",
+ mac:"Releia antes de entregar: <b>começa sem conectivo? tem autor? tem exemplo? responde a todos os comandos?</b>"}
+];
+const N=TELAS.length,$=id=>document.getElementById(id);
+let i=0;try{i=Math.min(N-1,Math.max(0,+localStorage.getItem("soc1")||0))}catch(e){}
+function show(n){i=n;try{localStorage.setItem("soc1",i)}catch(e){}
+ const t=TELAS[i];let h=`<div class="eyebrow">${t.g} · ${t.k}</div><h1>${t.t}</h1><div class="box ideia"><b class="lb">Ideia central</b>${t.ideia}</div>`;
+ if(t.tab)h+=`<div class="tw"><table><thead><tr>${t.tab.head.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${t.tab.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+ if(t.ex)h+=t.ex.map(e=>`<div class="ex"><p class="q">${e.q}</p><ol>${e.p.map(s=>`<li>${s}</li>`).join("")}</ol><div class="r">Resposta: ${e.r}</div></div>`).join("");
+ if(t.list)h+=`<ul class="l">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(t.trap)h+=`<div class="box trap"><b class="lb">Pegadinha</b>${t.trap}</div>`;
+ if(t.mac)h+=`<div class="box mac"><b class="lb">Macete</b>${t.mac}</div>`;
+ if(i==N-1)h+=`<p class="fim">Fim do resumo. Agora faça o <a href="../quiz/">quiz de Sociologia</a>.</p>`;
+ $("tela").innerHTML=h;$("idx").classList.remove("on");$("tela").style.display="";
+ $("cnt").textContent=`Tela ${i+1} de ${N}`;$("pb").style.width=((i+1)/N*100)+"%";
+ $("prev").disabled=i==0;$("next").disabled=i==N-1;$("menu").textContent="Índice";scrollTo(0,0)}
+function index(){if($("idx").classList.contains("on"))return show(i);
+ let h="",g="";TELAS.forEach((t,n)=>{if(t.g!=g){h+=(g?"</ol>":"")+`<h2>${t.g}</h2><ol>`;g=t.g}
+  h+=`<li><button data-n="${n}" class="${n==i?"cur":""}"><span>${n+1}</span>${t.t}</button></li>`});
+ $("idx").innerHTML=h+"</ol>";$("idx").classList.add("on");$("tela").style.display="none";$("menu").textContent="Fechar";scrollTo(0,0)}
+$("idx").onclick=e=>{const b=e.target.closest("button[data-n]");if(b)show(+b.dataset.n)};
+$("prev").onclick=()=>i>0&&show(i-1);$("next").onclick=()=>i<N-1&&show(i+1);$("menu").onclick=index;
+document.addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("next").click();if(e.key=="ArrowLeft")$("prev").click()});
+show(i);
+</script>
+</body>
+</html>

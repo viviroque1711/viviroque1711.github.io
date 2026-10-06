@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resumo de Redação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<meta name="color-scheme" content="light">
+<style>
+:root{--bg:#fff;--ink:#18212b;--muted:#5b6876;--line:#d8dee5;--acc:#5c6b1e;--acc-soft:#eef1df;--warn:#a34a00;--warn-soft:#fff1e3;--ok:#23784a;--ok-soft:#e3f2e9;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px}
+.top a{color:var(--acc);font-weight:700;text-decoration:none}
+.bar{height:6px;background:var(--acc-soft);border-radius:4px;margin:14px 0 18px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1.12;margin:6px 0 16px;text-wrap:balance}
+.box{border-radius:12px;padding:12px 14px;margin:14px 0}
+.box b.lb{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ideia{background:var(--acc-soft)}.ideia b.lb{color:var(--acc)}
+.trap{background:var(--warn-soft)}.trap b.lb{color:var(--warn)}
+.mac{background:var(--ok-soft)}.mac b.lb{color:var(--ok)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.ex{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.ex .q{font-weight:700;margin:0 0 6px}
+.ex ol{margin:0 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ex .r{background:var(--ok-soft);border-radius:8px;padding:6px 10px;font-weight:700}
+ul.l{margin:12px 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.nav div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+button{font:inherit;font-weight:700;white-space:nowrap;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;flex:1}
+button:disabled{opacity:.4;cursor:default}
+#cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+#idx{display:none}
+#idx.on{display:block}
+#idx h2{font-family:var(--display);font-size:18px;margin:18px 0 6px}
+#idx ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+#idx li button{width:100%;text-align:left;font-weight:400;padding:8px 10px;display:flex;gap:10px}
+#idx li button span{color:var(--muted);min-width:2ch;font-weight:700}
+#idx li button.cur{border-color:var(--acc);background:var(--acc-soft)}
+.fim{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.aviso{font-size:14px;color:var(--muted);background:#f6f7f9;border-radius:10px;padding:10px 12px;margin:14px 0 0}
+.fim a{color:var(--acc);font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="top"><a href="../">← Início</a><span><a href="../quiz/">Quiz</a></span></div>
+ <p class="aviso">AA1: Cap. 2 (tabelas, gráficos e índices), Cap. 10 (enquete e relatório) e dissertação modelo ENEM.</p>
+ <div class="bar"><i id="pb"></i></div>
+ <section id="tela" aria-live="polite"></section>
+ <section id="idx"></section>
+</main>
+<nav class="nav" aria-label="Telas"><div>
+ <button id="prev" aria-label="Tela anterior">←</button>
+ <button id="menu">Índice</button>
+ <span id="cnt"></span>
+ <button id="next" class="pri">Próxima →</button>
+</div></nav>
+<script>
+const TELAS=[
+/* ===== CAP. 2 ===== */
+{g:"Cap. 2 · Tabelas, gráficos e índices",k:"Cap. 2",t:"Qual gráfico usar",
+ ideia:"Cada tipo de gráfico serve para <b>mostrar uma relação</b>. Escolher o gráfico certo já é metade da interpretação.",
+ tab:{head:["Tipo","Serve para","Exemplo"],rows:[
+  ["Colunas / barras","<b>Comparar categorias</b>","Número de alunos por turma"],
+  ["Linhas","<b>Evolução no tempo</b>, tendência","Inflação mês a mês"],
+  ["Setores (pizza)","<b>Partes de um todo</b> (somam 100%)","Gastos de uma família"],
+  ["Tabela","Valores exatos, muitos dados","Notas por disciplina"],
+  ["Infográfico","Juntar texto, número e imagem","Processo de reciclagem"]]},
+ trap:"Pizza só funciona se as partes somam <b>100%</b>. Se cada pessoa pode marcar mais de uma opção, a soma passa de 100% e a pizza não serve.",
+ mac:"<b>Comparar = barras. Tempo = linhas. Parte do todo = pizza.</b>"},
+{g:"Cap. 2 · Tabelas, gráficos e índices",k:"Cap. 2",t:"Como ler um gráfico sem cair em armadilha",
+ ideia:"Antes dos números, leia o <b>contexto</b>: título, fonte, unidade e período. Depois procure <b>tendência, pico e comparação</b>.",
+ list:["<b>1. Título:</b> o que está sendo medido.",
+  "<b>2. Fonte:</b> quem produziu os dados (IBGE, OMS…). Dado sem fonte é frágil.",
+  "<b>3. Eixos e unidades:</b> %, milhares, R$, anos.",
+  "<b>4. Legenda e período:</b> o que cada cor representa; de quando a quando.",
+  "<b>5. Leitura:</b> subiu, caiu, ficou estável? Qual o maior e o menor valor?",
+  "<b>Escala truncada:</b> eixo que não começa no zero faz uma diferença pequena parecer enorme.",
+  "<b>Correlação não é causa:</b> duas coisas subirem juntas não prova que uma causou a outra."],
+ trap:"<b>Porcentagem × pontos percentuais:</b> passar de 10% para 15% é aumento de <b>5 pontos percentuais</b>, mas de <b>50%</b> (5 ÷ 10).",
+ mac:"<b>Título → fonte → unidade → período → tendência.</b>"},
+{g:"Cap. 2 · Tabelas, gráficos e índices",k:"Cap. 2",t:"Índices e cálculos básicos",
+ ideia:"<b>Índices</b> resumem uma realidade complexa em um número, o que permite comparar lugares e épocas.",
+ tab:{head:["Índice ou cálculo","O que mostra"],rows:[
+  ["<b>Variação percentual</b>","(final − inicial) ÷ inicial × 100. De 200 para 250: 50 ÷ 200 = <b>25%</b>"],
+  ["<b>Per capita</b>","Valor dividido pela população (renda per capita)"],
+  ["<b>Taxa</b>","Ocorrências por grupo (ex.: por 100 mil habitantes)"],
+  ["<b>Média × mediana</b>","Média é puxada por valores extremos; mediana é o valor do meio"],
+  ["<b>IDH</b>","Desenvolvimento humano: renda, educação e saúde (de 0 a 1)"],
+  ["<b>IPCA</b>","Inflação oficial do Brasil"],
+  ["<b>Gini</b>","Desigualdade de renda (0 = igualdade total; 1 = desigualdade máxima)"]]},
+ trap:"Gini <b>maior</b> = <b>mais</b> desigualdade (é o contrário do IDH, em que maior é melhor).",
+ mac:"<b>Variação = diferença ÷ valor de partida.</b>"},
+{g:"Cap. 2 · Tabelas, gráficos e índices",k:"Cap. 2",t:"Usar dados no texto",
+ ideia:"Na redação e no relatório, o dado precisa ser <b>citado com fonte</b> e <b>interpretado</b>, nunca jogado solto.",
+ list:["<b>Cite a fonte:</b> “Segundo dados do IBGE (2022), …”.",
+  "<b>Interprete:</b> diga o que o número <b>significa</b> para o seu argumento (“o que revela…”, “o que evidencia…”).",
+  "<b>Compare:</b> “o índice é o dobro do registrado em…”.",
+  "<b>Seja preciso:</b> não invente números; se não lembrar o valor exato, use “cerca de”, “mais da metade”.",
+  "<b>Verbos úteis:</b> aumentou, recuou, oscilou, manteve-se estável, atingiu o pico, superou."],
+ trap:"Dado sem interpretação não é argumento: é só enfeite.",
+ mac:"<b>Fonte + número + o que ele prova.</b>"},
+/* ===== CAP. 10 ===== */
+{g:"Cap. 10 · Enquete e relatório",k:"Cap. 10",t:"Enquete",
+ ideia:"<b>Enquete</b> é uma consulta rápida de opinião sobre um tema, com perguntas objetivas e respostas fáceis de contar.",
+ list:["<b>Planejamento:</b> objetivo (o que quero saber), público (quem responde), pergunta clara, alternativas que não se sobreponham.",
+  "<b>Pergunta neutra:</b> evite induzir a resposta. Ruim: “Você concorda que o lanche é péssimo?”. Boa: “Como você avalia o lanche: ótimo, bom, regular ou ruim?”.",
+  "<b>Apuração:</b> conte as respostas e transforme em <b>porcentagem</b> e <b>gráfico</b>.",
+  "<b>Enquete × pesquisa científica:</b> a enquete não tem amostra representativa (responde quem quer), então <b>não permite generalizar</b> para toda a população."],
+ trap:"“70% dos internautas que votaram” <b>não</b> é “70% dos brasileiros”.",
+ mac:"<b>Pergunta neutra + público definido + gráfico</b>, sem generalizar."},
+{g:"Cap. 10 · Enquete e relatório",k:"Cap. 10",t:"Relatório",
+ ideia:"<b>Relatório</b> é um texto <b>expositivo</b> que registra e analisa uma atividade (pesquisa, enquete, experimento, visita), com linguagem <b>objetiva e impessoal</b>.",
+ tab:{head:["Parte","O que escrever"],rows:[
+  ["Título e identificação","Tema, autor, data"],
+  ["Introdução / objetivo","O que foi investigado e por quê"],
+  ["Metodologia","Como foi feito: público, número de participantes, perguntas, período"],
+  ["Resultados","Dados organizados em <b>tabelas e gráficos</b>, com descrição"],
+  ["Análise / discussão","Interpretação dos dados: o que mostram, limites"],
+  ["Conclusão / recomendações","Síntese e sugestões"]]},
+ list:["<b>Linguagem:</b> 3ª pessoa ou voz passiva (“foram entrevistados 120 alunos”, “verificou-se que…”), norma-padrão, sem gírias nem opinião pessoal solta.",
+  "<b>Tempo verbal:</b> pretérito para o que foi feito; presente para o que os dados mostram."],
+ trap:"Relatório <b>relata e analisa</b>; não é texto de opinião. A conclusão deve sair <b>dos dados</b>.",
+ mac:"<b>Objetivo → método → resultados → análise → conclusão.</b>"},
+/* ===== DISSERTAÇÃO ENEM ===== */
+{g:"Dissertação ENEM",k:"Competências",t:"As 5 competências do ENEM",
+ ideia:"A redação do ENEM vale <b>1 000 pontos</b>: cinco competências de <b>200 pontos</b> cada. O texto é <b>dissertativo-argumentativo</b>, em prosa, com até 30 linhas.",
+ tab:{head:["Competência","O que avalia"],rows:[
+  ["C1","Domínio da <b>norma-padrão</b> (gramática, ortografia, pontuação)"],
+  ["C2","Entender a proposta, o <b>tipo textual</b> e usar <b>repertório sociocultural</b> pertinente e produtivo"],
+  ["C3","<b>Projeto de texto</b>: selecionar e organizar argumentos em defesa de um ponto de vista"],
+  ["C4","<b>Coesão</b>: conectivos e retomadas entre frases e parágrafos"],
+  ["C5","<b>Proposta de intervenção</b> detalhada e que respeite os direitos humanos"]]},
+ list:["<b>Nota zero:</b> fuga total ao tema, não ser dissertativo-argumentativo, texto com até 7 linhas, parte deliberadamente desconectada do tema, impropérios ou desenhos, cópia dos textos motivadores."],
+ trap:"<b>Tangenciar</b> o tema (falar do assunto geral, não do recorte) derruba muito a nota. <b>Fugir</b> dele zera.",
+ mac:"C1 gramática · C2 tema e repertório · C3 argumentos · C4 coesão · C5 proposta."},
+{g:"Dissertação ENEM",k:"Estrutura",t:"Estrutura parágrafo a parágrafo",
+ ideia:"Use a estrutura de <b>4 parágrafos</b>: introdução, dois desenvolvimentos e conclusão.",
+ tab:{head:["Parágrafo","Conteúdo"],rows:[
+  ["Introdução","<b>Contextualização</b> (um repertório: fato histórico, filósofo, lei, dado) + <b>tese</b> (sua posição) + anúncio dos dois argumentos"],
+  ["Desenvolvimento 1","<b>Tópico frasal</b> (1º argumento) + explicação + repertório + fechamento ligado à tese"],
+  ["Desenvolvimento 2","Mesma estrutura com o 2º argumento; comece com conectivo (“Além disso”, “Outrossim”)"],
+  ["Conclusão","Retomada da tese + <b>proposta de intervenção</b> completa"]]},
+ list:["<b>Proposta com 5 elementos:</b> <b>agente</b> (quem faz) + <b>ação</b> (o que faz) + <b>meio/modo</b> (como) + <b>finalidade</b> (para quê) + <b>detalhamento</b> (explicar um dos elementos).",
+  "<b>Exemplo:</b> “Portanto, cabe ao <b>Ministério da Educação</b> (agente) <b>criar campanhas</b> (ação) sobre o uso consciente das redes nas escolas, <b>por meio de oficinas</b> com psicólogos (meio), <b>a fim de</b> reduzir a ansiedade dos jovens (finalidade). Essas oficinas, <b>realizadas mensalmente</b>, …” (detalhamento)."],
+ trap:"Repertório “de bolso” sem ligação com o argumento não pontua bem: ele precisa ser <b>produtivo</b>, ou seja, explicar o problema.",
+ mac:"<b>Proposta = quem + o quê + como + para quê + detalhe.</b>"},
+{g:"Dissertação ENEM",k:"Coesão e repertório",t:"Coesão, repertório e conexão com as outras matérias",
+ ideia:"Os conteúdos de Sociologia, História e Literatura viram <b>repertório</b> na redação. Os conectivos garantem a <b>coesão</b> (C4).",
+ tab:{head:["Para…","Conectivos"],rows:[
+  ["Adicionar","Além disso, ademais, outrossim, também"],
+  ["Opor","No entanto, contudo, todavia, embora"],
+  ["Causa e consequência","Isso ocorre porque, visto que, por conseguinte, desse modo"],
+  ["Exemplificar","Por exemplo, a exemplo de, como se observa em"],
+  ["Concluir","Portanto, assim, dessa forma, logo"]]},
+ list:["<b>Repertórios que você já estudou:</b> Bauman (relações líquidas, consumo), Foucault (vigilância, controle), Fanon (racismo e colonialismo), Declaração Universal dos Direitos Humanos (1948), Constituição de 1988, Era Vargas (direitos trabalhistas), Holocausto (memória e intolerância).",
+  "Use dados com fonte (Cap. 2) para dar força ao argumento."],
+ trap:"Não repita o mesmo conectivo em todos os parágrafos: variar mostra domínio da coesão.",
+ mac:"<b>Sociologia e História = repertório pronto.</b>"}
+];
+const N=TELAS.length,$=id=>document.getElementById(id);
+let i=0;try{i=Math.min(N-1,Math.max(0,+localStorage.getItem("red1")||0))}catch(e){}
+function show(n){i=n;try{localStorage.setItem("red1",i)}catch(e){}
+ const t=TELAS[i];let h=`<div class="eyebrow">${t.g} · ${t.k}</div><h1>${t.t}</h1><div class="box ideia"><b class="lb">Ideia central</b>${t.ideia}</div>`;
+ if(t.tab)h+=`<div class="tw"><table><thead><tr>${t.tab.head.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${t.tab.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+ if(t.ex)h+=t.ex.map(e=>`<div class="ex"><p class="q">${e.q}</p><ol>${e.p.map(s=>`<li>${s}</li>`).join("")}</ol><div class="r">Resposta: ${e.r}</div></div>`).join("");
+ if(t.list)h+=`<ul class="l">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(t.trap)h+=`<div class="box trap"><b class="lb">Pegadinha</b>${t.trap}</div>`;
+ if(t.mac)h+=`<div class="box mac"><b class="lb">Macete</b>${t.mac}</div>`;
+ if(i==N-1)h+=`<p class="fim">Fim do resumo. Agora faça o <a href="../quiz/">quiz de Redação</a>.</p>`;
+ $("tela").innerHTML=h;$("idx").classList.remove("on");$("tela").style.display="";
+ $("cnt").textContent=`Tela ${i+1} de ${N}`;$("pb").style.width=((i+1)/N*100)+"%";
+ $("prev").disabled=i==0;$("next").disabled=i==N-1;$("menu").textContent="Índice";scrollTo(0,0)}
+function index(){if($("idx").classList.contains("on"))return show(i);
+ let h="",g="";TELAS.forEach((t,n)=>{if(t.g!=g){h+=(g?"</ol>":"")+`<h2>${t.g}</h2><ol>`;g=t.g}
+  h+=`<li><button data-n="${n}" class="${n==i?"cur":""}"><span>${n+1}</span>${t.t}</button></li>`});
+ $("idx").innerHTML=h+"</ol>";$("idx").classList.add("on");$("tela").style.display="none";$("menu").textContent="Fechar";scrollTo(0,0)}
+$("idx").onclick=e=>{const b=e.target.closest("button[data-n]");if(b)show(+b.dataset.n)};
+$("prev").onclick=()=>i>0&&show(i-1);$("next").onclick=()=>i<N-1&&show(i+1);$("menu").onclick=index;
+document.addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("next").click();if(e.key=="ArrowLeft")$("prev").click()});
+show(i);
+</script>
+</body>
+</html>
