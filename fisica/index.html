@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Resumo de Física</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<meta name="color-scheme" content="light">
+<style>
+:root{--bg:#fff;--ink:#18212b;--muted:#5b6876;--line:#d8dee5;--acc:#0f6e78;--acc-soft:#e0f2f3;--warn:#a34a00;--warn-soft:#fff1e3;--ok:#23784a;--ok-soft:#e3f2e9;
+ --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 110px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px}
+.top a{color:var(--acc);font-weight:700;text-decoration:none}
+.bar{height:6px;background:var(--acc-soft);border-radius:4px;margin:14px 0 18px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .2s}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1.12;margin:6px 0 16px;text-wrap:balance}
+.box{border-radius:12px;padding:12px 14px;margin:14px 0}
+.box b.lb{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ideia{background:var(--acc-soft)}.ideia b.lb{color:var(--acc)}
+.trap{background:var(--warn-soft)}.trap b.lb{color:var(--warn)}
+.mac{background:var(--ok-soft)}.mac b.lb{color:var(--ok)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f4f6f9;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.ex{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.ex .q{font-weight:700;margin:0 0 6px}
+.ex ol{margin:0 0 8px;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.ex .r{background:var(--ok-soft);border-radius:8px;padding:6px 10px;font-weight:700}
+ul.l{margin:12px 0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.nav div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+button{font:inherit;font-weight:700;white-space:nowrap;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;flex:1}
+button:disabled{opacity:.4;cursor:default}
+#cnt{font-size:13px;color:var(--muted);white-space:nowrap}
+#idx{display:none}
+#idx.on{display:block}
+#idx h2{font-family:var(--display);font-size:18px;margin:18px 0 6px}
+#idx ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+#idx li button{width:100%;text-align:left;font-weight:400;padding:8px 10px;display:flex;gap:10px}
+#idx li button span{color:var(--muted);min-width:2ch;font-weight:700}
+#idx li button.cur{border-color:var(--acc);background:var(--acc-soft)}
+.fim{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.aviso{font-size:14px;color:var(--muted);background:#f6f7f9;border-radius:10px;padding:10px 12px;margin:14px 0 0}
+.fim a{color:var(--acc);font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="top"><a href="../">← Início</a><span><a href="../quiz/">Quiz</a></span></div>
+ <p class="aviso">Ondulatória: caps. 6, 7 e 8 do livro. Leia a tela, tente as questões e confira a resolução passo a passo. Fórmulas e unidades sempre na resposta.</p>
+ <div class="bar"><i id="pb"></i></div>
+ <section id="tela" aria-live="polite"></section>
+ <section id="idx"></section>
+</main>
+<nav class="nav" aria-label="Telas"><div>
+ <button id="prev" aria-label="Tela anterior">←</button>
+ <button id="menu">Índice</button>
+ <span id="cnt"></span>
+ <button id="next" class="pri">Próxima →</button>
+</div></nav>
+<script>
+const TELAS=[
+/* ===== CAPÍTULO 6 ===== */
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"O que é o som",
+ ideia:"Som é <b>matéria vibrando</b>. A corda do violão ou o cone do alto-falante empurra o ar; as moléculas se apertam (<b>compressão</b>) e se afastam (<b>rarefação</b>) e passam esse empurrão adiante até o <b>tímpano</b>, que vibra com a <b>mesma frequência</b>. O cérebro transforma isso em “som”.",
+ list:["<b>Imagine uma fila de pessoas</b>: você empurra a primeira, ela empurra a segunda… O empurrão anda pela fila, mas cada pessoa só balança no lugar. A <b>energia viaja</b>; a matéria não vai junto.",
+  "O som é <b>onda mecânica</b> (precisa de matéria) e <b>longitudinal</b> (a vibração acontece na mesma direção em que a onda anda).",
+  "<b>Faixa audível humana:</b> de <b>20 Hz a 20 000 Hz</b>. Abaixo de 20 Hz: <b>infrassom</b> (ondas sísmicas de terremotos). Acima de 20 000 Hz: <b>ultrassom</b> (exames médicos, sonar; morcego e cão ouvem).",
+  "<b>Som agradável</b> (música) vem de vibrações <b>periódicas</b>; <b>ruído</b> (britadeira) vem de vibrações <b>aperiódicas</b>.",
+  "Na compressão a <b>pressão é maior</b>; na rarefação, <b>menor</b>. Por isso o som também é chamado de <b>onda de pressão</b>."],
+ trap:"Ultrassom e infrassom <b>também são ondas sonoras</b>; nós é que não os ouvimos. E o som <b>não</b> se propaga no vácuo (no espaço não há som).",
+ mac:"Som = <b>vibração + meio material</b>. Sem meio, sem som."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"Velocidade do som nos meios",
+ ideia:"A velocidade do som depende do <b>meio</b>: da <b>elasticidade</b> (quanto ele “devolve” o empurrão) e da <b>inércia</b>. Regra: <b>v<sub>sólidos</sub> &gt; v<sub>líquidos</sub> &gt; v<sub>gases</sub></b>.",
+ tab:{head:["Meio","Velocidade do som"],rows:[["Ar (15 °C)","340 m/s"],["Água (20 °C)","1 482 m/s"],["Vidro (25 °C)","4 540 m/s"],["Ferro (25 °C)","5 200 m/s"]]},
+ list:["<b>Nos gases</b> a velocidade depende da temperatura (fórmula de Laplace): v = √(γ·P/ρ) = √(γ·R·T/M). γ é o expoente de Poisson (c<sub>p</sub>/c<sub>v</sub>): 1,7 para gás monoatômico, 1,4 diatômico, 1,3 poliatômico. <b>T maior → v maior.</b>",
+  "Sólidos e líquidos quase não se comprimem: neles a velocidade <b>quase não muda</b> com a temperatura.",
+  "Em grandes altitudes o ar é <b>menos denso</b> e transmite pior o som (moléculas mais afastadas)."],
+ trap:"Com a <b>luz</b> é o <b>contrário</b>: v<sub>sólidos</sub> &lt; v<sub>líquidos</sub> &lt; v<sub>gases</sub> (e é máxima no vácuo). Questão adora trocar as duas.",
+ mac:"Som: <b>sólido ganha</b> (encoste o ouvido no trilho e ouça o trem antes). Luz: <b>vácuo ganha</b>."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"As duas fórmulas que você vai usar sempre",
+ ideia:"Quase toda conta de ondas sai de <b>duas fórmulas</b>. Saiba o que é cada letra.",
+ tab:{head:["Fórmula","Letras","Quando usar"],rows:[
+  ["<b>v = λ · f</b>","v = velocidade (m/s); λ = comprimento de onda (m); f = frequência (Hz)","Relacionar tamanho da onda e frequência"],
+  ["<b>v = ΔS / Δt</b>","ΔS = distância percorrida (m); Δt = tempo (s)","Eco, distância de obstáculo, tempo de ida e volta"]]},
+ list:["<b>Exemplo (livro):</b> som de 440 Hz no ar a 352 m/s. λ = v / f = 352 / 440 = <b>0,80 m</b>.",
+  "<b>Hz</b> (hertz) = oscilações por segundo. 440 Hz = a fonte vibra 440 vezes por segundo.",
+  "<b>Período</b> T = 1/f (tempo de uma oscilação). Ex.: f = 2 Hz → T = 0,5 s."],
+ trap:"Esqueceu de converter? cm → m (÷100), kHz → Hz (×1 000), μW → W (×10<sup>−6</sup>).",
+ mac:"“<b>Vela f</b>”: <b>V</b> = <b>λ</b>·<b>f</b>."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"Altura: grave ou agudo",
+ ideia:"<b>Altura</b> é a qualidade que separa som <b>grave</b> de som <b>agudo</b>, e depende <b>só da frequência</b>. Frequência baixa = grave; frequência alta = agudo.",
+ list:["Voz masculina: cerca de <b>100 a 200 Hz</b> (mais grave). Voz feminina: <b>200 a 400 Hz</b> (mais aguda).",
+  "Na escala musical (dó, ré, mi, fá, sol, lá, si), a <b>altura aumenta</b>: o si é o mais agudo da oitava, portanto tem a <b>maior frequência</b> e o <b>menor comprimento de onda</b> (mesma velocidade: λ = v/f).",
+  "Adolescente com a voz “ora fina, ora grossa”: é mudança de <b>altura</b>."],
+ trap:"No dia a dia “som alto” quer dizer “som forte”. Em Física, <b>alto = agudo</b>. Volume é <b>intensidade</b>, não altura.",
+ mac:"Altura ↔ <b>frequência</b>. Intensidade ↔ <b>amplitude</b>. Timbre ↔ <b>forma da onda</b>."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"Intensidade e potência sonora",
+ ideia:"<b>Intensidade</b> separa som <b>fraco</b> de som <b>forte</b> e está ligada à <b>amplitude</b> da onda. É a energia que passa por cada m² a cada segundo.",
+ tab:{head:["Fórmula","Significado"],rows:[
+  ["I = ΔE / (A · Δt)","Energia (J) que atravessa a área A (m²) no tempo Δt (s)"],
+  ["Pot = ΔE / Δt","Potência da fonte, em watts (W)"],
+  ["I = Pot / A","Intensidade em W/m²"],
+  ["<b>I = Pot / (4 · π · R²)</b>","Fonte que espalha o som em todas as direções (esfera de raio R)"]]},
+ list:["<b>Por que diminui com a distância?</b> A mesma potência se espalha por uma esfera cada vez maior. No <b>dobro</b> da distância a área fica <b>4 vezes</b> maior, e a intensidade cai para <b>1/4</b>. (I ∝ 1/R²)",
+  "<b>Exemplo resolvido (livro):</b> violino de 50 μW; menor intensidade audível 10<sup>−12</sup> W/m². 10<sup>−12</sup> = 50·10<sup>−6</sup> / (4·3,14·r²) → r ≅ <b>2·10<sup>3</sup> m = 2 km</b>.",
+  "<b>Amplitude e distância:</b> como I ∝ a² e I ∝ 1/d², a amplitude cai com <b>1/d</b>. Se a amplitude triplicou, a distância ficou 3 vezes menor."],
+ trap:"Dobrar a distância <b>não</b> divide a intensidade por 2: divide por <b>4</b>.",
+ mac:"Esfera: <b>4πR²</b>. Distância ×2 → intensidade ÷4; distância ×3 → ÷9."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"Nível sonoro em decibéis",
+ ideia:"O ouvido percebe a intensidade em <b>escala logarítmica</b>. O <b>nível sonoro</b> é <b>N = 10 · log (I / I<sub>0</sub>)</b>, em decibéis (dB), com I<sub>0</sub> = 10<sup>−12</sup> W/m² (limiar da audição). O nome vem de Alexander Graham Bell (1 dB = 0,1 B).",
+ tab:{head:["Situação","I (W/m²)","N (dB)"],rows:[["Limiar de audibilidade","10<sup>−12</sup>","0"],["Cochicho","10<sup>−10</sup>","20"],["No lar","10<sup>−8</sup>","40"],["Festa barulhenta","10<sup>−6</sup>","60"],["Tráfego intenso","10<sup>−4</sup>","80"],["Máquina agrícola","10<sup>−2</sup>","100"],["Show de rock","10<sup>−1</sup>","110"],["Avião a jato a 30 m","10<sup>2</sup>","140"]]},
+ list:["<b>Regra de ouro:</b> ΔN = 10 · log (I<sub>2</sub>/I<sub>1</sub>). Intensidade <b>×10 → +10 dB</b>; ×100 → +20 dB; ×1 000 → +30 dB; <b>×2 → +3 dB</b> (log 2 = 0,30).",
+  "<b>Exemplo (livro):</b> intensidade dobrou, de 30 dB foi para <b>33 dB</b>. A sensação <b>não dobrou</b>.",
+  "<b>Exemplo:</b> 1 torcedor faz 40 dB; 10 000 torcedores iguais → intensidade ×10<sup>4</sup> → +40 dB → <b>80 dB</b>.",
+  "Saúde: acima de <b>80–85 dB</b> por muito tempo há risco de perda auditiva; <b>130 dB</b> provocam dor."],
+ trap:"Decibéis <b>não se somam</b> como números comuns: duas fontes de 60 dB juntas dão 63 dB, não 120 dB.",
+ mac:"Conte os <b>zeros</b>: cada ×10 na intensidade soma <b>10 dB</b>."},
+{g:"Cap. 6 · O som e suas características",k:"Cap. 6",t:"Timbre",
+ ideia:"<b>Timbre</b> permite distinguir dois sons de <b>mesma frequência e mesma intensidade</b> vindos de fontes diferentes (a mesma nota no violino e no piano). Ele vem dos <b>harmônicos</b> que acompanham o som fundamental, que mudam a <b>forma da onda</b>.",
+ list:["Uma corda de violão vibra ao mesmo tempo no 1º harmônico (fundamental) e em outros harmônicos; a soma dá uma vibração <b>complexa</b>, com “assinatura” própria.",
+  "No osciloscópio: mesma frequência e amplitude, mas <b>desenhos diferentes</b> → timbres diferentes, alturas iguais.",
+  "Componentes harmônicas de um mesmo som (mesmo meio) têm a <b>mesma velocidade</b>; o que muda entre elas é a frequência."],
+ trap:"Timbre não depende de “volume” nem de “ser agudo”. Mesma nota, instrumento diferente = <b>timbre</b>.",
+ mac:"Reconhecer a voz de alguém ao telefone = <b>timbre</b>."},
+/* ===== CAPÍTULO 7 ===== */
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"O som se comporta como onda",
+ ideia:"Como toda onda, o som pode ser <b>refletido</b>, <b>refratado</b>, <b>difratado</b> e sofrer <b>interferência</b>. Só <b>não</b> sofre <b>polarização</b>, que exige onda <b>transversal</b>, e o som é <b>longitudinal</b>.",
+ tab:{head:["Fenômeno","O que acontece","Exemplo"],rows:[
+  ["Reflexão","Bate num obstáculo e volta","Eco, sonar do morcego, ultrassom"],
+  ["Refração","Muda de meio; muda v e λ","Som do ar para a água"],
+  ["Difração","Contorna obstáculos","Ouvir alguém atrás do muro"],
+  ["Interferência","Ondas se somam ou se anulam","Fone com cancelamento de ruído"],
+  ["Batimento","Duas frequências próximas","Afinar instrumento com diapasão"]]},
+ list:["<b>Na reflexão</b> em obstáculo rígido a onda volta <b>invertida</b> (inversão de fase), mas mantém <b>velocidade, frequência e comprimento de onda</b>.",
+  "Morcegos e golfinhos (ecolocalização) usam a <b>reflexão</b> do ultrassom."],
+ trap:"“O som pode ser polarizado?” <b>Não</b>: polarização só ocorre com onda transversal (como a luz).",
+ mac:"Som faz tudo, <b>menos polarizar</b>."},
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"Eco, reforço e reverberação",
+ ideia:"Tudo depende do <b>tempo</b> entre o som direto e o som refletido. O ouvido só separa dois sons se entre eles houver <b>mais de 0,1 s</b> (<b>persistência auditiva</b>).",
+ tab:{head:["Tempo até o som refletido","Você ouve","Nome"],rows:[
+  ["Muito menor que 0,1 s","Um som só, mais forte","<b>Reforço</b>"],
+  ["Um pouco menor que 0,1 s","O som “se prolonga”","<b>Reverberação</b>"],
+  ["Maior que 0,1 s","O som repetido, separado","<b>Eco</b>"]]},
+ list:["<b>Distância mínima para eco no ar — passo a passo:</b> 1) o som vai até a parede e volta: ΔS = 2x. 2) ΔS = v · Δt = 340 · 0,1 = 34 m. 3) 2x = 34 → <b>x = 17 m</b>.",
+  "<b>Na água</b> (v ≈ 1 600 m/s): 2ℓ = 1 600 · 0,1 = 160 → <b>ℓ = 80 m</b>. Mais velocidade, maior distância mínima.",
+  "<b>Sala de concerto:</b> a reverberação “na medida certa” dá sensação de continuidade; reverberação demais atrapalha entender as palavras.",
+  "<b>Palmas sem eco:</b> se o eco volta exatamente na próxima palma, você não o percebe. Com 30 palmas por minuto (uma a cada 2 s): 2d = 330 · 2 → d = <b>330 m</b>."],
+ trap:"Não esqueça o <b>2</b>: o som vai <b>e volta</b>. Esquecer o 2 é o erro mais comum (dá 34 m em vez de 17 m).",
+ mac:"<b>Eco no ar: mais de 17 m.</b> Menos que isso: reverberação ou reforço."},
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"Refração e impedância acústica",
+ ideia:"Quando o som muda de meio, a <b>frequência não muda</b> (quem decide a frequência é a fonte). Mudam a <b>velocidade</b> e o <b>comprimento de onda</b>, na mesma proporção.",
+ list:["<b>Passo a passo (livro):</b> diapasão de 440 Hz. No ar (352 m/s): λ = 352/440 = <b>0,80 m</b>. Na água (1 496 m/s): λ = 1 496/440 = <b>3,4 m</b>. Mesma nota, onda mais comprida.",
+  "Razão entre comprimentos: λ<sub>água</sub>/λ<sub>ar</sub> = v<sub>água</sub>/v<sub>ar</sub> (porque f é igual). Ex.: 1 404/332 ≅ 4,23.",
+  "Quem mergulha ouve <b>a mesma nota</b> do piano tocado na borda (mesma frequência).",
+  "<b>Impedância acústica</b> é a “resistência” do meio ao som: <b>Z = ρ · v</b> (densidade × velocidade). Quanto <b>maior a diferença</b> de Z entre dois meios, <b>mais som é refletido</b> na fronteira.",
+  "<b>Ultrassom (ENEM):</b> calcule Z = ρ·v de cada tecido. Osso ≈ 7,7·10<sup>6</sup>; gordura ≈ 1,3·10<sup>6</sup>; músculo ≈ 1,6·10<sup>6</sup>; cérebro ≈ 1,6·10<sup>6</sup>. Maior diferença: <b>osso e gordura</b> → mais fáceis de distinguir."],
+ trap:"“Ao entrar na água o som fica mais agudo”? <b>Não</b>: a frequência (altura) não muda. Muda a velocidade (aumenta na água) e o λ.",
+ mac:"Na refração: <b>f fica</b>, <b>v e λ mudam juntos</b>."},
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"Interferência",
+ ideia:"Quando duas ondas se encontram, elas se <b>somam</b>. Crista com crista: som <b>mais forte</b> (<b>construtiva</b>). Crista com vale: som fraco ou <b>silêncio</b> (<b>destrutiva</b>).",
+ list:["<b>Regra para fontes em fase:</b> calcule a <b>diferença de caminhos</b> ΔS (quanto uma onda andou a mais que a outra) e use <b>ΔS = n · λ/2</b>.",
+  "<b>n par</b> (0, 2, 4…) → <b>construtiva</b>. <b>n ímpar</b> (1, 3, 5…) → <b>destrutiva</b>. Fontes em <b>oposição de fase</b>: inverte.",
+  "<b>Passo a passo:</b> 1) ache as distâncias de cada alto-falante ao ponto; 2) subtraia: ΔS; 3) destrutiva com o <b>maior λ</b> possível → n = 1 → λ = 2·ΔS; 4) menor frequência: f = v/λ.",
+  "<b>Fone com cancelamento ativo de ruído (ANC):</b> microfones captam o ruído e o fone emite uma onda <b>oposta</b> → interferência <b>destrutiva</b>. Funciona melhor com ruído constante (avião, ventilador) do que com vozes.",
+  "<b>Ressonância:</b> aumento de amplitude quando a frequência coincide com a frequência natural de um corpo (a cantora que quebra a taça)."],
+ trap:"Destrutiva não é “som que some para sempre”: é silêncio <b>naquele ponto</b>. Em outros pontos pode haver reforço.",
+ mac:"ΔS = n·λ/2: <b>par soma, ímpar apaga</b> (fontes em fase)."},
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"Batimento",
+ ideia:"Duas ondas na mesma direção com frequências <b>muito próximas</b> entram e saem de fase o tempo todo: o som fica “ondulando” (forte, fraco, forte…). Isso é o <b>batimento</b>, uma interferência no <b>tempo</b>.",
+ tab:{head:["O que calcular","Fórmula"],rows:[["Frequência do som resultante (o que você ouve)","f<sub>RES</sub> = (f<sub>I</sub> + f<sub>II</sub>) / 2 — a <b>média</b>"],["Frequência dos batimentos (quantas “ondulações” por segundo)","f<sub>BAT</sub> = f<sub>II</sub> − f<sub>I</sub> — a <b>diferença</b>"]]},
+ list:["<b>Exemplo (UFC):</b> 100 Hz e 102 Hz → batimento de <b>2 Hz</b> (2 ondulações por segundo); som resultante de <b>101 Hz</b>.",
+  "<b>Afinação:</b> o músico toca junto com o diapasão (440 Hz). Enquanto há batimento, as frequências são diferentes; quando o batimento <b>some</b>, a corda está afinada."],
+ trap:"Batimento é a <b>diferença</b>, não a soma (202 Hz) nem a média (101 Hz).",
+ mac:"<b>Bate = diferença.</b> Resultante = média."},
+{g:"Cap. 7 · Efeitos sonoros",k:"Cap. 7",t:"Difração",
+ ideia:"<b>Difração</b> é a onda <b>contornar obstáculos</b> ou passar por aberturas e se espalhar. Ela é forte quando o obstáculo tem tamanho <b>parecido com o comprimento de onda</b>.",
+ list:["O som tem λ da ordem de <b>1 m</b>, como portas, muros e pessoas. A luz tem λ da ordem de <b>10<sup>−7</sup> m</b>.",
+  "Por isso você <b>ouve</b> o gato atrás do muro, mas <b>não o vê</b>: o som contorna o muro; a luz não.",
+  "Explica-se pelo <b>Princípio de Huygens</b>: cada ponto da onda vira uma nova fonte."],
+ trap:"A razão para ouvir e não ver <b>não</b> é “o som ser longitudinal” nem “ser mais lento”: é o <b>comprimento de onda maior</b>.",
+ mac:"Ouviu atrás do muro = <b>difração</b>. Ouviu o próprio grito voltar = <b>reflexão (eco)</b>."},
+/* ===== CAPÍTULO 8 ===== */
+{g:"Cap. 8 · Cordas sonoras",k:"Cap. 8",t:"Cordas e ondas estacionárias",
+ ideia:"Ao tocar uma corda presa nas duas pontas, a onda vai, reflete nas pontas e volta. A ida e a volta se somam e formam uma <b>onda estacionária</b>: alguns pontos ficam parados (<b>nós</b>) e outros vibram ao máximo (<b>ventres</b>). As <b>pontas presas são sempre nós</b>.",
+ list:["Só “cabem” na corda ondas cujo meio comprimento de onda caiba um número inteiro de vezes: <b>ℓ = n · λ/2</b>, ou seja, <b>λ<sub>n</sub> = 2ℓ / n</b>.",
+  "<b>n</b> = número do harmônico = <b>número de ventres</b> (os “gomos” do desenho).",
+  "<b>Maior comprimento de onda possível = 2ℓ</b> (n = 1, um gomo só). Corda de 60 cm → λ máximo = 120 cm.",
+  "<b>Distância entre dois nós vizinhos = λ/2</b> (não λ).",
+  "Exemplo FUVEST: corda de 0,60 m → λ = 1,20; 0,60; 0,40 m (n = 1, 2, 3).",
+  "A corda vibra e faz o ar vibrar com a <b>mesma frequência</b>: é esse som que ouvimos."],
+ trap:"Corda de 60 cm: o maior λ é <b>120 cm</b>, não 60 cm. Um gomo é só <b>meia</b> onda.",
+ mac:"<b>Conte os gomos</b> = n. Depois λ = 2ℓ/n."},
+{g:"Cap. 8 · Cordas sonoras",k:"Cap. 8",t:"Harmônicos e frequências",
+ ideia:"Juntando v = λ·f com λ = 2ℓ/n: <b>f<sub>n</sub> = n · v / (2ℓ)</b>. A menor é a <b>frequência fundamental</b> (1º harmônico): <b>f<sub>1</sub> = v / (2ℓ)</b>. As outras são <b>múltiplos inteiros</b>: <b>f<sub>n</sub> = n · f<sub>1</sub></b>.",
+ tab:{head:["Harmônico","Gomos","λ","f"],rows:[["1º (fundamental)","1","2ℓ","f<sub>1</sub>"],["2º","2","ℓ","2f<sub>1</sub>"],["3º","3","2ℓ/3","3f<sub>1</sub>"],["4º","4","ℓ/2","4f<sub>1</sub>"]]},
+ list:["<b>Exemplo:</b> fundamental 100 Hz → próximas: <b>200, 300, 400, 500 Hz</b> (todos os múltiplos, não só os pares).",
+  "<b>Exemplo (PUC-PR):</b> ℓ = 0,6 m, f<sub>1</sub> = 220 Hz. λ<sub>1</sub> = 1,2 m; v = λ·f = 1,2 · 220 = <b>264 m/s</b>.",
+  "<b>Encurtar a corda</b> (apertar no braço do violão) aumenta a frequência: f é <b>inversamente proporcional</b> a ℓ. Apertar a ℓ/3 da pestana deixa 2ℓ/3 vibrando → f fica ×3/2 (440 → <b>660 Hz</b>)."],
+ trap:"Corda presa nas duas pontas tem <b>todos</b> os harmônicos (1, 2, 3, 4…). Só pares ou só ímpares é pegadinha.",
+ mac:"<b>f<sub>n</sub> = n · f<sub>1</sub></b>. Corda menor → som mais agudo."},
+{g:"Cap. 8 · Cordas sonoras",k:"Cap. 8",t:"Velocidade na corda: tração e espessura",
+ ideia:"A velocidade da onda na corda depende de quanto ela está <b>esticada</b> (força de tração F) e de quão <b>pesada</b> ela é por metro (<b>densidade linear μ</b>): <b>v = √(F / μ)</b>, com <b>μ = m / ℓ</b> (kg/m).",
+ list:["<b>Mais tensa</b> (girar a tarraxa) → v maior → f maior → <b>mais agudo</b>.",
+  "<b>Mais grossa</b> (mais massa por metro) → v menor → <b>mais grave</b>. Por isso as cordas graves do violão são as grossas.",
+  "Para cordas de mesmo material: μ = d · A (densidade × área da seção), e então <b>f<sub>n</sub> = (n / 2ℓ) · √(F / (d·A))</b>.",
+  "<b>Passo a passo (Mackenzie):</b> ℓ = 1,6 m, m = 40 g = 0,04 kg, F = 160 N. 1) μ = 0,04/1,6 = 0,025 kg/m. 2) v = √(160/0,025) = √6 400 = 80 m/s. 3) f<sub>1</sub> = 80/(2·1,6) = 25 Hz. 4) f<sub>3</sub> = 3·25 = <b>75 Hz</b>.",
+  "<b>Quadruplicar a tração</b> (massa do bloco ×4) → v ×2 → f ×2 (200 → <b>400 Hz</b>)."],
+ trap:"f depende da <b>raiz</b> da força: força ×4 → frequência ×<b>2</b>, não ×4.",
+ mac:"<b>Esticou → agudo. Engrossou → grave. Encurtou → agudo.</b>"},
+{g:"Cap. 8 · Cordas sonoras",k:"Cap. 8",t:"Características do som e instrumentos",
+ ideia:"Em música, o som tem <b>duração</b> (tempo; com as pausas, cria o ritmo), <b>altura</b> (frequência: grave/agudo), <b>intensidade</b> (amplitude: volume) e <b>timbre</b> (distingue instrumentos na mesma nota).",
+ tab:{head:["Tipo de instrumento","Como faz som","Exemplos"],rows:[
+  ["Sopro (madeira)","Ar vibrando num tubo; bocal ou palheta","Flauta, clarinete, saxofone, oboé, fagote"],
+  ["Sopro (metal)","Lábios vibrando no bocal","Trompete, trombone, trompa, tuba"],
+  ["Corda","Corda friccionada ou dedilhada","Violino, violoncelo; violão, harpa, guitarra"],
+  ["Teclas","Teclado faz vibrar ar ou corda","Órgão de tubo; piano (martelo na corda)"],
+  ["Percussão","Percutir, sacudir, raspar","Tambor, xilofone, triângulo, maracas"],
+  ["Eletrônicos","Sinal elétrico amplificado","Sintetizador, teclado, bateria eletrônica"]]},
+ list:["A <b>caixa de ressonância</b> (cabaça do berimbau, corpo do violão) amplia o som da corda."],
+ trap:"Saxofone é de <b>madeira</b> (palheta), mesmo sendo feito de metal: a classificação é pelo modo de produzir o som.",
+ mac:"Duração, altura, intensidade e timbre: “<b>D-A-I-T</b>”."},
+/* ===== QUESTÕES DO LIVRO RESOLVIDAS ===== */
+{g:"Questões do livro resolvidas",k:"Cap. 6",t:"Cap. 6 · Agora é com @você e Atividades 1 a 4",
+ ideia:"Primeiro tente resolver; depois confira o raciocínio. Em cada questão, ache <b>qual qualidade do som</b> ou <b>qual fórmula</b> está em jogo.",
+ ex:[
+  {q:"Agora 1 (ENEM) — Ouvido absoluto: identificar notas isoladas. Que propriedade da onda distingue as notas?",p:["Notas diferentes = sons mais graves ou mais agudos.","Grave/agudo é altura, que depende da frequência."],r:"a) frequência"},
+  {q:"Agora 2 (ENEM PPL) — Mesma nota no piano e no violão, mas dá para distinguir. Por quê?",p:["Mesma nota = mesma frequência.","O que muda de instrumento para instrumento é a forma da onda (harmônicos)."],r:"d) o timbre é diferente"},
+  {q:"Agora 3 (EBMSP) — Prédios a 10 m; serra elétrica com I = 1,0·10<sup>−1</sup> W/m²; π = 3. Potência da fonte?",p:["I = Pot / (4πR²) → Pot = I · 4πR².","Pot = 0,1 · 4 · 3 · 10² = 0,1 · 1 200."],r:"Pot = 120 W"},
+  {q:"Agora 4 (UFC) — 1 torcedor: 40 dB. 10 000 torcedores iguais?",p:["A intensidade fica 10 000 = 10<sup>4</sup> vezes maior.","ΔN = 10 · log 10<sup>4</sup> = 10 · 4 = 40 dB.","N = 40 + 40."],r:"e) 80 dB"},
+  {q:"Ativ. 1 (EEAR) — Voz do adolescente ora fina, ora grossa.",p:["Fina = aguda; grossa = grave.","Grave/agudo = altura."],r:"a) altura"},
+  {q:"Ativ. 2 (ENEM PPL) — Lei limita o nível a 40 dB após 22 h. Que característica é limitada?",p:["Decibel mede intensidade (volume).","Intensidade está ligada à amplitude da onda."],r:"b) a amplitude"},
+  {q:"Ativ. 3 (FEI) — A altura depende só da frequência. Então:",p:["Menor frequência → som mais grave.","As alternativas com “intensidade” estão erradas: intensidade não define altura."],r:"c) mais grave quanto menor a frequência"},
+  {q:"Ativ. 4 (ENEM) — Componentes harmônicas A, B e C de um mesmo som. O que têm de igual?",p:["No gráfico, as três têm a mesma altura do desenho (amplitude).","Estão no mesmo meio → mesma velocidade.","O número de oscilações é diferente → frequência e λ diferentes."],r:"a) amplitude e velocidade"}]},
+{g:"Questões do livro resolvidas",k:"Cap. 6",t:"Cap. 6 · Atividades 5 a 10",
+ ideia:"Questões de decibel: use ΔN = 10·log(I<sub>2</sub>/I<sub>1</sub>) e conte os zeros.",
+ ex:[
+  {q:"Ativ. 5 (UECE) — O som passa do ar para os ossinhos e depois para o líquido da cóclea. O que acontece?",p:["Mudar de meio é refração.","Na refração a frequência fica; a velocidade e o λ mudam."],r:"c) mudança de velocidade de um meio para o outro"},
+  {q:"Ativ. 6 (ENEM) — Na mesma oitava, a nota si (a mais aguda) é a que tem menor…",p:["Mais aguda = maior frequência.","Mesmo meio = mesma velocidade; λ = v/f → frequência maior, λ menor."],r:"e) comprimento de onda"},
+  {q:"Ativ. 7 (PUC-MG) — Osciloscópio com as vozes A e B: quantas afirmativas corretas?",p:["As duas ondas repetem o desenho no mesmo intervalo → mesma frequência, mesmo período, mesmo λ, mesma altura (II, III, IV, VII corretas).","Os desenhos são diferentes → timbres diferentes (I correta).","As alturas do desenho são iguais → amplitudes iguais (V falsa). Mesma frequência → nenhuma é mais aguda (VI falsa)."],r:"c) 5 corretas (confira a figura com o professor)"},
+  {q:"Ativ. 8 (Escola Naval) — Amplitudes a<sub>2</sub> = 3a<sub>1</sub>. Razão d<sub>1</sub>/d<sub>2</sub>?",p:["I ∝ a² e I ∝ 1/d² → a ∝ 1/d.","Amplitude 3 vezes maior → distância 3 vezes menor: d<sub>2</sub> = d<sub>1</sub>/3."],r:"d) d<sub>1</sub>/d<sub>2</sub> = 3"},
+  {q:"Ativ. 9 — Estádio a 60 dB; no gol a intensidade fica 1 000 vezes maior.",p:["1 000 = 10³ → ΔN = 10 · 3 = 30 dB.","60 + 30."],r:"c) 90 dB"},
+  {q:"Ativ. 10 (PUC-MG) — Murmúrio 20 dB, grito 70 dB. Razão I<sub>2</sub>/I<sub>1</sub>?",p:["ΔN = 70 − 20 = 50 dB.","50 = 10 · log(I<sub>2</sub>/I<sub>1</sub>) → log = 5."],r:"c) 10<sup>5</sup>"}]},
+{g:"Questões do livro resolvidas",k:"Cap. 7",t:"Cap. 7 · Resolvidos e Agora é com @você",
+ ideia:"Em refração, a <b>frequência não muda</b>. Em eco, o som <b>vai e volta</b> (2x).",
+ ex:[
+  {q:"Resolvido 1 — 440 Hz; v<sub>ar</sub> = 352 m/s; v<sub>água</sub> = 1 496 m/s. λ no ar e na água?",p:["λ = v/f.","Ar: 352/440 = 0,80 m.","Na água a frequência continua 440 Hz: 1 496/440 = 3,4 m."],r:"0,80 m no ar; 3,4 m na água"},
+  {q:"Resolvido 2 — Mergulhador (v = 1 600 m/s). Distância mínima para eco?",p:["O eco exige Δt ≥ 0,1 s.","2ℓ = v · Δt = 1 600 · 0,1 = 160 m."],r:"ℓ > 80 m"},
+  {q:"Resolvido 3 — v<sub>ar</sub> = 332 m/s, v<sub>água</sub> = 1 404 m/s, 440 Hz. λ<sub>água</sub>/λ<sub>ar</sub>?",p:["Mesma f → λ<sub>água</sub>/λ<sub>ar</sub> = v<sub>água</sub>/v<sub>ar</sub>.","1 404/332."],r:"≅ 4,23"},
+  {q:"Agora 1 (ENEM) — Morcegos e golfinhos localizam objetos com ultrassom.",p:["Eles emitem o som e ouvem o que volta do objeto."],r:"a) reflexão"},
+  {q:"Agora 2 (FATEC) — Piano de 440 Hz na borda; a pessoa mergulha.",p:["Mudar de meio não muda a frequência."],r:"a) a mesma nota"},
+  {q:"Agora 3 (UFMG) — Laila ouve a gata atrás do muro, mas não a vê.",p:["Ouvir atrás do muro é difração.","O som difrata porque seu λ (~1 m) é comparável ao muro; o da luz é minúsculo."],r:"d) λ do som é maior que o da luz"},
+  {q:"Agora 4 (UFC) — 100 Hz e 102 Hz. Frequência de batimento?",p:["f<sub>BAT</sub> = 102 − 100."],r:"d) 2,00 Hz"},
+  {q:"Agora 5 (Escola Naval) — Alto-falantes e ponto A.",p:["Depende das distâncias da figura: ache ΔS, use n = 1 (destrutiva com maior λ): λ = 2ΔS; depois f = 340/λ."],r:"Falta a figura: cole a imagem para completar"}]},
+{g:"Questões do livro resolvidas",k:"Cap. 7",t:"Cap. 7 · Atividades propostas",
+ ideia:"Identifique o fenômeno pelas palavras-chave: “volta” = reflexão; “contorna” = difração; “frequências próximas” = batimento.",
+ ex:[
+  {q:"Ativ. 1 (UECE) — Sala de concerto: diferença entre som direto e refletido dá sensação de continuidade.",p:["Som que “se prolonga” sem virar eco."],r:"Reverberação"},
+  {q:"Ativ. 2 (UFSM) — O som muda de meio.",p:["A frequência é da fonte e não muda."],r:"a) f igual; v e λ mudam"},
+  {q:"Ativ. 3 (PUC-RS) — v = 340 m/s, λ = 0,340 m; novo meio com v = 680 m/s.",p:["f = 340/0,340 = 1 000 Hz (não muda).","Novo λ = 680/1 000 = 0,680 m."],r:"c) 1 000 Hz e 0,680 m"},
+  {q:"Ativ. 4 (UECE) — Afinar com diapasão; diferença entre as frequências.",p:["Duas frequências próximas ao mesmo tempo → batimento."],r:"b) batimento"},
+  {q:"Ativ. 5 (UFG) — Morcego a 5 m; 100 kHz; λ = 3,5·10<sup>−3</sup> m. Persistência acústica?",p:["v = λ·f = 3,5·10<sup>−3</sup> · 10<sup>5</sup> = 350 m/s.","Ida e volta: 2 · 5 = 10 m.","t = 10/350 ≈ 0,029 s."],r:"c) ≈ 0,03 s"},
+  {q:"Ativ. 6 (UFG) — Marteladas a 2 Hz. Menor d para não ouvir o eco?",p:["Período: T = 1/2 = 0,5 s.","O eco “se esconde” se voltar junto com a próxima martelada: 2d = 340 · 0,5 = 170 m."],r:"b) 85 m"},
+  {q:"Ativ. 7 (ENEM) — Luz passando por orifício pequeno se espalha. Qual situação com som é igual?",p:["Espalhar ao passar por abertura/obstáculo = difração."],r:"a) menino atrás do muro ouve os colegas"},
+  {q:"Ativ. 8 (ENEM) — Ultrassom: estruturas mais fáceis de diferenciar.",p:["Z = ρ·v: osso 1 900·4 040 ≈ 7,7·10<sup>6</sup>; gordura 920·1 450 ≈ 1,3·10<sup>6</sup>.","Músculo ≈ 1,64·10<sup>6</sup>; cérebro ≈ 1,56·10<sup>6</sup>.","Maior diferença: osso e gordura."],r:"a) o osso e a gordura"},
+  {q:"Ativ. 9 (UFU) — 30 palmas por minuto, v = 330 m/s; o eco coincide com a palma.",p:["Uma palma a cada 60/30 = 2 s.","2d = 330 · 2 = 660 m."],r:"c) 330 m"},
+  {q:"Ativ. 10 (UPE) — Alto-falantes A e B; silêncio em P.",p:["Destrutiva com maior λ: n = 1 → λ = 2·ΔS (ΔS da figura)."],r:"Falta a figura: cole a imagem para completar"}]},
+{g:"Questões do livro resolvidas",k:"Cap. 8",t:"Cap. 8 · Cordas: todas as questões",
+ ideia:"Roteiro: <b>1)</b> conte os gomos (n); <b>2)</b> λ = 2ℓ/n; <b>3)</b> v = λ·f ou v = √(F/μ); <b>4)</b> f<sub>n</sub> = n·f<sub>1</sub>.",
+ ex:[
+  {q:"Agora 1 (UECE) — Corda de 60 cm. Maior λ?",p:["Maior λ = 2ℓ (n = 1)."],r:"b) 120 cm"},
+  {q:"Ativ. 1 (FMP) e Ativ. 2 (UFRGS) — dependem da figura da corda.",p:["Conte os gomos (n), use λ = 2ℓ/n e v = λ·f."],r:"Falta a figura: cole a imagem para completar"},
+  {q:"Ativ. 3 (FUVEST) — ℓ = 0,60 m. Três maiores λ?",p:["λ = 2ℓ/n com n = 1, 2, 3: 1,20; 0,60; 0,40."],r:"a) 1,20; 0,60; 0,40"},
+  {q:"Ativ. 4 (PUC-PR) — ℓ = 0,6 m, f<sub>1</sub> = 220 Hz. Alternativa correta?",p:["λ<sub>1</sub> = 2 · 0,6 = 1,2 m (a c, que diz 0,6 m, está errada).","v = 1,2 · 220 = 264 m/s.","Mudar a tensão muda f (a a está errada); entre nós vizinhos é λ/2 (a b está errada)."],r:"d) v = 264 m/s"},
+  {q:"Ativ. 5 (UFRGS) — λ = 60 cm. Três menores comprimentos da corda?",p:["ℓ = n·λ/2 = n · 30 cm: 30, 60, 90."],r:"a) 30, 60 e 90"},
+  {q:"Ativ. 6 (CESGRANRIO) — f<sub>0</sub> = 100 Hz. Próximas quatro?",p:["Múltiplos inteiros: 2·100, 3·100, 4·100, 5·100."],r:"c) 200, 300, 400, 500 Hz"},
+  {q:"Ativ. 7 (UFU) — 440 Hz livre; pressiona a ℓ/3 da pestana.",p:["Sobra vibrando 2ℓ/3.","f é inversamente proporcional a ℓ: 440 · 3/2."],r:"a) 660 Hz"},
+  {q:"Ativ. 8 (Mackenzie) — 1,6 m; 40 g; 160 N. 3º harmônico?",p:["μ = 0,04/1,6 = 0,025 kg/m.","v = √(160/0,025) = 80 m/s.","f<sub>1</sub> = 80/3,2 = 25 Hz; f<sub>3</sub> = 75 Hz."],r:"d) 75 Hz"},
+  {q:"Ativ. 9 (EFOMM) — Fio de 2 m, μ = 10<sup>−3</sup> kg/m, 3º harmônico a 100 Hz; panela de 500 g. Água restante?",p:["λ<sub>3</sub> = 2·2/3 = 4/3 m → v = λ·f = 400/3 ≈ 133,3 m/s.","F = μ·v² = 10<sup>−3</sup> · (400/3)² ≈ 17,8 N → massa total = F/g ≈ 1,78 kg.","Água = 1,78 − 0,50."],r:"a) ≈ 1,28 kg"},
+  {q:"Ativ. 10 (Escola Naval) — 200 Hz com bloco de 4 kg; massa ×4.",p:["F = m·g → força ×4.","v = √(F/μ) → v ×2 → f ×2."],r:"d) 400 Hz"}]},
+{g:"Revisão final",k:"Caps. 6 a 8",t:"Formulário e como responder",
+ ideia:"Todas as fórmulas da prova em um lugar. Em questão aberta, escreva <b>a fórmula, os valores com unidade e a conta</b>: mesmo errando no fim, o raciocínio pontua.",
+ tab:{head:["Assunto","Fórmula"],rows:[
+  ["Onda","v = λ·f &nbsp;·&nbsp; T = 1/f &nbsp;·&nbsp; v = ΔS/Δt"],
+  ["Intensidade","I = Pot/A = Pot/(4πR²)"],
+  ["Decibel","N = 10·log(I/I<sub>0</sub>), I<sub>0</sub> = 10<sup>−12</sup> W/m² &nbsp;·&nbsp; ΔN = 10·log(I<sub>2</sub>/I<sub>1</sub>)"],
+  ["Eco","2x = v·Δt, com Δt ≥ 0,1 s (ar: x ≥ 17 m)"],
+  ["Impedância","Z = ρ·v"],
+  ["Interferência (em fase)","ΔS = n·λ/2: n par construtiva, n ímpar destrutiva"],
+  ["Batimento","f<sub>BAT</sub> = f<sub>II</sub> − f<sub>I</sub> &nbsp;·&nbsp; f<sub>RES</sub> = (f<sub>I</sub> + f<sub>II</sub>)/2"],
+  ["Corda","λ<sub>n</sub> = 2ℓ/n &nbsp;·&nbsp; f<sub>n</sub> = n·v/(2ℓ) = n·f<sub>1</sub> &nbsp;·&nbsp; v = √(F/μ), μ = m/ℓ"]]},
+ trap:"Antes de responder, confira as <b>unidades</b> (cm → m, g → kg, kHz → Hz) e se o som <b>vai e volta</b> (eco).",
+ mac:"Qualidades: altura = <b>frequência</b>; intensidade = <b>amplitude</b>; timbre = <b>forma da onda</b>."}
+];
+const N=TELAS.length,$=id=>document.getElementById(id);
+let i=0;try{i=Math.min(N-1,Math.max(0,+localStorage.getItem("fis1")||0))}catch(e){}
+function show(n){i=n;try{localStorage.setItem("fis1",i)}catch(e){}
+ const t=TELAS[i];let h=`<div class="eyebrow">${t.g} · ${t.k}</div><h1>${t.t}</h1><div class="box ideia"><b class="lb">Ideia central</b>${t.ideia}</div>`;
+ if(t.tab)h+=`<div class="tw"><table><thead><tr>${t.tab.head.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${t.tab.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+ if(t.ex)h+=t.ex.map(e=>`<div class="ex"><p class="q">${e.q}</p><ol>${e.p.map(s=>`<li>${s}</li>`).join("")}</ol><div class="r">Resposta: ${e.r}</div></div>`).join("");
+ if(t.list)h+=`<ul class="l">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(t.trap)h+=`<div class="box trap"><b class="lb">Pegadinha</b>${t.trap}</div>`;
+ if(t.mac)h+=`<div class="box mac"><b class="lb">Macete</b>${t.mac}</div>`;
+ if(i==N-1)h+=`<p class="fim">Fim do resumo. Agora faça o <a href="../quiz/">quiz de Física</a>.</p>`;
+ $("tela").innerHTML=h;$("idx").classList.remove("on");$("tela").style.display="";
+ $("cnt").textContent=`Tela ${i+1} de ${N}`;$("pb").style.width=((i+1)/N*100)+"%";
+ $("prev").disabled=i==0;$("next").disabled=i==N-1;$("menu").textContent="Índice";scrollTo(0,0)}
+function index(){if($("idx").classList.contains("on"))return show(i);
+ let h="",g="";TELAS.forEach((t,n)=>{if(t.g!=g){h+=(g?"</ol>":"")+`<h2>${t.g}</h2><ol>`;g=t.g}
+  h+=`<li><button data-n="${n}" class="${n==i?"cur":""}"><span>${n+1}</span>${t.t}</button></li>`});
+ $("idx").innerHTML=h+"</ol>";$("idx").classList.add("on");$("tela").style.display="none";$("menu").textContent="Fechar";scrollTo(0,0)}
+$("idx").onclick=e=>{const b=e.target.closest("button[data-n]");if(b)show(+b.dataset.n)};
+$("prev").onclick=()=>i>0&&show(i-1);$("next").onclick=()=>i<N-1&&show(i+1);$("menu").onclick=index;
+document.addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("next").click();if(e.key=="ArrowLeft")$("prev").click()});
+show(i);
+</script>
+</body>
+</html>

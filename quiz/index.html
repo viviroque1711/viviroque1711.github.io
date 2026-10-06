@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light"><style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Quiz de Química, Biologia e Literatura</title>
+<title>Quiz de Química, Biologia, Literatura e Física</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -7,7 +7,7 @@
 /* Layout: uma coluna de estudo (máx. 720px); configuração → pergunta → feedback → resultado. Cor da matéria no topo. */
 :root{
  --bg:#FFFFFF; --card:#ffffff; --ink:#18212b; --muted:#5b6876; --line:#d8dee5;
- --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --lit:#a3401c; --lit-soft:#fbeae3;
+ --qui:#2457c5; --qui-soft:#e6edfb; --bio:#23784a; --bio-soft:#e3f2e9; --lit:#a3401c; --lit-soft:#fbeae3; --fis:#0f6e78; --fis-soft:#e0f2f3;
  --ok:#1d7a45; --ok-soft:#e2f4e9; --mid:#9a6400; --mid-soft:#fbf0d9; --bad:#b4372f; --bad-soft:#fbe7e5;
  --acc:var(--qui); --acc-soft:var(--qui-soft);
  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
@@ -22,7 +22,7 @@
  --qui:#7fa6ff; --qui-soft:#1d2a45; --bio:#6cc795; --bio-soft:#173326;
  --ok:#6cc795; --ok-soft:#173326; --mid:#f0b54a; --mid-soft:#3a2d12; --bad:#ff8f86; --bad-soft:#3a1f1d; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
-body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}body.lit{--acc:var(--lit);--acc-soft:var(--lit-soft)}
+body.bio{--acc:var(--bio);--acc-soft:var(--bio-soft)}body.lit{--acc:var(--lit);--acc-soft:var(--lit-soft)}body.fis{--acc:var(--fis);--acc-soft:var(--fis-soft)}
 .wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
 h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
@@ -38,7 +38,7 @@ h2{font-size:22px;font-weight:800}
 .chip input{accent-color:var(--acc);width:18px;height:18px;flex:none}
 .chip .n{margin-left:auto;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;flex:none}
 .chip .tag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;flex:none}
-.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}.tag.l{background:var(--lit-soft);color:var(--lit)}
+.tag.q{background:var(--qui-soft);color:var(--qui)}.tag.b{background:var(--bio-soft);color:var(--bio)}.tag.l{background:var(--lit-soft);color:var(--lit)}.tag.f{background:var(--fis-soft);color:var(--fis)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:10px;padding:12px 20px;background:var(--acc);color:var(--card);cursor:pointer}
 .btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
@@ -129,10 +129,143 @@ const CAPS = [
  {k:"l1",m:"l",n:1,tag:"Concr.",lb:"Concretismo e Neoconcretismo",t:"Tendências contemporâneas: Concretismo e Neoconcretismo"},
  {k:"l2",m:"l",n:2,tag:"Marg.",lb:"Poesia marginal e contemporânea",t:"Poesia marginal e contemporânea"},
  {k:"l3",m:"l",n:3,tag:"Saram.",lb:"José Saramago",t:"Literatura portuguesa contemporânea: José Saramago"},
- {k:"lr",m:"l",n:4,tag:"Revisão",lb:"Revisão do livro",t:"Revisão das escolas literárias (caps. 1 a 6 do livro)"}
+ {k:"lr",m:"l",n:4,tag:"Revisão",lb:"Revisão do livro",t:"Revisão das escolas literárias (caps. 1 a 6 do livro)"},
+ {k:"f6",m:"f",n:6,tag:"6",lb:"Cap. 6",t:"O som e suas características"},
+ {k:"f7",m:"f",n:7,tag:"7",lb:"Cap. 7",t:"Efeitos sonoros"},
+ {k:"f8",m:"f",n:8,tag:"8",lb:"Cap. 8",t:"Cordas sonoras"}
 ];
 
 const Q = [
+/* ===== FÍSICA · CAP. 6 ===== */
+{k:"f6",lv:2,s:"Considere:<br>I. O som se propaga no vácuo, mas com velocidade menor.<br>II. Em geral, o som é mais rápido nos sólidos do que nos gases.<br>III. Infrassons e ultrassons são ondas sonoras, embora não audíveis pelo ser humano.<br>Está correto o que se afirma em",c:3,o:[
+ ["I, apenas.","A I é falsa: o som é onda mecânica e não se propaga no vácuo."],
+ ["II, apenas.","A III também está correta: são ondas sonoras fora da faixa de 20 Hz a 20 000 Hz."],
+ ["I e II, apenas.","A I é falsa: sem meio material não há som."],
+ ["II e III, apenas.","Isso. v<sub>sólidos</sub> &gt; v<sub>líquidos</sub> &gt; v<sub>gases</sub>, e infra/ultrassons são sons não audíveis."],
+ ["I, II e III.","A I é falsa."]]},
+{k:"f6",lv:2,s:"Uma fonte sonora tem potência de 12 W e emite igualmente em todas as direções. Usando π = 3, a intensidade a 10 m da fonte é",c:1,o:[
+ ["1,2 W/m².","Isso seria dividir só por 10. A potência se espalha pela área da esfera, 4πR²."],
+ ["0,01 W/m².","Isso. I = Pot/(4πR²) = 12/(4·3·100) = 12/1 200 = 0,01 W/m²."],
+ ["0,1 W/m².","Você dividiu por 120 (esqueceu de elevar R ao quadrado: 4·3·10)."],
+ ["0,12 W/m².","Dividiu só por 100 (R²) e esqueceu o 4π."],
+ ["0,001 W/m².","Errou uma potência de 10: 12/1 200 = 0,01."]]},
+{k:"f6",lv:2,s:"A 2 m de uma fonte puntiforme a intensidade sonora é I. A 6 m da mesma fonte, a intensidade será",c:4,o:[
+ ["I/3.","A intensidade cai com o quadrado da distância, não proporcionalmente."],
+ ["3I.","Ao se afastar, a intensidade diminui."],
+ ["I/6.","A distância triplicou (2 → 6), não sextuplicou."],
+ ["9I.","Ao se afastar, a intensidade diminui."],
+ ["I/9.","Isso. Distância ×3 → área ×9 → intensidade ÷9 (I ∝ 1/d²)."]]},
+{k:"f6",lv:2,s:"O nível sonoro de uma sala passa de 50 dB para 80 dB. A intensidade sonora ficou",c:2,o:[
+ ["30 vezes maior.","Decibel é logarítmico: cada +10 dB multiplica a intensidade por 10."],
+ ["1,6 vez maior.","80/50 não vale para decibéis."],
+ ["1 000 vezes maior.","Isso. +30 dB = 10 · log(I<sub>2</sub>/I<sub>1</sub>) → log = 3 → I<sub>2</sub>/I<sub>1</sub> = 10³."],
+ ["300 vezes maior.","Cada +10 dB é ×10: três vezes ×10 = ×1 000."],
+ ["100 vezes maior.","+20 dB daria ×100; aqui são +30 dB."]]},
+{k:"f6",lv:2,s:"Duas máquinas iguais produzem, cada uma, 70 dB num ponto. Ligadas juntas (log 2 = 0,30), o nível no ponto é",c:0,o:[
+ ["73 dB.","Isso. Intensidade dobra → ΔN = 10 · log 2 = 3 dB → 73 dB."],
+ ["140 dB.","Decibéis não se somam diretamente; somam-se as intensidades."],
+ ["70 dB.","A intensidade dobrou, então o nível aumenta um pouco."],
+ ["77 dB.","10 · log 2 = 3, não 7."],
+ ["80 dB.","+10 dB exigiria intensidade 10 vezes maior."]]},
+{k:"f6",lv:2,s:"Num osciloscópio, dois sons aparecem com o mesmo número de oscilações no mesmo intervalo, a mesma altura máxima, mas desenhos diferentes. Eles diferem em",c:3,o:[
+ ["altura.","Mesmo número de oscilações → mesma frequência → mesma altura."],
+ ["intensidade.","Mesma altura do desenho → mesma amplitude → mesma intensidade."],
+ ["velocidade.","No mesmo meio, sons têm a mesma velocidade."],
+ ["timbre.","Isso. Forma da onda diferente = harmônicos diferentes = timbre diferente."],
+ ["frequência.","O número de oscilações por tempo é igual."]]},
+{k:"f6",lv:2,s:"A velocidade do som num gás, pela fórmula de Laplace (v = √(γRT/M)), aumenta quando",c:1,o:[
+ ["a massa molar do gás aumenta.","M está no denominador: gás mais pesado → som mais lento."],
+ ["a temperatura absoluta aumenta.","Isso. T está no numerador da raiz: ar mais quente → som mais rápido."],
+ ["a frequência da fonte aumenta.","A velocidade depende do meio, não da frequência."],
+ ["a amplitude da onda aumenta.","Amplitude muda a intensidade, não a velocidade."],
+ ["o gás é trocado por vácuo.","No vácuo o som não se propaga."]]},
+{k:"f6",lv:2,s:"Em Física, dizer que “a voz feminina é mais alta que a masculina” significa que ela é",v:true,e:"Correto se entendido assim: mais alta = mais aguda = maior frequência (cerca de 200–400 Hz contra 100–200 Hz). Não quer dizer mais forte."},
+{k:"f6",lv:2,s:"Se a intensidade de um som dobra, a sensação sonora (nível em dB) também dobra.",v:false,e:"Falso. O nível aumenta só 3 dB (10·log 2). Ex.: 30 dB → 33 dB."},
+/* ===== FÍSICA · CAP. 7 ===== */
+{k:"f7",lv:2,s:"Uma pessoa grita a 50 m de um paredão (v = 340 m/s). Em quanto tempo ouve o eco e o que ela percebe?",c:2,o:[
+ ["0,15 s; reverberação.","O tempo de ida e volta é 100/340 ≈ 0,29 s, acima de 0,1 s."],
+ ["0,29 s; reforço.","Reforço exige intervalo muito menor que 0,1 s."],
+ ["≈ 0,29 s; eco, pois o intervalo supera 0,1 s.","Isso. ΔS = 2 · 50 = 100 m; Δt = 100/340 ≈ 0,29 s &gt; 0,1 s → eco."],
+ ["0,15 s; eco.","Você esqueceu a volta: o som percorre 100 m, não 50 m."],
+ ["6,8 s; eco.","Você multiplicou em vez de dividir: Δt = ΔS/v."]]},
+{k:"f7",lv:2,s:"Num ambiente onde o som se propaga a 1 500 m/s, qual a distância mínima de um obstáculo para ouvir eco (persistência de 0,1 s)?",c:4,o:[
+ ["150 m.","Esse é o caminho de ida e volta; a distância é a metade."],
+ ["17 m.","17 m vale para o ar (340 m/s)."],
+ ["1 500 m.","Use ΔS = v·Δt com Δt = 0,1 s."],
+ ["15 m.","Errou uma casa: 1 500 · 0,1 = 150."],
+ ["75 m.","Isso. 2x = 1 500 · 0,1 = 150 → x = 75 m."]]},
+{k:"f7",lv:2,s:"Um som de 680 Hz passa do ar (340 m/s) para a água (1 360 m/s). Na água,",c:0,o:[
+ ["a frequência continua 680 Hz e o comprimento de onda passa de 0,5 m para 2,0 m.","Isso. f não muda; λ<sub>ar</sub> = 340/680 = 0,5 m; λ<sub>água</sub> = 1 360/680 = 2,0 m."],
+ ["a frequência passa a 2 720 Hz e o λ continua 0,5 m.","Na refração a frequência não muda; quem muda é λ."],
+ ["a frequência cai para 170 Hz.","A frequência é imposta pela fonte."],
+ ["o comprimento de onda diminui para 0,125 m.","Velocidade maior com f igual → λ maior, não menor."],
+ ["o som fica mais agudo.","Agudo depende da frequência, que não muda."]]},
+{k:"f7",lv:2,s:"Duas fontes em fase emitem som de comprimento de onda 0,4 m. Num ponto P, a diferença entre as distâncias às fontes é 1,0 m. Em P a interferência é",c:3,o:[
+ ["construtiva, pois 1,0 m é múltiplo de 0,4 m.","1,0 não é múltiplo inteiro de 0,4. Use ΔS = n·λ/2."],
+ ["construtiva, com n = 4.","1,0 = n · 0,2 → n = 5, não 4."],
+ ["nula, pois as fontes estão em fase.","Fontes em fase ainda podem interferir destrutivamente, dependendo de ΔS."],
+ ["destrutiva, pois n = 5 é ímpar.","Isso. ΔS = n·λ/2 → 1,0 = n · 0,2 → n = 5 (ímpar) → destrutiva."],
+ ["destrutiva, pois n = 2,5.","n tem de ser inteiro: 1,0/0,2 = 5."]]},
+{k:"f7",lv:2,s:"Um diapasão de 440 Hz e uma corda soam juntos e se ouvem 4 batimentos por segundo. A frequência da corda pode ser",c:1,o:[
+ ["444 Hz, apenas.","Também pode ser 436 Hz: o batimento é a diferença em módulo."],
+ ["436 Hz ou 444 Hz.","Isso. |f − 440| = 4 → f = 436 Hz ou 444 Hz."],
+ ["880 Hz.","Isso seria o dobro, sem relação com batimento."],
+ ["442 Hz.","Daria 2 batimentos por segundo."],
+ ["110 Hz.","Seria 440/4, mas batimento é diferença, não divisão."]]},
+{k:"f7",lv:2,s:"Por que ouvimos alguém atrás de um muro, mas não o vemos?",c:2,o:[
+ ["Porque o som é mais rápido que a luz.","A luz é muito mais rápida; não é a velocidade que explica."],
+ ["Porque o som é longitudinal e a luz é transversal.","Isso explica a polarização, não a difração."],
+ ["Porque o comprimento de onda do som é comparável ao muro e o da luz é muito menor; o som difrata.","Isso. λ do som ≈ 1 m; λ da luz ≈ 10<sup>−7</sup> m."],
+ ["Porque o som é refletido pelo muro.","A reflexão devolveria o som para o lado de quem fala."],
+ ["Porque a frequência do som é maior que a da luz.","É o contrário: a luz tem frequência muito maior."]]},
+{k:"f7",lv:2,s:"No ultrassom, quanto maior a diferença de impedância acústica (Z = ρ·v) entre dois tecidos, maior a reflexão. Tecido X: ρ = 1 000 kg/m³, v = 1 500 m/s. Tecido Y: ρ = 2 000 kg/m³, v = 4 000 m/s. A razão Z<sub>Y</sub>/Z<sub>X</sub> é",c:4,o:[
+ ["2.","Você comparou só as densidades; Z = ρ·v."],
+ ["2,7.","Você comparou só as velocidades."],
+ ["4,7.","Somou as razões; o certo é multiplicá-las."],
+ ["0,19.","Inverteu a razão."],
+ ["≈ 5,3.","Isso. Z<sub>X</sub> = 1,5·10<sup>6</sup>; Z<sub>Y</sub> = 8·10<sup>6</sup>; razão ≈ 5,3."]]},
+{k:"f7",lv:2,s:"O fone com cancelamento ativo de ruído funciona por interferência destrutiva e é mais eficiente com ruídos constantes, como o de um avião.",v:true,e:"Correto. Microfones captam o ruído e o fone gera uma onda oposta. Vozes variam muito e são mais difíceis de cancelar."},
+{k:"f7",lv:2,s:"Na reflexão do som em uma parede rígida, a onda volta com frequência maior, por isso o eco é mais agudo.",v:false,e:"Falso. Na reflexão a frequência, a velocidade e o comprimento de onda se mantêm; ocorre inversão de fase."},
+{k:"f7",lv:2,s:"O som não sofre polarização porque é uma onda longitudinal.",v:true,e:"Correto. Polarização só ocorre em ondas transversais."},
+/* ===== FÍSICA · CAP. 8 ===== */
+{k:"f8",lv:2,s:"Uma corda de 80 cm vibra formando 4 ventres. O comprimento de onda é",c:3,o:[
+ ["80 cm.","Seria o 2º harmônico (2 ventres)."],
+ ["20 cm.","Essa é a largura de cada gomo (λ/2)."],
+ ["160 cm.","Seria o fundamental (1 ventre)."],
+ ["40 cm.","Isso. λ = 2ℓ/n = 2 · 80/4 = 40 cm."],
+ ["320 cm.","λ = 2ℓ/n, não 4ℓ."]]},
+{k:"f8",lv:2,s:"Numa corda, ondas viajam a 120 m/s e o comprimento é 0,6 m. A frequência do 3º harmônico é",c:0,o:[
+ ["300 Hz.","Isso. f<sub>1</sub> = v/(2ℓ) = 120/1,2 = 100 Hz; f<sub>3</sub> = 3·100 = 300 Hz."],
+ ["100 Hz.","Esse é o fundamental (1º harmônico)."],
+ ["600 Hz.","Você usou λ = ℓ/3 em vez de 2ℓ/3."],
+ ["200 Hz.","Esse é o 2º harmônico."],
+ ["66,7 Hz.","Dividiu em vez de multiplicar por n."]]},
+{k:"f8",lv:2,s:"Uma corda tem frequência fundamental de 150 Hz. Assinale a sequência de frequências que ela também pode emitir em ondas estacionárias.",c:2,o:[
+ ["225, 300, 375 Hz.","Os harmônicos são múltiplos inteiros: 300, 450, 600…"],
+ ["300, 600, 900 Hz, apenas.","Faltam 450, 750…: entram todos os múltiplos, não só os pares."],
+ ["300, 450, 600 Hz.","Isso. f<sub>n</sub> = n·f<sub>1</sub>: 2·150, 3·150, 4·150."],
+ ["450, 750, 1 050 Hz, apenas.","Corda presa nas duas pontas tem também os harmônicos pares."],
+ ["75, 50, 37,5 Hz.","Harmônicos são múltiplos, não divisores."]]},
+{k:"f8",lv:2,s:"Uma corda de 2,0 m e 50 g é tracionada por 100 N. A velocidade de propagação de ondas nela é",c:1,o:[
+ ["200 m/s.","Você usou μ = 2,5 g/m sem converter para kg."],
+ ["≈ 63 m/s.","Isso. μ = 0,05/2 = 0,025 kg/m; v = √(100/0,025) = √4 000 ≈ 63 m/s."],
+ ["4 000 m/s.","Faltou tirar a raiz: v = √(F/μ)."],
+ ["2,5 m/s.","Inverteu a fração dentro da raiz."],
+ ["20 m/s.","Usou a massa total em vez da massa por metro."]]},
+{k:"f8",lv:2,s:"Para tornar mais agudo o som de uma corda de violão, sem trocá-la, o músico pode",c:4,o:[
+ ["afrouxar a tarraxa.","Menos tração → v menor → som mais grave."],
+ ["tocar mais forte.","Isso aumenta a intensidade, não a frequência."],
+ ["trocar por corda mais grossa.","Corda mais grossa (μ maior) soa mais grave; e a questão diz sem trocar."],
+ ["afastar o dedo da boca do violão, aumentando o trecho que vibra.","Trecho maior → frequência menor → mais grave."],
+ ["apertar a corda num traste, encurtando o trecho que vibra, ou esticá-la mais.","Isso. f = (n/2ℓ)·√(F/μ): ℓ menor ou F maior → f maior."]]},
+{k:"f8",lv:2,s:"Se a força de tração numa corda é multiplicada por 9 (comprimento e corda iguais), a frequência fundamental",c:3,o:[
+ ["fica 9 vezes maior.","f depende da raiz de F."],
+ ["fica 9 vezes menor.","Aumentar a tração aumenta a frequência."],
+ ["não muda.","A velocidade muda com a tração."],
+ ["fica 3 vezes maior.","Isso. v = √(F/μ) → F ×9 → v ×3 → f ×3."],
+ ["fica 81 vezes maior.","Seria elevar ao quadrado; o certo é tirar a raiz."]]},
+{k:"f8",lv:2,s:"A distância entre dois nós consecutivos de uma onda estacionária é igual a um comprimento de onda.",v:false,e:"Falso. Entre dois nós vizinhos há meio comprimento de onda (λ/2), um gomo."},
+{k:"f8",lv:2,s:"Em uma corda presa nas duas pontas, o maior comprimento de onda possível é o dobro do comprimento da corda.",v:true,e:"Correto. No fundamental (n = 1) há um gomo só: λ = 2ℓ."},
 {"k":"l1","lv":2,"s":"Num poema concreto, a palavra “chuva” se repete descendo pela página, letra por letra, como se escorresse. Esse recurso, em que a forma visual reproduz o sentido, chama-se","c":4,"o":[["paronomásia.","Paronomásia é aproximar palavras de som parecido e sentido diferente (lixo/luxo). Aqui o recurso é a forma imitar o sentido."],["enjambement.","Enjambement é o verso que continua no seguinte. Poema concreto nem tem verso."],["sinestesia.","Sinestesia mistura sensações (cor, som, cheiro). Não é o caso."],["anáfora.","Anáfora é repetir a mesma palavra no início de versos. Aqui o que importa é o desenho."],["isomorfismo.","Isso. Forma e conteúdo têm a mesma “forma”: o poema sobre chuva cai na página."]]},
 {"k":"l1","lv":2,"s":"No poema “luxo/lixo”, de Augusto de Campos, a palavra LUXO aparece em letras grandes formadas por muitas palavras “lixo”. Que leitura crítica o poema permite?","c":2,"o":[["Elogio à riqueza e ao consumo de produtos caros.","O poema faz o oposto: mostra que o luxo é feito de lixo."],["Saudade da infância pobre do poeta.","Não há eu lírico autobiográfico; a poesia concreta é objetiva."],["O luxo é feito de lixo: crítica ao consumismo e ao valor de fachada.","Isso. A paronomásia (luxo/lixo) e a forma visual juntas criticam o consumo e a ostentação."],["A natureza deve ser preservada do lixo urbano.","Leitura ecológica possível de modo amplo, mas o poema joga com <b>luxo</b> × <b>lixo</b>, isto é, com a ostentação."],["Uma homenagem à poesia parnasiana.","O poema não tem verso, rima ou métrica; está longe do Parnasianismo."]]},
 {"k":"l1","lv":2,"s":"O poema “beba coca cola”, de Décio Pignatari (1957), transforma um slogan publicitário em palavras como “babe”, “caco” e “cloaca”. O efeito é","c":0,"o":[["criticar a propaganda e a sociedade de consumo usando a própria linguagem dela.","Isso. O poema desmonta o slogan e revela o que ele esconde: é a fase em que a poesia concreta também critica."],["fazer propaganda gratuita do refrigerante.","Pelo contrário: as palavras derivadas (cloaca = esgoto) ridicularizam o anúncio."],["imitar uma cantiga medieval.","Não há relação com o trovadorismo."],["expressar a tristeza amorosa do poeta.","Não há eu lírico sentimental no poema concreto."],["defender a pureza da língua contra palavras estrangeiras.","O poema não trata de purismo linguístico."]]},
@@ -362,6 +495,19 @@ const Q = [
 
 /* Orientação de estudo: [regex sobre o enunciado, tema, macete, onde reler]. Primeira regra que casar vence; a última de cada capítulo é o padrão. */
 const DICAS = {
+ f6:[
+ [/dB|nível|decib|intensidade .* (dobra|ficou)/i,"Decibéis","N = 10·log(I/I₀). Cada ×10 na intensidade soma 10 dB; ×2 soma 3 dB. Decibéis não se somam direto.","Física · Resumo, tela 6"],
+ [/W\/m²|potência|distância|metros da fonte|m da mesma fonte/i,"Intensidade e distância","I = Pot/(4πR²). Distância ×2 → intensidade ÷4; ×3 → ÷9.","Física · Resumo, tela 5"],
+ [/timbre|osciloscópio|desenho/i,"Altura, intensidade e timbre","Altura = frequência; intensidade = amplitude; timbre = forma da onda (harmônicos).","Física · Resumo, telas 4 e 7"],
+ [/./,"Som e velocidade","Som é onda mecânica longitudinal (20 a 20 000 Hz); não se propaga no vácuo; v sólidos > líquidos > gases (luz: ao contrário).","Física · Resumo, telas 1 e 2"]],
+ f7:[
+ [/eco|paredão|obstáculo/i,"Eco","Ida e volta: 2x = v·Δt, com Δt ≥ 0,1 s. No ar, x ≥ 17 m.","Física · Resumo, tela 9"],
+ [/batimento/i,"Batimento","f_BAT = diferença das frequências (em módulo); som resultante = média.","Física · Resumo, tela 12"],
+ [/fase|interferência|cancelamento/i,"Interferência","Fontes em fase: ΔS = n·λ/2; n par construtiva, n ímpar destrutiva.","Física · Resumo, tela 11"],
+ [/./,"Refração, difração e impedância","Na refração f não muda (v e λ mudam). Difração: λ do som ≈ obstáculos. Z = ρ·v: maior diferença, mais reflexão.","Física · Resumo, telas 10 e 13"]],
+ f8:[
+ [/tração|tarraxa|agudo|N\.|kg|g é/i,"Tração e espessura","v = √(F/μ), μ = m/ℓ (em kg/m). Força ×4 → f ×2. Mais esticada ou mais curta → mais aguda.","Física · Resumo, tela 16"],
+ [/./,"Harmônicos","Conte os gomos (n): λ = 2ℓ/n; fₙ = n·f₁ = n·v/(2ℓ). Entre nós vizinhos: λ/2.","Física · Resumo, telas 14 e 15"]],
  l1:[
  [/neoconcret|Gullar|Bichos|Lygia|1959/i,"Concreto × Neoconcreto","Concretismo = São Paulo, anos 50, razão e geometria, poema para ver e ler. Neoconcretismo = Rio, 1959 (Gullar), expressão e participação do público (não-objeto).","Literatura · Resumo, tela 2"],
  [/isomorf|chuva|luxo|coca|verbivocovisual|forma visual/i,"Forma = sentido","Verbivocovisual: sentido + som + forma. Isomorfismo: a forma imita o conteúdo. Paronomásia: luxo/lixo. Explique sempre como a forma reforça o sentido.","Literatura · Resumo, tela 1"],
@@ -515,7 +661,7 @@ const store=load();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}};
 const app=document.getElementById("app");
 const capOf=k=>CAPS.find(c=>c.k===k);
-const MAT={q:"Química",b:"Biologia",l:"Literatura"},AB={q:"Quí",b:"Bio",l:"Lit"};
+const MAT={q:"Química",b:"Biologia",l:"Literatura",f:"Física"},AB={q:"Quí",b:"Bio",l:"Lit",f:"Fís"};
 const label=c=>c.lb?MAT[c.m]+" · "+c.lb:c.k==="bi"?"Biologia · Integração dos sistemas":c.k==="qn"?"Química · Nomenclatura":(c.m==="q"?"Química":"Biologia")+" · Cap. "+c.n;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -528,7 +674,7 @@ const inLv=q=>cfg.lv===0||(q.lv||1)===cfg.lv;
 
 let run=null;
 
-function setTheme(m){m=m||cfg.m;document.body.classList.toggle("bio",m==="b");document.body.classList.toggle("lit",m==="l")}
+function setTheme(m){m=m||cfg.m;document.body.classList.toggle("bio",m==="b");document.body.classList.toggle("lit",m==="l");document.body.classList.toggle("fis",m==="f")}
 
 function setup(){
  cfg.lv=2;
@@ -539,7 +685,7 @@ function setup(){
  app.innerHTML=`
  <header>
   <div class="eyebrow"><a href="../" style="font-size:13px;font-weight:700;color:inherit;opacity:.75;text-decoration:none;margin-right:8px">← Início</a>Treino para a recuperação · 2ª série do ensino médio</div>
-  <h1>Quiz de Química, Biologia e Literatura</h1>
+  <h1>Quiz de Química, Biologia, Literatura e Física</h1>
   <p class="lead">Responda e veja na hora se acertou. Quando errar, a explicação mostra por que aquela alternativa está errada e qual é a certa.</p>
  </header>
  <section class="panel">
@@ -548,6 +694,7 @@ function setup(){
    <button data-m="q" aria-pressed="${cfg.m==="q"}">Química</button>
    <button data-m="b" aria-pressed="${cfg.m==="b"}">Biologia</button>
    <button data-m="l" aria-pressed="${cfg.m==="l"}">Literatura</button>
+   <button data-m="f" aria-pressed="${cfg.m==="f"}">Física</button>
    <button data-m="t" aria-pressed="${cfg.m==="t"}">Tudo misturado</button>
   </div>
   <p class="small" style="margin:0">Todas as questões são de <b>nível prova</b>: análise de afirmações, situações-problema, trechos para interpretar e as pegadinhas mais cobradas.</p>
@@ -697,7 +844,7 @@ function finish(){
  const byTopic={};
  run.res.filter(r=>!r.ok).forEach(({q})=>{const t=topicOf(q);if(!t)return;const key=q.k+"|"+t[1];const g=byTopic[key]=byTopic[key]||{k:q.k,t,n:0};g.n++});
  const topics=Object.values(byTopic).sort((a,b)=>b.n-a.n);
- const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):c.m==="l"?r:r.startsWith("Biologia")?r:`Biologia · ${r}`};
+ const where=(k,r)=>{const c=capOf(k);return c.m==="q"?(/^(Cap\.|Isomeria plana|Nomes usuais)/.test(r)?`Química · ${r}`:`Química · ${c.lb||("Cap. "+c.n)} · ${r}`):c.m==="l"||c.m==="f"?r:r.startsWith("Biologia")?r:`Biologia · ${r}`};
  const worst=caps.find(c=>c.p<1);
  const next=pct===100?"Você gabaritou esta rodada. Próximo passo: faça um quiz com <b>Tudo misturado</b> ou escolha 20 perguntas para testar a memória."
   :`Próximo passo: leia os macetes acima, refaça só as que errou e, depois, treine o capítulo em que você foi pior${worst?`: <b>${label(worst.c)} · ${esc(worst.c.t)}</b>`:""}.`;
